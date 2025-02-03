@@ -1,0 +1,59 @@
+# OS-generated files #
+######################
+.DS_Store          # macOS
+Thumbs.db          # Windows
+desktop.ini        # Windows
+
+# Build directories and files #
+###############################
+/build/            # Common build directory
+build              
+/bin/              # Common binary directory
+/obj/              # Common object file directory
+*.o                # Object files
+*.obj              # Windows object files
+*.exe              # Executables (Windows)
+*.out              # Executables (Linux/Unix)
+*.a                # Static libraries
+*.lib              # Static libraries (Windows)
+*.so               # Shared libraries (Linux/Unix)
+*.dll              # Dynamic libraries (Windows)
+*.dylib            # Shared libraries (macOS)
+*.pdb              # Debugging information files (Windows)
+*.exp              # Export files (Windows)
+*.ilk              # Incremental link files (Windows)
+
+# Compiler-specific files #
+###########################
+*.d                # Dependency files (GCC/Make)
+*.manifest         # Windows manifests
+*.tlog             # Build logs (Visual Studio)
+
+# IDE-specific files #
+#######################
+.vscode/           # Visual Studio Code
+.idea/             # JetBrains IDEs
+*.code-workspace   # VSCode workspace files
+*.iml              # IntelliJ project files
+
+# Visual Studio #
+##################
+*.suo              # Solution user options
+*.user             # User settings
+*.userosscache     # Cache
+*.sln.docstates    # Solution docstates
+
+# Qt-specific files #
+######################
+*.pro.user         # Qt Creator user preferences
+*.pro.user.*       # Qt Creator versioned user files
+*.qmake.stash      # Qt build cache
+*.qmake.cache      # Qt build cache
+
+# CMake-specific files #
+########################
+CMakeCache.txt     # CMake cache
+CMakeFiles/        # CMake temporary files
+cmake_install.cmake
+Makefile
+CMakeLists.txt.user
