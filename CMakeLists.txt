@@ -8,8 +8,11 @@ find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+add_subdirectory(config)
+
 qt_add_executable(appTotodoro
     main.cpp
+    ${CONFIG_CONST_VAL_SOURCES}
 )
 
 qt_add_qml_module(appTotodoro
