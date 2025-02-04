@@ -23,45 +23,44 @@ Item {
         id: layout
         anchors.fill: parent
         spacing: 10
-        Item {
+        CustomButton {
             id: minimizeItem
+
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Image {
-                id: minimizeImage
-                anchors.fill: parent
-                source: `resources/window/minimize-button.png`
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: `resources/window/minimize-button.png`
+            iconColor: internal.enableColor
+            isShowIcon: true
+            isShowBackground: false
         }
-        Item {
+
+        CustomButton {
             id: maximizeItem
+
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Image {
-                id: maximizeImage
-                anchors.fill: parent
-                source: `resources/window/maximize-button.png`
-                fillMode: Image.PreserveAspectFit
-            }
+            iconSource: `resources/window/maximize-button.png`
+            iconColor: internal.enableColor
+            isShowIcon: true
+            isShowBackground: false
         }
-        Item {
+
+        CustomButton {
             id: closeItem
+
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Image {
-                id: closeImage
-                anchors.fill: parent
-                source: `resources/window/close-button.png`
-                fillMode: Image.PreserveAspectFit
-            }
-            MouseArea {
-                id: closeArea
-                anchors.fill: parent
-                onClicked: {
-                    closeWindowClicked()
-                }
-            }
+            iconSource: `resources/window/close-button.png`
+            iconColor: internal.enableColor
+            isShowIcon: true
+            isShowBackground: false
         }
+    }
+
+    QtObject {
+        id: internal
+
+        readonly property color enableColor: "#FFFFFF"
+        readonly property color disableColor: "#666666"
     }
 }
