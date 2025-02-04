@@ -1,5 +1,15 @@
+/*
+* File: Main.qml
+* Author: trung.la
+* Date: 02-04-2025
+* Brief: This file contains the WindowControl component which is used to control the window of the application.
+*/
+
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
+
+import CommonModule 1.0
 
 ApplicationWindow {
     id: root
@@ -26,6 +36,17 @@ ApplicationWindow {
         border {
             color: "#ffffff"
             width: 0.5
+        }
+    }
+
+    WindowControl {
+        id: windowControl
+
+        anchors {
+            top: parent.top
+            topMargin: 10
+            right: parent.right
+            rightMargin: 5
         }
     }
 }

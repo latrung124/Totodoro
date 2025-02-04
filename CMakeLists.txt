@@ -10,6 +10,9 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 add_subdirectory(config)
 
+# Add the qmlmodules subdirectory
+add_subdirectory(qmlmodules)
+
 qt_add_executable(appTotodoro
     main.cpp
     ${CONFIG_CONST_VAL_SOURCES}
@@ -34,7 +37,9 @@ set_target_properties(appTotodoro PROPERTIES
 )
 
 target_link_libraries(appTotodoro
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Qt6::Quick
+        common_moduleplugin
 )
 
 include(GNUInstallDirs)
