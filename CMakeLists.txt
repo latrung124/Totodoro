@@ -40,6 +40,7 @@ target_link_libraries(appTotodoro
     PRIVATE
         Qt6::Quick
         common_moduleplugin
+        mediaplayer_moduleplugin
 )
 
 include(GNUInstallDirs)

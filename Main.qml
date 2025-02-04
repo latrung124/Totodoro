@@ -10,6 +10,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import CommonModule 1.0
+import MediaPlayerModule 1.0
 
 ApplicationWindow {
     id: root
@@ -47,6 +48,16 @@ ApplicationWindow {
             topMargin: 10
             right: parent.right
             rightMargin: 5
+        }
+    }
+
+    MediaPlayer {
+        id: mediaPlayer
+
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
         }
     }
 }
