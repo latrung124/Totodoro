@@ -1,0 +1,38 @@
+repos:
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        additional_dependencies: ["prettier@3.0.0-alpha.0"]
+        entry: prettier --write --list-different --ignore-unknown
+        language: node
+        types: [text]
+        files: \.(yaml|yml)$
+
+      - id: clang-format
+        name: clang-format
+        entry: clang-format -i
+        args: ["-fallback-style=none"]
+        language: python
+        additional_dependencies: ["clang-format==16.0.6"]
+        types_or: [c, c++]
+        files: |
+          (?x)(
+              main.cpp
+          )$
+      - id: cmake-format
+        name: cmake-format
+        description: cmake-format can format your listfiles nicely so that they don't look like crap.
+        entry: cmake-format -i
+        language: python
+        types_or: [cmake]
+        additional_dependencies: ["cmakelang"]
+        files: |
+          (?x)(
+              CMakeList.txt |
+              ^cmake/.* |
+              ^CameraHandle/.* |
+              ^CameraStorage/.* |
+              ^Core/.* |
+              ^CustomVideoHandle/.*
+          )$
