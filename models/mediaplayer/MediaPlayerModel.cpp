@@ -28,6 +28,11 @@ void MediaPlayerModel::setTitle(const QString &title)
     }
 }
 
+void MediaPlayerModel::onTitleChanged(const QString &title)
+{
+    setTitle(title);
+}
+
 QString MediaPlayerModel::artist() const
 {
     return m_artist;
@@ -42,6 +47,11 @@ void MediaPlayerModel::setArtist(const QString &artist)
     }
 }
 
+void MediaPlayerModel::onArtistChanged(const QString &artist)
+{
+    setArtist(artist);
+}
+
 QUrl MediaPlayerModel::thumbnail() const
 {
     return m_thumbnail;
@@ -54,6 +64,11 @@ void MediaPlayerModel::setThumbnail(const QUrl &thumbnail)
         m_thumbnail = thumbnail;
         emit thumbnailChanged(thumbnail);
     }
+}
+
+void MediaPlayerModel::onThumbnailChanged(const QUrl &thumbnail)
+{
+    setThumbnail(thumbnail);
 }
 
 MediaPlayerModel::MediaPlaybackModelPtr MediaPlayerModel::mediaPlaybackModel() const

@@ -42,6 +42,11 @@ signals:
     void artistChanged(const QString &artist);
     void thumbnailChanged(const QUrl &thumbnail);
 
+public slots:
+    void onTitleChanged(const QString &title);
+    void onArtistChanged(const QString &artist);
+    void onThumbnailChanged(const QUrl &thumbnail);
+
 private:
     QString m_title;
     QString m_artist;

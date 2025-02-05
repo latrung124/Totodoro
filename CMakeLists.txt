@@ -31,11 +31,28 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/mediaplayer/MediaPlaybackModel.h
 )
 
+# set core sources
+set(CONTROLLER_SOURCES
+    core/controllers/ModelController.cpp
+    core/controllers/ViewModelController.cpp
+
+    core/controllers/ModelController.h
+    core/controllers/ViewModelController.h
+)
+
+set(CONNECTION_SOURCES
+    core/connections/ConnectionManager.cpp
+
+    core/connections/ConnectionManager.h
+)
+
 qt_add_executable(appTotodoro
     main.cpp
     ${CONFIG_CONST_VAL_SOURCES}
     ${MEDIAPLAYER_VM_SOURCES}
     ${MEDIAPLAYER_MODELS_SOURCES}
+    ${CONTROLLER_SOURCES}
+    ${CONNECTION_SOURCES}
 )
 
 qt_add_qml_module(appTotodoro

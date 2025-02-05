@@ -28,6 +28,7 @@ void MediaPlayerViewModel::setTitle(const QString &title)
 	if (m_title != title) {
 		m_title = title;
 		emit titleChanged();
+		emit viewTitleChanged(title);
 	}
 }
 
@@ -46,6 +47,7 @@ void MediaPlayerViewModel::setArtist(const QString &artist)
 	if (m_artist != artist) {
 		m_artist = artist;
 		emit artistChanged();
+		emit viewArtistChanged(artist);
 	}
 }
 
@@ -78,6 +80,7 @@ void MediaPlayerViewModel::setThumbnail(const QUrl &thumbnail)
 	if (m_thumbnail != thumbnail) {
 		m_thumbnail = thumbnail;
 		emit thumbnailChanged();
+		emit viewThumbnailChanged(thumbnail);
 	}
 }
 
