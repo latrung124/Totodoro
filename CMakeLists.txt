@@ -13,9 +13,19 @@ add_subdirectory(config)
 # Add the qmlmodules subdirectory
 add_subdirectory(qmlmodules)
 
+# set the view-models
+set(MEDIAPLAYER_VM_SOURCES
+    view-models/mediaplayer/MediaPlayerViewModel.cpp
+    view-models/mediaplayer/MediaPlaybackViewModel.cpp
+
+    view-models/mediaplayer/MediaPlayerViewModel.h
+    view-models/mediaplayer/MediaPlaybackViewModel.h
+)
+
 qt_add_executable(appTotodoro
     main.cpp
     ${CONFIG_CONST_VAL_SOURCES}
+    ${MEDIAPLAYER_VM_SOURCES}
 )
 
 qt_add_qml_module(appTotodoro
@@ -34,6 +44,11 @@ set_target_properties(appTotodoro PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
+)
+
+target_include_directories(appTotodoro
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(appTotodoro
