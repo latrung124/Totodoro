@@ -22,10 +22,20 @@ set(MEDIAPLAYER_VM_SOURCES
     view-models/mediaplayer/MediaPlaybackViewModel.h
 )
 
+# set the models
+set(MEDIAPLAYER_MODELS_SOURCES
+    models/mediaplayer/MediaPlayerModel.cpp
+    models/mediaplayer/MediaPlaybackModel.cpp
+
+    models/mediaplayer/MediaPlayerModel.h
+    models/mediaplayer/MediaPlaybackModel.h
+)
+
 qt_add_executable(appTotodoro
     main.cpp
     ${CONFIG_CONST_VAL_SOURCES}
     ${MEDIAPLAYER_VM_SOURCES}
+    ${MEDIAPLAYER_MODELS_SOURCES}
 )
 
 qt_add_qml_module(appTotodoro
