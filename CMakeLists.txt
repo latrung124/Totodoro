@@ -46,6 +46,12 @@ set(CONNECTION_SOURCES
     core/connections/ConnectionManager.h
 )
 
+set(CORE_SOURCES
+    core/GuiApplication.cpp
+
+    core/GuiApplication.h
+)
+
 qt_add_executable(appTotodoro
     main.cpp
     ${CONFIG_CONST_VAL_SOURCES}
@@ -53,6 +59,7 @@ qt_add_executable(appTotodoro
     ${MEDIAPLAYER_MODELS_SOURCES}
     ${CONTROLLER_SOURCES}
     ${CONNECTION_SOURCES}
+    ${CORE_SOURCES}
 )
 
 qt_add_qml_module(appTotodoro

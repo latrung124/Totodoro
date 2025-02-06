@@ -1,4 +1,5 @@
 #include "config/const_val/ApplicationConst.h"
+#include "core/GuiApplication.h"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -35,7 +36,9 @@ int main(int argc, char *argv[])
 	    &app,
 	    []() { QCoreApplication::exit(-1); },
 	    Qt::QueuedConnection);
-	engine.loadFromModule("Totodoro", "Main");
+
+	GuiApplication guiApp(&engine);
+	guiApp.init();
 
 	return app.exec();
 }
