@@ -6,7 +6,6 @@ desktop.ini        # Windows
 
 # Build directories and files #
 ###############################
-/build/            # Common build directory
 build              
 /bin/              # Common binary directory
 /obj/              # Common object file directory
@@ -31,7 +30,7 @@ build
 
 # IDE-specific files #
 #######################
-.vscode/           # Visual Studio Code
+.vscode
 .idea/             # JetBrains IDEs
 *.code-workspace   # VSCode workspace files
 *.iml              # IntelliJ project files
