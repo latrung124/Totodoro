@@ -2,6 +2,7 @@
 #include "core/GuiApplication.h"
 
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 
 void setApplicationAttribute()
@@ -20,6 +21,7 @@ void setApplicationInfo()
 	QGuiApplication::setApplicationName(ApplicationName);
 	QGuiApplication::setApplicationDisplayName(ApplicationDisplayName);
 	QGuiApplication::setApplicationVersion(ApplicationVersion);
+	QGuiApplication::setWindowIcon(QIcon(ApplicationIcon));
 }
 
 int main(int argc, char *argv[])

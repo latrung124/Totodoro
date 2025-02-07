@@ -8,10 +8,13 @@ find_package(Qt6 REQUIRED COMPONENTS Quick Core5Compat)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
-add_subdirectory(config)
-
 # Add the qmlmodules subdirectory
 add_subdirectory(qmlmodules)
+
+# set the config and const val sources
+set (CONFIG_CONST_VAL_SOURCES
+    ${CMAKE_SOURCE_DIR}/config/const_val/ApplicationConst.h
+)
 
 # set the view-models
 set(MEDIAPLAYER_VM_SOURCES
@@ -65,8 +68,11 @@ qt_add_executable(appTotodoro
 qt_add_qml_module(appTotodoro
     URI Totodoro
     VERSION 1.0
+    RESOURCE_PREFIX /resources/qml
     QML_FILES
         Main.qml
+    RESOURCES
+	"resources/icon/totoro-icon-48x48.png"
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

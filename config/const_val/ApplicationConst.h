@@ -23,6 +23,7 @@ namespace application
     const QString ApplicationName = "Totodoro";
     const QString ApplicationDisplayName = "Totodoro";
     const QString ApplicationVersion = "1.0.0";
+    const QString ApplicationIcon = ":/resources/qml/Totodoro/resources/icon/totoro-icon-48x48.png";
 } // namespace application
 
 } // namespace const_val
