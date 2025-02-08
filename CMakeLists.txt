@@ -21,6 +21,9 @@ set (INTERFACE_CONFIG_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/config/interface/WindowServiceExport.h
 )
 
+# add services subdirectory
+add_subdirectory(services)
+
 # set the config and const val sources
 set (CONFIG_CONST_VAL_SOURCES
     ${CMAKE_SOURCE_DIR}/config/const_val/ApplicationConst.h
