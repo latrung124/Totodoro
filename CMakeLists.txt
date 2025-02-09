@@ -70,21 +70,31 @@ set(CONNECTION_SOURCES
     core/connections/ConnectionManager.h
 )
 
+set(UTIL_SOURCES
+    utils/ThreadGuard.h
+)
+
 set(CORE_SOURCES
     core/GuiApplication.cpp
+    core/handlers/WMediaServiceHandler.cpp
     core/handlers/service-listeners/WMediaServiceListener.cpp
     core/handlers/service-messages/window-service/WMediaInfoMessage.cpp
     core/handlers/service-messages/window-service/WPlaybackControlsMessage.cpp
     core/handlers/service-messages/window-service/WPlaybackInfoMessage.cpp
+    core/handlers/service-consumers/window-service/WMediaServiceConsumer.cpp
 
     core/GuiApplication.h
+    core/handlers/ServiceHandler.h
     core/handlers/service-listeners/WMediaServiceListener.h
-
+    core/handlers/service-consumers/ServiceConsumer.h
+    
+    core/handlers/WMediaServiceHandler.h
     core/handlers/service-messages/ServiceMessage.h
     core/handlers/service-messages/ServiceMessageId.h
     core/handlers/service-messages/window-service/WMediaInfoMessage.h
     core/handlers/service-messages/window-service/WPlaybackControlsMessage.h
     core/handlers/service-messages/window-service/WPlaybackInfoMessage.h
+    core/handlers/service-consumers/window-service/WMediaServiceConsumer.h
 )
 
 qt_add_executable(appTotodoro
@@ -96,6 +106,7 @@ qt_add_executable(appTotodoro
     ${CONTROLLER_SOURCES}
     ${CONNECTION_SOURCES}
     ${CORE_SOURCES}
+    ${UTIL_SOURCES}
 )
 
 qt_add_qml_module(appTotodoro
