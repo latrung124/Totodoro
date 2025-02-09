@@ -72,8 +72,10 @@ set(CONNECTION_SOURCES
 
 set(CORE_SOURCES
     core/GuiApplication.cpp
+    core/handlers/service-listeners/WMediaServiceListener.cpp
 
     core/GuiApplication.h
+    core/handlers/service-listeners/WMediaServiceListener.h
 )
 
 qt_add_executable(appTotodoro
