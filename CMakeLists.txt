@@ -24,6 +24,8 @@ set (INTERFACES_SOURCES
     ${CMAKE_SOURCE_DIR}/interfaces/export-headers/WindowServiceExport.h
 
     ${CMAKE_SOURCE_DIR}/interfaces/window-services/IWMediaService.h
+
+    ${CMAKE_SOURCE_DIR}/interfaces/window-services/WMediaServiceUtils.h
 )
 
 # add services subdirectory
