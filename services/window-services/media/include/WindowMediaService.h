@@ -8,11 +8,16 @@
 #ifndef WINDOW_MEDIA_SERVICE_H
 #define WINDOW_MEDIA_SERVICE_H
 
-class WindowMediaService
+#include "window-services/IWMediaService.h"
+
+class WMEDIA_SERVICE_API WindowMediaService : public IWMediaService
 {
 public:
     WindowMediaService();
-    ~WindowMediaService();
+    ~WindowMediaService() override;
+
+    void start() override;
+    void getMediaInfo() override;
 };
 
 #endif // WINDOW_MEDIA_SERVICE_H

@@ -14,3 +14,13 @@ WindowMediaService::WindowMediaService()
 WindowMediaService::~WindowMediaService()
 {
 }
+
+void WindowMediaService::start()
+{
+    // Start the media service
+}
+
+void WindowMediaService::getMediaInfo()
+{
+    // Get media information
+}

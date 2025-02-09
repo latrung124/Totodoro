@@ -16,9 +16,14 @@ add_definitions(-DSERVICE_FACTORY_LIBRARY_EXPORTS)
 add_subdirectory(qmlmodules)
 
 # set the interface config
-set (INTERFACE_CONFIG_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/config/interface/ServiceFactoryExport.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/config/interface/WindowServiceExport.h
+set (INTERFACES_SOURCES
+    ${CMAKE_SOURCE_DIR}/interfaces/IService.h
+    ${CMAKE_SOURCE_DIR}/interfaces/IServiceListener.h
+
+    ${CMAKE_SOURCE_DIR}/interfaces/export-headers/ServiceFactoryExport.h
+    ${CMAKE_SOURCE_DIR}/interfaces/export-headers/WindowServiceExport.h
+
+    ${CMAKE_SOURCE_DIR}/interfaces/window-services/IWMediaService.h
 )
 
 # add services subdirectory
@@ -110,6 +115,7 @@ target_link_libraries(appTotodoro
         Qt6::Quick
         common_moduleplugin
         mediaplayer_moduleplugin
+        wmedia_service
 )
 
 include(GNUInstallDirs)
