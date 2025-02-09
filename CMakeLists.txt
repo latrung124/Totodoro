@@ -73,9 +73,18 @@ set(CONNECTION_SOURCES
 set(CORE_SOURCES
     core/GuiApplication.cpp
     core/handlers/service-listeners/WMediaServiceListener.cpp
+    core/handlers/service-messages/window-service/WMediaInfoMessage.cpp
+    core/handlers/service-messages/window-service/WPlaybackControlsMessage.cpp
+    core/handlers/service-messages/window-service/WPlaybackInfoMessage.cpp
 
     core/GuiApplication.h
     core/handlers/service-listeners/WMediaServiceListener.h
+
+    core/handlers/service-messages/ServiceMessage.h
+    core/handlers/service-messages/ServiceMessageId.h
+    core/handlers/service-messages/window-service/WMediaInfoMessage.h
+    core/handlers/service-messages/window-service/WPlaybackControlsMessage.h
+    core/handlers/service-messages/window-service/WPlaybackInfoMessage.h
 )
 
 qt_add_executable(appTotodoro
