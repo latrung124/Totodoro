@@ -24,6 +24,7 @@ set (INTERFACES_SOURCES
     ${CMAKE_SOURCE_DIR}/interfaces/export-headers/WindowServiceExport.h
 
     ${CMAKE_SOURCE_DIR}/interfaces/window-services/IWMediaService.h
+    ${CMAKE_SOURCE_DIR}/interfaces/window-services/IWMediaServiceListener.h
 
     ${CMAKE_SOURCE_DIR}/interfaces/window-services/WMediaServiceUtils.h
 )
@@ -77,7 +78,7 @@ set(CORE_SOURCES
 
 qt_add_executable(appTotodoro
     main.cpp
-    ${INTERFACE_CONFIG_SOURCES}
+    ${INTERFACES_SOURCES} # this should be removed and installed to the include directory
     ${CONFIG_CONST_VAL_SOURCES}
     ${MEDIAPLAYER_VM_SOURCES}
     ${MEDIAPLAYER_MODELS_SOURCES}
