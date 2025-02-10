@@ -4,3 +4,5 @@
 if(WIN32)
     add_subdirectory(window-services)
 endif (WIN32)
+
+add_subdirectory(service-factory)
