@@ -19,12 +19,6 @@ WMediaServiceHandler::~WMediaServiceHandler()
 {
 }
 
-WMediaServiceHandler& WMediaServiceHandler::getInstance()
-{
-    static WMediaServiceHandler instance;
-    return instance;
-}
-
 void WMediaServiceHandler::start()
 {
     m_serviceConsumer->start();

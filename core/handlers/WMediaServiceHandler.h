@@ -21,8 +21,8 @@ public:
     using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
     using ServiceConsumerUPtr = std::unique_ptr<ServiceConsumer>;
 
+    WMediaServiceHandler();
     virtual ~WMediaServiceHandler();
-    static WMediaServiceHandler& getInstance();
 
     void start();
     void stop();
@@ -31,7 +31,6 @@ public:
     void processMessage(ServiceMessageUPtr message);
 
 private:
-    WMediaServiceHandler();
     ServiceConsumerUPtr m_serviceConsumer = nullptr;
 };
 

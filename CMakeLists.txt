@@ -84,16 +84,15 @@ set(CORE_SOURCES
     core/handlers/service-consumers/window-service/WMediaServiceConsumer.cpp
 
     core/GuiApplication.h
-    core/handlers/ServiceHandler.h
     core/handlers/service-listeners/WMediaServiceListener.h
-    core/handlers/service-consumers/ServiceConsumer.h
-    
+    core/handlers/ServiceHandler.h
     core/handlers/WMediaServiceHandler.h
     core/handlers/service-messages/ServiceMessage.h
     core/handlers/service-messages/ServiceMessageId.h
     core/handlers/service-messages/window-service/WMediaInfoMessage.h
     core/handlers/service-messages/window-service/WPlaybackControlsMessage.h
     core/handlers/service-messages/window-service/WPlaybackInfoMessage.h
+    core/handlers/service-consumers/ServiceConsumer.h
     core/handlers/service-consumers/window-service/WMediaServiceConsumer.h
 )
 
