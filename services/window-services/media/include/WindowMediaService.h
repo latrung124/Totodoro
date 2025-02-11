@@ -16,6 +16,9 @@ public:
     WindowMediaService();
     ~WindowMediaService() override;
 
+    void registerListener(const IServiceListener *listener) override;
+    void unregisterListener(const IServiceListener *listener) override;
+
     void start() override;
     void getMediaInfo() override;
 };

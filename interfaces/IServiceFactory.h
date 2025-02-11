@@ -10,7 +10,7 @@
 
 #include "interfaces/export-headers/ServiceFactoryExport.h"
 
-#include <string>
+#include <string_view>
 
 #include "IService.h"
 
@@ -18,7 +18,7 @@ class SERVICE_FACTORY_API IServiceFactory
 {
 public:
     virtual ~IServiceFactory() = default;
-    virtual IService* factoryMethod(std::string &serviceName) const = 0;
+    virtual IService* factoryMethod(std::string_view serviceName) const = 0;
 };
 
 extern "C" SERVICE_FACTORY_API IServiceFactory* getServiceFactory();

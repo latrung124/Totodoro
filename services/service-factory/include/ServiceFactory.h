@@ -15,7 +15,7 @@ class SERVICE_FACTORY_API ServiceFactory : public IServiceFactory
 public:
     ServiceFactory() = default;
     virtual ~ServiceFactory() = default;
-    virtual IService* factoryMethod(std::string &serviceName) const override;
+    virtual IService* factoryMethod(std::string_view serviceName) const override;
 };
 
 extern "C" SERVICE_FACTORY_API IServiceFactory* getServiceFactory() {

@@ -15,6 +15,16 @@ WindowMediaService::~WindowMediaService()
 {
 }
 
+void WindowMediaService::registerListener(const IServiceListener *listener)
+{
+    // Register listener
+}
+
+void WindowMediaService::unregisterListener(const IServiceListener *listener)
+{
+    // Unregister listener
+}
+
 void WindowMediaService::start()
 {
     // Start the media service

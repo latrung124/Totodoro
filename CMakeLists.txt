@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Totodoro VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick Core5Compat)
@@ -132,6 +133,7 @@ set_target_properties(appTotodoro PROPERTIES
 target_include_directories(appTotodoro
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
 )
 
 target_link_libraries(appTotodoro
