@@ -7,6 +7,11 @@
 
 #include "MediaPlaybackModel.h"
 
+MediaPlaybackModel::MediaPlaybackModel(QObject *parent)
+    : SystemDataModel(parent)
+{
+}
+
 bool MediaPlaybackModel::isPlaying() const
 {
     return m_isPlaying;

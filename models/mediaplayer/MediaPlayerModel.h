@@ -8,15 +8,16 @@
 #ifndef MEDIAPLAYERMODEL_H
 #define MEDIAPLAYERMODEL_H
 
-#include <memory>
+#include "models/SystemDataModel.h"
 
-#include <QObject>
 #include <QString>
 #include <QUrl>
 
+#include <memory>
+
 class MediaPlaybackModel;
 
-class MediaPlayerModel : public QObject
+class MediaPlayerModel : public SystemDataModel
 {
     Q_OBJECT
 

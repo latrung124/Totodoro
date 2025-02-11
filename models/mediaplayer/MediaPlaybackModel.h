@@ -8,14 +8,14 @@
 #ifndef MEDIAPLAYBACKMODEL_H
 #define MEDIAPLAYBACKMODEL_H
 
-#include <QObject>
+#include "models/SystemDataModel.h"
 
-class MediaPlaybackModel : public QObject
+class MediaPlaybackModel : public SystemDataModel
 {
     Q_OBJECT
 
 public:
-    MediaPlaybackModel() = default;
+    MediaPlaybackModel(QObject *parent = nullptr);
     ~MediaPlaybackModel() = default;
 
     bool isPlaying() const;

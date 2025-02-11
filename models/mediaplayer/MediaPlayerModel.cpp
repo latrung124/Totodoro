@@ -9,7 +9,7 @@
 #include "MediaPlaybackModel.h"
 
 MediaPlayerModel::MediaPlayerModel(QObject* parent)
-    : QObject(parent)
+    : SystemDataModel(parent)
     , m_mediaPlaybackModel(std::make_shared<MediaPlaybackModel>())
 {
 }
