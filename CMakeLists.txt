@@ -83,6 +83,8 @@ set(CORE_SOURCES
     core/handlers/service-messages/window-service/WPlaybackControlsMessage.cpp
     core/handlers/service-messages/window-service/WPlaybackInfoMessage.cpp
     core/handlers/service-consumers/window-service/WMediaServiceConsumer.cpp
+    core/services/ServiceConcreteHelper.h
+    core/services/ServiceManager.h
 
     core/GuiApplication.h
     core/handlers/service-listeners/WMediaServiceListener.h
