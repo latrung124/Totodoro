@@ -49,9 +49,14 @@ set(MEDIAPLAYER_VM_SOURCES
 
 # set the models
 set(MEDIAPLAYER_MODELS_SOURCES
+    models/Model.h
+    models/DatabaseModel.h
+    models/SystemDataModel.h
     models/mediaplayer/MediaPlayerModel.cpp
     models/mediaplayer/MediaPlaybackModel.cpp
 
+    models/DatabaseModel.cpp
+    models/SystemDataModel.cpp
     models/mediaplayer/MediaPlayerModel.h
     models/mediaplayer/MediaPlaybackModel.h
 )
