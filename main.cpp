@@ -1,3 +1,13 @@
+/*
+File: main.cpp
+* Author: trung.la
+* Date: 02-12-2025
+* Description: This file contains the main function of the application.
+*/
+
+#include "core/services/ServiceManager.h"
+#include "interfaces/window-services/IWMediaService.h"
+
 #include "config/const_val/ApplicationConst.h"
 #include "core/GuiApplication.h"
 
@@ -24,12 +34,21 @@ void setApplicationInfo()
 	QGuiApplication::setWindowIcon(QIcon(ApplicationIcon));
 }
 
+void serviceRegister()
+{
+	//Example: Register service here
+	auto service = ServiceManager::instance().registerService<IWMediaService>();
+	Q_UNUSED(service); // TODO: use for register listener
+}
+
 int main(int argc, char *argv[])
 {
 	QGuiApplication app(argc, argv);
 
 	setApplicationAttribute();
 	setApplicationInfo();
+
+	serviceRegister();
 
 	QQmlApplicationEngine engine;
 	QObject::connect(

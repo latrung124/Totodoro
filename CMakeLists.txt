@@ -102,6 +102,7 @@ set(CORE_SOURCES
     core/handlers/service-messages/window-service/WPlaybackInfoMessage.h
     core/handlers/service-consumers/ServiceConsumer.h
     core/handlers/service-consumers/window-service/WMediaServiceConsumer.h
+    core/services/ServiceManager.cpp
 )
 
 qt_add_executable(appTotodoro
@@ -162,6 +163,7 @@ target_link_libraries(appTotodoro
         common_moduleplugin
         mediaplayer_moduleplugin
         wmedia_service
+        service_factory
 )
 
 include(GNUInstallDirs)
