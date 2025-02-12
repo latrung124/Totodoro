@@ -123,7 +123,20 @@ qt_add_qml_module(appTotodoro
     QML_FILES
         Main.qml
     RESOURCES
-	    "resources/icon/totoro-icon-48x48.png"
+	    "resources/icon/Black/16x16.png"
+        "resources/icon/Black/24x24.png"
+        "resources/icon/Black/32x32.png"
+        "resources/icon/Black/48x48.png"
+        "resources/icon/Black/128x128.png"
+        "resources/icon/Black/256x256.png"
+        "resources/icon/Black/512x512.png"
+        "resources/icon/White/16x16.png"
+        "resources/icon/White/24x24.png"
+        "resources/icon/White/32x32.png"
+        "resources/icon/White/48x48.png"
+        "resources/icon/White/128x128.png"
+        "resources/icon/White/256x256.png"
+        "resources/icon/White/512x512.png"
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
