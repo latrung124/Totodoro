@@ -6,6 +6,7 @@ File: main.cpp
 */
 
 #include "core/services/ServiceManager.h"
+#include "core/handlers/service-listeners/WMediaServiceListener.h"
 #include "interfaces/window-services/IWMediaService.h"
 
 #include "config/const_val/ApplicationConst.h"
@@ -36,9 +37,9 @@ void setApplicationInfo()
 
 void serviceRegister()
 {
-	//Example: Register service here
 	auto service = ServiceManager::instance().registerService<IWMediaService>();
-	Q_UNUSED(service); // TODO: use for register listener
+	if (service != nullptr)
+		service->registerListener(new WMediaServiceListener());
 }
 
 int main(int argc, char *argv[])
