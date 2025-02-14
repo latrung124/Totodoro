@@ -7,7 +7,7 @@
 
 #include "models/SystemDataModel.h"
 
-SystemDataModel::SystemDataModel(QObject *parent) : Model(parent)
+SystemDataModel::SystemDataModel()
 {
 }
 

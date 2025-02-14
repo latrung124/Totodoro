@@ -13,7 +13,7 @@
 class SystemDataModel : public Model
 {
 public:
-    SystemDataModel(QObject *parent = nullptr);
+    SystemDataModel();
     virtual ~SystemDataModel();
 };
 

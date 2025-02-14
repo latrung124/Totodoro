@@ -7,8 +7,7 @@
 
 #include "MediaPlaybackModel.h"
 
-MediaPlaybackModel::MediaPlaybackModel(QObject *parent)
-    : SystemDataModel(parent)
+MediaPlaybackModel::MediaPlaybackModel()
 {
 }
 
@@ -22,7 +21,6 @@ void MediaPlaybackModel::setIsPlaying(bool isPlaying)
     if (m_isPlaying != isPlaying)
     {
         m_isPlaying = isPlaying;
-        emit isPlayingChanged(isPlaying);
     }
 }
 
@@ -36,7 +34,6 @@ void MediaPlaybackModel::setIsPlayingEnabled(bool isPlayingEnabled)
     if (m_isPlayingEnabled != isPlayingEnabled)
     {
         m_isPlayingEnabled = isPlayingEnabled;
-        emit isPlayingEnabledChanged(isPlayingEnabled);
     }
 }
 
@@ -50,7 +47,6 @@ void MediaPlaybackModel::setIsPauseEnabled(bool isPauseEnabled)
     if (m_isPauseEnabled != isPauseEnabled)
     {
         m_isPauseEnabled = isPauseEnabled;
-        emit isPauseEnabledChanged(isPauseEnabled);
     }
 }
 
@@ -64,7 +60,6 @@ void MediaPlaybackModel::setIsNextEnabled(bool isNextEnabled)
     if (m_isNextEnabled != isNextEnabled)
     {
         m_isNextEnabled = isNextEnabled;
-        emit isNextEnabledChanged(isNextEnabled);
     }
 }
 
@@ -78,6 +73,5 @@ void MediaPlaybackModel::setIsPreviousEnabled(bool isPreviousEnabled)
     if (m_isPreviousEnabled != isPreviousEnabled)
     {
         m_isPreviousEnabled = isPreviousEnabled;
-        emit isPreviousEnabledChanged(isPreviousEnabled);
     }
 }

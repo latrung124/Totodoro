@@ -13,7 +13,7 @@
 class DatabaseModel : public Model
 {
 public:
-    DatabaseModel(QObject *parent = nullptr);
+    DatabaseModel();
     virtual ~DatabaseModel();
 };
 

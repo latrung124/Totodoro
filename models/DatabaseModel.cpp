@@ -7,7 +7,7 @@
 
 #include "models/DatabaseModel.h"
 
-DatabaseModel::DatabaseModel(QObject *parent) : Model(parent)
+DatabaseModel::DatabaseModel()
 {
 }
 

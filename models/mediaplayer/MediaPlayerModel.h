@@ -10,48 +10,34 @@
 
 #include "models/SystemDataModel.h"
 
-#include <QString>
-#include <QUrl>
-
+#include <string>
 #include <memory>
 
 class MediaPlaybackModel;
 
 class MediaPlayerModel : public SystemDataModel
 {
-    Q_OBJECT
-
 public:
     using MediaPlaybackModelPtr = std::shared_ptr<MediaPlaybackModel>;
 
-    explicit MediaPlayerModel(QObject *parent = nullptr);
+    explicit MediaPlayerModel();
     ~MediaPlayerModel() = default;
 
-    QString title() const;
-    void setTitle(const QString &title);
+    std::string title() const;
+    void setTitle(const std::string &title);
 
-    QString artist() const;
-    void setArtist(const QString &artist);
+    std::string artist() const;
+    void setArtist(const std::string &artist);
 
-    QUrl thumbnail() const;
-    void setThumbnail(const QUrl &thumbnail);
+    std::string thumbnail() const;
+    void setThumbnail(const std::string &thumbnail);
 
     MediaPlaybackModelPtr mediaPlaybackModel() const;
 
-signals:
-    void titleChanged(const QString &title);
-    void artistChanged(const QString &artist);
-    void thumbnailChanged(const QUrl &thumbnail);
-
-public slots:
-    void onTitleChanged(const QString &title);
-    void onArtistChanged(const QString &artist);
-    void onThumbnailChanged(const QUrl &thumbnail);
-
 private:
-    QString m_title;
-    QString m_artist;
-    QUrl m_thumbnail;
+    std::string m_title;
+    std::string m_artist;
+    std::string m_thumbnail;
     MediaPlaybackModelPtr m_mediaPlaybackModel;
 };
 

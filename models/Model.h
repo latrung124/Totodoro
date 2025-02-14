@@ -8,13 +8,10 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <QObject>
-
-class Model : public QObject
+class Model
 {
-    Q_OBJECT
 public:
-    Model(QObject *parent = nullptr) : QObject(parent) {}
+    Model() = default;
     virtual ~Model() = default;
 };
 

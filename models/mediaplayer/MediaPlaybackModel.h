@@ -10,12 +10,10 @@
 
 #include "models/SystemDataModel.h"
 
-class MediaPlaybackModel : public SystemDataModel
+class MediaPlaybackModel
 {
-    Q_OBJECT
-
 public:
-    MediaPlaybackModel(QObject *parent = nullptr);
+    MediaPlaybackModel();
     ~MediaPlaybackModel() = default;
 
     bool isPlaying() const;
@@ -32,13 +30,6 @@ public:
 
     bool isPreviousEnabled() const;
     void setIsPreviousEnabled(bool isPreviousEnabled);
-
-signals:
-    void isPlayingChanged(bool isPlaying);
-    void isPlayingEnabledChanged(bool isPlayingEnabled);
-    void isPauseEnabledChanged(bool isPauseEnabled);
-    void isNextEnabledChanged(bool isNextEnabled);
-    void isPreviousEnabledChanged(bool isPreviousEnabled);
 
 private:
     bool m_isPlaying = false;

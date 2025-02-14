@@ -70,12 +70,6 @@ set(CONTROLLER_SOURCES
     core/controllers/ViewModelController.h
 )
 
-set(CONNECTION_SOURCES
-    core/connections/ConnectionManager.cpp
-
-    core/connections/ConnectionManager.h
-)
-
 set(UTIL_SOURCES
     utils/ThreadGuard.h
 )
@@ -112,7 +106,6 @@ qt_add_executable(appTotodoro
     ${MEDIAPLAYER_VM_SOURCES}
     ${MEDIAPLAYER_MODELS_SOURCES}
     ${CONTROLLER_SOURCES}
-    ${CONNECTION_SOURCES}
     ${CORE_SOURCES}
     ${UTIL_SOURCES}
 )
