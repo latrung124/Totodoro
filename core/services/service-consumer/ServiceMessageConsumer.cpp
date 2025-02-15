@@ -8,6 +8,7 @@
 #include "ServiceMessageConsumer.h"
 
 #include "core/services/service-messages/window-service/WMediaInfoMessage.h"
+#include "core/services/service-handlers/WMediaInfoMessageHandler.h"
 
 ServiceMessageConsumer::ServiceMessageConsumer()
 {
@@ -17,20 +18,16 @@ ServiceMessageConsumer::~ServiceMessageConsumer()
 {
 }
 
+void ServiceMessageConsumer::addHandler(std::unique_ptr<ServiceMessageHandler> handler)
+{
+    m_handlers[handler->getId()] = std::move(handler);
+}
+
 void ServiceMessageConsumer::consumeMessage(ServiceMessageUPtr message)
 {
-    if (!message) {
+    if (message == nullptr) {
         return;
     }
 
-    ServiceMessageId messageId = message->getId();
-    switch (messageId)
-    {
-    case ServiceMessageId::WMediaInfoMessage: {
-        // Process WMediaInfoMessage
-        break;
-    }
-    default:
-        break;
-    }
+    m_handlers[message->getId()]->handleMessage(std::move(message));
 }

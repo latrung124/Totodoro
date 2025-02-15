@@ -85,6 +85,8 @@ set(CORE_SOURCES
     core/services/service-queue/ServiceMessageQueue.cpp
     core/services/ServiceConcreteHelper.h
     core/services/ServiceManager.h
+    core/services/service-handlers/ServiceMessageHandler.h
+    core/services/service-handlers/WMediaInfoMessageHandler.h
 
     core/GuiApplication.h
     core/services/service-listeners/WMediaServiceListener.h
@@ -100,6 +102,7 @@ set(CORE_SOURCES
     core/services/service-queue/MessageQueue.h
     core/services/service-queue/ServiceMessageQueue.h
     core/services/ServiceManager.cpp
+    core/services/service-handlers/WMediaInfoMessageHandler.cpp
 )
 
 qt_add_executable(appTotodoro

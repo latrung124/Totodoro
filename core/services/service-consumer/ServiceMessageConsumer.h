@@ -9,10 +9,13 @@ File: ServiceMessageConsumer.h
 #define SERVICE_MESSAGE_CONSUMER_H
 
 #include "core/services/service-consumer/ServiceConsumer.h"
+#include "core/services/service-messages/ServiceMessage.h"
 
 #include <memory>
+#include <map>
 
 class ServiceMessage;
+class ServiceMessageHandler;
 
 class ServiceMessageConsumer : public ServiceConsumer
 {
@@ -23,6 +26,11 @@ public:
     virtual ~ServiceMessageConsumer();
 
     void consumeMessage(ServiceMessageUPtr message);
+
+    void addHandler(std::unique_ptr<ServiceMessageHandler> handler);
+
+private:
+    std::map<ServiceMessageId, std::unique_ptr<ServiceMessageHandler>> m_handlers;
 };
 
 #endif // SERVICE_MESSAGE_CONSUMER_H
