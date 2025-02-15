@@ -8,7 +8,7 @@
 #include "ServiceMessageConsumer.h"
 
 #include "core/handlers/service-messages/window-service/WMediaInfoMessage.h"
-#include "core/handlers/service-consumers/ServiceMessageQueue.h"
+#include "core/handlers/ServiceMessageQueue.h"
 
 ServiceMessageConsumer::ServiceMessageConsumer()
     : m_messageQueue(std::make_unique<ServiceMessageQueue>(this))

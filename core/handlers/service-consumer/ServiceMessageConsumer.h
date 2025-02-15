@@ -8,7 +8,7 @@ File: ServiceMessageConsumer.h
 #ifndef SERVICE_MESSAGE_CONSUMER_H
 #define SERVICE_MESSAGE_CONSUMER_H
 
-#include "core/handlers/ServiceConsumer.h"
+#include "core/handlers/service-consumer/ServiceConsumer.h"
 
 #include <memory>
 

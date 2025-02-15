@@ -7,7 +7,7 @@
 
 #include "ServiceMessageQueue.h"
 
-#include "core/handlers/ServiceMessageConsumer.h"
+#include "core/handlers/service-consumer/ServiceMessageConsumer.h"
 
 #include "utils/ThreadGuard.h"
 

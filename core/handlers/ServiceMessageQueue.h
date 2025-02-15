@@ -8,7 +8,7 @@
 #ifndef SERVICE_MESSAGE_QUEUE_H
 #define SERVICE_MESSAGE_QUEUE_H
 
-#include "core/handlers/service-consumers/MessageQueue.h"
+#include "core/handlers/MessageQueue.h"
 
 #include <mutex>
 #include <condition_variable>
