@@ -7,12 +7,12 @@
 
 #include "ServiceMessageQueue.h"
 
-#include "core/handlers/service-consumer/ServiceMessageConsumer.h"
+#include "core/services/service-consumer/ServiceMessageConsumer.h"
 
 #include "utils/ThreadGuard.h"
 
-ServiceMessageQueue::ServiceMessageQueue(ServiceMessageConsumer *handler)
-    : m_consumer(handler)
+ServiceMessageQueue::ServiceMessageQueue(ServiceMessageConsumer *consumer)
+    : m_consumer(consumer)
     , m_isRunning(false)
 {
 }
@@ -69,6 +69,6 @@ void ServiceMessageQueue::loop()
 void ServiceMessageQueue::consumeMessage(ServiceMessageUPtr message)
 {
     if (m_consumer) {
-        m_consumer->handleMessage(std::move(message));
+        m_consumer->consumeMessage(std::move(message));
     }
 }

@@ -8,7 +8,7 @@
 #ifndef SERVICE_MESSAGE_QUEUE_H
 #define SERVICE_MESSAGE_QUEUE_H
 
-#include "core/handlers/MessageQueue.h"
+#include "core/services/service-queue/MessageQueue.h"
 
 #include <mutex>
 #include <condition_variable>
@@ -22,7 +22,7 @@ class ServiceMessageQueue : public MessageQueue
 public:
     using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 
-    ServiceMessageQueue(ServiceMessageConsumer* handler);
+    ServiceMessageQueue(ServiceMessageConsumer* consumer);
     ~ServiceMessageQueue() override;
 
     ServiceMessageQueue(const ServiceMessageQueue&) = delete;

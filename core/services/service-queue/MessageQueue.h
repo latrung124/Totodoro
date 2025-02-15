@@ -8,7 +8,7 @@
 #ifndef MESSAGE_QUEUE_H
 #define MESSAGE_QUEUE_H
 
-#include "core/handlers/service-messages/ServiceMessage.h"
+#include "core/services/service-messages/ServiceMessage.h"
 
 #include <memory>
 

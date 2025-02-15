@@ -8,7 +8,7 @@
 #ifndef W_PLAYBACK_INFO_MESSAGE_H
 #define W_PLAYBACK_INFO_MESSAGE_H
 
-#include "core/handlers/service-messages/ServiceMessage.h"
+#include "core/services/service-messages/ServiceMessage.h"
 #include "interfaces/window-services/WMediaServiceUtils.h"
 
 class WPlaybackInfoMessage : public ServiceMessage

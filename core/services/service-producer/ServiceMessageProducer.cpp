@@ -6,10 +6,10 @@
 */
 
 #include "ServiceMessageProducer.h"
-#include "core/handlers/service-messages/ServiceMessageId.h"
-#include "core/handlers/service-messages/window-service/WMediaInfoMessage.h"
-#include "core/handlers/service-messages/window-service/WPlaybackControlsMessage.h"
-#include "core/handlers/service-messages/window-service/WPlaybackInfoMessage.h"
+#include "core/services/service-messages/ServiceMessageId.h"
+#include "core/services/service-messages/window-service/WMediaInfoMessage.h"
+#include "core/services/service-messages/window-service/WPlaybackControlsMessage.h"
+#include "core/services/service-messages/window-service/WPlaybackInfoMessage.h"
 
 ServiceMessageProducer& ServiceMessageProducer::getInstance()
 {

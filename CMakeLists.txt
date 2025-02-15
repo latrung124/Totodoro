@@ -76,29 +76,29 @@ set(UTIL_SOURCES
 
 set(CORE_SOURCES
     core/GuiApplication.cpp
-    core/handlers/service-consumer/ServiceMessageConsumer.cpp
-    core/handlers/service-producer/ServiceMessageProducer.cpp
-    core/handlers/service-listeners/WMediaServiceListener.cpp
-    core/handlers/service-messages/window-service/WMediaInfoMessage.cpp
-    core/handlers/service-messages/window-service/WPlaybackControlsMessage.cpp
-    core/handlers/service-messages/window-service/WPlaybackInfoMessage.cpp
-    core/handlers/ServiceMessageQueue.cpp
+    core/services/service-consumer/ServiceMessageConsumer.cpp
+    core/services/service-producer/ServiceMessageProducer.cpp
+    core/services/service-listeners/WMediaServiceListener.cpp
+    core/services/service-messages/window-service/WMediaInfoMessage.cpp
+    core/services/service-messages/window-service/WPlaybackControlsMessage.cpp
+    core/services/service-messages/window-service/WPlaybackInfoMessage.cpp
+    core/services/service-queue/ServiceMessageQueue.cpp
     core/services/ServiceConcreteHelper.h
     core/services/ServiceManager.h
 
     core/GuiApplication.h
-    core/handlers/service-listeners/WMediaServiceListener.h
-    core/handlers/service-consumer/ServiceConsumer.h
-    core/handlers/service-consumer/ServiceMessageConsumer.h
-    core/handlers/service-producer/ServiceProducer.h
-    core/handlers/service-producer/ServiceMessageProducer.h
-    core/handlers/service-messages/ServiceMessage.h
-    core/handlers/service-messages/ServiceMessageId.h
-    core/handlers/service-messages/window-service/WMediaInfoMessage.h
-    core/handlers/service-messages/window-service/WPlaybackControlsMessage.h
-    core/handlers/service-messages/window-service/WPlaybackInfoMessage.h
-    core/handlers/MessageQueue.h
-    core/handlers/ServiceMessageQueue.h
+    core/services/service-listeners/WMediaServiceListener.h
+    core/services/service-consumer/ServiceConsumer.h
+    core/services/service-consumer/ServiceMessageConsumer.h
+    core/services/service-producer/ServiceProducer.h
+    core/services/service-producer/ServiceMessageProducer.h
+    core/services/service-messages/ServiceMessage.h
+    core/services/service-messages/ServiceMessageId.h
+    core/services/service-messages/window-service/WMediaInfoMessage.h
+    core/services/service-messages/window-service/WPlaybackControlsMessage.h
+    core/services/service-messages/window-service/WPlaybackInfoMessage.h
+    core/services/service-queue/MessageQueue.h
+    core/services/service-queue/ServiceMessageQueue.h
     core/services/ServiceManager.cpp
 )
 

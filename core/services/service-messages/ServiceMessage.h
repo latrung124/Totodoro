@@ -8,7 +8,7 @@
 #ifndef SERVICE_MESSAGE_H
 #define SERVICE_MESSAGE_H
 
-#include "core/handlers/service-messages/ServiceMessageId.h"
+#include "core/services/service-messages/ServiceMessageId.h"
 
 class ServiceMessage
 {

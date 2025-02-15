@@ -5,8 +5,8 @@ File: main.cpp
 * Description: This file contains the main function of the application.
 */
 
+#include "core/services/service-listeners/WMediaServiceListener.h"
 #include "core/services/ServiceManager.h"
-#include "core/handlers/service-listeners/WMediaServiceListener.h"
 #include "interfaces/window-services/IWMediaService.h"
 
 #include "config/const_val/ApplicationConst.h"
@@ -38,8 +38,9 @@ void setApplicationInfo()
 void serviceRegister()
 {
 	auto service = ServiceManager::instance().registerService<IWMediaService>();
-	if (service != nullptr)
+	if (service != nullptr) {
 		service->registerListener(new WMediaServiceListener());
+	}
 }
 
 int main(int argc, char *argv[])
