@@ -77,6 +77,7 @@ set(UTIL_SOURCES
 set(CORE_SOURCES
     core/GuiApplication.cpp
     core/handlers/service-consumer/ServiceMessageConsumer.cpp
+    core/handlers/service-producer/ServiceMessageProducer.cpp
     core/handlers/service-listeners/WMediaServiceListener.cpp
     core/handlers/service-messages/window-service/WMediaInfoMessage.cpp
     core/handlers/service-messages/window-service/WPlaybackControlsMessage.cpp
@@ -89,6 +90,8 @@ set(CORE_SOURCES
     core/handlers/service-listeners/WMediaServiceListener.h
     core/handlers/service-consumer/ServiceConsumer.h
     core/handlers/service-consumer/ServiceMessageConsumer.h
+    core/handlers/service-producer/ServiceProducer.h
+    core/handlers/service-producer/ServiceMessageProducer.h
     core/handlers/service-messages/ServiceMessage.h
     core/handlers/service-messages/ServiceMessageId.h
     core/handlers/service-messages/window-service/WMediaInfoMessage.h
