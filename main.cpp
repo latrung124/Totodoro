@@ -7,7 +7,7 @@ File: main.cpp
 
 #include "core/services/service-listeners/WMediaServiceListener.h"
 #include "core/services/ServiceManager.h"
-#include "interfaces/window-services/IWMediaService.h"
+#include <IWMediaService.h>
 
 #include "config/const_val/ApplicationConst.h"
 #include "core/GuiApplication.h"

@@ -11,26 +11,8 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 set(SERVICE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/service_install)
 
-# Set interface export definitions
-add_definitions(-DWMEDIA_SERVICE_LIBRARY_EXPORTS)
-add_definitions(-DSERVICE_FACTORY_LIBRARY_EXPORTS)
-
 # Add the qmlmodules subdirectory
 add_subdirectory(qmlmodules)
-
-# set the interface config
-set (INTERFACES_SOURCES
-    ${CMAKE_SOURCE_DIR}/interfaces/IService.h
-    ${CMAKE_SOURCE_DIR}/interfaces/IServiceListener.h
-
-    ${CMAKE_SOURCE_DIR}/interfaces/export-headers/ServiceFactoryExport.h
-    ${CMAKE_SOURCE_DIR}/interfaces/export-headers/WindowServiceExport.h
-
-    ${CMAKE_SOURCE_DIR}/interfaces/window-services/IWMediaService.h
-    ${CMAKE_SOURCE_DIR}/interfaces/window-services/IWMediaServiceListener.h
-
-    ${CMAKE_SOURCE_DIR}/interfaces/window-services/WMediaServiceUtils.h
-)
 
 # add services subdirectory
 add_subdirectory(services)
@@ -155,7 +137,6 @@ set_target_properties(appTotodoro PROPERTIES
 target_include_directories(appTotodoro
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/interfaces
 )
 
 target_link_libraries(appTotodoro

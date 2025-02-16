@@ -19,12 +19,10 @@ add_dependencies(service_interfaces wmedia_service)
 
 target_include_directories(wmedia_service
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/interfaces/export-headers>
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/interfaces/window-services>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/services/interfaces/export-headers>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/services/interfaces/include/window-services>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/media/include>
-        $<INSTALL_INTERFACE:interfaces/export-headers>
-        $<INSTALL_INTERFACE:interfaces/window-services>
-        $<INSTALL_INTERFACE:media/include>
+        $<INSTALL_INTERFACE:interfaces>
 )
 
 install(TARGETS wmedia_service

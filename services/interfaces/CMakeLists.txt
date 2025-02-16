@@ -5,14 +5,15 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(INTERFACE_HEADERS
-    IService.h
-    IServiceFactory.h
-    IServiceListener.h
+    include/IService.h
+    include/IServiceFactory.h
+    include/IServiceListener.h
+    include/window-services/IWMediaService.h
+    include/window-services/IWMediaServiceListener.h
+    include/window-services/WMediaServiceUtils.h
+    export-headers/ServiceExport.h
     export-headers/ServiceFactoryExport.h
     export-headers/WindowServiceExport.h
-    window-services/IWMediaService.h
-    window-services/IWMediaServiceListener.h
-    window-services/WMediaServiceUtils.h
 )
 
 add_library(service_interfaces INTERFACE
@@ -21,21 +22,11 @@ add_library(service_interfaces INTERFACE
 
 target_include_directories(service_interfaces
     INTERFACE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/export-headers>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/window-services>
-        $<INSTALL_INTERFACE:export-headers>
-        $<INSTALL_INTERFACE:window-services>
-)
-
-install(FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/IService.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/IServiceFactory.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/IServiceListener.h
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/interfaces
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<INSTALL_INTERFACE:interfaces>
 )
 
 install(DIRECTORY
-    ${CMAKE_CURRENT_SOURCE_DIR}/export-headers
-    ${CMAKE_CURRENT_SOURCE_DIR}/window-services
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/interfaces
 )

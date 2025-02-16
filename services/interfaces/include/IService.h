@@ -8,9 +8,11 @@
 #ifndef INTERFACES_ISERVICE_H_
 #define INTERFACES_ISERVICE_H_
 
-#include "IServiceListener.h"
+#include <ServiceExport.h>
 
-class IService
+class IServiceListener;
+
+class SERVICE_API IService
 {
 public:
     IService() = default;

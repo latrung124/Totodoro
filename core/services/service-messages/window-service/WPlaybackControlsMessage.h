@@ -9,7 +9,7 @@
 #define W_PLAYBACK_CONTROLS_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
-#include "interfaces/window-services/WMediaServiceUtils.h"
+#include <WMediaServiceUtils.h>
 
 class WPlaybackControlsMessage : public ServiceMessage
 {

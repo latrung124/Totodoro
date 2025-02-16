@@ -8,7 +8,7 @@
 #ifndef IW_MEDIA_SERVICE_LISTENER_H
 #define IW_MEDIA_SERVICE_LISTENER_H
 
-#include <IServiceListener.h>
+#include "../IServiceListener.h"
 #include <WMediaServiceUtils.h>
 
 class IWMediaServiceListener : public IServiceListener
