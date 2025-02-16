@@ -7,16 +7,16 @@
 
 #include "WMediaInfoMessageHandler.h"
 
-WMediaServiceHandler::WMediaServiceHandler()
+WMediaInfoMessageHandler::WMediaInfoMessageHandler()
     : ServiceMessageHandler(ServiceMessageId::WMediaInfoMessage)
 {
 }
 
-WMediaServiceHandler::~WMediaServiceHandler()
+WMediaInfoMessageHandler::~WMediaInfoMessageHandler()
 {
 }
 
-void WMediaServiceHandler::handleMessage(ServiceMessageUPtr message)
+void WMediaInfoMessageHandler::handleMessage(ServiceMessageUPtr message)
 {
     // Cast the message to WMediaInfoMessage
 }

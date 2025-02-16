@@ -5,8 +5,8 @@
 * Description: This file contains the declaration of the ServiceMessageHandler class.
 */
 
-#ifndef SERVICE_HANDLER_H
-#define SERVICE_HANDLER_H
+#ifndef SERVICE_MESSAGE_HANDLER_H
+#define SERVICE_MESSAGE_HANDLER_H
 
 #include "core/services/service-messages/ServiceMessage.h"
 
@@ -35,4 +35,4 @@ private:
     ServiceMessageId m_id = ServiceMessageId::None;
 };
 
-#endif // SERVICE_HANDLER_H
+#endif // SERVICE_MESSAGE_HANDLER_H

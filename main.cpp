@@ -5,6 +5,8 @@ File: main.cpp
 * Description: This file contains the main function of the application.
 */
 
+#include "core/services/service-consumer/ServiceMessageConsumer.h"
+#include "core/services/service-handlers/WMediaInfoMessageHandler.h"
 #include "core/services/service-listeners/WMediaServiceListener.h"
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>
@@ -40,6 +42,8 @@ void serviceRegister()
 	auto service = ServiceManager::instance().registerService<IWMediaService>();
 	if (service != nullptr) {
 		service->registerListener(new WMediaServiceListener());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WMediaInfoMessageHandler>());
 	}
 }
 
