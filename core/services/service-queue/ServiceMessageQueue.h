@@ -15,14 +15,12 @@
 #include <queue>
 #include <memory>
 
-class ServiceMessageConsumer;
-
 class ServiceMessageQueue : public MessageQueue
 {
 public:
     using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 
-    ServiceMessageQueue(ServiceMessageConsumer* consumer);
+    ServiceMessageQueue();
     ~ServiceMessageQueue() override;
 
     ServiceMessageQueue(const ServiceMessageQueue&) = delete;
@@ -46,7 +44,6 @@ private:
     std::condition_variable m_conditionVariable;
     std::queue<ServiceMessageUPtr> m_messageQueue;
     bool m_isRunning;
-    ServiceMessageConsumer* m_consumer = nullptr;
 };
 
 #endif // SERVICE_MESSAGE_QUEUE_H

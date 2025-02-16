@@ -10,8 +10,10 @@
 #include "core/services/service-messages/window-service/WMediaInfoMessage.h"
 #include "core/services/service-handlers/WMediaInfoMessageHandler.h"
 
-ServiceMessageConsumer::ServiceMessageConsumer()
+ServiceMessageConsumer& ServiceMessageConsumer::getInstance()
 {
+    static ServiceMessageConsumer instance;
+    return instance;
 }
 
 ServiceMessageConsumer::~ServiceMessageConsumer()

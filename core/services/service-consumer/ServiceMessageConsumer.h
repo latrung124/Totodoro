@@ -22,7 +22,7 @@ class ServiceMessageConsumer : public ServiceConsumer
 public:
     using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 
-    ServiceMessageConsumer();
+    static ServiceMessageConsumer& getInstance();
     virtual ~ServiceMessageConsumer();
 
     void consumeMessage(ServiceMessageUPtr message);
@@ -30,6 +30,7 @@ public:
     void addHandler(std::unique_ptr<ServiceMessageHandler> handler);
 
 private:
+    ServiceMessageConsumer() = default;
     std::map<ServiceMessageId, std::unique_ptr<ServiceMessageHandler>> m_handlers;
 };
 

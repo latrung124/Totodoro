@@ -11,9 +11,8 @@
 
 #include "utils/ThreadGuard.h"
 
-ServiceMessageQueue::ServiceMessageQueue(ServiceMessageConsumer *consumer)
-    : m_consumer(consumer)
-    , m_isRunning(false)
+ServiceMessageQueue::ServiceMessageQueue()
+    : m_isRunning(false)
 {
 }
 
@@ -58,17 +57,8 @@ void ServiceMessageQueue::loop()
             break;
         }
 
-        if (m_consumer) {
-            auto message = std::move(m_messageQueue.front());
-            m_messageQueue.pop();
-            consumeMessage(std::move(message));
-        }
-    }
-}
-
-void ServiceMessageQueue::consumeMessage(ServiceMessageUPtr message)
-{
-    if (m_consumer) {
-        m_consumer->consumeMessage(std::move(message));
+        auto message = std::move(m_messageQueue.front());
+        m_messageQueue.pop();
+        ServiceMessageConsumer::getInstance().consumeMessage(std::move(message));
     }
 }
