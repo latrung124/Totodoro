@@ -9,6 +9,8 @@ find_package(Qt6 REQUIRED COMPONENTS Quick Core5Compat)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
+set(SERVICE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/service_install)
+
 # Set interface export definitions
 add_definitions(-DWMEDIA_SERVICE_LIBRARY_EXPORTS)
 add_definitions(-DSERVICE_FACTORY_LIBRARY_EXPORTS)

@@ -5,8 +5,8 @@
 * Description: This file contains the implementation of the ServiceFactory class.
 */
 
-#include "services/service-factory/include/ServiceFactory.h"
-#include "services/window-services/media/include/WindowMediaService.h"
+#include <ServiceFactory.h>
+#include <WindowMediaService.h>
 
 IService* ServiceFactory::factoryMethod(std::string_view serviceName) const
 {

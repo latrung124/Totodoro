@@ -8,7 +8,7 @@
 #ifndef WINDOW_MEDIA_SERVICE_H
 #define WINDOW_MEDIA_SERVICE_H
 
-#include "window-services/IWMediaService.h"
+#include <IWMediaService.h>
 
 class WMEDIA_SERVICE_API WindowMediaService : public IWMediaService
 {
