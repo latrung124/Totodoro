@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.22)
+project(Interfaces LANGUAGES CXX)
+
 set(INTERFACE_HEADERS
     include/IService.h
     include/IServiceFactory.h
@@ -10,17 +13,31 @@ set(INTERFACE_HEADERS
     export-headers/WindowServiceExport.h
 )
 
-add_library(service_interfaces INTERFACE
+add_library(Interfaces INTERFACE
     ${INTERFACE_HEADERS}
 )
 
-target_include_directories(service_interfaces
+target_include_directories(Interfaces
     INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:interfaces>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/window-services>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/export-headers>
+        $<INSTALL_INTERFACE:include/services/interfaces>
+        $<INSTALL_INTERFACE:include/services/interfaces/export-headers>
+        $<INSTALL_INTERFACE:include/services/interfaces/include>
+        $<INSTALL_INTERFACE:include/services/interfaces/include/window-services>
 )
 
-install(DIRECTORY
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/interfaces
+install(TARGETS Interfaces
+    EXPORT ServicesTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(FILES
+    ${INTERFACE_HEADERS}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/services/interfaces
 )

@@ -8,8 +8,8 @@
 #ifndef SERVICE_CONCRETE_HELPER_H
 #define SERVICE_CONCRETE_HELPER_H
 
-#include "services/interfaces/include/IService.h"
-#include "services/interfaces/include/IServiceFactory.h"
+#include <IService.h>
+#include <IServiceFactory.h>
 #include <IWMediaService.h>
 
 #include <memory>

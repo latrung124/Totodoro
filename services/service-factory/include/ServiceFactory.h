@@ -8,7 +8,7 @@
 #ifndef SERVICE_FACTORY_H
 #define SERVICE_FACTORY_H
 
-#include "../IServiceFactory.h"
+#include <IServiceFactory.h>
 
 class SERVICE_FACTORY_API ServiceFactory : public IServiceFactory
 {

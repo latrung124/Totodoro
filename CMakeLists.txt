@@ -9,13 +9,15 @@ find_package(GTest REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Quick Core5Compat)
 qt_standard_project_setup(REQUIRES 6.5)
 
-set(SERVICE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/service_install)
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/out" CACHE PATH "Installation Directory" FORCE)
 
 # Add the qmlmodules subdirectory
 add_subdirectory(qmlmodules)
 
 # add services subdirectory
 add_subdirectory(services)
+
+LIST(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/out")
 
 # set the config and const val sources
 set (CONFIG_CONST_VAL_SOURCES
@@ -144,8 +146,8 @@ target_link_libraries(appTotodoro
         Qt6::Quick
         common_moduleplugin
         mediaplayer_moduleplugin
-        wmedia_service
-        service_factory
+        WMediaService
+        ServiceFactory
 )
 
 include(GNUInstallDirs)
