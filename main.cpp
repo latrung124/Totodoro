@@ -56,16 +56,8 @@ int main(int argc, char *argv[])
 
 	serviceRegister();
 
-	QQmlApplicationEngine engine;
-	QObject::connect(
-	    &engine,
-	    &QQmlApplicationEngine::objectCreationFailed,
-	    &app,
-	    []() { QCoreApplication::exit(-1); },
-	    Qt::QueuedConnection);
-
-	GuiApplication guiApp(&engine);
-	guiApp.init();
+	GuiApplication guiApp(&app);
+	guiApp.start();
 
 	return app.exec();
 }

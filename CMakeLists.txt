@@ -51,9 +51,11 @@ set(MEDIAPLAYER_MODELS_SOURCES
 set(CONTROLLER_SOURCES
     core/controllers/ModelController.cpp
     core/controllers/ViewModelController.cpp
+    core/controllers/ModuleController.cpp
 
     core/controllers/ModelController.h
     core/controllers/ViewModelController.h
+    core/controllers/ModuleController.h
 )
 
 set(UTIL_SOURCES
