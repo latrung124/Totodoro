@@ -80,28 +80,3 @@ void MediaPlaybackViewModel::setIsPreviousEnabled(bool isPreviousEnabled)
 		emit isPreviousEnabledChanged();
 	}
 }
-
-void MediaPlaybackViewModel::onIsPlayingChanged(bool isPlaying)
-{
-	setIsPlaying(isPlaying);
-}
-
-void MediaPlaybackViewModel::onIsPlayingEnabledChanged(bool isPlayingEnabled)
-{
-	setIsPlayingEnabled(isPlayingEnabled);
-}
-
-void MediaPlaybackViewModel::onIsPausedEnabledChanged(bool isPausedEnabled)
-{
-	setIsPauseEnabled(isPausedEnabled);
-}
-
-void MediaPlaybackViewModel::onIsNextEnabledChanged(bool isNextEnabled)
-{
-	setIsNextEnabled(isNextEnabled);
-}
-
-void MediaPlaybackViewModel::onIsPreviousEnabledChanged(bool isPreviousEnabled)
-{
-	setIsPreviousEnabled(isPreviousEnabled);
-}

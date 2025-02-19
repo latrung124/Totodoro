@@ -49,13 +49,6 @@ signals:
 	void isNextEnabledChanged();
 	void isPreviousEnabledChanged();
 
-public slots:
-	void onIsPlayingChanged(bool isPlaying);
-	void onIsPlayingEnabledChanged(bool isPlayingEnabled);
-	void onIsPausedEnabledChanged(bool isPausedEnabled);
-	void onIsNextEnabledChanged(bool isNextEnabled);
-	void onIsPreviousEnabledChanged(bool isPreviousEnabled);
-
 private:
 	bool m_isPlaying = false;
 	bool m_isPlayingEnabled = false;
