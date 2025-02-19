@@ -1,15 +1,14 @@
 /*
-* File: WMediaInfoMessage.cpp
-* Author: trung.la
-* Date: 02-09-2025
-* Description: Media info message class
-*/
+ * File: WMediaInfoMessage.cpp
+ * Author: trung.la
+ * Date: 02-09-2025
+ * Description: Media info message class
+ */
 
 #include "WMediaInfoMessage.h"
 
-namespace
-{
-    using namespace window_services::media::utils;
+namespace {
+using namespace window_services::media::utils;
 }
 
 WMediaInfoMessage::WMediaInfoMessage()
@@ -17,12 +16,12 @@ WMediaInfoMessage::WMediaInfoMessage()
 {
 }
 
-void WMediaInfoMessage::setMediaInfo(const WMediaInfo& mediaInfo)
+void WMediaInfoMessage::setMediaInfo(const WMediaInfo &mediaInfo)
 {
-    m_mediaInfo = mediaInfo;
+	m_mediaInfo = mediaInfo;
 }
 
 WMediaInfo WMediaInfoMessage::getMediaInfo() const
 {
-    return m_mediaInfo;
+	return m_mediaInfo;
 }

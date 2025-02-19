@@ -1,9 +1,9 @@
 /*
-* File: WPlaybackInfoMessage.h
-* Author: trung.la
-* Date: 02-09-2025
-* Description: Playback info message class
-*/
+ * File: WPlaybackInfoMessage.h
+ * Author: trung.la
+ * Date: 02-09-2025
+ * Description: Playback info message class
+ */
 
 #ifndef W_PLAYBACK_INFO_MESSAGE_H
 #define W_PLAYBACK_INFO_MESSAGE_H
@@ -14,16 +14,16 @@
 class WPlaybackInfoMessage : public ServiceMessage
 {
 public:
-    using WPlaybackInfo = window_services::media::utils::WPlaybackInfo;
+	using WPlaybackInfo = window_services::media::utils::WPlaybackInfo;
 
-    WPlaybackInfoMessage();
-    ~WPlaybackInfoMessage() = default;
+	WPlaybackInfoMessage();
+	~WPlaybackInfoMessage() = default;
 
-    void setWPlaybackInfo(const WPlaybackInfo& wPlaybackInfo);
-    WPlaybackInfo getWPlaybackInfo() const;
+	void setWPlaybackInfo(const WPlaybackInfo &wPlaybackInfo);
+	WPlaybackInfo getWPlaybackInfo() const;
 
 private:
-    WPlaybackInfo m_wPlaybackInfo;
+	WPlaybackInfo m_wPlaybackInfo;
 };
 
 #endif // W_PLAYBACK_INFO_MESSAGE_H

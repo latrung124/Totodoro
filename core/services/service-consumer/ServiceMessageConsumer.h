@@ -11,8 +11,8 @@ File: ServiceMessageConsumer.h
 #include "core/services/service-consumer/ServiceConsumer.h"
 #include "core/services/service-messages/ServiceMessage.h"
 
-#include <memory>
 #include <map>
+#include <memory>
 
 class ServiceMessage;
 class ServiceMessageHandler;
@@ -20,18 +20,18 @@ class ServiceMessageHandler;
 class ServiceMessageConsumer : public ServiceConsumer
 {
 public:
-    using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
+	using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 
-    static ServiceMessageConsumer& getInstance();
-    virtual ~ServiceMessageConsumer();
+	static ServiceMessageConsumer &getInstance();
+	virtual ~ServiceMessageConsumer();
 
-    void consumeMessage(ServiceMessageUPtr message);
+	void consumeMessage(ServiceMessageUPtr message);
 
-    void addHandler(std::unique_ptr<ServiceMessageHandler> handler);
+	void addHandler(std::unique_ptr<ServiceMessageHandler> handler);
 
 private:
-    ServiceMessageConsumer() = default;
-    std::map<ServiceMessageId, std::unique_ptr<ServiceMessageHandler>> m_handlers;
+	ServiceMessageConsumer() = default;
+	std::map<ServiceMessageId, std::unique_ptr<ServiceMessageHandler>> m_handlers;
 };
 
 #endif // SERVICE_MESSAGE_CONSUMER_H

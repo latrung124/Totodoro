@@ -1,9 +1,9 @@
 /*
-* File: ThreadGuard.h
-* Author: trung.la
-* Date: 02-10-2025
-* Description: Implementation for Thread Guard
-*/
+ * File: ThreadGuard.h
+ * Author: trung.la
+ * Date: 02-10-2025
+ * Description: Implementation for Thread Guard
+ */
 
 #ifndef THREAD_GUARD_H
 #define THREAD_GUARD_H
@@ -14,17 +14,23 @@ namespace utils {
 
 class ThreadGuard
 {
-    std::thread& m_thread;
-public:
-    ThreadGuard(std::thread &thread) : m_thread(thread) {}
-    ~ThreadGuard() {
-        if (m_thread.joinable()) {
-            m_thread.join();
-        }
-    }
+	std::thread &m_thread;
 
-    ThreadGuard(const ThreadGuard&) = delete;
-    ThreadGuard& operator=(const ThreadGuard&) = delete;
+public:
+	ThreadGuard(std::thread &thread)
+	    : m_thread(thread)
+	{
+	}
+
+	~ThreadGuard()
+	{
+		if (m_thread.joinable()) {
+			m_thread.join();
+		}
+	}
+
+	ThreadGuard(const ThreadGuard &) = delete;
+	ThreadGuard &operator=(const ThreadGuard &) = delete;
 };
 
 } // namespace utils

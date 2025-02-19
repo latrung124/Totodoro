@@ -1,9 +1,9 @@
 /*
-* File: WMediaInfoMessageHandler.h
-* Author: trung.la
-* Date: 02-15-2025
-* Description: This file contains the declaration of the WMediaInfoMessageHandler class.
-*/
+ * File: WMediaInfoMessageHandler.h
+ * Author: trung.la
+ * Date: 02-15-2025
+ * Description: This file contains the declaration of the WMediaInfoMessageHandler class.
+ */
 
 #ifndef WMEDIA_SERVICE_MESSAGE_HANDLER_H
 #define WMEDIA_SERVICE_MESSAGE_HANDLER_H
@@ -13,10 +13,10 @@
 class WMediaInfoMessageHandler : public ServiceMessageHandler
 {
 public:
-    WMediaInfoMessageHandler();
-    virtual ~WMediaInfoMessageHandler();
+	WMediaInfoMessageHandler();
+	virtual ~WMediaInfoMessageHandler();
 
-    void handleMessage(ServiceMessageUPtr message) override;
+	void handleMessage(ServiceMessageUPtr message) override;
 };
 
 #endif // WMEDIA_SERVICE_MESSAGE_HANDLER_H

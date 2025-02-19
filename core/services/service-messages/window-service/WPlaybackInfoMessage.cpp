@@ -7,9 +7,8 @@ Description: Implementation for Window Media Playback Info Message
 
 #include "WPlaybackInfoMessage.h"
 
-namespace
-{
-    using namespace window_services::media::utils;
+namespace {
+using namespace window_services::media::utils;
 }
 
 WPlaybackInfoMessage::WPlaybackInfoMessage()
@@ -17,12 +16,12 @@ WPlaybackInfoMessage::WPlaybackInfoMessage()
 {
 }
 
-void WPlaybackInfoMessage::setWPlaybackInfo(const WPlaybackInfo& wPlaybackInfo)
+void WPlaybackInfoMessage::setWPlaybackInfo(const WPlaybackInfo &wPlaybackInfo)
 {
-    m_wPlaybackInfo = wPlaybackInfo;
+	m_wPlaybackInfo = wPlaybackInfo;
 }
 
 WPlaybackInfo WPlaybackInfoMessage::getWPlaybackInfo() const
 {
-    return m_wPlaybackInfo;
+	return m_wPlaybackInfo;
 }

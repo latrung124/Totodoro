@@ -10,8 +10,8 @@
 #include <QGuiApplication>
 
 #include "core/controllers/ModelController.h"
-#include "core/controllers/ViewModelController.h"
 #include "core/controllers/ModuleController.h"
+#include "core/controllers/ViewModelController.h"
 
 GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     : QObject(parent)
@@ -20,22 +20,30 @@ GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     , m_viewModelController(std::make_unique<ViewModelController>())
     , m_moduleController(std::make_unique<ModuleController>())
 {
-    startConnections();
+	startConnections();
 }
 
 GuiApplication::~GuiApplication()
 {
-    endConnections();
+	endConnections();
 }
 
 void GuiApplication::startConnections()
 {
 	const auto moduleController = m_moduleController.get();
-	connect(moduleController, &ModuleController::moduleLoadedSuccess, this, &GuiApplication::construct
-			, Qt::QueuedConnection);
+	connect(
+	    moduleController,
+	    &ModuleController::moduleLoadedSuccess,
+	    this,
+	    &GuiApplication::construct,
+	    Qt::QueuedConnection);
 
-	connect(moduleController, &ModuleController::destroyModule, this, &GuiApplication::destroy
-			, Qt::QueuedConnection);
+	connect(
+	    moduleController,
+	    &ModuleController::destroyModule,
+	    this,
+	    &GuiApplication::destroy,
+	    Qt::QueuedConnection);
 }
 
 void GuiApplication::endConnections()

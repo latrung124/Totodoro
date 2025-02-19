@@ -1,9 +1,9 @@
 /*
-* File: MediaPlaybackModel.h
-* Author: trung.la
-* Date: 02-05-2025
-* Description: This file contains the declaration of the MediaPlaybackModel class.
-*/
+ * File: MediaPlaybackModel.h
+ * Author: trung.la
+ * Date: 02-05-2025
+ * Description: This file contains the declaration of the MediaPlaybackModel class.
+ */
 
 #ifndef MEDIAPLAYBACKMODEL_H
 #define MEDIAPLAYBACKMODEL_H
@@ -13,30 +13,30 @@
 class MediaPlaybackModel
 {
 public:
-    MediaPlaybackModel();
-    ~MediaPlaybackModel() = default;
+	MediaPlaybackModel();
+	~MediaPlaybackModel() = default;
 
-    bool isPlaying() const;
-    void setIsPlaying(bool isPlaying);
+	bool isPlaying() const;
+	void setIsPlaying(bool isPlaying);
 
-    bool isPlayingEnabled() const;
-    void setIsPlayingEnabled(bool isPlayingEnabled);
+	bool isPlayingEnabled() const;
+	void setIsPlayingEnabled(bool isPlayingEnabled);
 
-    bool isPauseEnabled() const;
-    void setIsPauseEnabled(bool isPauseEnabled);
+	bool isPauseEnabled() const;
+	void setIsPauseEnabled(bool isPauseEnabled);
 
-    bool isNextEnabled() const;
-    void setIsNextEnabled(bool isNextEnabled);
+	bool isNextEnabled() const;
+	void setIsNextEnabled(bool isNextEnabled);
 
-    bool isPreviousEnabled() const;
-    void setIsPreviousEnabled(bool isPreviousEnabled);
+	bool isPreviousEnabled() const;
+	void setIsPreviousEnabled(bool isPreviousEnabled);
 
 private:
-    bool m_isPlaying = false;
-    bool m_isPlayingEnabled = false;
-    bool m_isPauseEnabled = false;
-    bool m_isNextEnabled = false;
-    bool m_isPreviousEnabled = false;
+	bool m_isPlaying = false;
+	bool m_isPlayingEnabled = false;
+	bool m_isPauseEnabled = false;
+	bool m_isNextEnabled = false;
+	bool m_isPreviousEnabled = false;
 };
 
 #endif // MEDIAPLAYBACKMODEL_H

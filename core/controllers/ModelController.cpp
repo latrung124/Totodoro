@@ -1,9 +1,9 @@
 /*
-* File: ModelController.cpp
-* Author: trung.la
-* Date: 02-05-2025
-* Description: ModelController class
-*/
+ * File: ModelController.cpp
+ * Author: trung.la
+ * Date: 02-05-2025
+ * Description: ModelController class
+ */
 
 #include "ModelController.h"
 #include "models/mediaplayer/MediaPlayerModel.h"
@@ -20,5 +20,5 @@ ModelController::~ModelController()
 
 ModelController::MediaPlayerModelWPtr ModelController::getMediaPlayerModel() const
 {
-    return m_mediaPlayerModel;
+	return m_mediaPlayerModel;
 }

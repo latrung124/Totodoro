@@ -1,9 +1,9 @@
 /*
-* File: SystemDataModel.h
-* Author: trung.la
-* Date: 02-11-2025
-* Description: SystemDataModel class is base class for all system data models
-*/
+ * File: SystemDataModel.h
+ * Author: trung.la
+ * Date: 02-11-2025
+ * Description: SystemDataModel class is base class for all system data models
+ */
 
 #ifndef SYSTEMDATAMODEL_H
 #define SYSTEMDATAMODEL_H
@@ -13,8 +13,8 @@
 class SystemDataModel : public Model
 {
 public:
-    SystemDataModel();
-    virtual ~SystemDataModel();
+	SystemDataModel();
+	virtual ~SystemDataModel();
 };
 
 #endif // SYSTEMDATAMODEL_H

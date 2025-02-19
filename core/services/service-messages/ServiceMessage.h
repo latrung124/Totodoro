@@ -1,9 +1,9 @@
 /*
-* File: ServiceMessage.h
-* Author: trung.la
-* Date: 02-09-2025
-* Description: Service message class
-*/
+ * File: ServiceMessage.h
+ * Author: trung.la
+ * Date: 02-09-2025
+ * Description: Service message class
+ */
 
 #ifndef SERVICE_MESSAGE_H
 #define SERVICE_MESSAGE_H
@@ -13,14 +13,21 @@
 class ServiceMessage
 {
 public:
-    ServiceMessage(const ServiceMessageId& id) : m_id(id) {}
-    ServiceMessage() = delete;
-    virtual ~ServiceMessage() = default;
+	ServiceMessage(const ServiceMessageId &id)
+	    : m_id(id)
+	{
+	}
 
-    ServiceMessageId getId() const { return m_id; }
+	ServiceMessage() = delete;
+	virtual ~ServiceMessage() = default;
+
+	ServiceMessageId getId() const
+	{
+		return m_id;
+	}
 
 private:
-    ServiceMessageId m_id = ServiceMessageId::None;
+	ServiceMessageId m_id = ServiceMessageId::None;
 };
 
 #endif // SERVICE_MESSAGE_H

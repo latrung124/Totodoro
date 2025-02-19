@@ -1,9 +1,9 @@
 /*
-* File:  ViewModelController.h
-* Author: trung.la
-* Date: 02-05-2025
-* Description: ViewModelController class
-*/
+ * File:  ViewModelController.h
+ * Author: trung.la
+ * Date: 02-05-2025
+ * Description: ViewModelController class
+ */
 
 #ifndef VIEWMODELCONTROLLER_H
 #define VIEWMODELCONTROLLER_H
@@ -16,19 +16,19 @@ class MediaPlayerViewModel;
 
 class ViewModelController : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    using MediaPlayerViewModelPtr = std::shared_ptr<MediaPlayerViewModel>;
-    using MediaPlayerViewModelWPtr = std::weak_ptr<MediaPlayerViewModel>;
-    
-    ViewModelController(QObject *parent = nullptr);
-    ~ViewModelController();
+	using MediaPlayerViewModelPtr = std::shared_ptr<MediaPlayerViewModel>;
+	using MediaPlayerViewModelWPtr = std::weak_ptr<MediaPlayerViewModel>;
 
-    MediaPlayerViewModelWPtr getMediaPlayerViewModel() const;
+	ViewModelController(QObject *parent = nullptr);
+	~ViewModelController();
+
+	MediaPlayerViewModelWPtr getMediaPlayerViewModel() const;
 
 private:
-    MediaPlayerViewModelPtr m_mediaPlayerViewModel;
+	MediaPlayerViewModelPtr m_mediaPlayerViewModel;
 };
 
 #endif // VIEWMODELCONTROLLER_H

@@ -1,9 +1,9 @@
 /*
-* File: WMediaServiceListener.cpp
-* Author: trung.la
-* Date: 02-09-2025
-* Description: Interface for media service listener
-*/
+ * File: WMediaServiceListener.cpp
+ * Author: trung.la
+ * Date: 02-09-2025
+ * Description: Interface for media service listener
+ */
 
 #include "WMediaServiceListener.h"
 

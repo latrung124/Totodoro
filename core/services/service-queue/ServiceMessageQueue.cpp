@@ -1,9 +1,9 @@
 /*
-* File: ServiceMessageQueue.cpp
-* Author: trung.la
-* Date: 02-10-2025
-* Description: This file contains the implementation of the ServiceMessageQueue class.
-*/
+ * File: ServiceMessageQueue.cpp
+ * Author: trung.la
+ * Date: 02-10-2025
+ * Description: This file contains the implementation of the ServiceMessageQueue class.
+ */
 
 #include "ServiceMessageQueue.h"
 
@@ -18,47 +18,45 @@ ServiceMessageQueue::ServiceMessageQueue()
 
 ServiceMessageQueue::~ServiceMessageQueue()
 {
-    utils::ThreadGuard guard(m_looper);
+	utils::ThreadGuard guard(m_looper);
 }
 
 void ServiceMessageQueue::start()
 {
-    m_isRunning = true;
-    m_looper = std::thread(&ServiceMessageQueue::loop, this);
+	m_isRunning = true;
+	m_looper = std::thread(&ServiceMessageQueue::loop, this);
 }
 
 void ServiceMessageQueue::stop()
 {
-    m_isRunning = false;
-    m_conditionVariable.notify_all();
+	m_isRunning = false;
+	m_conditionVariable.notify_all();
 }
 
 bool ServiceMessageQueue::canConsume()
 {
-    return m_isRunning && !m_messageQueue.empty();
+	return m_isRunning && !m_messageQueue.empty();
 }
 
 void ServiceMessageQueue::addMessage(ServiceMessageUPtr message)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
-    m_messageQueue.push(std::move(message));
-    m_conditionVariable.notify_all();
+	std::lock_guard<std::mutex> lock(m_mutex);
+	m_messageQueue.push(std::move(message));
+	m_conditionVariable.notify_all();
 }
 
 void ServiceMessageQueue::loop()
 {
-    while (true) {
-        std::unique_lock<std::mutex> lock(m_mutex);
-        m_conditionVariable.wait(lock, [this] {
-            return canConsume();
-        });
+	while (true) {
+		std::unique_lock<std::mutex> lock(m_mutex);
+		m_conditionVariable.wait(lock, [this] { return canConsume(); });
 
-        if (!m_isRunning && m_messageQueue.empty()) {
-            break;
-        }
+		if (!m_isRunning && m_messageQueue.empty()) {
+			break;
+		}
 
-        auto message = std::move(m_messageQueue.front());
-        m_messageQueue.pop();
-        ServiceMessageConsumer::getInstance().consumeMessage(std::move(message));
-    }
+		auto message = std::move(m_messageQueue.front());
+		m_messageQueue.pop();
+		ServiceMessageConsumer::getInstance().consumeMessage(std::move(message));
+	}
 }

@@ -1,9 +1,9 @@
 /*
-* File: WPlaybackControlsMessage.h
-* Author: trung.la
-* Date: 02-09-2025
-* Description: Playback controls message class
-*/
+ * File: WPlaybackControlsMessage.h
+ * Author: trung.la
+ * Date: 02-09-2025
+ * Description: Playback controls message class
+ */
 
 #ifndef W_PLAYBACK_CONTROLS_MESSAGE_H
 #define W_PLAYBACK_CONTROLS_MESSAGE_H
@@ -14,16 +14,16 @@
 class WPlaybackControlsMessage : public ServiceMessage
 {
 public:
-    using WPlaybackControls = window_services::media::utils::WPlaybackControls;
+	using WPlaybackControls = window_services::media::utils::WPlaybackControls;
 
-    WPlaybackControlsMessage();
-    ~WPlaybackControlsMessage() = default;
+	WPlaybackControlsMessage();
+	~WPlaybackControlsMessage() = default;
 
-    void setWPlaybackControls(const WPlaybackControls& wPlaybackControls);
-    WPlaybackControls getWPlaybackControls() const;
+	void setWPlaybackControls(const WPlaybackControls &wPlaybackControls);
+	WPlaybackControls getWPlaybackControls() const;
 
 private:
-    WPlaybackControls m_wPlaybackControls;
+	WPlaybackControls m_wPlaybackControls;
 };
 
 #endif // W_PLAYBACK_CONTROLS_MESSAGE_H

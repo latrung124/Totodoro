@@ -1,9 +1,9 @@
 /*
-* File: ViewModelController.cpp
-* Author: trung.la
-* Date: 02-05-2025
-* Description: ViewModelController class
-*/
+ * File: ViewModelController.cpp
+ * Author: trung.la
+ * Date: 02-05-2025
+ * Description: ViewModelController class
+ */
 
 #include "ViewModelController.h"
 #include "view-models/mediaplayer/MediaPlayerViewModel.h"
@@ -20,5 +20,5 @@ ViewModelController::~ViewModelController()
 
 ViewModelController::MediaPlayerViewModelWPtr ViewModelController::getMediaPlayerViewModel() const
 {
-    return m_mediaPlayerViewModel;
+	return m_mediaPlayerViewModel;
 }
