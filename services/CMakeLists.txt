@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.22)
-project(Services VERSION 1.0.0 LANGUAGES CXX)
+project(
+  Services
+  VERSION 1.0.0
+  LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,33 +18,29 @@ add_subdirectory(interfaces)
 add_subdirectory(window-services)
 add_subdirectory(service-factory)
 
-install(EXPORT ServicesTargets
-    FILE ServicesTargets.cmake
-    NAMESPACE Services::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Services
-)
+install(
+  EXPORT ServicesTargets
+  FILE ServicesTargets.cmake
+  NAMESPACE Services::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Services)
 
-export(EXPORT ServicesTargets
-    FILE ${CMAKE_CURRENT_BINARY_DIR}/ServicesTargets.cmake
-    NAMESPACE Services::
-)
+export(
+  EXPORT ServicesTargets
+  FILE ${CMAKE_CURRENT_BINARY_DIR}/ServicesTargets.cmake
+  NAMESPACE Services::)
 
 set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/Services)
 
 configure_package_config_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/ServicesConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfig.cmake
-    INSTALL_DESTINATION ${ConfigPackageLocation}
-)
+  ${CMAKE_CURRENT_SOURCE_DIR}/ServicesConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfig.cmake
+  INSTALL_DESTINATION ${ConfigPackageLocation})
 
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfigVersion.cmake
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY SameMajorVersion
-)
+  ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfigVersion.cmake
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY SameMajorVersion)
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfig.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfigVersion.cmake
-    DESTINATION ${ConfigPackageLocation}
-)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/ServicesConfigVersion.cmake
+        DESTINATION ${ConfigPackageLocation})

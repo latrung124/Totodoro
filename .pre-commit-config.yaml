@@ -28,6 +28,10 @@ repos:
             ^models/mediaplayer/.* |
             main.cpp
           )$
+
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
       - id: cmake-format
         name: cmake-format
         description: cmake-format can format your listfiles nicely so that they don't look like crap.
@@ -37,10 +41,12 @@ repos:
         additional_dependencies: ["cmakelang"]
         files: |
           (?x)(
-              CMakeList.txt |
-              ^cmake/.* |
-              ^CameraHandle/.* |
-              ^CameraStorage/.* |
-              ^Core/.* |
-              ^CustomVideoHandle/.*
+            CMakeList.txt |
+            ^qmlmodules/.* |
+            ^qmlmodules/common/.* |
+            ^qmlmodules/mediaplayer/.* |
+            ^services/.* |
+            ^services/interfaces/.* |
+            ^services/service-factory/.* |
+            ^services/window-services/.* |
           )$
