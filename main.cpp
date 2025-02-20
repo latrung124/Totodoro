@@ -7,6 +7,8 @@ File: main.cpp
 
 #include "core/services/service-consumer/ServiceMessageConsumer.h"
 #include "core/services/service-handlers/WMediaInfoMessageHandler.h"
+#include "core/services/service-handlers/WPlaybackControlsMessageHandler.h"
+#include "core/services/service-handlers/WPlaybackInfoMessageHandler.h"
 #include "core/services/service-listeners/WMediaServiceListener.h"
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>
@@ -44,6 +46,10 @@ void serviceRegister()
 		service->registerListener(new WMediaServiceListener());
 		ServiceMessageConsumer::getInstance().addHandler(
 		    std::make_unique<WMediaInfoMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WPlaybackControlsMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WPlaybackInfoMessageHandler>());
 	}
 }
 
