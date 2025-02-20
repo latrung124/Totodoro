@@ -13,6 +13,8 @@
 #include "core/controllers/ModuleController.h"
 #include "core/controllers/ViewModelController.h"
 
+#include "core/services/service-queue/ServiceMessageQueue.h"
+
 GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     : QObject(parent)
     , m_app(app)
@@ -57,6 +59,10 @@ void GuiApplication::endConnections()
 void GuiApplication::start()
 {
 	// Start the application & services
+	// Start the service message queue
+	ServiceMessageQueue::getInstance().start();
+
+	// Load the main module
 	m_moduleController->loadModule("Totodoro", "Main");
 }
 

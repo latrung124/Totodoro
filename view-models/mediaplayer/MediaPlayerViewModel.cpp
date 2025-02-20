@@ -31,11 +31,6 @@ void MediaPlayerViewModel::setTitle(const QString &title)
 	}
 }
 
-void MediaPlayerViewModel::onTitleChanged(const QString &title)
-{
-	setTitle(title);
-}
-
 QString MediaPlayerViewModel::artist() const
 {
 	return m_artist;
@@ -47,11 +42,6 @@ void MediaPlayerViewModel::setArtist(const QString &artist)
 		m_artist = artist;
 		emit artistChanged();
 	}
-}
-
-void MediaPlayerViewModel::onArtistChanged(const QString &artist)
-{
-	setArtist(artist);
 }
 
 QObject *MediaPlayerViewModel::mediaPlaybackViewModel() const
@@ -79,9 +69,4 @@ void MediaPlayerViewModel::setThumbnail(const QUrl &thumbnail)
 		m_thumbnail = thumbnail;
 		emit thumbnailChanged();
 	}
-}
-
-void MediaPlayerViewModel::onThumbnailChanged(const QUrl &thumbnail)
-{
-	setThumbnail(thumbnail);
 }

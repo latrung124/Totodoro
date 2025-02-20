@@ -11,6 +11,12 @@
 
 #include "utils/ThreadGuard.h"
 
+ServiceMessageQueue &ServiceMessageQueue::getInstance()
+{
+	static ServiceMessageQueue instance;
+	return instance;
+}
+
 ServiceMessageQueue::ServiceMessageQueue()
     : m_isRunning(false)
 {

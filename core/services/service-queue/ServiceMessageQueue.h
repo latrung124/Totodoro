@@ -20,7 +20,7 @@ class ServiceMessageQueue : public MessageQueue
 public:
 	using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 
-	ServiceMessageQueue();
+	static ServiceMessageQueue &getInstance();
 	~ServiceMessageQueue() override;
 
 	ServiceMessageQueue(const ServiceMessageQueue &) = delete;
@@ -34,6 +34,7 @@ public:
 	virtual void addMessage(ServiceMessageUPtr msg) override;
 
 private:
+	ServiceMessageQueue();
 	void loop();
 	bool canConsume();
 
