@@ -31,5 +31,9 @@ void ServiceMessageConsumer::consumeMessage(ServiceMessageUPtr message)
 		return;
 	}
 
-	m_handlers[message->getId()]->handleMessage(std::move(message));
+	auto id = message->getId();
+	if (m_handlers.find(id) == m_handlers.end()) {
+		return;
+	}
+	m_handlers[id]->handleMessage(std::move(message));
 }

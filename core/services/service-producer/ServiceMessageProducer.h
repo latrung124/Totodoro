@@ -16,11 +16,11 @@ enum class ServiceMessageId : uint16_t;
 class ServiceMessageProducer
 {
 public:
-	using ServiceMessagePtr = std::shared_ptr<ServiceMessage>;
+	using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 	static ServiceMessageProducer &getInstance();
 	virtual ~ServiceMessageProducer() = default;
 
-	[[nodiscard]] ServiceMessagePtr produceMessage(ServiceMessageId messageId);
+	[[nodiscard]] ServiceMessageUPtr produceMessage(ServiceMessageId messageId);
 
 private:
 	ServiceMessageProducer() = default;

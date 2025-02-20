@@ -17,16 +17,16 @@ ServiceMessageProducer &ServiceMessageProducer::getInstance()
 	return instance;
 }
 
-ServiceMessageProducer::ServiceMessagePtr ServiceMessageProducer::produceMessage(
+ServiceMessageProducer::ServiceMessageUPtr ServiceMessageProducer::produceMessage(
     ServiceMessageId messageId)
 {
 	switch (messageId) {
 	case ServiceMessageId::WMediaInfoMessage:
-		return std::make_shared<WMediaInfoMessage>();
+		return std::make_unique<WMediaInfoMessage>();
 	case ServiceMessageId::WPlaybackControlsMessage:
-		return std::make_shared<WPlaybackControlsMessage>();
+		return std::make_unique<WPlaybackControlsMessage>();
 	case ServiceMessageId::WPlaybackInfoMessage:
-		return std::make_shared<WPlaybackInfoMessage>();
+		return std::make_unique<WPlaybackInfoMessage>();
 	default:
 		return nullptr;
 	}
