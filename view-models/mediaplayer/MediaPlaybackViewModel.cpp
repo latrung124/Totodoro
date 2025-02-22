@@ -7,6 +7,14 @@
 
 #include "MediaPlaybackViewModel.h"
 
+#include "core/services/service-messages/ServiceMessage.h"
+#include "core/services/service-producer/ServiceMessageProducer.h"
+#include "core/services/service-queue/ServiceMessageQueue.h"
+
+namespace {
+using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
+}
+
 MediaPlaybackViewModel::MediaPlaybackViewModel(QObject *parent)
     : QObject(parent)
 {
@@ -78,5 +86,41 @@ void MediaPlaybackViewModel::setIsPreviousEnabled(bool isPreviousEnabled)
 	if (m_isPreviousEnabled != isPreviousEnabled) {
 		m_isPreviousEnabled = isPreviousEnabled;
 		emit isPreviousEnabledChanged();
+	}
+}
+
+void MediaPlaybackViewModel::play()
+{
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
+	    ServiceMessageId::WPlayAsyncMessage);
+	if (message) {
+		ServiceMessageQueue::getInstance().push(std::move(message));
+	}
+}
+
+void MediaPlaybackViewModel::pause()
+{
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
+	    ServiceMessageId::WPauseAsyncMessage);
+	if (message) {
+		ServiceMessageQueue::getInstance().push(std::move(message));
+	}
+}
+
+void MediaPlaybackViewModel::next()
+{
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
+	    ServiceMessageId::WNextAsyncMessage);
+	if (message) {
+		ServiceMessageQueue::getInstance().push(std::move(message));
+	}
+}
+
+void MediaPlaybackViewModel::previous()
+{
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
+	    ServiceMessageId::WPreviousAsyncMessage);
+	if (message) {
+		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
 }

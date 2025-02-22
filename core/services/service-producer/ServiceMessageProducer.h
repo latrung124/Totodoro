@@ -20,7 +20,7 @@ public:
 	static ServiceMessageProducer &getInstance();
 	virtual ~ServiceMessageProducer() = default;
 
-	[[nodiscard]] ServiceMessageUPtr produceMessage(ServiceMessageId messageId);
+	[[nodiscard]] ServiceMessageUPtr produce(ServiceMessageId messageId);
 
 private:
 	ServiceMessageProducer() = default;

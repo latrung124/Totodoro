@@ -8,8 +8,12 @@
 #include "ServiceMessageProducer.h"
 #include "core/services/service-messages/ServiceMessageId.h"
 #include "core/services/service-messages/window-service/WMediaInfoMessage.h"
+#include "core/services/service-messages/window-service/WNextAsyncMessage.h"
+#include "core/services/service-messages/window-service/WPauseAsyncMessage.h"
+#include "core/services/service-messages/window-service/WPlayAsyncMessage.h"
 #include "core/services/service-messages/window-service/WPlaybackControlsMessage.h"
 #include "core/services/service-messages/window-service/WPlaybackInfoMessage.h"
+#include "core/services/service-messages/window-service/WPreviousAsyncMessage.h"
 
 ServiceMessageProducer &ServiceMessageProducer::getInstance()
 {
@@ -17,7 +21,7 @@ ServiceMessageProducer &ServiceMessageProducer::getInstance()
 	return instance;
 }
 
-ServiceMessageProducer::ServiceMessageUPtr ServiceMessageProducer::produceMessage(
+ServiceMessageProducer::ServiceMessageUPtr ServiceMessageProducer::produce(
     ServiceMessageId messageId)
 {
 	switch (messageId) {
@@ -27,6 +31,14 @@ ServiceMessageProducer::ServiceMessageUPtr ServiceMessageProducer::produceMessag
 		return std::make_unique<WPlaybackControlsMessage>();
 	case ServiceMessageId::WPlaybackInfoMessage:
 		return std::make_unique<WPlaybackInfoMessage>();
+	case ServiceMessageId::WPlayAsyncMessage:
+		return std::make_unique<WPlayAsyncMessage>();
+	case ServiceMessageId::WPauseAsyncMessage:
+		return std::make_unique<WPauseAsyncMessage>();
+	case ServiceMessageId::WNextAsyncMessage:
+		return std::make_unique<WNextAsyncMessage>();
+	case ServiceMessageId::WPreviousAsyncMessage:
+		return std::make_unique<WPreviousAsyncMessage>();
 	default:
 		return nullptr;
 	}

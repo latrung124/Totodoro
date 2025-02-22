@@ -13,27 +13,27 @@
 
 void WMediaServiceListener::onMediaInfoChanged(const WMediaInfo &mediaInfo)
 {
-	auto message = ServiceMessageProducer::getInstance().produceMessage(
+	auto message = ServiceMessageProducer::getInstance().produce(
 	    ServiceMessageId::WMediaInfoMessage);
 	if (message) {
-		ServiceMessageQueue::getInstance().addMessage(std::move(message));
+		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
 }
 
 void WMediaServiceListener::onPlaybackControlsChanged(const WPlaybackControls &playbackControls)
 {
-	auto message = ServiceMessageProducer::getInstance().produceMessage(
+	auto message = ServiceMessageProducer::getInstance().produce(
 	    ServiceMessageId::WPlaybackControlsMessage);
 	if (message) {
-		ServiceMessageQueue::getInstance().addMessage(std::move(message));
+		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
 }
 
 void WMediaServiceListener::onPlaybackStatusChanged(const WPlaybackInfo &playbackInfo)
 {
-	auto message = ServiceMessageProducer::getInstance().produceMessage(
+	auto message = ServiceMessageProducer::getInstance().produce(
 	    ServiceMessageId::WPlaybackInfoMessage);
 	if (message) {
-		ServiceMessageQueue::getInstance().addMessage(std::move(message));
+		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
 }

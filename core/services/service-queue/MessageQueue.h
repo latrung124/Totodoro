@@ -26,7 +26,7 @@ public:
 	virtual void start() = 0;
 	virtual void stop() = 0;
 
-	virtual void addMessage(std::unique_ptr<ServiceMessage> msg) = 0;
+	virtual void push(std::unique_ptr<ServiceMessage> msg) = 0;
 };
 
 #endif // MESSAGE_QUEUE_H

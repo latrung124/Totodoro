@@ -44,7 +44,7 @@ bool ServiceMessageQueue::canConsume()
 	return m_isRunning && !m_messageQueue.empty();
 }
 
-void ServiceMessageQueue::addMessage(ServiceMessageUPtr message)
+void ServiceMessageQueue::push(ServiceMessageUPtr message)
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
 	m_messageQueue.push(std::move(message));

@@ -31,7 +31,7 @@ public:
 	virtual void start() override;
 	virtual void stop() override;
 
-	virtual void addMessage(ServiceMessageUPtr msg) override;
+	virtual void push(ServiceMessageUPtr msg) override;
 
 private:
 	ServiceMessageQueue();

@@ -16,6 +16,10 @@ enum class ServiceMessageId : uint16_t
 	WMediaInfoMessage = 1,
 	WPlaybackControlsMessage = 2,
 	WPlaybackInfoMessage = 3,
+	WPauseAsyncMessage = 4,
+	WPlayAsyncMessage = 5,
+	WNextAsyncMessage = 6,
+	WPreviousAsyncMessage = 7,
 };
 
 #endif // SERVICE_MESSAGE_ID_H

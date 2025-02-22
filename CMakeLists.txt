@@ -71,25 +71,35 @@ set(CORE_SOURCES
     core/services/service-consumer/ServiceMessageConsumer.h
     core/services/service-producer/ServiceProducer.h
     core/services/service-producer/ServiceMessageProducer.h
-    core/services/service-messages/ServiceMessage.h
-    core/services/service-messages/ServiceMessageId.h
-    core/services/service-messages/window-service/WMediaInfoMessage.h
-    core/services/service-messages/window-service/WPlaybackControlsMessage.h
-    core/services/service-messages/window-service/WPlaybackInfoMessage.h
     core/services/service-queue/MessageQueue.h
     core/services/service-queue/ServiceMessageQueue.h
     core/GuiApplication.cpp
     core/services/service-consumer/ServiceMessageConsumer.cpp
     core/services/service-producer/ServiceMessageProducer.cpp
     core/services/service-listeners/WMediaServiceListener.cpp
-    core/services/service-messages/window-service/WMediaInfoMessage.cpp
-    core/services/service-messages/window-service/WPlaybackControlsMessage.cpp
-    core/services/service-messages/window-service/WPlaybackInfoMessage.cpp
     core/services/service-queue/ServiceMessageQueue.cpp
     core/services/ServiceManager.cpp
     core/services/service-handlers/WMediaInfoMessageHandler.cpp
     core/services/service-handlers/WPlaybackControlsMessageHandler.cpp
     core/services/service-handlers/WPlaybackInfoMessageHandler.cpp)
+
+set(CORE_SERVICE_MSG_SOURCES
+    core/services/service-messages/ServiceMessage.h
+    core/services/service-messages/ServiceMessageId.h
+    core/services/service-messages/window-service/WMediaInfoMessage.h
+    core/services/service-messages/window-service/WPlaybackControlsMessage.h
+    core/services/service-messages/window-service/WPlaybackInfoMessage.h
+    core/services/service-messages/window-service/WPlayAsyncMessage.h
+    core/services/service-messages/window-service/WPauseAsyncMessage.h
+    core/services/service-messages/window-service/WPreviousAsyncMessage.h
+    core/services/service-messages/window-service/WNextAsyncMessage.h
+    core/services/service-messages/window-service/WMediaInfoMessage.cpp
+    core/services/service-messages/window-service/WPlaybackControlsMessage.cpp
+    core/services/service-messages/window-service/WPlaybackInfoMessage.cpp
+    core/services/service-messages/window-service/WPlayAsyncMessage.cpp
+    core/services/service-messages/window-service/WPauseAsyncMessage.cpp
+    core/services/service-messages/window-service/WPreviousAsyncMessage.cpp
+    core/services/service-messages/window-service/WNextAsyncMessage.cpp)
 
 qt_add_executable(
   appTotodoro
@@ -101,6 +111,7 @@ qt_add_executable(
   ${MEDIAPLAYER_MODELS_SOURCES}
   ${CONTROLLER_SOURCES}
   ${CORE_SOURCES}
+  ${CORE_SERVICE_MSG_SOURCES}
   ${UTIL_SOURCES})
 
 qt_add_qml_module(

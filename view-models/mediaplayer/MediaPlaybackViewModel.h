@@ -49,6 +49,12 @@ signals:
 	void isNextEnabledChanged();
 	void isPreviousEnabledChanged();
 
+public slots:
+	void play();
+	void pause();
+	void next();
+	void previous();
+
 private:
 	bool m_isPlaying = false;
 	bool m_isPlayingEnabled = false;
