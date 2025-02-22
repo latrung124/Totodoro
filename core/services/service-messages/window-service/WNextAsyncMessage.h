@@ -15,12 +15,6 @@ class WNextAsyncMessage : public ServiceMessage
 public:
 	WNextAsyncMessage();
 	~WNextAsyncMessage() = default;
-
-	bool isNextAsync() const;
-	void setNextAsync(bool nextAsync);
-
-private:
-	bool m_nextAsync;
 };
 
 #endif // W_NEXT_ASYNC_MESSAGE_H

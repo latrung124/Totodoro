@@ -15,12 +15,6 @@ class WPreviousAsyncMessage : public ServiceMessage
 public:
 	WPreviousAsyncMessage();
 	~WPreviousAsyncMessage() = default;
-
-	bool isPreviousAsync() const;
-	void setPreviousAsync(bool previousAsync);
-
-private:
-	bool m_previousAsync = false;
 };
 
 #endif // WPREVIOUS_ASYNC_MESSAGE_H

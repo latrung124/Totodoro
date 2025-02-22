@@ -11,13 +11,3 @@ WPreviousAsyncMessage::WPreviousAsyncMessage()
     : ServiceMessage(ServiceMessageId::WPreviousAsyncMessage)
 {
 }
-
-bool WPreviousAsyncMessage::isPreviousAsync() const
-{
-	return m_previousAsync;
-}
-
-void WPreviousAsyncMessage::setPreviousAsync(bool previousAsync)
-{
-	m_previousAsync = previousAsync;
-}

@@ -11,13 +11,3 @@ WPauseAsyncMessage::WPauseAsyncMessage()
     : ServiceMessage(ServiceMessageId::WPauseAsyncMessage)
 {
 }
-
-bool WPauseAsyncMessage::isPauseAsync() const
-{
-	return m_pauseAsync;
-}
-
-void WPauseAsyncMessage::setPauseAsync(bool pauseAsync)
-{
-	m_pauseAsync = pauseAsync;
-}

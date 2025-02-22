@@ -15,12 +15,6 @@ class WPauseAsyncMessage : public ServiceMessage
 public:
 	WPauseAsyncMessage();
 	~WPauseAsyncMessage() = default;
-
-	bool isPauseAsync() const;
-	void setPauseAsync(bool pauseAsync);
-
-private:
-	bool m_pauseAsync = false;
 };
 
 #endif // W_PAUSE_ASYNC_MESSAGE_H

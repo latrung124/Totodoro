@@ -15,12 +15,6 @@ class WPlayAsyncMessage : public ServiceMessage
 public:
 	WPlayAsyncMessage();
 	~WPlayAsyncMessage() = default;
-
-	bool isPlayAsync() const;
-	void setPlayAsync(bool playAsync);
-
-private:
-	bool m_playAsync = false;
 };
 
 #endif // W_PLAY_ASYNC_MESSAGE_H

@@ -11,13 +11,3 @@ WPlayAsyncMessage::WPlayAsyncMessage()
     : ServiceMessage(ServiceMessageId::WPlayAsyncMessage)
 {
 }
-
-bool WPlayAsyncMessage::isPlayAsync() const
-{
-	return m_playAsync;
-}
-
-void WPlayAsyncMessage::setPlayAsync(bool playAsync)
-{
-	m_playAsync = playAsync;
-}
