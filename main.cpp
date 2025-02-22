@@ -7,8 +7,12 @@ File: main.cpp
 
 #include "core/services/service-consumer/ServiceMessageConsumer.h"
 #include "core/services/service-handlers/WMediaInfoMessageHandler.h"
+#include "core/services/service-handlers/WNextAsyncMessageHandler.h"
+#include "core/services/service-handlers/WPauseAsyncMessageHandler.h"
+#include "core/services/service-handlers/WPlayAsyncMessageHandler.h"
 #include "core/services/service-handlers/WPlaybackControlsMessageHandler.h"
 #include "core/services/service-handlers/WPlaybackInfoMessageHandler.h"
+#include "core/services/service-handlers/WPreviousAsyncMessageHandler.h"
 #include "core/services/service-listeners/WMediaServiceListener.h"
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>
@@ -50,6 +54,14 @@ void serviceRegister()
 		    std::make_unique<WPlaybackControlsMessageHandler>());
 		ServiceMessageConsumer::getInstance().addHandler(
 		    std::make_unique<WPlaybackInfoMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WPlayAsyncMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WPauseAsyncMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WNextAsyncMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WPreviousAsyncMessageHandler>());
 	}
 }
 

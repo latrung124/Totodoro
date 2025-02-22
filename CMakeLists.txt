@@ -61,10 +61,6 @@ set(UTIL_SOURCES utils/ThreadGuard.h)
 set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h
     core/services/ServiceManager.h
-    core/services/service-handlers/ServiceMessageHandler.h
-    core/services/service-handlers/WMediaInfoMessageHandler.h
-    core/services/service-handlers/WPlaybackControlsMessageHandler.h
-    core/services/service-handlers/WPlaybackInfoMessageHandler.h
     core/GuiApplication.h
     core/services/service-listeners/WMediaServiceListener.h
     core/services/service-consumer/ServiceConsumer.h
@@ -78,10 +74,24 @@ set(CORE_SOURCES
     core/services/service-producer/ServiceMessageProducer.cpp
     core/services/service-listeners/WMediaServiceListener.cpp
     core/services/service-queue/ServiceMessageQueue.cpp
-    core/services/ServiceManager.cpp
+    core/services/ServiceManager.cpp)
+
+set(CORE_SERVICE_MSG_HANDLER_SOURCES
+    core/services/service-handlers/ServiceMessageHandler.h
+    core/services/service-handlers/WMediaInfoMessageHandler.h
+    core/services/service-handlers/WPlaybackControlsMessageHandler.h
+    core/services/service-handlers/WPlaybackInfoMessageHandler.h
+    core/services/service-handlers/WPlayAsyncMessageHandler.h
+    core/services/service-handlers/WPauseAsyncMessageHandler.h
+    core/services/service-handlers/WPreviousAsyncMessageHandler.h
+    core/services/service-handlers/WNextAsyncMessageHandler.h
     core/services/service-handlers/WMediaInfoMessageHandler.cpp
     core/services/service-handlers/WPlaybackControlsMessageHandler.cpp
-    core/services/service-handlers/WPlaybackInfoMessageHandler.cpp)
+    core/services/service-handlers/WPlaybackInfoMessageHandler.cpp
+    core/services/service-handlers/WPlayAsyncMessageHandler.cpp
+    core/services/service-handlers/WPauseAsyncMessageHandler.cpp
+    core/services/service-handlers/WPreviousAsyncMessageHandler.cpp
+    core/services/service-handlers/WNextAsyncMessageHandler.cpp)
 
 set(CORE_SERVICE_MSG_SOURCES
     core/services/service-messages/ServiceMessage.h
@@ -112,6 +122,7 @@ qt_add_executable(
   ${CONTROLLER_SOURCES}
   ${CORE_SOURCES}
   ${CORE_SERVICE_MSG_SOURCES}
+  ${CORE_SERVICE_MSG_HANDLER_SOURCES}
   ${UTIL_SOURCES})
 
 qt_add_qml_module(
