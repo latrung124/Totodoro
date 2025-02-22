@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
 project(WindowServices LANGUAGES CXX)
 
-set(WMEDIA_SERVICE_SOURCES media/include/WindowMediaService.h
-                           media/src/WindowMediaService.cpp)
+set(WMEDIA_SERVICE_SOURCES
+    media/include/WindowSystemMedia.h media/include/WindowMediaService.h
+    media/src/WindowSystemMedia.cpp media/src/WindowMediaService.cpp)
 
 add_library(WMediaService SHARED ${WMEDIA_SERVICE_SOURCES})
 

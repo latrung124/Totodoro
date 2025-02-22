@@ -13,7 +13,10 @@ File: main.cpp
 #include "core/services/service-handlers/WPlaybackControlsMessageHandler.h"
 #include "core/services/service-handlers/WPlaybackInfoMessageHandler.h"
 #include "core/services/service-handlers/WPreviousAsyncMessageHandler.h"
+#include "core/services/service-handlers/WTimelinePropertiesMessageHandler.h"
+
 #include "core/services/service-listeners/WMediaServiceListener.h"
+
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>
 
@@ -62,6 +65,8 @@ void serviceRegister()
 		    std::make_unique<WNextAsyncMessageHandler>());
 		ServiceMessageConsumer::getInstance().addHandler(
 		    std::make_unique<WPreviousAsyncMessageHandler>());
+		ServiceMessageConsumer::getInstance().addHandler(
+		    std::make_unique<WTimelinePropertiesMessageHandler>());
 	}
 }
 

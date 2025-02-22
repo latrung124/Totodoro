@@ -11,6 +11,7 @@
 #include <string>
 #include <stdint.h>
 #include <vector>
+#include <chrono>
 
 namespace window_services
 {
@@ -55,7 +56,7 @@ namespace utils
         std::vector<std::string> genres = {};
         WMediaPlaybackType playbackType = WMediaPlaybackType::Unknown;
         std::string subtitle = "";
-        std::vector<uint8_t> thumbnail = {};
+        std::string thumbnail = "";
         std::string title = "";
         int32_t trackNumber = 0;
     };
@@ -89,6 +90,15 @@ namespace utils
         WMediaPlaybackType playbackType = WMediaPlaybackType::Unknown;
     };
 
+    struct WTimelineProperties
+    {
+        int64_t endTime = 0;
+        int64_t startTime = 0;
+        std::chrono::system_clock::time_point lastUpdatedTime;
+        int64_t maxSeekTime = 0;
+        int64_t minSeekTime = 0;
+        int64_t position = 0;
+    };
 } // namespace utils
 
 } // namespace media

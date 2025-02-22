@@ -14,6 +14,7 @@
 #include "core/services/service-messages/window-service/WPlaybackControlsMessage.h"
 #include "core/services/service-messages/window-service/WPlaybackInfoMessage.h"
 #include "core/services/service-messages/window-service/WPreviousAsyncMessage.h"
+#include "core/services/service-messages/window-service/WTimelinePropertiesMessage.h"
 
 ServiceMessageProducer &ServiceMessageProducer::getInstance()
 {
@@ -31,6 +32,8 @@ ServiceMessageProducer::ServiceMessageUPtr ServiceMessageProducer::produce(
 		return std::make_unique<WPlaybackControlsMessage>();
 	case ServiceMessageId::WPlaybackInfoMessage:
 		return std::make_unique<WPlaybackInfoMessage>();
+	case ServiceMessageId::WTimelinePropertiesMessage:
+		return std::make_unique<WTimelinePropertiesMessage>();
 	case ServiceMessageId::WPlayAsyncMessage:
 		return std::make_unique<WPlayAsyncMessage>();
 	case ServiceMessageId::WPauseAsyncMessage:

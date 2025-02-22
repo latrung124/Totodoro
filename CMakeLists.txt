@@ -81,6 +81,7 @@ set(CORE_SERVICE_MSG_HANDLER_SOURCES
     core/services/service-handlers/WMediaInfoMessageHandler.h
     core/services/service-handlers/WPlaybackControlsMessageHandler.h
     core/services/service-handlers/WPlaybackInfoMessageHandler.h
+    core/services/service-handlers/WTimelinePropertiesMessageHandler.h
     core/services/service-handlers/WPlayAsyncMessageHandler.h
     core/services/service-handlers/WPauseAsyncMessageHandler.h
     core/services/service-handlers/WPreviousAsyncMessageHandler.h
@@ -88,6 +89,7 @@ set(CORE_SERVICE_MSG_HANDLER_SOURCES
     core/services/service-handlers/WMediaInfoMessageHandler.cpp
     core/services/service-handlers/WPlaybackControlsMessageHandler.cpp
     core/services/service-handlers/WPlaybackInfoMessageHandler.cpp
+    core/services/service-handlers/WTimelinePropertiesMessageHandler.cpp
     core/services/service-handlers/WPlayAsyncMessageHandler.cpp
     core/services/service-handlers/WPauseAsyncMessageHandler.cpp
     core/services/service-handlers/WPreviousAsyncMessageHandler.cpp
@@ -99,6 +101,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/service-messages/window-service/WMediaInfoMessage.h
     core/services/service-messages/window-service/WPlaybackControlsMessage.h
     core/services/service-messages/window-service/WPlaybackInfoMessage.h
+    core/services/service-messages/window-service/WTimelinePropertiesMessage.h
     core/services/service-messages/window-service/WPlayAsyncMessage.h
     core/services/service-messages/window-service/WPauseAsyncMessage.h
     core/services/service-messages/window-service/WPreviousAsyncMessage.h
@@ -106,6 +109,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/service-messages/window-service/WMediaInfoMessage.cpp
     core/services/service-messages/window-service/WPlaybackControlsMessage.cpp
     core/services/service-messages/window-service/WPlaybackInfoMessage.cpp
+    core/services/service-messages/window-service/WTimelinePropertiesMessage.cpp
     core/services/service-messages/window-service/WPlayAsyncMessage.cpp
     core/services/service-messages/window-service/WPauseAsyncMessage.cpp
     core/services/service-messages/window-service/WPreviousAsyncMessage.cpp

@@ -8,7 +8,7 @@
 #ifndef IW_MEDIA_SERVICE_LISTENER_H
 #define IW_MEDIA_SERVICE_LISTENER_H
 
-#include <IServiceListener.h>
+#include "../IServiceListener.h"
 #include <WMediaServiceUtils.h>
 
 class IWMediaServiceListener : public IServiceListener
@@ -17,6 +17,7 @@ public:
     using WMediaInfo = window_services::media::utils::WMediaInfo;
     using WPlaybackControls = window_services::media::utils::WPlaybackControls;
     using WPlaybackInfo = window_services::media::utils::WPlaybackInfo;
+    using WTimelineProperties = window_services::media::utils::WTimelineProperties;
 
 	IWMediaServiceListener() = default;
 	virtual ~IWMediaServiceListener() = default;
@@ -24,6 +25,7 @@ public:
     virtual void onMediaInfoChanged(const WMediaInfo &mediaInfo) = 0;
     virtual void onPlaybackControlsChanged(const WPlaybackControls &playbackControls) = 0;
     virtual void onPlaybackStatusChanged(const WPlaybackInfo &playbackInfo) = 0;
+    virtual void onTimelinePropertiesChanged(const WTimelineProperties &timelineProperties) = 0;
 };
 
 #endif // IW_MEDIA_SERVICE_LISTENER_H

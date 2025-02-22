@@ -37,3 +37,13 @@ void WMediaServiceListener::onPlaybackStatusChanged(const WPlaybackInfo &playbac
 		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
 }
+
+void WMediaServiceListener::onTimelinePropertiesChanged(
+    const WTimelineProperties &timelineProperties)
+{
+	auto message = ServiceMessageProducer::getInstance().produce(
+	    ServiceMessageId::WTimelinePropertiesMessage);
+	if (message) {
+		ServiceMessageQueue::getInstance().push(std::move(message));
+	}
+}
