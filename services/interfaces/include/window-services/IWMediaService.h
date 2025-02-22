@@ -18,6 +18,10 @@ public:
 
     virtual void start() = 0;
     virtual void getMediaInfo() = 0;
+    virtual bool playAsync() = 0;
+    virtual bool pauseAsync() = 0;
+    virtual bool nextAsync() = 0;
+    virtual bool previousAsync() = 0;
 };
 
 #endif // IW_MEDIA_SERVICE_H_

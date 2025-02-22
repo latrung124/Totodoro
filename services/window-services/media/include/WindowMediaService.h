@@ -21,6 +21,10 @@ public:
 
     void start() override;
     void getMediaInfo() override;
+    bool playAsync() override;
+    bool pauseAsync() override;
+    bool nextAsync() override;
+    bool previousAsync() override;
 };
 
 #endif // WINDOW_MEDIA_SERVICE_H
