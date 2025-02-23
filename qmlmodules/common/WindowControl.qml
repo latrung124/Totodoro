@@ -12,9 +12,9 @@ import QtQuick.Layouts
 Item {
     id: windowControl
 
-    signal closeWindowClicked()
-    signal minimizeWindowClicked()
-    signal maximizeWindowClicked()
+    signal closeWindow()
+    signal minimizeWindow()
+    signal maximizeWindow()
 
     implicitWidth: 80 // Consider change the size of the window control buttons with different sizes
     implicitHeight: 20
@@ -32,6 +32,10 @@ Item {
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
+
+            onClicked: function() {
+                minimizeWindow();
+            }
         }
 
         CustomButton {
@@ -43,6 +47,10 @@ Item {
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
+
+            onClicked: function() {
+                maximizeWindow();
+            }
         }
 
         CustomButton {
@@ -54,6 +62,10 @@ Item {
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
+
+            onClicked: function() {
+                closeWindow();
+            }
         }
     }
 

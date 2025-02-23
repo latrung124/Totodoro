@@ -6,8 +6,10 @@
  */
 
 #include "ModuleController.h"
+#include "core/contexts/WindowNavigator.h"
 
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 ModuleController::ModuleController(QObject *parent)
     : QObject(parent)
@@ -18,13 +20,21 @@ ModuleController::ModuleController(QObject *parent)
 
 ModuleController::~ModuleController()
 {
-	m_engine->deleteLater();
-	endConnections();
+	if (!m_engine) {
+		m_engine->deleteLater();
+		endConnections();
+	}
 }
 
 void ModuleController::loadModule(const QString &moduleName, const QString &moduleComponent)
 {
 	m_engine->loadFromModule(moduleName, moduleComponent);
+}
+
+void ModuleController::setContext(Context *context)
+{
+	m_engine->rootContext()->setContextProperty(
+	    "navigator", qobject_cast<WindowNavigator *>(context));
 }
 
 void ModuleController::startConnections()
@@ -48,13 +58,6 @@ void ModuleController::startConnections()
 		    }
 		    emit moduleLoadedSuccess();
 	    },
-	    Qt::QueuedConnection);
-
-	connect(
-	    engine,
-	    &QQmlApplicationEngine::quit,
-	    this,
-	    [this]() { emit destroyModule(); },
 	    Qt::QueuedConnection);
 }
 

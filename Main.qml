@@ -49,6 +49,16 @@ ApplicationWindow {
             right: parent.right
             rightMargin: 5
         }
+
+        onMaximizeWindow: function() {
+        }
+
+        onMinimizeWindow: function() {
+        }
+
+        onCloseWindow: function() {
+            navigator.closeWindow();
+        }
     }
 
     MediaPlayer {

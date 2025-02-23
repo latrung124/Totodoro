@@ -69,12 +69,15 @@ set(CORE_SOURCES
     core/services/service-producer/ServiceMessageProducer.h
     core/services/service-queue/MessageQueue.h
     core/services/service-queue/ServiceMessageQueue.h
+    core/contexts/Context.h
+    core/contexts/WindowNavigator.h
     core/GuiApplication.cpp
     core/services/service-consumer/ServiceMessageConsumer.cpp
     core/services/service-producer/ServiceMessageProducer.cpp
     core/services/service-listeners/WMediaServiceListener.cpp
     core/services/service-queue/ServiceMessageQueue.cpp
-    core/services/ServiceManager.cpp)
+    core/services/ServiceManager.cpp
+    core/contexts/WindowNavigator.cpp)
 
 set(CORE_SERVICE_MSG_HANDLER_SOURCES
     core/services/service-handlers/ServiceMessageHandler.h

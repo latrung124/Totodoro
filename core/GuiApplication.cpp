@@ -7,11 +7,14 @@
 
 #include "GuiApplication.h"
 
+#include <QCoreApplication>
 #include <QGuiApplication>
 
 #include "core/controllers/ModelController.h"
 #include "core/controllers/ModuleController.h"
 #include "core/controllers/ViewModelController.h"
+
+#include "core/contexts/WindowNavigator.h"
 
 #include "core/services/service-queue/ServiceMessageQueue.h"
 
@@ -21,6 +24,7 @@ GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     , m_modelController(std::make_unique<ModelController>())
     , m_viewModelController(std::make_unique<ViewModelController>())
     , m_moduleController(std::make_unique<ModuleController>())
+    , m_windowNavigator(std::make_unique<WindowNavigator>())
 {
 	startConnections();
 }
@@ -41,8 +45,8 @@ void GuiApplication::startConnections()
 	    Qt::QueuedConnection);
 
 	connect(
-	    moduleController,
-	    &ModuleController::destroyModule,
+	    qobject_cast<WindowNavigator *>(m_windowNavigator.get()),
+	    &WindowNavigator::closeWindowSignal,
 	    this,
 	    &GuiApplication::destroy,
 	    Qt::QueuedConnection);
@@ -52,8 +56,6 @@ void GuiApplication::endConnections()
 {
 	const auto moduleController = m_moduleController.get();
 	disconnect(moduleController, &ModuleController::moduleLoadedSuccess, this, nullptr);
-
-	disconnect(moduleController, &ModuleController::destroyModule, this, nullptr);
 }
 
 void GuiApplication::start()
@@ -61,6 +63,9 @@ void GuiApplication::start()
 	// Start the application & services
 	// Start the service message queue
 	ServiceMessageQueue::getInstance().start();
+
+	// Set Navigator Context
+	m_moduleController->setContext(m_windowNavigator.get());
 
 	// Load the main module
 	m_moduleController->loadModule("Totodoro", "Main");
@@ -80,4 +85,6 @@ void GuiApplication::construct()
 void GuiApplication::destroy()
 {
 	// Destroy the necessary variable & component
+	qDebug() << "Destroying the application";
+	emit destroySignal();
 }

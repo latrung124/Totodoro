@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
 	serviceRegister();
 
 	GuiApplication guiApp(&app);
+	QObject::connect(&guiApp, &GuiApplication::destroySignal, &app, &QGuiApplication::quit);
 	guiApp.start();
 
 	return app.exec();

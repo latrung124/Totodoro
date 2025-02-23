@@ -51,6 +51,10 @@ T.Button {
 
         anchors.fill: parent
         hoverEnabled: true
+
+        onClicked: function() {
+            control.clicked();
+        }
     }
 
     states: [

@@ -13,6 +13,7 @@
 #include <QObject>
 
 class QQmlApplicationEngine;
+class Context;
 
 class ModuleController : public QObject
 {
@@ -25,11 +26,11 @@ public:
 	virtual ~ModuleController();
 
 	void loadModule(const QString &moduleName, const QString &moduleComponent);
+	void setContext(Context *context);
 
 signals:
 	void moduleLoadedSuccess();
 	void moduleLoadedFailed();
-	void destroyModule();
 
 private:
 	void startConnections();
