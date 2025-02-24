@@ -53,7 +53,7 @@ set(CONTROLLER_SOURCES
     core/controllers/ViewModelController.cpp core/controllers/ModelController.h
     core/controllers/ViewModelController.h)
 
-set(UTIL_SOURCES utils/ThreadGuard.h)
+set(UTIL_SOURCES utils/ThreadGuard.h utils/ScopedThread.h)
 
 set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h
