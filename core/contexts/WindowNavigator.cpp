@@ -20,18 +20,14 @@ WindowNavigator::~WindowNavigator()
 void WindowNavigator::closeWindow()
 {
 	// Close the window
-	qDebug() << "Window closed";
-	emit closeWindowSignal();
 }
 
 void WindowNavigator::maximizeWindow()
 {
 	// Maximize the window
-	emit maximizeWindowSignal();
 }
 
 void WindowNavigator::minimizeWindow()
 {
 	// Minimize the window
-	emit minimizeWindowSignal();
 }

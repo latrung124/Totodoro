@@ -22,11 +22,6 @@ public slots:
 	void closeWindow();
 	void maximizeWindow();
 	void minimizeWindow();
-
-signals:
-	void closeWindowSignal();
-	void maximizeWindowSignal();
-	void minimizeWindowSignal();
 };
 
 #endif // WINDOWNAVIGATOR_H

@@ -10,6 +10,7 @@
 
 #include "core/services/service-queue/MessageQueue.h"
 
+#include <atomic>
 #include <condition_variable>
 #include <memory>
 #include <mutex>
@@ -44,7 +45,7 @@ private:
 	std::thread m_looper;
 	std::condition_variable m_conditionVariable;
 	std::queue<ServiceMessageUPtr> m_messageQueue;
-	bool m_isRunning;
+	std::atomic<bool> m_stopFlag{false};
 };
 
 #endif // SERVICE_MESSAGE_QUEUE_H

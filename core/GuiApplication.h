@@ -16,7 +16,7 @@ class QGuiApplication;
 
 class ModelController;
 class ViewModelController;
-class ModuleController;
+class QQmlApplicationEngine;
 class Context;
 
 class GuiApplication : public QObject
@@ -26,7 +26,7 @@ class GuiApplication : public QObject
 public:
 	using ModelControllerPtr = std::unique_ptr<ModelController>;
 	using ViewModelControllerPtr = std::unique_ptr<ViewModelController>;
-	using ModuleControllerPtr = std::unique_ptr<ModuleController>;
+	using QQmlApplicationEnginePtr = std::unique_ptr<QQmlApplicationEngine>;
 	using ContextPtr = std::unique_ptr<Context>;
 
 	explicit GuiApplication(QGuiApplication *app, QObject *parent = nullptr);
@@ -38,10 +38,6 @@ public:
 signals:
 	void destroySignal();
 
-public slots:
-	void construct();
-	void destroy();
-
 private:
 	void startConnections();
 	void endConnections();
@@ -49,8 +45,8 @@ private:
 	QGuiApplication *m_app = nullptr;
 	ModelControllerPtr m_modelController = nullptr;
 	ViewModelControllerPtr m_viewModelController = nullptr;
-	ModuleControllerPtr m_moduleController = nullptr;
 	ContextPtr m_windowNavigator = nullptr;
+	QQmlApplicationEnginePtr m_engine = nullptr;
 };
 
 #endif // GUIAPPLICATION_H

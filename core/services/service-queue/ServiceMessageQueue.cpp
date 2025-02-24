@@ -18,37 +18,36 @@ ServiceMessageQueue &ServiceMessageQueue::getInstance()
 }
 
 ServiceMessageQueue::ServiceMessageQueue()
-    : m_isRunning(false)
 {
 }
 
 ServiceMessageQueue::~ServiceMessageQueue()
 {
-	utils::ThreadGuard guard(m_looper);
 }
 
 void ServiceMessageQueue::start()
 {
-	m_isRunning = true;
+	m_stopFlag.store(false);
 	m_looper = std::thread(&ServiceMessageQueue::loop, this);
 }
 
 void ServiceMessageQueue::stop()
 {
-	m_isRunning = false;
-	m_conditionVariable.notify_all();
+	m_stopFlag.store(true);
+	m_conditionVariable.notify_one();
+	utils::ThreadGuard guard(m_looper);
 }
 
 bool ServiceMessageQueue::canConsume()
 {
-	return m_isRunning && !m_messageQueue.empty();
+	return m_stopFlag.load() || !m_messageQueue.empty();
 }
 
 void ServiceMessageQueue::push(ServiceMessageUPtr message)
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
 	m_messageQueue.push(std::move(message));
-	m_conditionVariable.notify_all();
+	m_conditionVariable.notify_one();
 }
 
 void ServiceMessageQueue::loop()
@@ -57,12 +56,14 @@ void ServiceMessageQueue::loop()
 		std::unique_lock<std::mutex> lock(m_mutex);
 		m_conditionVariable.wait(lock, [this] { return canConsume(); });
 
-		if (!m_isRunning && m_messageQueue.empty()) {
+		if (m_stopFlag.load() && m_messageQueue.empty()) {
 			break;
 		}
 
-		auto message = std::move(m_messageQueue.front());
-		m_messageQueue.pop();
-		ServiceMessageConsumer::getInstance().consumeMessage(std::move(message));
+		while (!m_messageQueue.empty()) {
+			auto message = std::move(m_messageQueue.front());
+			m_messageQueue.pop();
+			ServiceMessageConsumer::getInstance().consumeMessage(std::move(message));
+		}
 	}
 }

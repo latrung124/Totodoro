@@ -12,7 +12,7 @@ import QtQuick.Layouts
 import CommonModule 1.0
 import MediaPlayerModule 1.0
 
-ApplicationWindow {
+Window {
     id: root
 
     objectName: "appWindow"
@@ -58,6 +58,7 @@ ApplicationWindow {
 
         onCloseWindow: function() {
             navigator.closeWindow();
+            close();
         }
     }
 
