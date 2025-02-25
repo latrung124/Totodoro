@@ -50,10 +50,18 @@ Window {
             rightMargin: 5
         }
 
+        isFullScreen: root.visibility === Window.FullScreen
+
         onMaximizeWindow: function() {
+            if (root.visibility === Window.FullScreen) {
+                root.visibility = Window.Windowed;
+            } else {
+                root.visibility = Window.FullScreen;
+            }
         }
 
         onMinimizeWindow: function() {
+            root.visibility = Window.Minimized;
         }
 
         onCloseWindow: function() {

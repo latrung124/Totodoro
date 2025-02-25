@@ -16,6 +16,8 @@ Item {
     signal minimizeWindow()
     signal maximizeWindow()
 
+    property bool isFullScreen: false
+
     implicitWidth: 80 // Consider change the size of the window control buttons with different sizes
     implicitHeight: 20
 
@@ -32,6 +34,9 @@ Item {
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
+            ToolTip.visible: hovered
+            ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+            ToolTip.text: "Minimize"
 
             onClicked: function() {
                 minimizeWindow();
@@ -47,6 +52,9 @@ Item {
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
+            ToolTip.visible: hovered
+            ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+            ToolTip.text: isFullScreen ? "Restore" : "Maximize"
 
             onClicked: function() {
                 maximizeWindow();
@@ -62,6 +70,9 @@ Item {
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
+            ToolTip.visible: hovered
+            ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+            ToolTip.text: "Close"
 
             onClicked: function() {
                 closeWindow();
