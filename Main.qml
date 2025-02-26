@@ -17,8 +17,8 @@ Window {
 
     objectName: "appWindow"
     visible: true
-    width: 1366
-    height: 780
+    width: internal.windowWidth
+    height: internal.windowHeight
     color: "transparent"
     flags: Qt.FramelessWindowHint | Qt.Window
 
@@ -61,7 +61,7 @@ Window {
         }
 
         onMinimizeWindow: function() {
-            root.visibility = Window.Minimized;
+            minimizeAnimation.start();
         }
 
         onCloseWindow: function() {
@@ -78,5 +78,35 @@ Window {
             left: parent.left
             right: parent.right
         }
+    }
+
+    SequentialAnimation {
+        id: minimizeAnimation
+        ParallelAnimation {
+            NumberAnimation { target: root; property: "x"; to: internal.hidePosX; duration: 200; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: root; property: "y"; to: internal.hidePosY; duration: 200; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: root; property: "width"; to: internal.hideWidthTarget; duration: 200; easing.type: Easing.InOutQuad }
+            NumberAnimation { target: root; property: "height"; to: internal.hideHeightTarget; duration: 200; easing.type: Easing.InOutQuad }
+        }
+
+        onFinished: function() {
+            root.visibility = Window.Minimized;
+            root.width = internal.windowWidth;
+            root.height = internal.windowHeight;
+            root.x = (screen.width - width) / 2;
+            root.y = (screen.height - height) / 2;
+        }
+    }
+
+    QtObject {
+        id: internal
+
+        property int hidePosX: Math.floor(Screen.width / 2) - 50
+        property int hidePosY: screen.height - 100
+        property int hideWidthTarget: 100
+        property int hideHeightTarget: 100
+        property int minimizeDuration: 200
+        property int windowWidth: 1366
+        property int windowHeight: 780
     }
 }
