@@ -26,6 +26,8 @@ qt_add_qml_module(
   CommonModule
   VERSION
   1.0
+  OUTPUT_DIRECTORY
+  ${QT_QML_OUTPUT_DIRECTORY}/CommonModule
   QML_FILES
   WindowControl.qml
   buttons/CustomButton.qml

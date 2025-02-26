@@ -16,6 +16,11 @@ set(CMAKE_INSTALL_PREFIX
     "${CMAKE_BINARY_DIR}/out"
     CACHE PATH "Installation Directory" FORCE)
 
+set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
+set(QML_IMPORT_PATH
+    ${QT_QML_OUTPUT_DIRECTORY}
+    CACHE STRING "Import paths for Qt Creator's code model" FORCE)
+
 # Add the qmlmodules subdirectory
 add_subdirectory(qmlmodules)
 
@@ -137,6 +142,9 @@ qt_add_qml_module(
   1.0
   RESOURCE_PREFIX
   /resources/qml
+  IMPORT_PATH
+  ${QML_IMPORT_PATH}/MediaPlayerModule
+  ${QML_IMPORT_PATH}/CommonModule
   QML_FILES
   Main.qml
   RESOURCES
@@ -169,9 +177,12 @@ set_target_properties(
 
 target_include_directories(appTotodoro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(
-  appTotodoro PRIVATE Qt6::Quick common_moduleplugin mediaplayer_moduleplugin
-                      WMediaService ServiceFactory)
+set(QML_PLUGINS common_moduleplugin mediaplayer_moduleplugin)
+
+set(SERVICE_LIBRARIES WMediaService ServiceFactory)
+
+target_link_libraries(appTotodoro PRIVATE Qt6::Quick ${QML_PLUGINS}
+                                          ${SERVICE_LIBRARIES})
 
 include(GNUInstallDirs)
 install(

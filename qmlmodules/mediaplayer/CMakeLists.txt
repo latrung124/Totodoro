@@ -4,6 +4,8 @@ qt_add_qml_module(
   mediaplayer_module
   URI
   MediaPlayerModule
+  OUTPUT_DIRECTORY
+  ${QT_QML_OUTPUT_DIRECTORY}/MediaPlayerModule
   VERSION
   1.0
   QML_FILES
