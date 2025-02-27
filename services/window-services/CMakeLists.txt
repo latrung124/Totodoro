@@ -27,3 +27,7 @@ install(
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   INCLUDES
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+enable_testing()
+
+add_subdirectory(tests)
