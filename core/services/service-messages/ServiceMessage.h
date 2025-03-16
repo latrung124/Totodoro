@@ -8,6 +8,8 @@
 #ifndef SERVICE_MESSAGE_H
 #define SERVICE_MESSAGE_H
 
+#include <memory>
+
 #include "core/services/service-messages/ServiceMessageId.h"
 
 class ServiceMessage
@@ -18,7 +20,8 @@ public:
 	{
 	}
 
-	ServiceMessage() = delete;
+	ServiceMessage() = default;
+
 	virtual ~ServiceMessage() = default;
 
 	ServiceMessageId getId() const
@@ -29,5 +32,7 @@ public:
 private:
 	ServiceMessageId m_id = ServiceMessageId::None;
 };
+
+using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
 
 #endif // SERVICE_MESSAGE_H

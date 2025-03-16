@@ -13,11 +13,6 @@ class ServiceProducer
 public:
 	ServiceProducer() = default;
 	virtual ~ServiceProducer() = default;
-
-	ServiceProducer(const ServiceProducer &) = delete;
-	ServiceProducer &operator=(const ServiceProducer &) = delete;
-	ServiceProducer(ServiceProducer &&) = delete;
-	ServiceProducer &operator=(ServiceProducer &&) = delete;
 };
 
 #endif // SERVICE_CONSUMER_H

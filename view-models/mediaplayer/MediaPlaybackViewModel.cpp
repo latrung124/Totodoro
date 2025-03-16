@@ -7,7 +7,10 @@
 
 #include "MediaPlaybackViewModel.h"
 
-#include "core/services/service-messages/ServiceMessage.h"
+#include "core/services/service-messages/window-service/WNextAsyncMessage.h"
+#include "core/services/service-messages/window-service/WPauseAsyncMessage.h"
+#include "core/services/service-messages/window-service/WPlayAsyncMessage.h"
+#include "core/services/service-messages/window-service/WPreviousAsyncMessage.h"
 #include "core/services/service-producer/ServiceMessageProducer.h"
 #include "core/services/service-queue/ServiceMessageQueue.h"
 
@@ -91,8 +94,7 @@ void MediaPlaybackViewModel::setIsPreviousEnabled(bool isPreviousEnabled)
 
 void MediaPlaybackViewModel::play()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
-	    ServiceMessageId::WPlayAsyncMessage);
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPlayAsyncMessage>();
 	if (message) {
 		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
@@ -100,8 +102,7 @@ void MediaPlaybackViewModel::play()
 
 void MediaPlaybackViewModel::pause()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
-	    ServiceMessageId::WPauseAsyncMessage);
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPauseAsyncMessage>();
 	if (message) {
 		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
@@ -109,8 +110,7 @@ void MediaPlaybackViewModel::pause()
 
 void MediaPlaybackViewModel::next()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
-	    ServiceMessageId::WNextAsyncMessage);
+	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WNextAsyncMessage>();
 	if (message) {
 		ServiceMessageQueue::getInstance().push(std::move(message));
 	}
@@ -118,8 +118,8 @@ void MediaPlaybackViewModel::next()
 
 void MediaPlaybackViewModel::previous()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce(
-	    ServiceMessageId::WPreviousAsyncMessage);
+	ServiceMessageUPtr message =
+	    ServiceMessageProducer::getInstance().produce<WPreviousAsyncMessage>();
 	if (message) {
 		ServiceMessageQueue::getInstance().push(std::move(message));
 	}

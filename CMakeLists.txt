@@ -69,6 +69,15 @@ set(CORE_SOURCES
     core/services/service-consumer/ServiceMessageConsumer.h
     core/services/service-producer/ServiceProducer.h
     core/services/service-producer/ServiceMessageProducer.h
+    core/services/service-producer/ServiceMessageCreator.h
+    core/services/service-producer/window-service/WMediaInfoMessageCreator.h
+    core/services/service-producer/window-service/WPlaybackControlsMessageCreator.h
+    core/services/service-producer/window-service/WPlaybackInfoMessageCreator.h
+    core/services/service-producer/window-service/WTimelinePropertiesMessageCreator.h
+    core/services/service-producer/window-service/WPlayAsyncMessageCreator.h
+    core/services/service-producer/window-service/WPauseAsyncMessageCreator.h
+    core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h
+    core/services/service-producer/window-service/WNextAsyncMessageCreator.h
     core/services/service-queue/MessageQueue.h
     core/services/service-queue/ServiceMessageQueue.h
     core/contexts/Context.h
@@ -76,6 +85,14 @@ set(CORE_SOURCES
     core/GuiApplication.cpp
     core/services/service-consumer/ServiceMessageConsumer.cpp
     core/services/service-producer/ServiceMessageProducer.cpp
+    core/services/service-producer/window-service/WMediaInfoMessageCreator.cpp
+    core/services/service-producer/window-service/WPlaybackControlsMessageCreator.cpp
+    core/services/service-producer/window-service/WPlaybackInfoMessageCreator.cpp
+    core/services/service-producer/window-service/WTimelinePropertiesMessageCreator.cpp
+    core/services/service-producer/window-service/WPlayAsyncMessageCreator.cpp
+    core/services/service-producer/window-service/WPauseAsyncMessageCreator.cpp
+    core/services/service-producer/window-service/WPreviousAsyncMessageCreator.cpp
+    core/services/service-producer/window-service/WNextAsyncMessageCreator.cpp
     core/services/service-listeners/WMediaServiceListener.cpp
     core/services/service-queue/ServiceMessageQueue.cpp
     core/services/ServiceManager.cpp
