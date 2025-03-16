@@ -17,6 +17,17 @@ File: main.cpp
 
 #include "core/services/service-listeners/WMediaServiceListener.h"
 
+// TODO: move out of main
+#include "core/services/service-producer/ServiceMessageProducer.h"
+#include "core/services/service-producer/window-service/WMediaInfoMessageCreator.h"
+#include "core/services/service-producer/window-service/WNextAsyncMessageCreator.h"
+#include "core/services/service-producer/window-service/WPauseAsyncMessageCreator.h"
+#include "core/services/service-producer/window-service/WPlayAsyncMessageCreator.h"
+#include "core/services/service-producer/window-service/WPlaybackControlsMessageCreator.h"
+#include "core/services/service-producer/window-service/WPlaybackInfoMessageCreator.h"
+#include "core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h"
+#include "core/services/service-producer/window-service/WTimelinePropertiesMessageCreator.h"
+
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>
 
@@ -47,6 +58,7 @@ void setApplicationInfo()
 
 void serviceRegister()
 {
+	// TODO: refactor later, move out of main
 	auto service = ServiceManager::instance().registerService<IWMediaService>();
 	if (service != nullptr) {
 		service->registerListener(new WMediaServiceListener());
@@ -66,6 +78,17 @@ void serviceRegister()
 		    std::make_unique<WPreviousAsyncMessageHandler>());
 		ServiceMessageConsumer::getInstance().addHandler(
 		    std::make_unique<WTimelinePropertiesMessageHandler>());
+
+		// Register service creators for Service Producer/Factory
+		auto producer = ServiceMessageProducer::getInstance();
+		producer.registerCreator<WMediaInfoMessageCreator>();
+		producer.registerCreator<WPlaybackControlsMessageCreator>();
+		producer.registerCreator<WPlaybackInfoMessageCreator>();
+		producer.registerCreator<WPlayAsyncMessageCreator>();
+		producer.registerCreator<WPauseAsyncMessageCreator>();
+		producer.registerCreator<WNextAsyncMessageCreator>();
+		producer.registerCreator<WPreviousAsyncMessageCreator>();
+		producer.registerCreator<WTimelinePropertiesMessageCreator>();
 	}
 }
 
