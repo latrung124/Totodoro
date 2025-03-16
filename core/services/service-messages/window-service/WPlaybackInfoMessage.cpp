@@ -8,11 +8,14 @@ Description: Implementation for Window Media Playback Info Message
 #include "WPlaybackInfoMessage.h"
 
 namespace {
+
 using namespace window_services::media::utils;
+
 }
 
-WPlaybackInfoMessage::WPlaybackInfoMessage()
+WPlaybackInfoMessage::WPlaybackInfoMessage(ExtractWPlaybackInfoStrategyUPtr strategy)
     : ServiceMessage(ServiceMessageId::WPlaybackInfoMessage)
+    , m_strategy(std::move(strategy))
 {
 }
 
@@ -24,4 +27,9 @@ void WPlaybackInfoMessage::setWPlaybackInfo(const WPlaybackInfo &wPlaybackInfo)
 WPlaybackInfo WPlaybackInfoMessage::getWPlaybackInfo() const
 {
 	return m_wPlaybackInfo;
+}
+
+void WPlaybackInfoMessage::extract()
+{
+	m_strategy->extract(*this);
 }

@@ -7,8 +7,9 @@
 
 #include "core/services/service-producer/window-service/WPlayAsyncMessageCreator.h"
 #include "core/services/service-messages/window-service/WPlayAsyncMessage.h"
+#include "core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.h"
 
 ServiceMessageUPtr WPlayAsyncMessageCreator::create() const
 {
-	return std::make_unique<WPlayAsyncMessage>();
+	return std::make_unique<WPlayAsyncMessage>(std::make_unique<WPlayAsyncExtractStrategy>());
 }

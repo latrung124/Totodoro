@@ -13,8 +13,10 @@ using namespace window_services::media::utils;
 
 } // namespace
 
-WTimelinePropertiesMessage::WTimelinePropertiesMessage()
+WTimelinePropertiesMessage::WTimelinePropertiesMessage(
+    WTimelinePropertiesExtractStrategyUPtr strategy)
     : ServiceMessage(ServiceMessageId::WTimelinePropertiesMessage)
+    , m_strategy(std::move(strategy))
 {
 }
 
@@ -26,4 +28,9 @@ void WTimelinePropertiesMessage::setTimelineProperties(const WTimelineProperties
 WTimelineProperties WTimelinePropertiesMessage::getTimelineProperties() const
 {
 	return m_timelineProperties;
+}
+
+void WTimelinePropertiesMessage::extract()
+{
+	m_strategy->extract(*this);
 }

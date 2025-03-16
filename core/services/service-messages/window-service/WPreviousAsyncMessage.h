@@ -9,12 +9,21 @@
 #define WPREVIOUS_ASYNC_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
+#include "core/services/service-strategies/ExtractStrategy.h"
 
 class WPreviousAsyncMessage : public ServiceMessage
 {
 public:
-	WPreviousAsyncMessage();
+	using ExtractWPreviousAsyncStrategyUPtr =
+	    std::unique_ptr<ExtractStrategy<WPreviousAsyncMessage>>;
+
+	WPreviousAsyncMessage(ExtractWPreviousAsyncStrategyUPtr strategy);
 	~WPreviousAsyncMessage() = default;
+
+	void extract() override;
+
+private:
+	ExtractWPreviousAsyncStrategyUPtr m_strategy;
 };
 
 #endif // WPREVIOUS_ASYNC_MESSAGE_H

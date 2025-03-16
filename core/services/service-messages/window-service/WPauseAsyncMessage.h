@@ -9,12 +9,20 @@
 #define W_PAUSE_ASYNC_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
+#include "core/services/service-strategies/ExtractStrategy.h"
 
 class WPauseAsyncMessage : public ServiceMessage
 {
 public:
-	WPauseAsyncMessage();
+	using ExtractWPauseAsyncStrategyUPtr = std::unique_ptr<ExtractStrategy<WPauseAsyncMessage>>;
+
+	WPauseAsyncMessage(ExtractWPauseAsyncStrategyUPtr strategy);
 	~WPauseAsyncMessage() = default;
+
+	void extract() override;
+
+private:
+	ExtractWPauseAsyncStrategyUPtr m_strategy;
 };
 
 #endif // W_PAUSE_ASYNC_MESSAGE_H

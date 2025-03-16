@@ -78,6 +78,15 @@ set(CORE_SOURCES
     core/services/service-producer/window-service/WPauseAsyncMessageCreator.h
     core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h
     core/services/service-producer/window-service/WNextAsyncMessageCreator.h
+    core/services/service-strategies/ExtractStrategy.h
+    core/services/service-strategies/window-service/WMediaInfoExtractStrategy.h
+    core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.h
+    core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.h
+    core/services/service-strategies/window-service/WTimelinePropertiesExtractStrategy.h
+    core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.h
+    core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.h
+    core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.h
+    core/services/service-strategies/window-service/WNextAsyncExtractStrategy.h
     core/services/service-queue/MessageQueue.h
     core/services/service-queue/ServiceMessageQueue.h
     core/contexts/Context.h
@@ -93,6 +102,14 @@ set(CORE_SOURCES
     core/services/service-producer/window-service/WPauseAsyncMessageCreator.cpp
     core/services/service-producer/window-service/WPreviousAsyncMessageCreator.cpp
     core/services/service-producer/window-service/WNextAsyncMessageCreator.cpp
+    core/services/service-strategies/window-service/WMediaInfoExtractStrategy.cpp
+    core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.cpp
+    core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.cpp
+    core/services/service-strategies/window-service/WTimelinePropertiesExtractStrategy.cpp
+    core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.cpp
+    core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.cpp
+    core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.cpp
+    core/services/service-strategies/window-service/WNextAsyncExtractStrategy.cpp
     core/services/service-listeners/WMediaServiceListener.cpp
     core/services/service-queue/ServiceMessageQueue.cpp
     core/services/ServiceManager.cpp

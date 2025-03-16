@@ -9,12 +9,20 @@
 #define W_NEXT_ASYNC_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
+#include "core/services/service-strategies/ExtractStrategy.h"
 
 class WNextAsyncMessage : public ServiceMessage
 {
 public:
-	WNextAsyncMessage();
+	using ExtractWNextAsyncStrategyUPtr = std::unique_ptr<ExtractStrategy<WNextAsyncMessage>>;
+
+	WNextAsyncMessage(ExtractWNextAsyncStrategyUPtr strategy);
 	~WNextAsyncMessage() = default;
+
+	void extract() override;
+
+private:
+	ExtractWNextAsyncStrategyUPtr m_strategy;
 };
 
 #endif // W_NEXT_ASYNC_MESSAGE_H

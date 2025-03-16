@@ -7,8 +7,10 @@
 
 #include "core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h"
 #include "core/services/service-messages/window-service/WPreviousAsyncMessage.h"
+#include "core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.h"
 
 ServiceMessageUPtr WPreviousAsyncMessageCreator::create() const
 {
-	return std::make_unique<WPreviousAsyncMessage>();
+	return std::make_unique<WPreviousAsyncMessage>(
+	    std::make_unique<WPreviousAsyncExtractStrategy>());
 }

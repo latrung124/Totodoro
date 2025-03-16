@@ -10,6 +10,7 @@
 
 #include <cstdint>
 
+// TODO: remove this enum
 enum class ServiceMessageId : uint16_t
 {
 	None = 0,

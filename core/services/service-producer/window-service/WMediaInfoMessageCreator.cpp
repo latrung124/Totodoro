@@ -7,8 +7,9 @@
 
 #include "core/services/service-producer/window-service/WMediaInfoMessageCreator.h"
 #include "core/services/service-messages/window-service/WMediaInfoMessage.h"
+#include "core/services/service-strategies/window-service/WMediaInfoExtractStrategy.h"
 
 ServiceMessageUPtr WMediaInfoMessageCreator::create() const
 {
-	return std::make_unique<WMediaInfoMessage>();
+	return std::make_unique<WMediaInfoMessage>(std::make_unique<WMediaInfoExtractStrategy>());
 }

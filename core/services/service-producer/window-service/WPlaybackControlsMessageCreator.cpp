@@ -7,8 +7,10 @@
 
 #include "core/services/service-producer/window-service/WPlaybackControlsMessageCreator.h"
 #include "core/services/service-messages/window-service/WPlaybackControlsMessage.h"
+#include "core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.h"
 
 ServiceMessageUPtr WPlaybackControlsMessageCreator::create() const
 {
-	return std::make_unique<WPlaybackControlsMessage>();
+	return std::make_unique<WPlaybackControlsMessage>(
+	    std::make_unique<WPlaybackControlsExtractStrategy>());
 }

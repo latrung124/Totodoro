@@ -8,11 +8,14 @@
 #include "WPlaybackControlsMessage.h"
 
 namespace {
+
 using namespace window_services::media::utils;
+
 }
 
-WPlaybackControlsMessage::WPlaybackControlsMessage()
+WPlaybackControlsMessage::WPlaybackControlsMessage(ExtractWPlaybackControlsStrategyUPtr strategy)
     : ServiceMessage(ServiceMessageId::WPlaybackControlsMessage)
+    , m_strategy(std::move(strategy))
 {
 }
 
@@ -24,4 +27,9 @@ void WPlaybackControlsMessage::setWPlaybackControls(const WPlaybackControls &wPl
 WPlaybackControls WPlaybackControlsMessage::getWPlaybackControls() const
 {
 	return m_wPlaybackControls;
+}
+
+void WPlaybackControlsMessage::extract()
+{
+	m_strategy->extract(*this);
 }

@@ -29,6 +29,8 @@ public:
 		return m_id;
 	}
 
+	virtual void extract() = 0;
+
 private:
 	ServiceMessageId m_id = ServiceMessageId::None;
 };

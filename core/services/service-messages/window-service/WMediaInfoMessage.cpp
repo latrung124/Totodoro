@@ -11,8 +11,9 @@ namespace {
 using namespace window_services::media::utils;
 }
 
-WMediaInfoMessage::WMediaInfoMessage()
+WMediaInfoMessage::WMediaInfoMessage(ExtractWMediaInfoStrategyUPtr strategy)
     : ServiceMessage(ServiceMessageId::WMediaInfoMessage)
+    , m_strategy(std::move(strategy))
 {
 }
 
@@ -24,4 +25,9 @@ void WMediaInfoMessage::setMediaInfo(const WMediaInfo &mediaInfo)
 WMediaInfo WMediaInfoMessage::getMediaInfo() const
 {
 	return m_mediaInfo;
+}
+
+void WMediaInfoMessage::extract()
+{
+	m_strategy->extract(*this);
 }

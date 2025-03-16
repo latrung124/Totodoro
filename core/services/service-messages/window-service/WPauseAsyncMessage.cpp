@@ -7,7 +7,13 @@
 
 #include "core/services/service-messages/window-service/WPauseAsyncMessage.h"
 
-WPauseAsyncMessage::WPauseAsyncMessage()
+WPauseAsyncMessage::WPauseAsyncMessage(ExtractWPauseAsyncStrategyUPtr strategy)
     : ServiceMessage(ServiceMessageId::WPauseAsyncMessage)
+    , m_strategy(std::move(strategy))
 {
+}
+
+void WPauseAsyncMessage::extract()
+{
+	m_strategy->extract(*this);
 }
