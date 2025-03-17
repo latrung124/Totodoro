@@ -78,15 +78,6 @@ set(CORE_SOURCES
     core/services/service-producer/window-service/WPauseAsyncMessageCreator.h
     core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h
     core/services/service-producer/window-service/WNextAsyncMessageCreator.h
-    core/services/service-strategies/ExtractStrategy.h
-    core/services/service-strategies/window-service/WMediaInfoExtractStrategy.h
-    core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.h
-    core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.h
-    core/services/service-strategies/window-service/WTimelinePropertiesExtractStrategy.h
-    core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WNextAsyncExtractStrategy.h
     core/services/service-queue/MessageQueue.h
     core/services/service-queue/ServiceMessageQueue.h
     core/contexts/Context.h
@@ -102,6 +93,21 @@ set(CORE_SOURCES
     core/services/service-producer/window-service/WPauseAsyncMessageCreator.cpp
     core/services/service-producer/window-service/WPreviousAsyncMessageCreator.cpp
     core/services/service-producer/window-service/WNextAsyncMessageCreator.cpp
+    core/services/service-listeners/WMediaServiceListener.cpp
+    core/services/service-queue/ServiceMessageQueue.cpp
+    core/services/ServiceManager.cpp
+    core/contexts/WindowNavigator.cpp)
+
+set(CORE_SERVICE_STRATEGIES
+    core/services/service-strategies/ExtractStrategy.h
+    core/services/service-strategies/window-service/WMediaInfoExtractStrategy.h
+    core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.h
+    core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.h
+    core/services/service-strategies/window-service/WTimelinePropertiesExtractStrategy.h
+    core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.h
+    core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.h
+    core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.h
+    core/services/service-strategies/window-service/WNextAsyncExtractStrategy.h
     core/services/service-strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -110,29 +116,7 @@ set(CORE_SOURCES
     core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.cpp
     core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.cpp
     core/services/service-strategies/window-service/WNextAsyncExtractStrategy.cpp
-    core/services/service-listeners/WMediaServiceListener.cpp
-    core/services/service-queue/ServiceMessageQueue.cpp
-    core/services/ServiceManager.cpp
-    core/contexts/WindowNavigator.cpp)
-
-set(CORE_SERVICE_MSG_HANDLER_SOURCES
-    core/services/service-handlers/ServiceMessageHandler.h
-    core/services/service-handlers/WMediaInfoMessageHandler.h
-    core/services/service-handlers/WPlaybackControlsMessageHandler.h
-    core/services/service-handlers/WPlaybackInfoMessageHandler.h
-    core/services/service-handlers/WTimelinePropertiesMessageHandler.h
-    core/services/service-handlers/WPlayAsyncMessageHandler.h
-    core/services/service-handlers/WPauseAsyncMessageHandler.h
-    core/services/service-handlers/WPreviousAsyncMessageHandler.h
-    core/services/service-handlers/WNextAsyncMessageHandler.h
-    core/services/service-handlers/WMediaInfoMessageHandler.cpp
-    core/services/service-handlers/WPlaybackControlsMessageHandler.cpp
-    core/services/service-handlers/WPlaybackInfoMessageHandler.cpp
-    core/services/service-handlers/WTimelinePropertiesMessageHandler.cpp
-    core/services/service-handlers/WPlayAsyncMessageHandler.cpp
-    core/services/service-handlers/WPauseAsyncMessageHandler.cpp
-    core/services/service-handlers/WPreviousAsyncMessageHandler.cpp
-    core/services/service-handlers/WNextAsyncMessageHandler.cpp)
+)
 
 set(CORE_SERVICE_MSG_SOURCES
     core/services/service-messages/ServiceMessage.h
@@ -165,7 +149,7 @@ qt_add_executable(
   ${CONTROLLER_SOURCES}
   ${CORE_SOURCES}
   ${CORE_SERVICE_MSG_SOURCES}
-  ${CORE_SERVICE_MSG_HANDLER_SOURCES}
+  ${CORE_SERVICE_STRATEGIES}
   ${UTIL_SOURCES})
 
 qt_add_qml_module(

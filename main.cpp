@@ -5,16 +5,6 @@ File: main.cpp
 * Description: This file contains the main function of the application.
 */
 
-#include "core/services/service-consumer/ServiceMessageConsumer.h"
-#include "core/services/service-handlers/WMediaInfoMessageHandler.h"
-#include "core/services/service-handlers/WNextAsyncMessageHandler.h"
-#include "core/services/service-handlers/WPauseAsyncMessageHandler.h"
-#include "core/services/service-handlers/WPlayAsyncMessageHandler.h"
-#include "core/services/service-handlers/WPlaybackControlsMessageHandler.h"
-#include "core/services/service-handlers/WPlaybackInfoMessageHandler.h"
-#include "core/services/service-handlers/WPreviousAsyncMessageHandler.h"
-#include "core/services/service-handlers/WTimelinePropertiesMessageHandler.h"
-
 #include "core/services/service-listeners/WMediaServiceListener.h"
 
 // TODO: move out of main
@@ -62,22 +52,6 @@ void serviceRegister()
 	auto service = ServiceManager::instance().registerService<IWMediaService>();
 	if (service != nullptr) {
 		service->registerListener(new WMediaServiceListener());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WMediaInfoMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WPlaybackControlsMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WPlaybackInfoMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WPlayAsyncMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WPauseAsyncMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WNextAsyncMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WPreviousAsyncMessageHandler>());
-		ServiceMessageConsumer::getInstance().addHandler(
-		    std::make_unique<WTimelinePropertiesMessageHandler>());
 
 		// Register service creators for Service Producer/Factory
 		auto producer = ServiceMessageProducer::getInstance();

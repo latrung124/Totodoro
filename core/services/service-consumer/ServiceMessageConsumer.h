@@ -15,7 +15,6 @@ File: ServiceMessageConsumer.h
 #include <memory>
 
 class ServiceMessage;
-class ServiceMessageHandler;
 
 class ServiceMessageConsumer : public ServiceConsumer
 {
@@ -27,11 +26,8 @@ public:
 
 	void consumeMessage(ServiceMessageUPtr message);
 
-	void addHandler(std::unique_ptr<ServiceMessageHandler> handler);
-
 private:
 	ServiceMessageConsumer() = default;
-	std::map<ServiceMessageId, std::unique_ptr<ServiceMessageHandler>> m_handlers;
 };
 
 #endif // SERVICE_MESSAGE_CONSUMER_H
