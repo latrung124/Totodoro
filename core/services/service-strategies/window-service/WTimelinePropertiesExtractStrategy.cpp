@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WTimelinePropertiesMessage.h"
 
+WTimelinePropertiesExtractStrategy::~WTimelinePropertiesExtractStrategy()
+{
+}
+
+void WTimelinePropertiesExtractStrategy::execute(const WTimelinePropertiesMessage &message)
+{
+	extract(message);
+}
+
 void WTimelinePropertiesExtractStrategy::extract(const WTimelinePropertiesMessage &message)
 {
 	std::cout << "Extracting timeline properties message" << std::endl;

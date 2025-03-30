@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WMediaInfoMessage.h"
 
+WMediaInfoExtractStrategy::~WMediaInfoExtractStrategy()
+{
+}
+
+void WMediaInfoExtractStrategy::execute(const WMediaInfoMessage &message)
+{
+	extract(message);
+}
+
 void WMediaInfoExtractStrategy::extract(const WMediaInfoMessage &message)
 {
 	std::cout << "Extracting media info!" << std::endl;

@@ -9,14 +9,14 @@
 #define W_MEDIA_INFO_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
 class WMediaInfoMessage : public ServiceMessage
 {
 public:
 	using WMediaInfo = window_services::media::utils::WMediaInfo;
-	using ExtractWMediaInfoStrategyUPtr = std::unique_ptr<ExtractStrategy<WMediaInfoMessage>>;
+	using ExtractWMediaInfoStrategyUPtr = std::unique_ptr<IStrategy<WMediaInfoMessage>>;
 
 	WMediaInfoMessage(ExtractWMediaInfoStrategyUPtr strategy);
 	~WMediaInfoMessage() = default;

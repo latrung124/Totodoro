@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WPlayAsyncMessage.h"
 
+WPlayAsyncExtractStrategy::~WPlayAsyncExtractStrategy()
+{
+}
+
+void WPlayAsyncExtractStrategy::execute(const WPlayAsyncMessage &message)
+{
+	extract(message);
+}
+
 void WPlayAsyncExtractStrategy::extract(const WPlayAsyncMessage &message)
 {
 	std::cout << "Extracting play async message" << std::endl;

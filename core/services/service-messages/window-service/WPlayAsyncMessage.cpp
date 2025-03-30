@@ -15,5 +15,5 @@ WPlayAsyncMessage::WPlayAsyncMessage(ExtractWPlayAsyncStrategyUPtr strategy)
 
 void WPlayAsyncMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }

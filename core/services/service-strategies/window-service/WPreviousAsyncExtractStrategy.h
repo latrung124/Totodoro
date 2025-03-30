@@ -8,14 +8,19 @@
 #ifndef WPREVIOUS_ASYNC_EXTRACT_STRATEGY_H
 #define WPREVIOUS_ASYNC_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WPreviousAsyncMessage;
 
-class WPreviousAsyncExtractStrategy : public ExtractStrategy<WPreviousAsyncMessage>
+class WPreviousAsyncExtractStrategy : public IStrategy<WPreviousAsyncMessage>
 {
 public:
-	void extract(const WPreviousAsyncMessage &message) override;
+	~WPreviousAsyncExtractStrategy();
+
+	void execute(const WPreviousAsyncMessage &message) override;
+
+private:
+	void extract(const WPreviousAsyncMessage &message);
 };
 
 #endif // WPREVIOUS_ASYNC_EXTRACT_STRATEGY_H

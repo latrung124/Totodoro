@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WPlaybackInfoMessage.h"
 
+WPlaybackInfoExtractStrategy::~WPlaybackInfoExtractStrategy()
+{
+}
+
+void WPlaybackInfoExtractStrategy::execute(const WPlaybackInfoMessage &message)
+{
+	extract(message);
+}
+
 void WPlaybackInfoExtractStrategy::extract(const WPlaybackInfoMessage &message)
 {
 	std::cout << "Extracting playback info message" << std::endl;

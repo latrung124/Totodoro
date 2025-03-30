@@ -99,7 +99,7 @@ set(CORE_SOURCES
     core/contexts/WindowNavigator.cpp)
 
 set(CORE_SERVICE_STRATEGIES
-    core/services/service-strategies/ExtractStrategy.h
+    core/services/service-strategies/IStrategy.h
     core/services/service-strategies/window-service/WMediaInfoExtractStrategy.h
     core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.h
     core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.h

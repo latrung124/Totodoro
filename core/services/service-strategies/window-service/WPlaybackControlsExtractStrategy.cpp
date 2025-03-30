@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WPlaybackControlsMessage.h"
 
+WPlaybackControlsExtractStrategy::~WPlaybackControlsExtractStrategy()
+{
+}
+
+void WPlaybackControlsExtractStrategy::execute(const WPlaybackControlsMessage &message)
+{
+	extract(message);
+}
+
 void WPlaybackControlsExtractStrategy::extract(const WPlaybackControlsMessage &message)
 {
 	std::cout << "Extracting playback controls!" << std::endl;

@@ -9,7 +9,7 @@
 #define W_TIMELINE_PROPERTIES_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
 class WTimelinePropertiesMessage : public ServiceMessage
@@ -17,7 +17,7 @@ class WTimelinePropertiesMessage : public ServiceMessage
 public:
 	using WTimelineProperties = window_services::media::utils::WTimelineProperties;
 	using WTimelinePropertiesExtractStrategyUPtr =
-	    std::unique_ptr<ExtractStrategy<WTimelinePropertiesMessage>>;
+	    std::unique_ptr<IStrategy<WTimelinePropertiesMessage>>;
 
 	WTimelinePropertiesMessage(WTimelinePropertiesExtractStrategyUPtr strategy);
 	~WTimelinePropertiesMessage() = default;

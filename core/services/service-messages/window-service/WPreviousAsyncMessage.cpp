@@ -15,5 +15,5 @@ WPreviousAsyncMessage::WPreviousAsyncMessage(ExtractWPreviousAsyncStrategyUPtr s
 
 void WPreviousAsyncMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }

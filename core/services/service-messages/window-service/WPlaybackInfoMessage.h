@@ -9,14 +9,14 @@
 #define W_PLAYBACK_INFO_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
 class WPlaybackInfoMessage : public ServiceMessage
 {
 public:
 	using WPlaybackInfo = window_services::media::utils::WPlaybackInfo;
-	using ExtractWPlaybackInfoStrategyUPtr = std::unique_ptr<ExtractStrategy<WPlaybackInfoMessage>>;
+	using ExtractWPlaybackInfoStrategyUPtr = std::unique_ptr<IStrategy<WPlaybackInfoMessage>>;
 
 	WPlaybackInfoMessage(ExtractWPlaybackInfoStrategyUPtr strategy);
 	~WPlaybackInfoMessage() = default;

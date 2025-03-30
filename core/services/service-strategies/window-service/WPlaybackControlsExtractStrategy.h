@@ -8,14 +8,19 @@
 #ifndef WPLAYBACK_CONTROLS_EXTRACT_STRATEGY_H
 #define WPLAYBACK_CONTROLS_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WPlaybackControlsMessage;
 
-class WPlaybackControlsExtractStrategy : public ExtractStrategy<WPlaybackControlsMessage>
+class WPlaybackControlsExtractStrategy : public IStrategy<WPlaybackControlsMessage>
 {
 public:
-	void extract(const WPlaybackControlsMessage &message) override;
+	~WPlaybackControlsExtractStrategy();
+
+	void execute(const WPlaybackControlsMessage &message) override;
+
+private:
+	void extract(const WPlaybackControlsMessage &message);
 };
 
 #endif // WPLAYBACK_CONTROLS_EXTRACT_STRATEGY_H

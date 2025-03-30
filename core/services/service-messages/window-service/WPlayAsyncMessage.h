@@ -9,12 +9,12 @@
 #define W_PLAY_ASYNC_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WPlayAsyncMessage : public ServiceMessage
 {
 public:
-	using ExtractWPlayAsyncStrategyUPtr = std::unique_ptr<ExtractStrategy<WPlayAsyncMessage>>;
+	using ExtractWPlayAsyncStrategyUPtr = std::unique_ptr<IStrategy<WPlayAsyncMessage>>;
 
 	WPlayAsyncMessage(ExtractWPlayAsyncStrategyUPtr strategy);
 	~WPlayAsyncMessage() = default;

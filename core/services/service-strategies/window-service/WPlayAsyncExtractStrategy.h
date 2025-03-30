@@ -8,14 +8,19 @@
 #ifndef WPLAY_ASYNC_EXTRACT_STRATEGY_H
 #define WPLAY_ASYNC_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WPlayAsyncMessage;
 
-class WPlayAsyncExtractStrategy : public ExtractStrategy<WPlayAsyncMessage>
+class WPlayAsyncExtractStrategy : public IStrategy<WPlayAsyncMessage>
 {
 public:
-	void extract(const WPlayAsyncMessage &message) override;
+	~WPlayAsyncExtractStrategy();
+
+	void execute(const WPlayAsyncMessage &message) override;
+
+private:
+	void extract(const WPlayAsyncMessage &message);
 };
 
 #endif // WPLAY_ASYNC_EXTRACT_STRATEGY_H

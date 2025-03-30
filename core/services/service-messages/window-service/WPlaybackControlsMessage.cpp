@@ -31,5 +31,5 @@ WPlaybackControls WPlaybackControlsMessage::getWPlaybackControls() const
 
 void WPlaybackControlsMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }

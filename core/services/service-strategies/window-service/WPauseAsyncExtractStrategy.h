@@ -8,14 +8,19 @@
 #ifndef WPAUSE_ASYNC_EXTRACT_STRATEGY_H
 #define WPAUSE_ASYNC_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WPauseAsyncMessage;
 
-class WPauseAsyncExtractStrategy : public ExtractStrategy<WPauseAsyncMessage>
+class WPauseAsyncExtractStrategy : public IStrategy<WPauseAsyncMessage>
 {
 public:
-	void extract(const WPauseAsyncMessage &message) override;
+	~WPauseAsyncExtractStrategy();
+
+	void execute(const WPauseAsyncMessage &message) override;
+
+private:
+	void extract(const WPauseAsyncMessage &message);
 };
 
 #endif // WPAUSE_ASYNC_EXTRACT_STRATEGY_H

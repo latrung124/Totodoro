@@ -29,5 +29,5 @@ WMediaInfo WMediaInfoMessage::getMediaInfo() const
 
 void WMediaInfoMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }

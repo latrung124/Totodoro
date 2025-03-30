@@ -8,14 +8,19 @@
 #ifndef WPLAYBACK_INFO_EXTRACT_STRATEGY_H
 #define WPLAYBACK_INFO_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WPlaybackInfoMessage;
 
-class WPlaybackInfoExtractStrategy : public ExtractStrategy<WPlaybackInfoMessage>
+class WPlaybackInfoExtractStrategy : public IStrategy<WPlaybackInfoMessage>
 {
 public:
-	void extract(const WPlaybackInfoMessage &message) override;
+	~WPlaybackInfoExtractStrategy();
+
+	void execute(const WPlaybackInfoMessage &message) override;
+
+private:
+	void extract(const WPlaybackInfoMessage &message);
 };
 
 #endif // WPLAYBACK_INFO_EXTRACT_STRATEGY_H

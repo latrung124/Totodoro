@@ -32,5 +32,5 @@ WTimelineProperties WTimelinePropertiesMessage::getTimelineProperties() const
 
 void WTimelinePropertiesMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }

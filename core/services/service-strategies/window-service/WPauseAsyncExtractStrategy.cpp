@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WPauseAsyncMessage.h"
 
+WPauseAsyncExtractStrategy::~WPauseAsyncExtractStrategy()
+{
+}
+
+void WPauseAsyncExtractStrategy::execute(const WPauseAsyncMessage &message)
+{
+	extract(message);
+}
+
 void WPauseAsyncExtractStrategy::extract(const WPauseAsyncMessage &message)
 {
 	std::cout << "Extracting pause async message" << std::endl;

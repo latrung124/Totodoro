@@ -8,14 +8,18 @@
 #ifndef WMEDIA_INFO_EXTRACT_STRATEGY_H
 #define WMEDIA_INFO_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WMediaInfoMessage;
 
-class WMediaInfoExtractStrategy : public ExtractStrategy<WMediaInfoMessage>
+class WMediaInfoExtractStrategy : public IStrategy<WMediaInfoMessage>
 {
 public:
-	void extract(const WMediaInfoMessage &message) override;
+	~WMediaInfoExtractStrategy();
+	void execute(const WMediaInfoMessage &message) override;
+
+private:
+	void extract(const WMediaInfoMessage &message);
 };
 
 #endif // WMEDIA_INFO_EXTRACT_STRATEGY_H

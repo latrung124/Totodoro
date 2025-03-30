@@ -9,7 +9,7 @@
 #define W_PLAYBACK_CONTROLS_MESSAGE_H
 
 #include "core/services/service-messages/ServiceMessage.h"
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
 class WPlaybackControlsMessage : public ServiceMessage
@@ -17,7 +17,7 @@ class WPlaybackControlsMessage : public ServiceMessage
 public:
 	using WPlaybackControls = window_services::media::utils::WPlaybackControls;
 	using ExtractWPlaybackControlsStrategyUPtr =
-	    std::unique_ptr<ExtractStrategy<WPlaybackControlsMessage>>;
+	    std::unique_ptr<IStrategy<WPlaybackControlsMessage>>;
 
 	WPlaybackControlsMessage(ExtractWPlaybackControlsStrategyUPtr strategy);
 	~WPlaybackControlsMessage() = default;

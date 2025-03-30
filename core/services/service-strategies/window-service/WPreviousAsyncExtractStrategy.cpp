@@ -11,6 +11,15 @@
 
 #include "core/services/service-messages/window-service/WPreviousAsyncMessage.h"
 
+WPreviousAsyncExtractStrategy::~WPreviousAsyncExtractStrategy()
+{
+}
+
+void WPreviousAsyncExtractStrategy::execute(const WPreviousAsyncMessage &message)
+{
+	extract(message);
+}
+
 void WPreviousAsyncExtractStrategy::extract(const WPreviousAsyncMessage &message)
 {
 	std::cout << "Extracting previous async message" << std::endl;

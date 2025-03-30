@@ -31,5 +31,5 @@ WPlaybackInfo WPlaybackInfoMessage::getWPlaybackInfo() const
 
 void WPlaybackInfoMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }

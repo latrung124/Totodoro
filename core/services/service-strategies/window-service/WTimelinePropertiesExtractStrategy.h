@@ -8,14 +8,19 @@
 #ifndef WTIMELINE_PROPERTIES_EXTRACT_STRATEGY_H
 #define WTIMELINE_PROPERTIES_EXTRACT_STRATEGY_H
 
-#include "core/services/service-strategies/ExtractStrategy.h"
+#include "core/services/service-strategies/IStrategy.h"
 
 class WTimelinePropertiesMessage;
 
-class WTimelinePropertiesExtractStrategy : public ExtractStrategy<WTimelinePropertiesMessage>
+class WTimelinePropertiesExtractStrategy : public IStrategy<WTimelinePropertiesMessage>
 {
 public:
-	void extract(const WTimelinePropertiesMessage &message) override;
+	~WTimelinePropertiesExtractStrategy();
+
+	void execute(const WTimelinePropertiesMessage &message) override;
+
+private:
+	void extract(const WTimelinePropertiesMessage &message);
 };
 
 #endif // WTIMELINE_PROPERTIES_EXTRACT_STRATEGY_H

@@ -15,5 +15,5 @@ WPauseAsyncMessage::WPauseAsyncMessage(ExtractWPauseAsyncStrategyUPtr strategy)
 
 void WPauseAsyncMessage::extract()
 {
-	m_strategy->extract(*this);
+	m_strategy->execute(*this);
 }
