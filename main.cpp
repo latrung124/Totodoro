@@ -5,18 +5,18 @@ File: main.cpp
 * Description: This file contains the main function of the application.
 */
 
-#include "core/services/service-listeners/WMediaServiceListener.h"
+#include "core/services/listeners/WMediaServiceListener.h"
 
 // TODO: move out of main
-#include "core/services/service-producer/ServiceMessageProducer.h"
-#include "core/services/service-producer/window-service/WMediaInfoMessageCreator.h"
-#include "core/services/service-producer/window-service/WNextAsyncMessageCreator.h"
-#include "core/services/service-producer/window-service/WPauseAsyncMessageCreator.h"
-#include "core/services/service-producer/window-service/WPlayAsyncMessageCreator.h"
-#include "core/services/service-producer/window-service/WPlaybackControlsMessageCreator.h"
-#include "core/services/service-producer/window-service/WPlaybackInfoMessageCreator.h"
-#include "core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h"
-#include "core/services/service-producer/window-service/WTimelinePropertiesMessageCreator.h"
+#include "core/services/producer/ServiceMessageProducer.h"
+#include "core/services/producer/window-service/WMediaInfoMessageCreator.h"
+#include "core/services/producer/window-service/WNextAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPauseAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPlayAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPlaybackControlsMessageCreator.h"
+#include "core/services/producer/window-service/WPlaybackInfoMessageCreator.h"
+#include "core/services/producer/window-service/WPreviousAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WTimelinePropertiesMessageCreator.h"
 
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>

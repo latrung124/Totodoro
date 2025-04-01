@@ -64,79 +64,78 @@ set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h
     core/services/ServiceManager.h
     core/GuiApplication.h
-    core/services/service-listeners/WMediaServiceListener.h
-    core/services/service-consumer/ServiceConsumer.h
-    core/services/service-consumer/ServiceMessageConsumer.h
-    core/services/service-producer/ServiceProducer.h
-    core/services/service-producer/ServiceMessageProducer.h
-    core/services/service-producer/ServiceMessageCreator.h
-    core/services/service-producer/window-service/WMediaInfoMessageCreator.h
-    core/services/service-producer/window-service/WPlaybackControlsMessageCreator.h
-    core/services/service-producer/window-service/WPlaybackInfoMessageCreator.h
-    core/services/service-producer/window-service/WTimelinePropertiesMessageCreator.h
-    core/services/service-producer/window-service/WPlayAsyncMessageCreator.h
-    core/services/service-producer/window-service/WPauseAsyncMessageCreator.h
-    core/services/service-producer/window-service/WPreviousAsyncMessageCreator.h
-    core/services/service-producer/window-service/WNextAsyncMessageCreator.h
-    core/services/service-queue/MessageQueue.h
-    core/services/service-queue/ServiceMessageQueue.h
+    core/services/listeners/WMediaServiceListener.h
+    core/services/consumer/ServiceConsumer.h
+    core/services/consumer/ServiceMessageConsumer.h
+    core/services/producer/ServiceProducer.h
+    core/services/producer/ServiceMessageProducer.h
+    core/services/producer/ServiceMessageCreator.h
+    core/services/producer/window-service/WMediaInfoMessageCreator.h
+    core/services/producer/window-service/WPlaybackControlsMessageCreator.h
+    core/services/producer/window-service/WPlaybackInfoMessageCreator.h
+    core/services/producer/window-service/WTimelinePropertiesMessageCreator.h
+    core/services/producer/window-service/WPlayAsyncMessageCreator.h
+    core/services/producer/window-service/WPauseAsyncMessageCreator.h
+    core/services/producer/window-service/WPreviousAsyncMessageCreator.h
+    core/services/producer/window-service/WNextAsyncMessageCreator.h
+    core/services/queue/MessageQueue.h
+    core/services/queue/ServiceMessageQueue.h
     core/contexts/Context.h
     core/contexts/WindowNavigator.h
     core/GuiApplication.cpp
-    core/services/service-consumer/ServiceMessageConsumer.cpp
-    core/services/service-producer/ServiceMessageProducer.cpp
-    core/services/service-producer/window-service/WMediaInfoMessageCreator.cpp
-    core/services/service-producer/window-service/WPlaybackControlsMessageCreator.cpp
-    core/services/service-producer/window-service/WPlaybackInfoMessageCreator.cpp
-    core/services/service-producer/window-service/WTimelinePropertiesMessageCreator.cpp
-    core/services/service-producer/window-service/WPlayAsyncMessageCreator.cpp
-    core/services/service-producer/window-service/WPauseAsyncMessageCreator.cpp
-    core/services/service-producer/window-service/WPreviousAsyncMessageCreator.cpp
-    core/services/service-producer/window-service/WNextAsyncMessageCreator.cpp
-    core/services/service-listeners/WMediaServiceListener.cpp
-    core/services/service-queue/ServiceMessageQueue.cpp
+    core/services/consumer/ServiceMessageConsumer.cpp
+    core/services/producer/ServiceMessageProducer.cpp
+    core/services/producer/window-service/WMediaInfoMessageCreator.cpp
+    core/services/producer/window-service/WPlaybackControlsMessageCreator.cpp
+    core/services/producer/window-service/WPlaybackInfoMessageCreator.cpp
+    core/services/producer/window-service/WTimelinePropertiesMessageCreator.cpp
+    core/services/producer/window-service/WPlayAsyncMessageCreator.cpp
+    core/services/producer/window-service/WPauseAsyncMessageCreator.cpp
+    core/services/producer/window-service/WPreviousAsyncMessageCreator.cpp
+    core/services/producer/window-service/WNextAsyncMessageCreator.cpp
+    core/services/listeners/WMediaServiceListener.cpp
+    core/services/queue/ServiceMessageQueue.cpp
     core/services/ServiceManager.cpp
     core/contexts/WindowNavigator.cpp)
 
 set(CORE_SERVICE_STRATEGIES
-    core/services/service-strategies/IStrategy.h
-    core/services/service-strategies/window-service/WMediaInfoExtractStrategy.h
-    core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.h
-    core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.h
-    core/services/service-strategies/window-service/WTimelinePropertiesExtractStrategy.h
-    core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WNextAsyncExtractStrategy.h
-    core/services/service-strategies/window-service/WMediaInfoExtractStrategy.cpp
-    core/services/service-strategies/window-service/WPlaybackControlsExtractStrategy.cpp
-    core/services/service-strategies/window-service/WPlaybackInfoExtractStrategy.cpp
-    core/services/service-strategies/window-service/WTimelinePropertiesExtractStrategy.cpp
-    core/services/service-strategies/window-service/WPlayAsyncExtractStrategy.cpp
-    core/services/service-strategies/window-service/WPauseAsyncExtractStrategy.cpp
-    core/services/service-strategies/window-service/WPreviousAsyncExtractStrategy.cpp
-    core/services/service-strategies/window-service/WNextAsyncExtractStrategy.cpp
-)
+    core/services/strategies/IStrategy.h
+    core/services/strategies/window-service/WMediaInfoExtractStrategy.h
+    core/services/strategies/window-service/WPlaybackControlsExtractStrategy.h
+    core/services/strategies/window-service/WPlaybackInfoExtractStrategy.h
+    core/services/strategies/window-service/WTimelinePropertiesExtractStrategy.h
+    core/services/strategies/window-service/WPlayAsyncExtractStrategy.h
+    core/services/strategies/window-service/WPauseAsyncExtractStrategy.h
+    core/services/strategies/window-service/WPreviousAsyncExtractStrategy.h
+    core/services/strategies/window-service/WNextAsyncExtractStrategy.h
+    core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
+    core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
+    core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
+    core/services/strategies/window-service/WTimelinePropertiesExtractStrategy.cpp
+    core/services/strategies/window-service/WPlayAsyncExtractStrategy.cpp
+    core/services/strategies/window-service/WPauseAsyncExtractStrategy.cpp
+    core/services/strategies/window-service/WPreviousAsyncExtractStrategy.cpp
+    core/services/strategies/window-service/WNextAsyncExtractStrategy.cpp)
 
 set(CORE_SERVICE_MSG_SOURCES
-    core/services/service-messages/ServiceMessage.h
-    core/services/service-messages/ServiceMessageId.h
-    core/services/service-messages/window-service/WMediaInfoMessage.h
-    core/services/service-messages/window-service/WPlaybackControlsMessage.h
-    core/services/service-messages/window-service/WPlaybackInfoMessage.h
-    core/services/service-messages/window-service/WTimelinePropertiesMessage.h
-    core/services/service-messages/window-service/WPlayAsyncMessage.h
-    core/services/service-messages/window-service/WPauseAsyncMessage.h
-    core/services/service-messages/window-service/WPreviousAsyncMessage.h
-    core/services/service-messages/window-service/WNextAsyncMessage.h
-    core/services/service-messages/window-service/WMediaInfoMessage.cpp
-    core/services/service-messages/window-service/WPlaybackControlsMessage.cpp
-    core/services/service-messages/window-service/WPlaybackInfoMessage.cpp
-    core/services/service-messages/window-service/WTimelinePropertiesMessage.cpp
-    core/services/service-messages/window-service/WPlayAsyncMessage.cpp
-    core/services/service-messages/window-service/WPauseAsyncMessage.cpp
-    core/services/service-messages/window-service/WPreviousAsyncMessage.cpp
-    core/services/service-messages/window-service/WNextAsyncMessage.cpp)
+    core/services/messages/ServiceMessage.h
+    core/services/messages/ServiceMessageId.h
+    core/services/messages/window-service/WMediaInfoMessage.h
+    core/services/messages/window-service/WPlaybackControlsMessage.h
+    core/services/messages/window-service/WPlaybackInfoMessage.h
+    core/services/messages/window-service/WTimelinePropertiesMessage.h
+    core/services/messages/window-service/WPlayAsyncMessage.h
+    core/services/messages/window-service/WPauseAsyncMessage.h
+    core/services/messages/window-service/WPreviousAsyncMessage.h
+    core/services/messages/window-service/WNextAsyncMessage.h
+    core/services/messages/window-service/WMediaInfoMessage.cpp
+    core/services/messages/window-service/WPlaybackControlsMessage.cpp
+    core/services/messages/window-service/WPlaybackInfoMessage.cpp
+    core/services/messages/window-service/WTimelinePropertiesMessage.cpp
+    core/services/messages/window-service/WPlayAsyncMessage.cpp
+    core/services/messages/window-service/WPauseAsyncMessage.cpp
+    core/services/messages/window-service/WPreviousAsyncMessage.cpp
+    core/services/messages/window-service/WNextAsyncMessage.cpp)
 
 qt_add_executable(
   appTotodoro

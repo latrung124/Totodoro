@@ -17,7 +17,7 @@
 
 #include "core/contexts/WindowNavigator.h"
 
-#include "core/services/service-queue/ServiceMessageQueue.h"
+#include "core/services/queue/ServiceMessageQueue.h"
 
 GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     : QObject(parent)

@@ -7,12 +7,12 @@
 
 #include "MediaPlaybackViewModel.h"
 
-#include "core/services/service-messages/window-service/WNextAsyncMessage.h"
-#include "core/services/service-messages/window-service/WPauseAsyncMessage.h"
-#include "core/services/service-messages/window-service/WPlayAsyncMessage.h"
-#include "core/services/service-messages/window-service/WPreviousAsyncMessage.h"
-#include "core/services/service-producer/ServiceMessageProducer.h"
-#include "core/services/service-queue/ServiceMessageQueue.h"
+#include "core/services/messages/window-service/WNextAsyncMessage.h"
+#include "core/services/messages/window-service/WPauseAsyncMessage.h"
+#include "core/services/messages/window-service/WPlayAsyncMessage.h"
+#include "core/services/messages/window-service/WPreviousAsyncMessage.h"
+#include "core/services/producer/ServiceMessageProducer.h"
+#include "core/services/queue/ServiceMessageQueue.h"
 
 namespace {
 using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
