@@ -8,7 +8,7 @@
 #include "core/services/messages/window-service/WPlayAsyncMessage.h"
 
 WPlayAsyncMessage::WPlayAsyncMessage(ExtractWPlayAsyncStrategyUPtr strategy)
-    : ServiceMessage(ServiceMessageId::WPlayAsyncMessage)
+    : Message(MessageId::WPlayAsyncMessage)
     , m_strategy(std::move(strategy))
 {
 }

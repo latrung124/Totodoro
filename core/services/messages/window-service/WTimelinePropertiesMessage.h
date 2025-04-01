@@ -8,11 +8,11 @@
 #ifndef W_TIMELINE_PROPERTIES_MESSAGE_H
 #define W_TIMELINE_PROPERTIES_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
-class WTimelinePropertiesMessage : public ServiceMessage
+class WTimelinePropertiesMessage : public Message
 {
 public:
 	using WTimelineProperties = window_services::media::utils::WTimelineProperties;

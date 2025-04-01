@@ -17,10 +17,10 @@
 
 /**
  * @class ServiceMessageProducer
- * @brief A modern factory pattern-based class for creating `ServiceMessage` instances.
+ * @brief A modern factory pattern-based class for creating `Message` instances.
  *
  * This class follows the factory pattern to dynamically register and create
- * `ServiceMessage` instances using registered creator types. It ensures that
+ * `Message` instances using registered creator types. It ensures that
  * each registered creator is associated with a specific type using `std::type_index`.
  *
  * @note This class is implemented as a singleton.
@@ -28,7 +28,7 @@
 class ServiceMessageProducer
 {
 public:
-	using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
+	using ServiceMessageUPtr = std::unique_ptr<Message>;
 
 	/**
 	 * @brief Gets the singleton instance of the `ServiceMessageProducer` class.
@@ -41,7 +41,7 @@ public:
 	virtual ~ServiceMessageProducer() = default;
 
 	/**
-	 * @brief Registers a creator type for producing ServiceMessage instances.
+	 * @brief Registers a creator type for producing Message instances.
 	 *
 	 * This function stores a lambda function that creates an instance of
 	 * `CreatorType` and associates it with the type information of `CreatorType`.
@@ -58,17 +58,17 @@ public:
 	}
 
 	/**
-	 * @brief Produces a `ServiceMessage` instance using the registered creator type.
+	 * @brief Produces a `Message` instance using the registered creator type.
 	 *
 	 * This function searches for a registered creator associated with `CreatorType`.
 	 * If found, it calls the stored creator function to generate a new instance.
 	 *
-	 * @tparam CreatorType The type of the creator class used to produce the `ServiceMessage`.
-	 * @return std::unique_ptr<ServiceMessage> A unique pointer to the created `ServiceMessage`
+	 * @tparam CreatorType The type of the creator class used to produce the `Message`.
+	 * @return std::unique_ptr<Message> A unique pointer to the created `Message`
 	 *         instance, or `nullptr` if no matching creator is found.
 	 */
 	template<typename CreatorType>
-	[[nodiscard]] std::unique_ptr<ServiceMessage> produce() const
+	[[nodiscard]] std::unique_ptr<Message> produce() const
 	{
 		std::type_index type = std::type_index(typeid(CreatorType));
 		const auto &it = m_creators.find(type);

@@ -8,7 +8,7 @@
 #include "core/services/messages/window-service/WNextAsyncMessage.h"
 
 WNextAsyncMessage::WNextAsyncMessage(ExtractWNextAsyncStrategyUPtr strategy)
-    : ServiceMessage(ServiceMessageId::WNextAsyncMessage)
+    : Message(MessageId::WNextAsyncMessage)
     , m_strategy(std::move(strategy))
 {
 }

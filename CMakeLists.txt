@@ -79,7 +79,6 @@ set(CORE_SOURCES
     core/services/producer/window-service/WPreviousAsyncMessageCreator.h
     core/services/producer/window-service/WNextAsyncMessageCreator.h
     core/services/queue/MessageQueue.h
-    core/services/queue/ServiceMessageQueue.h
     core/contexts/Context.h
     core/contexts/WindowNavigator.h
     core/GuiApplication.cpp
@@ -94,7 +93,7 @@ set(CORE_SOURCES
     core/services/producer/window-service/WPreviousAsyncMessageCreator.cpp
     core/services/producer/window-service/WNextAsyncMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
-    core/services/queue/ServiceMessageQueue.cpp
+    core/services/queue/MessageQueue.cpp
     core/services/ServiceManager.cpp
     core/contexts/WindowNavigator.cpp)
 
@@ -118,8 +117,8 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WNextAsyncExtractStrategy.cpp)
 
 set(CORE_SERVICE_MSG_SOURCES
-    core/services/messages/ServiceMessage.h
-    core/services/messages/ServiceMessageId.h
+    core/services/messages/Message.h
+    core/services/messages/MessageId.h
     core/services/messages/window-service/WMediaInfoMessage.h
     core/services/messages/window-service/WPlaybackControlsMessage.h
     core/services/messages/window-service/WPlaybackInfoMessage.h

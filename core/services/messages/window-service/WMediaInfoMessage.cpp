@@ -12,7 +12,7 @@ using namespace window_services::media::utils;
 }
 
 WMediaInfoMessage::WMediaInfoMessage(ExtractWMediaInfoStrategyUPtr strategy)
-    : ServiceMessage(ServiceMessageId::WMediaInfoMessage)
+    : Message(MessageId::WMediaInfoMessage)
     , m_strategy(std::move(strategy))
 {
 }

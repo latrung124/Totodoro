@@ -14,7 +14,7 @@ using namespace window_services::media::utils;
 }
 
 WPlaybackInfoMessage::WPlaybackInfoMessage(ExtractWPlaybackInfoStrategyUPtr strategy)
-    : ServiceMessage(ServiceMessageId::WPlaybackInfoMessage)
+    : Message(MessageId::WPlaybackInfoMessage)
     , m_strategy(std::move(strategy))
 {
 }

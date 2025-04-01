@@ -15,7 +15,7 @@ using namespace window_services::media::utils;
 
 WTimelinePropertiesMessage::WTimelinePropertiesMessage(
     WTimelinePropertiesExtractStrategyUPtr strategy)
-    : ServiceMessage(ServiceMessageId::WTimelinePropertiesMessage)
+    : Message(MessageId::WTimelinePropertiesMessage)
     , m_strategy(std::move(strategy))
 {
 }

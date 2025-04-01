@@ -12,13 +12,13 @@
 #include "core/services/messages/window-service/WPlaybackInfoMessage.h"
 #include "core/services/messages/window-service/WTimelinePropertiesMessage.h"
 #include "core/services/producer/ServiceMessageProducer.h"
-#include "core/services/queue/ServiceMessageQueue.h"
+#include "core/services/queue/MessageQueue.h"
 
 void WMediaServiceListener::onMediaInfoChanged(const WMediaInfo &mediaInfo)
 {
 	auto message = ServiceMessageProducer::getInstance().produce<WMediaInfoMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }
 
@@ -26,7 +26,7 @@ void WMediaServiceListener::onPlaybackControlsChanged(const WPlaybackControls &p
 {
 	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackControls>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }
 
@@ -34,7 +34,7 @@ void WMediaServiceListener::onPlaybackStatusChanged(const WPlaybackInfo &playbac
 {
 	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackInfoMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }
 
@@ -43,6 +43,6 @@ void WMediaServiceListener::onTimelinePropertiesChanged(
 {
 	auto message = ServiceMessageProducer::getInstance().produce<WTimelinePropertiesMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }

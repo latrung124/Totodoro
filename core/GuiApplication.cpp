@@ -17,7 +17,7 @@
 
 #include "core/contexts/WindowNavigator.h"
 
-#include "core/services/queue/ServiceMessageQueue.h"
+#include "core/services/queue/MessageQueue.h"
 
 GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     : QObject(parent)
@@ -31,7 +31,7 @@ GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
 
 GuiApplication::~GuiApplication()
 {
-	ServiceMessageQueue::getInstance().stop();
+	MessageQueue::getInstance().stop();
 	endConnections();
 }
 
@@ -57,7 +57,7 @@ void GuiApplication::endConnections()
 
 void GuiApplication::start()
 {
-	ServiceMessageQueue::getInstance().start();
+	MessageQueue::getInstance().start();
 
 	m_engine->rootContext()->setContextProperty(
 	    "navigator", qobject_cast<WindowNavigator *>(m_windowNavigator.get()));
@@ -67,5 +67,5 @@ void GuiApplication::start()
 
 void GuiApplication::end()
 {
-	ServiceMessageQueue::getInstance().stop();
+	MessageQueue::getInstance().stop();
 }

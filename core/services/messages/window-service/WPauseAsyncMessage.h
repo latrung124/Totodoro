@@ -8,10 +8,10 @@
 #ifndef W_PAUSE_ASYNC_MESSAGE_H
 #define W_PAUSE_ASYNC_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 
-class WPauseAsyncMessage : public ServiceMessage
+class WPauseAsyncMessage : public Message
 {
 public:
 	using ExtractWPauseAsyncStrategyUPtr = std::unique_ptr<IStrategy<WPauseAsyncMessage>>;

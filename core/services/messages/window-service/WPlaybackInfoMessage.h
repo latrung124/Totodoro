@@ -8,11 +8,11 @@
 #ifndef W_PLAYBACK_INFO_MESSAGE_H
 #define W_PLAYBACK_INFO_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
-class WPlaybackInfoMessage : public ServiceMessage
+class WPlaybackInfoMessage : public Message
 {
 public:
 	using WPlaybackInfo = window_services::media::utils::WPlaybackInfo;

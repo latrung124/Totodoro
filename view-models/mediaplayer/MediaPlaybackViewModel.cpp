@@ -12,10 +12,10 @@
 #include "core/services/messages/window-service/WPlayAsyncMessage.h"
 #include "core/services/messages/window-service/WPreviousAsyncMessage.h"
 #include "core/services/producer/ServiceMessageProducer.h"
-#include "core/services/queue/ServiceMessageQueue.h"
+#include "core/services/queue/MessageQueue.h"
 
 namespace {
-using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
+using ServiceMessageUPtr = std::unique_ptr<Message>;
 }
 
 MediaPlaybackViewModel::MediaPlaybackViewModel(QObject *parent)
@@ -96,7 +96,7 @@ void MediaPlaybackViewModel::play()
 {
 	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPlayAsyncMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }
 
@@ -104,7 +104,7 @@ void MediaPlaybackViewModel::pause()
 {
 	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPauseAsyncMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }
 
@@ -112,7 +112,7 @@ void MediaPlaybackViewModel::next()
 {
 	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WNextAsyncMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }
 
@@ -121,6 +121,6 @@ void MediaPlaybackViewModel::previous()
 	ServiceMessageUPtr message =
 	    ServiceMessageProducer::getInstance().produce<WPreviousAsyncMessage>();
 	if (message) {
-		ServiceMessageQueue::getInstance().push(std::move(message));
+		MessageQueue::getInstance().push(std::move(message));
 	}
 }

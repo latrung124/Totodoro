@@ -8,10 +8,10 @@
 #ifndef WPREVIOUS_ASYNC_MESSAGE_H
 #define WPREVIOUS_ASYNC_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 
-class WPreviousAsyncMessage : public ServiceMessage
+class WPreviousAsyncMessage : public Message
 {
 public:
 	using ExtractWPreviousAsyncStrategyUPtr = std::unique_ptr<IStrategy<WPreviousAsyncMessage>>;

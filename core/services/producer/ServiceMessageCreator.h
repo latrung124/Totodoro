@@ -8,7 +8,7 @@
 #ifndef SERVICE_MESSAGE_CREATOR_H
 #define SERVICE_MESSAGE_CREATOR_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 
 class ServiceMessageCreator
 {

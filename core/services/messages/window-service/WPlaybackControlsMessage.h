@@ -8,11 +8,11 @@
 #ifndef W_PLAYBACK_CONTROLS_MESSAGE_H
 #define W_PLAYBACK_CONTROLS_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
-class WPlaybackControlsMessage : public ServiceMessage
+class WPlaybackControlsMessage : public Message
 {
 public:
 	using WPlaybackControls = window_services::media::utils::WPlaybackControls;

@@ -1,5 +1,5 @@
 /*
- * File: ServiceMessageId.h
+ * File: MessageId.h
  * Author: trung.la
  * Date: 02-09-2025
  * Description: Implementation for Service Message Id
@@ -11,7 +11,7 @@
 #include <cstdint>
 
 // TODO: remove this enum
-enum class ServiceMessageId : uint16_t
+enum class MessageId : uint16_t
 {
 	None = 0,
 	WMediaInfoMessage = 1,

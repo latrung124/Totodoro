@@ -8,10 +8,10 @@
 #ifndef W_PLAY_ASYNC_MESSAGE_H
 #define W_PLAY_ASYNC_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 
-class WPlayAsyncMessage : public ServiceMessage
+class WPlayAsyncMessage : public Message
 {
 public:
 	using ExtractWPlayAsyncStrategyUPtr = std::unique_ptr<IStrategy<WPlayAsyncMessage>>;

@@ -9,17 +9,17 @@ File: ServiceMessageConsumer.h
 #define SERVICE_MESSAGE_CONSUMER_H
 
 #include "core/services/consumer/ServiceConsumer.h"
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 
 #include <map>
 #include <memory>
 
-class ServiceMessage;
+class Message;
 
 class ServiceMessageConsumer : public ServiceConsumer
 {
 public:
-	using ServiceMessageUPtr = std::unique_ptr<ServiceMessage>;
+	using ServiceMessageUPtr = std::unique_ptr<Message>;
 
 	static ServiceMessageConsumer &getInstance();
 	virtual ~ServiceMessageConsumer();

@@ -8,11 +8,11 @@
 #ifndef W_MEDIA_INFO_MESSAGE_H
 #define W_MEDIA_INFO_MESSAGE_H
 
-#include "core/services/messages/ServiceMessage.h"
+#include "core/services/messages/Message.h"
 #include "core/services/strategies/IStrategy.h"
 #include <WMediaServiceUtils.h>
 
-class WMediaInfoMessage : public ServiceMessage
+class WMediaInfoMessage : public Message
 {
 public:
 	using WMediaInfo = window_services::media::utils::WMediaInfo;

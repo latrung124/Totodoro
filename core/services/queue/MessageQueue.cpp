@@ -1,56 +1,56 @@
 /*
- * File: ServiceMessageQueue.cpp
+ * File: MessageQueue.cpp
  * Author: trung.la
  * Date: 02-10-2025
- * Description: This file contains the implementation of the ServiceMessageQueue class.
+ * Description: This file contains the implementation of the MessageQueue class.
  */
 
-#include "ServiceMessageQueue.h"
+#include "MessageQueue.h"
 
 #include "core/services/consumer/ServiceMessageConsumer.h"
 
 #include "utils/ThreadGuard.h"
 
-ServiceMessageQueue &ServiceMessageQueue::getInstance()
+MessageQueue &MessageQueue::getInstance()
 {
-	static ServiceMessageQueue instance;
+	static MessageQueue instance;
 	return instance;
 }
 
-ServiceMessageQueue::ServiceMessageQueue()
+MessageQueue::MessageQueue()
 {
 }
 
-ServiceMessageQueue::~ServiceMessageQueue()
+MessageQueue::~MessageQueue()
 {
 }
 
-void ServiceMessageQueue::start()
+void MessageQueue::start()
 {
 	m_stopFlag.store(false);
-	m_looper = std::thread(&ServiceMessageQueue::loop, this);
+	m_looper = std::thread(&MessageQueue::loop, this);
 }
 
-void ServiceMessageQueue::stop()
+void MessageQueue::stop()
 {
 	m_stopFlag.store(true);
 	m_conditionVariable.notify_one();
 	utils::ThreadGuard guard(m_looper);
 }
 
-bool ServiceMessageQueue::canConsume()
+bool MessageQueue::canConsume()
 {
 	return m_stopFlag.load() || !m_messageQueue.empty();
 }
 
-void ServiceMessageQueue::push(ServiceMessageUPtr message)
+void MessageQueue::push(ServiceMessageUPtr message)
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
 	m_messageQueue.push(std::move(message));
 	m_conditionVariable.notify_one();
 }
 
-void ServiceMessageQueue::loop()
+void MessageQueue::loop()
 {
 	while (true) {
 		std::unique_lock<std::mutex> lock(m_mutex);
