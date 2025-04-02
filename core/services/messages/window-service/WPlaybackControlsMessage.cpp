@@ -29,7 +29,7 @@ WPlaybackControls WPlaybackControlsMessage::getWPlaybackControls() const
 	return m_wPlaybackControls;
 }
 
-void WPlaybackControlsMessage::extract()
+void WPlaybackControlsMessage::execute()
 {
 	m_strategy->execute(*this);
 }

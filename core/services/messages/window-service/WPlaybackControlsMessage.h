@@ -25,7 +25,7 @@ public:
 	void setWPlaybackControls(const WPlaybackControls &wPlaybackControls);
 	WPlaybackControls getWPlaybackControls() const;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	WPlaybackControls m_wPlaybackControls;

@@ -25,7 +25,7 @@ public:
 	void setTimelineProperties(const WTimelineProperties &timelineProperties);
 	WTimelineProperties getTimelineProperties() const;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	WTimelineProperties m_timelineProperties;

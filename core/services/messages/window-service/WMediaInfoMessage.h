@@ -24,7 +24,7 @@ public:
 	void setMediaInfo(const WMediaInfo &mediaInfo);
 	WMediaInfo getMediaInfo() const;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	WMediaInfo m_mediaInfo;

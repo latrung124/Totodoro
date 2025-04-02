@@ -13,7 +13,7 @@ WPreviousAsyncMessage::WPreviousAsyncMessage(ExtractWPreviousAsyncStrategyUPtr s
 {
 }
 
-void WPreviousAsyncMessage::extract()
+void WPreviousAsyncMessage::execute()
 {
 	m_strategy->execute(*this);
 }

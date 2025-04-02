@@ -29,7 +29,7 @@ WPlaybackInfo WPlaybackInfoMessage::getWPlaybackInfo() const
 	return m_wPlaybackInfo;
 }
 
-void WPlaybackInfoMessage::extract()
+void WPlaybackInfoMessage::execute()
 {
 	m_strategy->execute(*this);
 }

@@ -7,8 +7,6 @@
 
 #include "ServiceMessageConsumer.h"
 
-#include "core/services/messages/window-service/WMediaInfoMessage.h"
-
 ServiceMessageConsumer &ServiceMessageConsumer::getInstance()
 {
 	static ServiceMessageConsumer instance;
@@ -25,5 +23,5 @@ void ServiceMessageConsumer::consumeMessage(ServiceMessageUPtr message)
 		return;
 	}
 
-	message->extract();
+	message->execute();
 }

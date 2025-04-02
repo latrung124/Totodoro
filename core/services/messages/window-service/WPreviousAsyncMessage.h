@@ -19,7 +19,7 @@ public:
 	WPreviousAsyncMessage(ExtractWPreviousAsyncStrategyUPtr strategy);
 	~WPreviousAsyncMessage() = default;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	ExtractWPreviousAsyncStrategyUPtr m_strategy;

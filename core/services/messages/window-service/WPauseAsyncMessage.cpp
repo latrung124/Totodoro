@@ -13,7 +13,7 @@ WPauseAsyncMessage::WPauseAsyncMessage(ExtractWPauseAsyncStrategyUPtr strategy)
 {
 }
 
-void WPauseAsyncMessage::extract()
+void WPauseAsyncMessage::execute()
 {
 	m_strategy->execute(*this);
 }

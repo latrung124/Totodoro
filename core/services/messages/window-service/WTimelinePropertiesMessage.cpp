@@ -30,7 +30,7 @@ WTimelineProperties WTimelinePropertiesMessage::getTimelineProperties() const
 	return m_timelineProperties;
 }
 
-void WTimelinePropertiesMessage::extract()
+void WTimelinePropertiesMessage::execute()
 {
 	m_strategy->execute(*this);
 }

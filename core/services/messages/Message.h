@@ -29,7 +29,7 @@ public:
 		return m_id;
 	}
 
-	virtual void extract() = 0;
+	virtual void execute() = 0;
 
 private:
 	MessageId m_id = MessageId::None;

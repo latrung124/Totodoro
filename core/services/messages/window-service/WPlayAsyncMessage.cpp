@@ -13,7 +13,7 @@ WPlayAsyncMessage::WPlayAsyncMessage(ExtractWPlayAsyncStrategyUPtr strategy)
 {
 }
 
-void WPlayAsyncMessage::extract()
+void WPlayAsyncMessage::execute()
 {
 	m_strategy->execute(*this);
 }

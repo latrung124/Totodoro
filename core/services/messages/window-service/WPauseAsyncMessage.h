@@ -19,7 +19,7 @@ public:
 	WPauseAsyncMessage(ExtractWPauseAsyncStrategyUPtr strategy);
 	~WPauseAsyncMessage() = default;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	ExtractWPauseAsyncStrategyUPtr m_strategy;

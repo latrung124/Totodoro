@@ -24,7 +24,7 @@ public:
 	void setWPlaybackInfo(const WPlaybackInfo &wPlaybackInfo);
 	WPlaybackInfo getWPlaybackInfo() const;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	WPlaybackInfo m_wPlaybackInfo;

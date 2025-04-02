@@ -19,7 +19,7 @@ public:
 	WPlayAsyncMessage(ExtractWPlayAsyncStrategyUPtr strategy);
 	~WPlayAsyncMessage() = default;
 
-	void extract() override;
+	void execute() override;
 
 private:
 	ExtractWPlayAsyncStrategyUPtr m_strategy;
