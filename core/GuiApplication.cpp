@@ -61,6 +61,7 @@ void GuiApplication::start()
 
 	m_engine->rootContext()->setContextProperty(
 	    "navigator", qobject_cast<WindowNavigator *>(m_windowNavigator.get()));
+	m_engine->addImportPath("qrc:/resources/qml");
 	m_engine->loadFromModule("Totodoro", "Main");
 	startConnections();
 }
