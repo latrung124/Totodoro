@@ -29,13 +29,9 @@ qt_add_qml_module(
   OUTPUT_DIRECTORY
   ${QT_QML_OUTPUT_DIRECTORY}/CommonModule
   QML_FILES
-  WindowControl.qml
   buttons/CustomButton.qml
   buttons/CustomButtonBackground.qml
   buttons/CustomButtonContent.qml
   images/RoundedImage.qml
   RESOURCES
-  "resources/window/close-button.png"
-  "resources/window/maximize-button.png"
-  "resources/window/minimize-button.png"
   "resources/media/music-note.png")

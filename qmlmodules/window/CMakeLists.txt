@@ -1,7 +1,8 @@
 qt_add_library(window_module STATIC)
 
 set(window_components
-    MainWindow.qml)
+    window-components/MainWindow.qml
+    window-components/WindowControl.qml)
 
 foreach(window ${window_components})
   get_filename_component(component_name ${window} NAME)
@@ -19,6 +20,7 @@ qt_add_qml_module(
   ${QT_QML_OUTPUT_DIRECTORY}/WindowModule
   QML_FILES
   window-components/MainWindow.qml
+  window-components/WindowControl.qml
   RESOURCES
   "resources/close-button.png"
   "resources/maximize-button.png"

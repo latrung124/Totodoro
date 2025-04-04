@@ -30,6 +30,22 @@ Window {
         radius: internal.radius
     }
 
+    WindowControl {
+        id: windowControl
+
+        anchors {
+            top: parent.top
+            right: parent.right
+            topMargin: 37
+            rightMargin: 40
+        }
+
+        width: 104
+        height: 24
+
+        spacing: 16
+    }
+
     QtObject {
         id: internal
 
