@@ -6,6 +6,9 @@
 */
 
 import QtQuick
+import QtQuick.Controls
+
+import CommonModule 1.0
 
 Window {
     id: root
@@ -25,6 +28,14 @@ Window {
         color: "#222222"
         opacity: 1
         radius: internal.radius
+    }
+
+    WindowDragger {
+        id: dragArea
+
+        anchors.fill: parent
+        dragTarget: root
+        enableDrag: true
     }
 
     Item {

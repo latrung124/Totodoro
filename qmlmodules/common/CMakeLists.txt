@@ -8,6 +8,8 @@ set(button_components
     buttons/CustomButton.qml buttons/CustomButtonBackground.qml
     buttons/CustomButtonContent.qml)
 
+set(dragger_components draggers/WindowDragger.qml)
+
 foreach(button ${button_components})
   get_filename_component(component_name ${button} NAME)
   set_source_files_properties(${button} PROPERTIES QT_RESOURCE_ALIAS
@@ -19,6 +21,13 @@ foreach(image ${image_components})
   set_source_files_properties(${image} PROPERTIES QT_RESOURCE_ALIAS
                                                   ${component_name})
 endforeach()
+
+foreach(dragger ${dragger_components})
+  get_filename_component(component_name ${dragger} NAME)
+  set_source_files_properties(${dragger} PROPERTIES QT_RESOURCE_ALIAS
+                                                   ${component_name})
+endforeach()
+
 
 qt_add_qml_module(
   common_module
@@ -33,5 +42,6 @@ qt_add_qml_module(
   buttons/CustomButtonBackground.qml
   buttons/CustomButtonContent.qml
   images/RoundedImage.qml
+  draggers/WindowDragger.qml
   RESOURCES
   "resources/media/music-note.png")
