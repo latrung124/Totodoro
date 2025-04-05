@@ -22,6 +22,7 @@ qt_add_qml_module(
   window-components/MainWindow.qml
   window-components/WindowControl.qml
   RESOURCES
+  "resources/app-name.png"
   "resources/close-button.png"
   "resources/maximize-button.png"
   "resources/minimize-button.png")

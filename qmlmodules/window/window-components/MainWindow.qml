@@ -27,6 +27,29 @@ Window {
         radius: internal.radius
     }
 
+    Item {
+        id: appNameItem
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            topMargin: 24
+            leftMargin: 40
+        }
+
+        width: 48
+        height: 48
+
+        Image {
+            id: appNameImage
+
+            anchors.fill: parent
+            source: `resources/app-name.png`
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+        }
+    }
+
     WindowControl {
         id: windowControl
 
