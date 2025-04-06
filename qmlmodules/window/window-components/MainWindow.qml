@@ -7,6 +7,7 @@
 
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 import CommonModule 1.0
 
@@ -20,6 +21,26 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.Window
 
     Component.onCompleted: internal.setWindowCenterPos()
+
+    ListModel {
+        id: menuModel
+
+        ListElement {
+            text: ""
+            iconSource: "qrc:/qt/qml/WindowModule/resources/home-button.png"
+            iconColor: "#FFFFFF"
+            isShowIcon: true
+            isShowBackground: false
+        }
+
+        ListElement {
+            text: ""
+            iconSource: "qrc:/qt/qml/WindowModule/resources/statistics-button.png"
+            iconColor: "#FFFFFF"
+            isShowIcon: true
+            isShowBackground: false
+        }
+    }
 
     Rectangle {
         id: backgroundRect
@@ -38,51 +59,77 @@ Window {
         enableDrag: true
     }
 
-    Item {
-        id: appNameItem
+    RowLayout {
+        id: titleBar
 
         anchors {
             top: parent.top
             left: parent.left
+            right: parent.right
             topMargin: 24
             leftMargin: 40
-        }
-
-        width: 48
-        height: 48
-
-        Image {
-            id: appNameImage
-
-            anchors.fill: parent
-            source: `resources/app-name.png`
-            fillMode: Image.PreserveAspectFit
-            smooth: true
-        }
-    }
-
-    WindowControl {
-        id: windowControl
-
-        anchors {
-            top: parent.top
-            right: parent.right
-            topMargin: 37
             rightMargin: 40
         }
 
-        width: 104
-        height: 24
+        height: 48
 
-        spacing: 16
+        RowLayout {
+            id: titleBarContent
 
-        onMinimizeWindow: function() {
-            minimizeAnimation.start();
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            Layout.preferredWidth: 162
+            Layout.preferredHeight: 48
+
+            spacing: 42
+
+            Item {
+                id: appNameItem
+
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                Layout.preferredWidth: 48
+                Layout.preferredHeight: 48
+
+                Image {
+                    id: appNameImage
+
+                    anchors.fill: parent
+                    source: `resources/app-name.png`
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                }
+            }
+
+            MenuTabs {
+                id: bar
+
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: 72
+                Layout.preferredHeight: 24
+
+                backgroundColor: "transparent"
+
+                tabSpacing: 24
+                tabModels: menuModel
+            }
         }
 
-        onCloseWindow: function() {
-            navigator.closeWindow();
-            close();
+        WindowControl {
+            id: windowControl
+
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.preferredWidth: 104
+            Layout.preferredHeight: 24
+
+            spacing: 16
+
+            onMinimizeWindow: function() {
+                minimizeAnimation.start();
+            }
+
+            onCloseWindow: function() {
+                navigator.closeWindow();
+                close();
+            }
         }
     }
 
@@ -114,6 +161,10 @@ Window {
         property int hideWidthTarget: 100
         property int hideHeightTarget: 100
         property int minimizeDuration: 200
+
+        readonly property color enableColor: "#FFFFFF"
+        readonly property color disableColor: "#666666"
+        readonly property string resourcePath: "qrc:/qt/qml/WindowModule/resources/"
 
         function setWindowCenterPos() {
             root.x = (screen.width - width) / 2;

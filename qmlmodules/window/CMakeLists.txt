@@ -1,8 +1,7 @@
 qt_add_library(window_module STATIC)
 
-set(window_components
-    window-components/MainWindow.qml
-    window-components/WindowControl.qml)
+set(window_components window-components/MainWindow.qml
+                      window-components/WindowControl.qml)
 
 foreach(window ${window_components})
   get_filename_component(component_name ${window} NAME)
@@ -23,6 +22,8 @@ qt_add_qml_module(
   window-components/WindowControl.qml
   RESOURCES
   "resources/app-name.png"
+  "resources/home-button.png"
+  "resources/statistics-button.png"
   "resources/close-button.png"
   "resources/maximize-button.png"
   "resources/minimize-button.png")
