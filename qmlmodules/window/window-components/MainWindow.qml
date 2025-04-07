@@ -133,6 +133,45 @@ Window {
         }
     }
 
+    StackLayout {
+        id: stackLayout
+
+        anchors {
+            top: titleBar.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            topMargin: 9
+            leftMargin: 16
+            rightMargin: 16
+            bottomMargin: 16
+        }
+
+        currentIndex: bar.currentIndex
+
+        DialogFrameView {
+            id: homePage
+
+            Layout.alignment: Qt.AlignCenter
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            triangleXCenter: 128 // TODO: Modify to fit with current tab
+            frameColor: "#FFFFFF"
+        }
+
+        DialogFrameView {
+            id: statisticsPage
+
+            Layout.alignment: Qt.AlignCenter
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            triangleXCenter: 128 + 36 // TODO: Modify to fit with current tab
+            frameColor: "#FFFFFF"
+        }
+    }
+
     SequentialAnimation {
         id: minimizeAnimation
         ParallelAnimation {

@@ -12,6 +12,8 @@ set(dragger_components draggers/WindowDragger.qml)
 
 set(menu_components menus/MenuTab.qml menus/MenuTabs.qml)
 
+set(view_components views/DialogFrameView.qml)
+
 foreach(button ${button_components})
   get_filename_component(component_name ${button} NAME)
   set_source_files_properties(${button} PROPERTIES QT_RESOURCE_ALIAS
@@ -36,6 +38,12 @@ foreach(menu ${menu_components})
                                                  ${component_name})
 endforeach()
 
+foreach(view ${view_components})
+  get_filename_component(component_name ${view} NAME)
+  set_source_files_properties(${view} PROPERTIES QT_RESOURCE_ALIAS
+                                                 ${component_name})
+endforeach()
+
 qt_add_qml_module(
   common_module
   URI
@@ -52,5 +60,6 @@ qt_add_qml_module(
   draggers/WindowDragger.qml
   menus/MenuTab.qml
   menus/MenuTabs.qml
+  views/DialogFrameView.qml
   RESOURCES
   "resources/media/music-note.png")
