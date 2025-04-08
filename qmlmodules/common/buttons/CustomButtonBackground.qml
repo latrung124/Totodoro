@@ -18,6 +18,7 @@ Item {
     property alias iconSource: icon.source
     property alias iconColor: iconOverlay.color
     property alias backgroundColor: background.color
+    property alias iconOpacity: iconOverlay.opacity
 
     implicitWidth: internal.backgroundWidth
     implicitHeight: internal.backgroundHeight

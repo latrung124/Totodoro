@@ -17,6 +17,7 @@ T.TabButton {
     property string iconSource: ""
     property color iconColor: "#ffffff"
     property color backgroundColor: "#000000"
+    property double iconOpacity: 1.0
 
     property alias isShowIcon: background.isShowIcon
     property alias isShowBackground: background.isShowBackground
@@ -45,6 +46,7 @@ T.TabButton {
 
         iconSource: menuTab.iconSource
         iconColor: menuTab.iconColor
+        iconOpacity: menuTab.iconOpacity
         backgroundColor: menuTab.backgroundColor
     }
 

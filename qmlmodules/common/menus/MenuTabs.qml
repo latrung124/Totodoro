@@ -65,6 +65,7 @@ T.TabBar {
 
                     iconSource: model.iconSource
                     iconColor: model.iconColor
+                    iconOpacity: control.currentIndex === index ? 1.0 : 0.6
                     isShowIcon: model.isShowIcon
                     isShowBackground: model.isShowBackground
                     text: model.text
@@ -72,6 +73,9 @@ T.TabBar {
                     ToolTip.visible: hovered
                     ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
                     ToolTip.text: model.toolTipText
+                    onClicked: function() {
+                        control.currentIndex = index;
+                    }
                 }
             }
         }

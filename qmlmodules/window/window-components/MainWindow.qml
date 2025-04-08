@@ -31,6 +31,7 @@ Window {
             iconColor: "#FFFFFF"
             isShowIcon: true
             isShowBackground: false
+            toolTipText: "Home"
         }
 
         ListElement {
@@ -39,6 +40,7 @@ Window {
             iconColor: "#FFFFFF"
             isShowIcon: true
             isShowBackground: false
+            toolTipText: "Statistics"
         }
     }
 
@@ -105,6 +107,7 @@ Window {
                 Layout.alignment: Qt.AlignVCenter
                 Layout.preferredWidth: 72
                 Layout.preferredHeight: 24
+                currentIndex: 0
 
                 backgroundColor: "transparent"
 
@@ -141,7 +144,6 @@ Window {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            topMargin: 9
             leftMargin: 16
             rightMargin: 16
             bottomMargin: 16
@@ -156,7 +158,7 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            triangleXCenter: 128 // TODO: Modify to fit with current tab
+            triangleXCenter: internal.calculateTabBarXCenter(0)
             frameColor: "#FFFFFF"
         }
 
@@ -167,7 +169,7 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            triangleXCenter: 128 + 36 // TODO: Modify to fit with current tab
+            triangleXCenter: internal.calculateTabBarXCenter(1)
             frameColor: "#FFFFFF"
         }
     }
@@ -208,6 +210,20 @@ Window {
         function setWindowCenterPos() {
             root.x = (screen.width - width) / 2;
             root.y = (screen.height - height) / 2;
+        }
+
+        function calculateTabBarXCenter(index) {
+            const tabCount = menuModel.count;
+            const totalSpacing = (tabCount - 1) * bar.tabSpacing;
+            const tabWidth = (bar.width - totalSpacing) / tabCount;
+
+            const triangleOffset = (homePage.triangleWidth - tabWidth) / 2;
+
+            const baseX = bar.x + titleBar.x;
+            const tabX = index * (tabWidth + bar.tabSpacing);
+            const centerOffset = tabWidth / 2;
+
+            return baseX + tabX + centerOffset - triangleOffset;
         }
     }
 }
