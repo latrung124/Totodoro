@@ -14,6 +14,8 @@ set(menu_components menus/MenuTab.qml menus/MenuTabs.qml)
 
 set(view_components views/DialogFrameView.qml)
 
+set(shape_components shapes/RoundedRectangle.qml)
+
 foreach(button ${button_components})
   get_filename_component(component_name ${button} NAME)
   set_source_files_properties(${button} PROPERTIES QT_RESOURCE_ALIAS
@@ -44,6 +46,12 @@ foreach(view ${view_components})
                                                  ${component_name})
 endforeach()
 
+foreach(shape ${shape_components})
+  get_filename_component(component_name ${shape} NAME)
+  set_source_files_properties(${shape} PROPERTIES QT_RESOURCE_ALIAS
+                                                  ${component_name})
+endforeach()
+
 qt_add_qml_module(
   common_module
   URI
@@ -61,5 +69,6 @@ qt_add_qml_module(
   menus/MenuTab.qml
   menus/MenuTabs.qml
   views/DialogFrameView.qml
+  shapes/RoundedRectangle.qml
   RESOURCES
   "resources/media/music-note.png")

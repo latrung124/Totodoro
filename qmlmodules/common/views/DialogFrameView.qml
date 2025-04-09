@@ -15,7 +15,12 @@ Item {
     property int triangleWidth: 36
     property int triangleHeight: 15
     property int triangleXCenter: radius + triangleWidth / 2
-    property color frameColor: "#ffffff"
+    property color frameColor: "#efefef"
+    property QtObject loaderComponent: null
+
+    property alias loaderSource: componentLoader.source
+    property alias loaderWidth: componentLoader.width
+    property alias loaderHeight: componentLoader.height
 
     implicitWidth: 1328
     implicitHeight: 692
@@ -88,5 +93,18 @@ Item {
         }
 
         Component.onCompleted: requestPaint()
+    }
+
+    Loader {
+        id: componentLoader
+
+        anchors {
+            top: parent.top
+            topMargin: root.verticalOffset
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+        }
+
+        sourceComponent: root.loaderComponent
     }
 }

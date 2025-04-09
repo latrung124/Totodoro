@@ -152,25 +152,38 @@ Window {
         currentIndex: bar.currentIndex
 
         DialogFrameView {
-            id: homePage
+            id: homeTab
 
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
 
             triangleXCenter: internal.calculateTabBarXCenter(0)
-            frameColor: "#FFFFFF"
+
+            loaderComponent: homeTabComponent
+
+            Component {
+                id: homeTabComponent
+
+                WHomeTabLayout {
+                    id: homeTabLayout
+
+                    width: 1328
+                    height: 668
+
+                    radius: homeTab.radius
+                }
+            }
         }
 
         DialogFrameView {
-            id: statisticsPage
+            id: statisticsTab
 
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
 
             triangleXCenter: internal.calculateTabBarXCenter(1)
-            frameColor: "#FFFFFF"
         }
     }
 
@@ -217,7 +230,7 @@ Window {
             const totalSpacing = (tabCount - 1) * bar.tabSpacing;
             const tabWidth = (bar.width - totalSpacing) / tabCount;
 
-            const triangleOffset = (homePage.triangleWidth - tabWidth) / 2;
+            const triangleOffset = (homeTab.triangleWidth - tabWidth) / 2;
 
             const baseX = bar.x + titleBar.x;
             const tabX = index * (tabWidth + bar.tabSpacing);
