@@ -16,6 +16,8 @@ T.Button {
     property color iconColor: "#ffffff"
     property color backgroundColor: "#000000"
     property double iconOpacity: 1.0
+    property int backgroundRadius: 0
+    property size iconSize: Qt.size(24, 24)
 
     property alias isShowIcon: background.isShowIcon
     property alias isShowBackground: background.isShowBackground
@@ -46,6 +48,9 @@ T.Button {
         iconColor: control.iconColor
         iconOpacity: control.iconOpacity
         backgroundColor: control.backgroundColor
+        radius: control.backgroundRadius
+        iconWidth: iconSize.width
+        iconHeigth: iconSize.height
     }
 
     MouseArea {
