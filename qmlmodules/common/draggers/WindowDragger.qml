@@ -10,6 +10,14 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 
+// ===================================================================
+// WindowDragger.qml - A reusable component for implementing drag behavior
+// ===================================================================
+// This component creates a draggable area that can be attached to
+// different types of QML elements (Window, Popup, or Item) to enable
+// dragging functionality. It's useful for creating custom title bars,
+// movable dialogs, or any draggable UI element.
+
 Item {
     id: dragArea
 

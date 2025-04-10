@@ -35,7 +35,7 @@ Item {
         Item {
             id: leftPanelItem
 
-            Layout.preferredWidth: 410
+            Layout.preferredWidth: internal.leftPanelItemWidth
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignLeft
         }
@@ -58,7 +58,7 @@ Item {
                     id: rightPanelTitle
 
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 82
+                    Layout.preferredHeight: internal.rightPanelTitleHeight
                     Layout.alignment: Qt.AlignTop
 
                     RoundedRectangle {
@@ -83,7 +83,7 @@ Item {
                     Item {
                         id: pomodoroItem
 
-                        Layout.preferredWidth: 580
+                        Layout.preferredWidth: internal.pomodoroItemWidth
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignLeft
 
@@ -119,5 +119,8 @@ Item {
 
         readonly property color backgroundColor: "#efefef"
         readonly property color rightPanelColor: "#ffffff"
+        readonly property int leftPanelItemWidth: 410
+        readonly property int rightPanelTitleHeight: 82
+        readonly property int pomodoroItemWidth: 580
     }
 }

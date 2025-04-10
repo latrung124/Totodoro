@@ -7,7 +7,9 @@
 
 import QtQuick 2.15
 
-// RoundedRectangle.qml
+// ===================================================================
+// RoundedRectangle.qml - A reusable component for implementing rounded rectangles
+// ===================================================================
 // This QML component creates a rounded rectangle shape using the Canvas element.
 // Individual control over which corners are rounded
 // Adjustable corner radius

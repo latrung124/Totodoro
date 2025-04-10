@@ -7,6 +7,14 @@
 
 import QtQuick
 
+// ===================================================================
+// DialogFrameView.qml - A reusable component for implementing dialog frames
+// ===================================================================
+// This QML component creates a frame view for dialogs or popups using the Canvas element.
+// It provides a customizable frame with rounded corners and a triangle tip at the top.
+// The frame can be styled with different colors and dimensions, and it can load other components inside it.
+// The component is designed to be flexible and reusable across different parts of the application.
+
 Item {
     id: root
 

@@ -16,6 +16,7 @@ Window {
 
     width: internal.windowWidth
     height: internal.windowHeight
+
     visible: true
     color: "transparent"
     flags: Qt.FramelessWindowHint | Qt.Window
@@ -28,7 +29,7 @@ Window {
         ListElement {
             text: ""
             iconSource: "qrc:/qt/qml/WindowModule/resources/home-button.png"
-            iconColor: "#FFFFFF"
+            iconColor: "#ffffff"
             isShowIcon: true
             isShowBackground: false
             toolTipText: "Home"
@@ -37,7 +38,7 @@ Window {
         ListElement {
             text: ""
             iconSource: "qrc:/qt/qml/WindowModule/resources/statistics-button.png"
-            iconColor: "#FFFFFF"
+            iconColor: "#ffffff"
             isShowIcon: true
             isShowBackground: false
             toolTipText: "Statistics"
@@ -48,7 +49,7 @@ Window {
         id: backgroundRect
 
         anchors.fill: parent
-        color: "#222222"
+        color: internal.bgDefaultColor
         opacity: 1
         radius: internal.radius
     }
@@ -80,7 +81,7 @@ Window {
 
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             Layout.preferredWidth: 162
-            Layout.preferredHeight: 48
+            Layout.fillHeight: true
 
             spacing: 42
 
@@ -89,7 +90,7 @@ Window {
 
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 Layout.preferredWidth: 48
-                Layout.preferredHeight: 48
+                Layout.fillHeight: true
 
                 Image {
                     id: appNameImage
@@ -106,12 +107,12 @@ Window {
 
                 Layout.alignment: Qt.AlignVCenter
                 Layout.preferredWidth: 72
-                Layout.preferredHeight: 24
+                Layout.preferredHeight: internal.titleBarBtnSize
                 currentIndex: 0
 
                 backgroundColor: "transparent"
 
-                tabSpacing: 24
+                tabSpacing: internal.tabSpacing
                 tabModels: menuModel
             }
         }
@@ -121,7 +122,7 @@ Window {
 
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
             Layout.preferredWidth: 104
-            Layout.preferredHeight: 24
+            Layout.preferredHeight: internal.titleBarBtnSize
 
             spacing: 16
 
@@ -144,9 +145,9 @@ Window {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            leftMargin: 16
-            rightMargin: 16
-            bottomMargin: 16
+            leftMargin: internal.contentLayoutMargin
+            rightMargin: internal.contentLayoutMargin
+            bottomMargin: internal.contentLayoutMargin
         }
 
         currentIndex: bar.currentIndex
@@ -168,8 +169,8 @@ Window {
                 WHomeTabLayout {
                     id: homeTabLayout
 
-                    width: 1328
-                    height: 668
+                    width: internal.tabWidth
+                    height: internal.tabHeight
 
                     radius: homeTab.radius
                 }
@@ -216,8 +217,16 @@ Window {
         property int hideHeightTarget: 100
         property int minimizeDuration: 200
 
-        readonly property color enableColor: "#FFFFFF"
+        readonly property color enableColor: "#ffffff"
         readonly property color disableColor: "#666666"
+        readonly property color bgDefaultColor: "#222222"
+
+        readonly property int tabWidth: 1328
+        readonly property int tabHeight: 668
+        readonly property int tabSpacing: 24
+        readonly property int contentLayoutMargin: 16
+        readonly property int titleBarBtnSize: 24
+
         readonly property string resourcePath: "qrc:/qt/qml/WindowModule/resources/"
 
         function setWindowCenterPos() {

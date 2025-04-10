@@ -9,6 +9,13 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Templates as T
 
+// ===================================================================
+// MenuTabs.qml - A reusable component for implementing menu tabs
+// ===================================================================
+// This QML component creates a menu bar with tabs that can be used to navigate between different sections of the application.
+// It provides a customizable tab layout with icons and text labels, and it allows for easy switching between tabs.
+// The component is designed to be flexible and reusable across different parts of the application.
+
 T.TabBar {
     id: control
 
