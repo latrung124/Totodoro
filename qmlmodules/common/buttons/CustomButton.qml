@@ -15,6 +15,7 @@ T.Button {
     property string iconSource: ""
     property color iconColor: "#ffffff"
     property color backgroundColor: "#000000"
+    property double iconOpacity: 1.0
 
     property alias isShowIcon: background.isShowIcon
     property alias isShowBackground: background.isShowBackground
@@ -43,6 +44,7 @@ T.Button {
 
         iconSource: control.iconSource
         iconColor: control.iconColor
+        iconOpacity: control.iconOpacity
         backgroundColor: control.backgroundColor
     }
 

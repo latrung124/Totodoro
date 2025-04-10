@@ -8,6 +8,14 @@ set(button_components
     buttons/CustomButton.qml buttons/CustomButtonBackground.qml
     buttons/CustomButtonContent.qml)
 
+set(dragger_components draggers/WindowDragger.qml)
+
+set(menu_components menus/MenuTab.qml menus/MenuTabs.qml)
+
+set(view_components views/DialogFrameView.qml)
+
+set(shape_components shapes/RoundedRectangle.qml)
+
 foreach(button ${button_components})
   get_filename_component(component_name ${button} NAME)
   set_source_files_properties(${button} PROPERTIES QT_RESOURCE_ALIAS
@@ -20,6 +28,30 @@ foreach(image ${image_components})
                                                   ${component_name})
 endforeach()
 
+foreach(dragger ${dragger_components})
+  get_filename_component(component_name ${dragger} NAME)
+  set_source_files_properties(${dragger} PROPERTIES QT_RESOURCE_ALIAS
+                                                    ${component_name})
+endforeach()
+
+foreach(menu ${menu_components})
+  get_filename_component(component_name ${menu} NAME)
+  set_source_files_properties(${menu} PROPERTIES QT_RESOURCE_ALIAS
+                                                 ${component_name})
+endforeach()
+
+foreach(view ${view_components})
+  get_filename_component(component_name ${view} NAME)
+  set_source_files_properties(${view} PROPERTIES QT_RESOURCE_ALIAS
+                                                 ${component_name})
+endforeach()
+
+foreach(shape ${shape_components})
+  get_filename_component(component_name ${shape} NAME)
+  set_source_files_properties(${shape} PROPERTIES QT_RESOURCE_ALIAS
+                                                  ${component_name})
+endforeach()
+
 qt_add_qml_module(
   common_module
   URI
@@ -29,13 +61,14 @@ qt_add_qml_module(
   OUTPUT_DIRECTORY
   ${QT_QML_OUTPUT_DIRECTORY}/CommonModule
   QML_FILES
-  WindowControl.qml
   buttons/CustomButton.qml
   buttons/CustomButtonBackground.qml
   buttons/CustomButtonContent.qml
   images/RoundedImage.qml
+  draggers/WindowDragger.qml
+  menus/MenuTab.qml
+  menus/MenuTabs.qml
+  views/DialogFrameView.qml
+  shapes/RoundedRectangle.qml
   RESOURCES
-  "resources/window/close-button.png"
-  "resources/window/maximize-button.png"
-  "resources/window/minimize-button.png"
   "resources/media/music-note.png")
