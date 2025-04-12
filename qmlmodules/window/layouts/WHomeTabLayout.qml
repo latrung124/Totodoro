@@ -10,6 +10,7 @@ import QtQuick
 import QtQuick.Layouts
 
 import CommonModule 1.0
+import PomodoroModule 1.0
 
 Item {
     id: root
@@ -80,17 +81,12 @@ Item {
 
                     spacing: 1
 
-                    Item {
-                        id: pomodoroItem
+                    PomodoroPanel {
+                        id: pomodoroPanel
 
-                        Layout.preferredWidth: internal.pomodoroItemWidth
+                        Layout.preferredWidth: internal.pomodoroPanelWidth
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignLeft
-
-                        Rectangle {
-                            anchors.fill: parent
-                            color: internal.rightPanelColor
-                        }
                     }
 
                     Item {
@@ -121,6 +117,6 @@ Item {
         readonly property color rightPanelColor: "#ffffff"
         readonly property int leftPanelItemWidth: 410
         readonly property int rightPanelTitleHeight: 82
-        readonly property int pomodoroItemWidth: 580
+        readonly property int pomodoroPanelWidth: 580
     }
 }
