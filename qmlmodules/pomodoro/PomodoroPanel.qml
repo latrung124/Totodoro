@@ -30,10 +30,7 @@ Item {
         id: layout
 
         anchors {
-            right: parent.right
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
+            fill: parent
             leftMargin: 24
             rightMargin: 24
             bottomMargin: 24
@@ -46,7 +43,6 @@ Item {
 
             Layout.fillWidth: true
             Layout.preferredHeight: 74
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
             spacing: 8
 
@@ -60,7 +56,6 @@ Item {
 
                     width: parent.width
                     height: parent.height
-                    anchors.centerIn: parent
                     source: 'resources/flag.png'
                     fillMode: Image.PreserveAspectFit
                     smooth: true
@@ -136,7 +131,6 @@ Item {
 
                             width: parent.width
                             height: parent.height
-                            anchors.centerIn: parent
                             source: 'resources/square-clock.png'
                             fillMode: Image.PreserveAspectFit
                             smooth: true
@@ -238,16 +232,16 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-			spacing: 40
+            spacing: 40
 
-			Item {
-				id: dynamicObjectRec
+            Item {
+                id: dynamicObjectRec
 
-				Layout.fillWidth: true
-				Layout.preferredHeight: 247
+                Layout.fillWidth: true
+                Layout.preferredHeight: 247
 
-				Image {
-					id: dynamicObjectImg
+                Image {
+                    id: dynamicObjectImg
 
                     anchors {
                         horizontalCenter: parent.horizontalCenter
@@ -261,24 +255,23 @@ Item {
                 }
             }
 
-			Item {
+            Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 42
 
                 CustomButton {
-					id: startButton
+                    id: startButton
 
-					height: parent.height
+                    height: parent.height
 
-					anchors {
-						left: parent.left
-						right: parent.right
-						verticalCenter: parent.verticalCenter
-						leftMargin: 212
-						rightMargin: 212
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: 212
+                        rightMargin: 212
                     }
 
-                    text: qsTr("Start")
                     font {
                         family: "Onest"
                         pixelSize: 14
@@ -286,16 +279,144 @@ Item {
                         letterSpacing: 0
                     }
 
-					isShowIcon: false
-					isShowBackground: true
-					backgroundColor: "#ff2727"
-				}
-			}
+                    text: qsTr("Start")
 
-			Item {
-				Layout.fillWidth: true
-				Layout.preferredHeight: 68
-			}
+                    backgroundRadius: 10
+                    isShowIcon: false
+                    isShowBackground: true
+                    backgroundColor: "#ff2727"
+                }
+            }
+
+            Item {
+                id: progressBarItem
+                Layout.fillWidth: true
+                Layout.preferredHeight: 68
+
+
+                Item {
+                    id: progressLocItem
+
+                    width: 24
+                    height: 24
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        leftMargin: -9
+                    }
+
+                    Image {
+                        id: progressLocation
+
+                        width: parent.width
+                        height: parent.height
+                        source: 'resources/location.png'
+                        fillMode: Image.PreserveAspectFit
+                        smooth: true
+                        asynchronous: true
+                    }
+                }
+
+                Rectangle {
+                    id: progressBar
+
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                        topMargin: 30
+                        bottomMargin: 26
+                    }
+                    color: "#d9d9d9"
+                    radius: 4
+                }
+
+                Item {
+                    id: bottomProgressValueItem
+
+                    height: 18
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+
+                    Item {
+                        id: pomodoroTextItem
+
+                        width: 69
+                        height: parent.height
+                        anchors {
+                            left: parent.left
+                            verticalCenter: parent.verticalCenter
+                        }
+
+                        Text {
+                            id: pomodoroText
+
+                            width: parent.width
+                            height: parent.height
+
+                            anchors {
+                                left: parent.left
+                                verticalCenter: parent.verticalCenter
+                            }
+                            verticalAlignment: Text.AlignVCenter
+
+                            font {
+                                family: "Onest"
+                                pixelSize: 14
+                                weight: Font.Bold
+                                letterSpacing: 0
+                            }
+
+                            color: "#000000"
+                            lineHeight: 1.0
+                            lineHeightMode: Text.FixedHeight
+                            text: qsTr("Pomodoro")
+                        }
+                    }
+
+                    Item {
+                        id: progressValueItem
+
+                        width: 63
+                        height: parent.height
+
+                        anchors {
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
+
+                        Text {
+                            id: progressValueText
+
+                            width: parent.width
+                            height: parent.height
+
+                            anchors {
+                                left: parent.left
+                                verticalCenter: parent.verticalCenter
+                            }
+                            verticalAlignment: Text.AlignVCenter
+
+                            font {
+                                family: "Onest"
+                                pixelSize: 14
+                                weight: Font.Bold
+                                letterSpacing: 0
+                            }
+
+                            color: "#000000"
+                            lineHeight: 1.0
+                            lineHeightMode: Text.FixedHeight
+                            text: qsTr("03:00:00")
+                        }
+                    }
+                }
+
+            }
         }
     }
 
