@@ -162,6 +162,7 @@ qt_add_qml_module(
   ${QML_IMPORT_PATH}/MediaPlayerModule
   ${QML_IMPORT_PATH}/CommonModule
   ${QML_IMPORT_PATH}/WindowModule
+  ${QML_IMPORT_PATH}/PomodoroModule
   QML_FILES
   Main.qml
   RESOURCES
@@ -197,7 +198,8 @@ target_include_directories(appTotodoro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 set(QML_PLUGINS
     common_moduleplugin
     mediaplayer_moduleplugin
-    window_moduleplugin)
+    window_moduleplugin
+    pomodoro_moduleplugin)
 
 set(SERVICE_LIBRARIES WMediaService ServiceFactory)
 
