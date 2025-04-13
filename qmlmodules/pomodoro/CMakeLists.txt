@@ -14,6 +14,7 @@ qt_add_qml_module(
   "resources/flag.png"
   "resources/flag2.png"
   "resources/location.png"
-  "resources/monster-level4.png"
-  "resources/square-clock.png")
+  "resources/monster-level-4.png"
+  "resources/square-clock.png"
+  "resources/monster-level-1.png")
 

@@ -9,6 +9,8 @@
 import QtQuick
 import QtQuick.Layouts
 
+import CommonModule 1.0
+
 Item {
     id: root
 
@@ -235,6 +237,65 @@ Item {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
+
+			spacing: 40
+
+			Item {
+				id: dynamicObjectRec
+
+				Layout.fillWidth: true
+				Layout.preferredHeight: 247
+
+				Image {
+					id: dynamicObjectImg
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                    }
+
+                    source: 'resources/monster-level-1.png'
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                    asynchronous: true
+                }
+            }
+
+			Item {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 42
+
+                CustomButton {
+					id: startButton
+
+					height: parent.height
+
+					anchors {
+						left: parent.left
+						right: parent.right
+						verticalCenter: parent.verticalCenter
+						leftMargin: 212
+						rightMargin: 212
+                    }
+
+                    text: qsTr("Start")
+                    font {
+                        family: "Onest"
+                        pixelSize: 14
+                        weight: Font.Bold
+                        letterSpacing: 0
+                    }
+
+					isShowIcon: false
+					isShowBackground: true
+					backgroundColor: "#ff2727"
+				}
+			}
+
+			Item {
+				Layout.fillWidth: true
+				Layout.preferredHeight: 68
+			}
         }
     }
 
