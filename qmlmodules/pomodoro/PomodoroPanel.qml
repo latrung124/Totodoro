@@ -256,14 +256,15 @@ Item {
             }
 
             Item {
+                id: pomodoroButtonItem
+
                 Layout.fillWidth: true
                 Layout.preferredHeight: 42
 
-                CustomButton {
-                    id: startButton
+               PomodoroButton {
+                    id: pomodoroButton
 
                     height: parent.height
-
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -271,20 +272,6 @@ Item {
                         leftMargin: 212
                         rightMargin: 212
                     }
-
-                    font {
-                        family: "Onest"
-                        pixelSize: 14
-                        weight: Font.Bold
-                        letterSpacing: 0
-                    }
-
-                    text: qsTr("Start")
-
-                    backgroundRadius: 10
-                    isShowIcon: false
-                    isShowBackground: true
-                    backgroundColor: "#ff2727"
                 }
             }
 

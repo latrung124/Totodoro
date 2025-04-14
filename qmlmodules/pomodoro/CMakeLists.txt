@@ -10,6 +10,8 @@ qt_add_qml_module(
   ${QT_QML_OUTPUT_DIRECTORY}/PomodoroModule
   QML_FILES
   PomodoroPanel.qml
+  PomodoroButton.qml
+  PomodoroButtonUnits.qml
   RESOURCES
   "resources/flag.png"
   "resources/flag2.png"
