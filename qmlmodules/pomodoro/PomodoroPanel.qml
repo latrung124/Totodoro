@@ -184,12 +184,36 @@ Item {
                         }
                     }
 
-                    Item {
-                        id: dynamicObjectsItem
+                    Row {
+                        id: countedObjectRow
 
                         Layout.fillWidth: true
                         Layout.preferredHeight: 24
                         Layout.alignment: Qt.AlignVCenter
+                        spacing: 0
+
+                        Repeater {
+                            id: countedObjectlv4
+
+                            model: 2 // TODO: refactor with real model
+
+                            Item {
+                                id: countedObject
+
+                                width: 29
+                                height: 24
+
+                                Image {
+                                    id: countedObjectImg
+
+                                    width: parent.width
+                                    height: parent.height
+                                    source: 'resources/monster-level-4.png'
+                                    fillMode: Image.PreserveAspectFit
+                                    smooth: true
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -402,7 +426,6 @@ Item {
                         }
                     }
                 }
-
             }
         }
     }
