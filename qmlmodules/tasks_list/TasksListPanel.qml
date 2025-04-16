@@ -14,6 +14,9 @@ Item {
 
 	property alias backgroundColor: background.color
 
+    implicitWidth: 338
+    implicitHeight: 586
+
 	Rectangle {
 		id: background
 		anchors.fill: parent

@@ -11,6 +11,7 @@ import QtQuick.Layouts
 
 import CommonModule 1.0
 import PomodoroModule 1.0
+import TasksListModule 1.0
 
 Item {
     id: root
@@ -89,20 +90,20 @@ Item {
                         Layout.alignment: Qt.AlignLeft
                     }
 
-                    Item {
-                        id: taskListItem
-
+                    RoundedRectangle {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignRight
+                        radius: root.radius
+                        fillColor: internal.rightPanelColor
+                        roundTopLeft: false
+                        roundTopRight: false
+                        roundBottomLeft: false
 
-                        RoundedRectangle {
-                            anchors.fill: parent
-                            radius: root.radius
-                            fillColor: internal.rightPanelColor
-                            roundTopLeft: false
-                            roundTopRight: false
-                            roundBottomLeft: false
+                        TasksListPanel {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            backgroundColor: "transparent"
                         }
                     }
                 }
