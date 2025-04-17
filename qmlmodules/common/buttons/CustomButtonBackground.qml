@@ -39,7 +39,7 @@ Item {
         id: icon
 
         visible: false
-        anchors.fill: parent
+        anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
     }
 

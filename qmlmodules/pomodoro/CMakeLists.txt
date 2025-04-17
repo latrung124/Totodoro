@@ -10,6 +10,7 @@ qt_add_qml_module(
   ${QT_QML_OUTPUT_DIRECTORY}/PomodoroModule
   QML_FILES
   PomodoroPanel.qml
+  PomodoroTitlePanel.qml
   PomodoroButton.qml
   PomodoroButtonUnits.qml
   RESOURCES
@@ -18,5 +19,7 @@ qt_add_qml_module(
   "resources/location.png"
   "resources/monster-level-4.png"
   "resources/square-clock.png"
-  "resources/monster-level-1.png")
-
+  "resources/monster-level-1.png"
+  "resources/panda-icon.png"
+  "resources/trash-can.png"
+  "resources/edit-button.png")

@@ -59,7 +59,6 @@ Window {
 
         width: parent.width
         height: 96
-        anchors.top: parent
         dragTarget: root
         enableDrag: true
     }

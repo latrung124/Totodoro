@@ -70,6 +70,13 @@ Item {
                         roundTopLeft: false
                         roundBottomLeft: false
                         roundBottomRight: false
+
+                        PomodoroTitlePanel {
+                            id: title
+
+                            anchors.fill: parent
+                            backgroundColor: "transparent"
+                        }
                     }
                 }
 
