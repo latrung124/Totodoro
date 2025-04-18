@@ -14,6 +14,17 @@ Item {
     property bool pressed: false
     property int buttonType: PomodoroButtonUnits.PomodoroButtonState.Start
 
+    signal start()
+    signal pause()
+    signal resume()
+    signal reset()
+
+    onReset: {
+        root.buttonType = PomodoroButtonUnits.PomodoroButtonState.Start;
+        text.text = "Start";
+        root.start();
+    }
+
     implicitWidth: 109
     implicitHeight: 42
 
@@ -64,7 +75,7 @@ Item {
         }
 
         onClicked: {
-            internal.setButtonText(root.buttonType);
+            internal.setButtonState();
         }
     }
 
@@ -93,28 +104,34 @@ Item {
     QtObject {
         id: internal
 
-        function setButtonText(type) {
-            if (type === PomodoroButtonUnits.PomodoroButtonState.Start) {
+        function setButtonState() {
+            if (root.buttonType === PomodoroButtonUnits.PomodoroButtonState.Start) {
                 root.buttonType = PomodoroButtonUnits.PomodoroButtonState.Pause;
-            } else if (type === PomodoroButtonUnits.PomodoroButtonState.Pause) {
-                root.buttonType = PomodoroButtonUnits.PomodoroButtonState.Stop;
+            } else if (root.buttonType === PomodoroButtonUnits.PomodoroButtonState.Pause) {
+                root.buttonType = PomodoroButtonUnits.PomodoroButtonState.Resume;
             } else {
-                root.buttonType = PomodoroButtonUnits.PomodoroButtonState.Start;
+                root.buttonType = PomodoroButtonUnits.PomodoroButtonState.Pause;
             }
 
             switch (root.buttonType) {
-                case PomodoroButtonUnits.PomodoroButtonState.Start:
-                    text.text = "Start";
-                    break;
-                case PomodoroButtonUnits.PomodoroButtonState.Pause:
-                    text.text = "Pause";
-                    break;
-                case PomodoroButtonUnits.PomodoroButtonState.Stop:
-                    text.text = "Stop";
-                    break;
-               default:
-                    text.text = "Start";
-                    break;
+            case PomodoroButtonUnits.PomodoroButtonState.Start: {
+                text.text = "Start";
+                root.start();
+                break;
+            }
+            case PomodoroButtonUnits.PomodoroButtonState.Pause: {
+                text.text = "Pause";
+                root.pause();
+                break;
+            }
+            case PomodoroButtonUnits.PomodoroButtonState.Resume: {
+                text.text = "Resume";
+                root.resume();
+                break;
+            }
+            default:
+                text.text = "Start";
+                break;
             }
         }
     }

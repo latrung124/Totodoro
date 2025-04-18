@@ -13,6 +13,6 @@ QtObject {
     enum PomodoroButtonState {
         Start,
         Pause,
-        Stop
+        Resume
     }
 }

@@ -296,6 +296,18 @@ Item {
                         leftMargin: 212
                         rightMargin: 212
                     }
+
+                    onStart: {
+                        internal.timerStop();
+                    }
+
+                    onPause: {
+                        internal.timerStart();
+                    }
+
+                    onResume: {
+                        internal.timerPause();
+                    }
                 }
             }
 
@@ -325,10 +337,16 @@ Item {
                         fillMode: Image.PreserveAspectFit
                         smooth: true
                         asynchronous: true
+                        x: progressBar.visualPosition * progressBar.width
+
+                        NumberAnimation on x {
+                            duration: 1000
+                            easing.type: Easing.InOutQuad
+                        }
                     }
                 }
 
-                Rectangle {
+                PomodoroProgressBar {
                     id: progressBar
 
                     anchors {
@@ -339,8 +357,7 @@ Item {
                         topMargin: 30
                         bottomMargin: 26
                     }
-                    color: "#d9d9d9"
-                    radius: 4
+                    value: 0
                 }
 
                 Item {
@@ -430,10 +447,45 @@ Item {
         }
     }
 
+    Timer {
+        id: pomodoroTimer
+
+        running: false
+        repeat: true
+        interval: internal.defaultDuration
+        onTriggered: {
+            if (progressBar.value === 1) {
+                pomodoroButton.reset();
+                return;
+            }
+
+            internal.currentTime += internal.defaultDuration;
+            progressBar.value = internal.currentTime / (internal.defaultPomodoroTime * internal.defaultDuration);
+        }
+    }
+
     QtObject {
         id: internal
 
         readonly property color backgroundColor: "#ffffff"
         readonly property color textDefaultColor: "#000000"
+        readonly property int defaultPomodoroTime: 1500 // 25m
+        readonly property int defaultDuration: 1000 // 1s
+        property int currentTime: 0
+
+        // Timer Start, Pause and Stop function
+        function timerStart() {
+            pomodoroTimer.start();
+        }
+
+        function timerPause() {
+            pomodoroTimer.stop();
+        }
+
+        function timerStop() {
+            pomodoroTimer.running = false;
+            progressBar.value = 0;
+            internal.currentTime = 0;
+        }
     }
 }

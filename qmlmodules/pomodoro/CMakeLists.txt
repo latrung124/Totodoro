@@ -13,6 +13,7 @@ qt_add_qml_module(
   PomodoroTitlePanel.qml
   PomodoroButton.qml
   PomodoroButtonUnits.qml
+  PomodoroProgressBar.qml
   RESOURCES
   "resources/flag.png"
   "resources/flag2.png"
