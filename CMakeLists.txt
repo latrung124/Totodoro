@@ -197,7 +197,7 @@ target_include_directories(appTotodoro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(QML_PLUGINS
     common_moduleplugin mediaplayer_moduleplugin window_moduleplugin
-    tasks_list_moduleplugin pomodoro_moduleplugin)
+    tasks_list_moduleplugin pomodoro_moduleplugin userprofile_moduleplugin)
 
 set(SERVICE_LIBRARIES WMediaService ServiceFactory)
 
