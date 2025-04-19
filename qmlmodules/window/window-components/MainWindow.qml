@@ -118,22 +118,39 @@ Window {
             }
         }
 
-        WindowControl {
-            id: windowControl
+        RowLayout {
+            id: buttonsControlLayout
 
+            Layout.preferredWidth: 156
+            Layout.preferredHeight: 38
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            Layout.preferredWidth: 104
-            Layout.preferredHeight: internal.titleBarBtnSize
-
             spacing: 16
 
-            onMinimizeWindow: function() {
-                minimizeAnimation.start();
+            WindowNotificationControl {
+                id: notificationControl
+
+                Layout.preferredWidth: 38
+                Layout.preferredHeight: 38
+                Layout.alignment: Qt.AlignRight
             }
 
-            onCloseWindow: function() {
-                navigator.closeWindow();
-                close();
+            WindowControl {
+                id: windowControl
+
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                Layout.preferredWidth: 104
+                Layout.preferredHeight: internal.titleBarBtnSize
+
+                spacing: 16
+
+                onMinimizeWindow: function() {
+                    minimizeAnimation.start();
+                }
+
+                onCloseWindow: function() {
+                    navigator.closeWindow();
+                    close();
+                }
             }
         }
     }

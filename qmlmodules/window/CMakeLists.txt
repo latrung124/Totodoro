@@ -28,6 +28,7 @@ qt_add_qml_module(
   QML_FILES
   window-components/MainWindow.qml
   window-components/WindowControl.qml
+  window-components/WindowNotificationControl.qml
   layouts/WHomeTabLayout.qml
   RESOURCES
   "resources/app-name.png"
@@ -35,4 +36,5 @@ qt_add_qml_module(
   "resources/statistics-button.png"
   "resources/close-button.png"
   "resources/maximize-button.png"
-  "resources/minimize-button.png")
+  "resources/minimize-button.png"
+  "resources/notification-button.png")
