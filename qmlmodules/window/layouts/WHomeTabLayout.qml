@@ -12,6 +12,7 @@ import QtQuick.Layouts
 import CommonModule 1.0
 import PomodoroModule 1.0
 import TasksListModule 1.0
+import UserProfileModule 1.0
 
 Item {
     id: root
@@ -34,12 +35,42 @@ Item {
 
         anchors.fill: parent
 
+        spacing: 0
+
         Item {
             id: leftPanelItem
 
             Layout.preferredWidth: internal.leftPanelItemWidth
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignLeft
+
+            RowLayout {
+                id: leftPanelLayout
+
+                anchors {
+                    fill: parent
+                    leftMargin: 24
+                    rightMargin: 24
+                    topMargin: 24
+                    bottomMargin: 24
+                }
+
+                spacing: 24
+
+                UserProfilePanel {
+                    id: userProfile
+
+                    Layout.preferredWidth: 42
+                    Layout.fillHeight: true
+                }
+
+                Item {
+                    id: taskGroupList
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+            }
         }
 
         Item {
