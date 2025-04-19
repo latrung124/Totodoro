@@ -16,9 +16,7 @@ qt_add_qml_module(
   TasksListPanel.qml
   OverlayedImage.qml
   RESOURCES
-  "resources/icon/addplus.svg"
   "resources/icon/flag.svg"
-  "resources/icon/menu.svg"
   "resources/icon/completed.svg"
   "resources/priority/lowest.svg"
   "resources/priority/low.svg"

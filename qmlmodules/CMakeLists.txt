@@ -1,6 +1,7 @@
 add_subdirectory(common)
 add_subdirectory(mediaplayer)
 add_subdirectory(tasks_list)
+add_subdirectory(task_group_list)
 add_subdirectory(window)
 add_subdirectory(pomodoro)
 add_subdirectory(userprofile)

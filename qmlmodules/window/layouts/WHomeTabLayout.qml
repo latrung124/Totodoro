@@ -12,6 +12,7 @@ import QtQuick.Layouts
 import CommonModule 1.0
 import PomodoroModule 1.0
 import TasksListModule 1.0
+import TaskGroupListModule 1.0
 import UserProfileModule 1.0
 
 Item {
@@ -49,10 +50,7 @@ Item {
 
                 anchors {
                     fill: parent
-                    leftMargin: 24
-                    rightMargin: 24
-                    topMargin: 24
-                    bottomMargin: 24
+					margins: 24
                 }
 
                 spacing: 24
@@ -64,12 +62,13 @@ Item {
                     Layout.fillHeight: true
                 }
 
-                Item {
-                    id: taskGroupList
+				TaskGroupListPanel {
+					id: taskGroupList
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                }
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					backgroundColor: internal.backgroundColor
+				}
             }
         }
 

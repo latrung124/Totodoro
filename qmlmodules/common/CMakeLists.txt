@@ -71,4 +71,8 @@ qt_add_qml_module(
   views/DialogFrameView.qml
   shapes/RoundedRectangle.qml
   RESOURCES
+  "resources/icon/addplus.svg"
+  "resources/icon/ellipsis.svg"
+  "resources/icon/search.svg"
+  "resources/icon/menu.svg"
   "resources/media/music-note.png")
