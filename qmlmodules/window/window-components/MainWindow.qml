@@ -10,6 +10,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import CommonModule 1.0
+import MediaPlayerModule 1.0
 
 Window {
     id: root
@@ -119,40 +120,58 @@ Window {
         }
 
         RowLayout {
-            id: buttonsControlLayout
+            id: leftControlLayout
 
-            Layout.preferredWidth: 156
-            Layout.preferredHeight: 38
-            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            spacing: 16
+            Layout.preferredWidth: 340
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignRight
+            spacing: 24
 
-            WindowNotificationControl {
-                id: notificationControl
+            MediaPlayer {
+                id: mediaPlayer
 
-                Layout.preferredWidth: 38
-                Layout.preferredHeight: 38
-                Layout.alignment: Qt.AlignRight
+                Layout.preferredWidth: 406
+                Layout.preferredHeight: 48
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             }
 
-            WindowControl {
-                id: windowControl
+            RowLayout {
+                id: buttonsControlLayout
 
+                Layout.preferredWidth: 156
+                Layout.preferredHeight: 38
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                Layout.preferredWidth: 104
-                Layout.preferredHeight: internal.titleBarBtnSize
-
                 spacing: 16
 
-                onMinimizeWindow: function() {
-                    minimizeAnimation.start();
+                WindowNotificationControl {
+                    id: notificationControl
+
+                    Layout.preferredWidth: 38
+                    Layout.preferredHeight: 38
+                    Layout.alignment: Qt.AlignRight
                 }
 
-                onCloseWindow: function() {
-                    navigator.closeWindow();
-                    close();
+                WindowControl {
+                    id: windowControl
+
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    Layout.preferredWidth: 104
+                    Layout.preferredHeight: internal.titleBarBtnSize
+
+                    spacing: 16
+
+                    onMinimizeWindow: function() {
+                        minimizeAnimation.start();
+                    }
+
+                    onCloseWindow: function() {
+                        navigator.closeWindow();
+                        close();
+                    }
                 }
             }
         }
+
     }
 
     StackLayout {

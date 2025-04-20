@@ -86,7 +86,6 @@ Item {
                         pixelSize: 26
                         weight: Font.Bold
                         letterSpacing: 0
-
                     }
 
                     lineHeight: 1.0
