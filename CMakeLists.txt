@@ -163,6 +163,8 @@ qt_add_qml_module(
   ${QML_IMPORT_PATH}/CommonModule
   ${QML_IMPORT_PATH}/WindowModule
   ${QML_IMPORT_PATH}/PomodoroModule
+  ${QML_IMPORT_PATH}/TasksListModule
+  ${QML_IMPORT_PATH}/TaskGroupListModule
   QML_FILES
   Main.qml
   RESOURCES
@@ -197,7 +199,8 @@ target_include_directories(appTotodoro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(QML_PLUGINS
     common_moduleplugin mediaplayer_moduleplugin window_moduleplugin
-    tasks_list_moduleplugin pomodoro_moduleplugin userprofile_moduleplugin)
+    tasks_list_moduleplugin task_group_list_moduleplugin
+    pomodoro_moduleplugin userprofile_moduleplugin)
 
 set(SERVICE_LIBRARIES WMediaService ServiceFactory)
 

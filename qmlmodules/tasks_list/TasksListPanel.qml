@@ -9,6 +9,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import CommonModule 1.0
+
 Item {
 	id: root
 
@@ -51,9 +53,16 @@ Item {
 					radius: 10
 					color: "#EFEFEF"
 
-					Image {
-						anchors.centerIn: parent
-						source: "resources/icon/addplus.svg"
+					CustomButton {
+						width: parent.width
+						height: parent.height
+						iconSource: internal.commonModuleResourcePath + "addplus.svg"
+						iconColor: internal.black
+						isShowIcon: true
+						isShowBackground: false
+						ToolTip.visible: hovered
+						ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+						ToolTip.text: "Add"
 					}
 				}
 
@@ -61,8 +70,22 @@ Item {
 					Layout.fillWidth: true
 				}
 
-				Image {
-					source: "resources/icon/menu.svg"
+				Item {
+					Layout.preferredWidth: 24
+					Layout.preferredHeight: 24
+					Layout.leftMargin: 5
+
+					CustomButton {
+						width: parent.width
+						height: parent.height
+						iconSource: internal.commonModuleResourcePath + "menu.svg"
+						iconColor: internal.black
+						isShowIcon: true
+						isShowBackground: false
+						ToolTip.visible: hovered
+						ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+						ToolTip.text: "Menu"
+					}
 				}
 			}
 		}
@@ -79,7 +102,10 @@ Item {
 			readonly property int margin: 24
 			readonly property int taskItemWidth: root.width - margin * 2
 
+			readonly property color black: "#000000"
+
 			readonly property string font: "Onest"
+			readonly property string commonModuleResourcePath: "qrc:/qt/qml/CommonModule/resources/icon/"
 		}
 	}
 }
