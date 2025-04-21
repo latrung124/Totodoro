@@ -17,10 +17,11 @@ Item {
     signal closeWindow()
     signal minimizeWindow()
     signal maximizeWindow()
+    signal restoreWindow()
 
+    readonly property bool isMaximized: internal.isFullScreen
     property bool isContainedMinimizeBtn: false
     property bool isContainMaximizeBtn: false
-    property bool isFullScreen: false
     property int spacing: 10
 
     property alias minimizedBtnImage: minimizeItem.iconSource
@@ -58,16 +59,21 @@ Item {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            iconSource: internal.resourcePath + (isFullScreen ? "restore-button.png" : "maximize-button.png")
+            iconSource: internal.resourcePath + (internal.isFullScreen ? "restore-button.png" : "maximize-button.png")
             iconColor: internal.enableColor
             isShowIcon: true
             isShowBackground: false
             ToolTip.visible: hovered
             ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-            ToolTip.text: isFullScreen ? "Restore" : "Maximize"
+            ToolTip.text: internal.isFullScreen ? "Restore" : "Maximize"
 
             onClicked: function() {
-                maximizeWindow();
+                internal.isFullScreen = !internal.isFullScreen;
+                if (internal.isFullScreen) {
+                    maximizeWindow();
+                } else {
+                    restoreWindow();
+                }
             }
         }
 
@@ -93,6 +99,7 @@ Item {
     QtObject {
         id: internal
 
+        property bool isFullScreen: false
         readonly property color enableColor: "#FFFFFF"
         readonly property color disableColor: "#666666"
         readonly property string resourcePath: "qrc:/qt/qml/WindowModule/resources/"

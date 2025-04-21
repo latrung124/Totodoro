@@ -122,13 +122,13 @@ Item {
                     PomodoroPanel {
                         id: pomodoroPanel
 
-                        Layout.preferredWidth: internal.pomodoroPanelWidth
+                        Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignLeft
                     }
 
                     RoundedRectangle {
-                        Layout.fillWidth: true
+                        Layout.preferredWidth: 338
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignRight
                         radius: root.radius
@@ -138,8 +138,8 @@ Item {
                         roundBottomLeft: false
 
                         TasksListPanel {
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
+                            width: parent.width
+                            height: parent.height
                             backgroundColor: "transparent"
                         }
                     }

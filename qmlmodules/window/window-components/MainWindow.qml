@@ -164,6 +164,20 @@ Window {
                         minimizeAnimation.start();
                     }
 
+                    onMaximizeWindow: function() {
+                        root.x = 0;
+                        root.y = 0;
+                        root.width = screen.width;
+                        root.height = screen.height;
+                    }
+
+                    onRestoreWindow: function() {
+                        root.x = (screen.width - internal.windowWidth) / 2;
+                        root.y = (screen.height - internal.windowHeight) / 2;
+                        root.width = internal.windowWidth;
+                        root.height = internal.windowHeight;
+                    }
+
                     onCloseWindow: function() {
                         navigator.closeWindow();
                         close();
@@ -206,11 +220,16 @@ Window {
                 WHomeTabLayout {
                     id: homeTabLayout
 
-                    width: internal.tabWidth
-                    height: internal.tabHeight
+                    width: homeTab.width
+                    height: homeTab.height
 
                     radius: homeTab.radius
                 }
+            }
+
+            Component.onCompleted: {
+                console.log("width: ", homeTab.width);
+                console.log("height: ", homeTab.height);
             }
         }
 
@@ -258,8 +277,6 @@ Window {
         readonly property color disableColor: "#666666"
         readonly property color bgDefaultColor: "#222222"
 
-        readonly property int tabWidth: 1328
-        readonly property int tabHeight: 668
         readonly property int tabSpacing: 24
         readonly property int contentLayoutMargin: 16
         readonly property int titleBarBtnSize: 24

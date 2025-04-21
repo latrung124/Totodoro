@@ -218,6 +218,7 @@ Item {
 
                 Item {
                     id: descriptionTextItem
+
                     Layout.fillWidth: true
                     Layout.preferredHeight: 18
 
@@ -261,7 +262,8 @@ Item {
                 id: dynamicObjectRec
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: 247
+                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
                 Image {
                     id: dynamicObjectImg
@@ -287,14 +289,10 @@ Item {
                PomodoroButton {
                     id: pomodoroButton
 
+                    width: 109
                     height: parent.height
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                        leftMargin: 212
-                        rightMargin: 212
-                    }
+
+                    anchors.centerIn: parent
 
                     onStart: {
                         internal.timerStop();
@@ -314,7 +312,7 @@ Item {
                 id: progressBarItem
                 Layout.fillWidth: true
                 Layout.preferredHeight: 68
-
+                Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
 
                 Item {
                     id: progressLocItem

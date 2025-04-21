@@ -37,4 +37,5 @@ qt_add_qml_module(
   "resources/close-button.png"
   "resources/maximize-button.png"
   "resources/minimize-button.png"
-  "resources/notification-button.png")
+  "resources/notification-button.png"
+  "resources/restore-button.png")
