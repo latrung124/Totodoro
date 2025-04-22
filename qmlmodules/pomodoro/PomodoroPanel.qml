@@ -354,7 +354,7 @@ Item {
                         topMargin: 30
                         bottomMargin: 26
                     }
-                    value: 0
+                    value: 0 // TODO: need update from model to match with pomodoroCurrentTimeText
                 }
 
                 Item {
@@ -378,7 +378,7 @@ Item {
                         }
 
                         Text {
-                            id: pomodoroText
+                            id: pomodoroCurrentTimeText
 
                             width: parent.width
                             height: parent.height
@@ -399,7 +399,7 @@ Item {
                             color: "#000000"
                             lineHeight: 1.0
                             lineHeightMode: Text.FixedHeight
-                            text: qsTr("Pomodoro")
+                            text: qsTr("00:00:00") // TODO: update from model to match with progressBar.value
                         }
                     }
 
@@ -415,7 +415,7 @@ Item {
                         }
 
                         Text {
-                            id: progressValueText
+                            id: progressTotalTimeText
 
                             width: parent.width
                             height: parent.height
@@ -436,7 +436,7 @@ Item {
                             color: "#000000"
                             lineHeight: 1.0
                             lineHeightMode: Text.FixedHeight
-                            text: qsTr("03:00:00")
+                            text: internal.calculateTotalPomodoroTime(internal.defaultPomodoroTime)
                         }
                     }
                 }
@@ -452,12 +452,13 @@ Item {
         interval: internal.defaultDuration
         onTriggered: {
             if (progressBar.value === 1) {
-                pomodoroButton.reset();
+                internal.timerReset();
                 return;
             }
 
             internal.currentTime += internal.defaultDuration;
-            progressBar.value = internal.currentTime / (internal.defaultPomodoroTime * internal.defaultDuration);
+            progressBar.value = internal.currentTime / (internal.defaultPomodoroTime * 60 * internal.defaultDuration);
+            pomodoroCurrentTimeText.text = internal.calculateCurrentPomodoroTime(pomodoroCurrentTimeText.text);
         }
     }
 
@@ -466,7 +467,7 @@ Item {
 
         readonly property color backgroundColor: "#ffffff"
         readonly property color textDefaultColor: "#000000"
-        readonly property int defaultPomodoroTime: 1500 // 25m
+        readonly property int defaultPomodoroTime: 25 // minutes
         readonly property int defaultDuration: 1000 // 1s
         property int currentTime: 0
 
@@ -483,6 +484,42 @@ Item {
             pomodoroTimer.running = false;
             progressBar.value = 0;
             internal.currentTime = 0;
+        }
+
+        function timerReset() {
+            pomodoroButton.reset();
+            pomodoroCurrentTimeText.text = "00:00:00";
+        }
+
+        function calculateTotalPomodoroTime(time) {
+            var hours = Math.floor(time/60);
+            var remainMinutes = Math.floor(time % 60);
+
+            const pad = (num) => String(num).padStart(2, '0');
+                return `${pad(hours)}:${pad(remainMinutes)}:00`;
+        }
+
+        function calculateCurrentPomodoroTime(startTime) {
+            var [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
+
+            const CURRENT_SECONDS = (startMinutes * startHours * 60) + startSeconds;
+            const POMODORO_LIMIT_SECONDS = internal.defaultPomodoroTime * 60;
+
+            if (CURRENT_SECONDS === POMODORO_LIMIT_SECONDS) {
+                internal.timerReset();
+                return pomodoroCurrentTimeText.text;
+            }
+
+            if (++startSeconds === 60) {
+                startSeconds = 0;
+                if (++startMinutes === 60) {
+                    startMinutes = 0;
+                    startHours += 1;
+                }
+            }
+
+            const pad = (n) => String(n).padStart(2, '0');
+            return `${pad(startHours)}:${pad(startMinutes)}:${pad(startSeconds)}`;
         }
     }
 }
