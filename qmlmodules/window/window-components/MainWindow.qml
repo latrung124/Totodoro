@@ -1,8 +1,8 @@
 /*
-* File: Window.qml
+* File: MainWindow.qml
 * Author: michael.godfrey
 * Date: 04-03-2025
-* Description: This file contains the Window QML component, which is used to create a window with a title bar and a close button.
+* Description: This file contains the MainWindow QML component, which is used to create a window with a title bar and a close button.
 */
 
 import QtQuick
@@ -266,7 +266,7 @@ Window {
 
         property int windowWidth: 1360
         property int windowHeight: 780
-        property int radius: 20
+        property int radius: windowControl.isMaximized ? 0 : 8
         property int hidePosX: Math.floor(Screen.width / 2) - 50
         property int hidePosY: screen.height - 100
         property int hideWidthTarget: 100
