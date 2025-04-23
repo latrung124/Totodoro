@@ -8,6 +8,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Window
 
 import CommonModule 1.0
 import MediaPlayerModule 1.0
@@ -51,7 +52,6 @@ Window {
 
         anchors.fill: parent
         color: internal.bgDefaultColor
-        opacity: 1
         radius: internal.radius
     }
 
@@ -161,21 +161,15 @@ Window {
                     spacing: 16
 
                     onMinimizeWindow: function() {
-                        minimizeAnimation.start();
+                        minimizedAnimation.running = true;
                     }
 
                     onMaximizeWindow: function() {
-                        root.x = 0;
-                        root.y = 0;
-                        root.width = screen.width;
-                        root.height = screen.height;
+                        root.showMaximized();
                     }
 
                     onRestoreWindow: function() {
-                        root.x = (screen.width - internal.windowWidth) / 2;
-                        root.y = (screen.height - internal.windowHeight) / 2;
-                        root.width = internal.windowWidth;
-                        root.height = internal.windowHeight;
+                        root.showNormal();
                     }
 
                     onCloseWindow: function() {
@@ -244,20 +238,19 @@ Window {
         }
     }
 
-    SequentialAnimation {
-        id: minimizeAnimation
-        ParallelAnimation {
-            NumberAnimation { target: root; property: "x"; to: internal.hidePosX; duration: 200; easing.type: Easing.InOutQuad }
-            NumberAnimation { target: root; property: "y"; to: internal.hidePosY; duration: 200; easing.type: Easing.InOutQuad }
-            NumberAnimation { target: root; property: "width"; to: internal.hideWidthTarget; duration: 200; easing.type: Easing.InOutQuad }
-            NumberAnimation { target: root; property: "height"; to: internal.hideHeightTarget; duration: 200; easing.type: Easing.InOutQuad }
-        }
+    NumberAnimation {
+        id: minimizedAnimation
 
-        onFinished: function() {
-            root.visibility = Window.Minimized;
-            root.width = internal.windowWidth;
-            root.height = internal.windowHeight;
-            internal.setWindowCenterPos();
+        target: root
+
+        property: "opacity"
+        to: 0.0
+        duration: internal.minimizeDuration
+        easing.type: Easing.InOutQuad
+
+        onStopped: {
+            root.showMinimized();
+            root.opacity = 1.0;
         }
     }
 
@@ -267,11 +260,6 @@ Window {
         property int windowWidth: 1360
         property int windowHeight: 780
         property int radius: windowControl.isMaximized ? 0 : 8
-        property int hidePosX: Math.floor(Screen.width / 2) - 50
-        property int hidePosY: screen.height - 100
-        property int hideWidthTarget: 100
-        property int hideHeightTarget: 100
-        property int minimizeDuration: 200
 
         readonly property color enableColor: "#ffffff"
         readonly property color disableColor: "#666666"
@@ -284,8 +272,8 @@ Window {
         readonly property string resourcePath: "qrc:/qt/qml/WindowModule/resources/"
 
         function setWindowCenterPos() {
-            root.x = (screen.width - width) / 2;
-            root.y = (screen.height - height) / 2;
+            root.x = (Screen.width - width) / 2;
+            root.y = (Screen.height - height) / 2;
         }
 
         function calculateTabBarXCenter(index) {
