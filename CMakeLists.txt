@@ -64,6 +64,7 @@ set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h
     core/services/ServiceManager.h
     core/GuiApplication.h
+    core/contexts/Navigator.h
     core/services/listeners/WMediaServiceListener.h
     core/services/consumer/ServiceConsumer.h
     core/services/consumer/ServiceMessageConsumer.h
@@ -79,9 +80,9 @@ set(CORE_SOURCES
     core/services/producer/window-service/WPreviousAsyncMessageCreator.h
     core/services/producer/window-service/WNextAsyncMessageCreator.h
     core/services/queue/MessageQueue.h
-    core/contexts/Context.h
-    core/contexts/WindowNavigator.h
+
     core/GuiApplication.cpp
+    core/contexts/Navigator.cpp
     core/services/consumer/ServiceMessageConsumer.cpp
     core/services/producer/ServiceMessageProducer.cpp
     core/services/producer/window-service/WMediaInfoMessageCreator.cpp
@@ -94,8 +95,7 @@ set(CORE_SOURCES
     core/services/producer/window-service/WNextAsyncMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
     core/services/queue/MessageQueue.cpp
-    core/services/ServiceManager.cpp
-    core/contexts/WindowNavigator.cpp)
+    core/services/ServiceManager.cpp)
 
 set(CORE_SERVICE_STRATEGIES
     core/services/strategies/IStrategy.h

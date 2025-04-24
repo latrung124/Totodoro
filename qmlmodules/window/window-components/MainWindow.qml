@@ -173,13 +173,11 @@ Window {
                     }
 
                     onCloseWindow: function() {
-                        navigator.closeWindow();
-                        close();
+                        root.close();
                     }
                 }
             }
         }
-
     }
 
     StackLayout {
@@ -200,6 +198,7 @@ Window {
         DialogFrameView {
             id: homeTab
 
+            objectName: "HomeTab"
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -230,6 +229,7 @@ Window {
         DialogFrameView {
             id: statisticsTab
 
+            objectName: "StatisticsTab"
             Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -288,6 +288,15 @@ Window {
             const centerOffset = tabWidth / 2;
 
             return baseX + tabX + centerOffset - triangleOffset;
+        }
+
+        function getComponentView(viewName) {
+            //TODO: using for load component by navigator
+            switch(viewName) {
+            case "HomeTab": return homeTab;
+            case "StatisticsTab": return statisticsTab;
+            default: return homeTab;
+            }
         }
     }
 }

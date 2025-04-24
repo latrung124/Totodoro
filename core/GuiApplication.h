@@ -18,6 +18,7 @@ class ModelController;
 class ViewModelController;
 class QQmlApplicationEngine;
 class Context;
+class Navigator;
 
 class GuiApplication : public QObject
 {
@@ -27,6 +28,7 @@ public:
 	using ModelControllerPtr = std::unique_ptr<ModelController>;
 	using ViewModelControllerPtr = std::unique_ptr<ViewModelController>;
 	using QQmlApplicationEnginePtr = std::unique_ptr<QQmlApplicationEngine>;
+	using NavigatorPtr = std::unique_ptr<Navigator>;
 	using ContextPtr = std::unique_ptr<Context>;
 
 	explicit GuiApplication(QGuiApplication *app, QObject *parent = nullptr);
@@ -43,10 +45,10 @@ private:
 	void endConnections();
 
 	QGuiApplication *m_app = nullptr;
-	ModelControllerPtr m_modelController = nullptr;
-	ViewModelControllerPtr m_viewModelController = nullptr;
-	ContextPtr m_windowNavigator = nullptr;
-	QQmlApplicationEnginePtr m_engine = nullptr;
+	ModelControllerPtr m_modelController;
+	ViewModelControllerPtr m_viewModelController;
+	QQmlApplicationEnginePtr m_engine;
+	NavigatorPtr m_navigator;
 };
 
 #endif // GUIAPPLICATION_H
