@@ -15,8 +15,6 @@
 #include "core/controllers/ModelController.h"
 #include "core/controllers/ViewModelController.h"
 
-#include "core/contexts/WindowNavigator.h"
-
 #include "core/services/queue/MessageQueue.h"
 
 GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
@@ -24,7 +22,6 @@ GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     , m_app(app)
     , m_modelController(std::make_unique<ModelController>())
     , m_viewModelController(std::make_unique<ViewModelController>())
-    , m_windowNavigator(std::make_unique<WindowNavigator>())
     , m_engine(std::make_unique<QQmlApplicationEngine>())
 {
 }
@@ -59,8 +56,6 @@ void GuiApplication::start()
 {
 	MessageQueue::getInstance().start();
 
-	m_engine->rootContext()->setContextProperty(
-	    "navigator", qobject_cast<WindowNavigator *>(m_windowNavigator.get()));
 	m_engine->addImportPath("qrc:/resources/qml");
 	m_engine->loadFromModule("Totodoro", "Main");
 	startConnections();

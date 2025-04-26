@@ -173,8 +173,7 @@ Window {
                     }
 
                     onCloseWindow: function() {
-                        navigator.closeWindow();
-                        close();
+                        root.close();
                     }
                 }
             }
@@ -220,11 +219,6 @@ Window {
                     radius: homeTab.radius
                 }
             }
-
-            Component.onCompleted: {
-                console.log("width: ", homeTab.width);
-                console.log("height: ", homeTab.height);
-            }
         }
 
         DialogFrameView {
@@ -245,7 +239,7 @@ Window {
 
         property: "opacity"
         to: 0.0
-        duration: internal.minimizeDuration
+        duration: 250
         easing.type: Easing.InOutQuad
 
         onStopped: {
