@@ -34,11 +34,12 @@ set(CONFIG_CONST_VAL_SOURCES
     ${CMAKE_SOURCE_DIR}/config/const_val/ApplicationConst.h)
 
 # set the view-models
-set(MEDIAPLAYER_VM_SOURCES
-    view-models/mediaplayer/MediaPlayerViewModel.cpp
-    view-models/mediaplayer/MediaPlaybackViewModel.cpp
+set(VM_SOURCES
+    view-models/ViewModel.h
+    view-models/mediaplayer/MediaPlaybackViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.h
-    view-models/mediaplayer/MediaPlaybackViewModel.h)
+    view-models/mediaplayer/MediaPlayerViewModel.cpp
+    view-models/mediaplayer/MediaPlaybackViewModel.cpp)
 
 # set the models
 set(MEDIAPLAYER_MODELS_SOURCES
@@ -94,6 +95,13 @@ set(CORE_SOURCES
     core/services/queue/MessageQueue.cpp
     core/services/ServiceManager.cpp)
 
+set(CORE_FACTORY_SOURCES
+    core/factories/ParamContainer.h
+    core/factories/ViewModelFactory.h
+    core/factories/view-model-producers/ViewModelProducer.h
+    core/factories/view-model-producers/MediaPlayerVMProducer.h
+    core/factories/view-model-producers/MediaPlayerVMProducer.cpp)
+
 set(CORE_SERVICE_STRATEGIES
     core/services/strategies/IStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.h
@@ -133,18 +141,22 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/window-service/WPreviousAsyncMessage.cpp
     core/services/messages/window-service/WNextAsyncMessage.cpp)
 
+set(HELPER_SOURCES helpers/ParamContainerHelper.h)
+
 qt_add_executable(
   appTotodoro
   main.cpp
   ${INTERFACES_SOURCES} # this should be removed and installed to the include
                         # directory
   ${CONFIG_CONST_VAL_SOURCES}
-  ${MEDIAPLAYER_VM_SOURCES}
+  ${VM_SOURCES}
   ${MEDIAPLAYER_MODELS_SOURCES}
   ${CONTROLLER_SOURCES}
   ${CORE_SOURCES}
   ${CORE_SERVICE_MSG_SOURCES}
   ${CORE_SERVICE_STRATEGIES}
+  ${CORE_FACTORY_SOURCES}
+  ${HELPER_SOURCES}
   ${UTIL_SOURCES})
 
 qt_add_qml_module(
@@ -195,9 +207,13 @@ set_target_properties(
 target_include_directories(appTotodoro PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(QML_PLUGINS
-    common_moduleplugin mediaplayer_moduleplugin window_moduleplugin
-    tasks_list_moduleplugin task_group_list_moduleplugin
-    pomodoro_moduleplugin userprofile_moduleplugin)
+    common_moduleplugin
+    mediaplayer_moduleplugin
+    window_moduleplugin
+    tasks_list_moduleplugin
+    task_group_list_moduleplugin
+    pomodoro_moduleplugin
+    userprofile_moduleplugin)
 
 set(SERVICE_LIBRARIES WMediaService ServiceFactory)
 
