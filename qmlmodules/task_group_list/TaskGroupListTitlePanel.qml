@@ -30,45 +30,39 @@ Item {
 			text: "Task Group List"
 		}
 
-		Rectangle {
-			Layout.preferredWidth: 24
-			Layout.preferredHeight: 24
+        CustomButton {
+            id: searchButton
 
-			radius: 10
-			color: internal.white
+            Layout.preferredWidth: 24
+            Layout.preferredHeight: 24
+            iconSize: Qt.size(16, 16)
+            backgroundRadius: 5
+            iconSource: internal.commonModuleResourcePath + "search.svg"
+            isShowIcon: true
+            iconColor: internal.black
+            backgroundColor: internal.white
+            isShowBackground: true
+            ToolTip.visible: hovered
+            ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+            ToolTip.text: "Search"
+        }
 
-			CustomButton {
-				width: parent.width
-				height: parent.height
-				iconSource: internal.commonModuleResourcePath + "addplus.svg"
-				iconColor: internal.black
-				isShowIcon: true
-				isShowBackground: false
-				ToolTip.visible: hovered
-				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-				ToolTip.text: "Add"
-			}
-		}
+        CustomButton {
+            id: addButton
 
-		Rectangle {
-			Layout.preferredWidth: 24
-			Layout.preferredHeight: 24
-
-			radius: 10
-			color: internal.white
-
-			CustomButton {
-				width: parent.width
-				height: parent.height
-				iconSource: internal.commonModuleResourcePath + "search.svg"
-				iconColor: internal.black
-				isShowIcon: true
-				isShowBackground: false
-				ToolTip.visible: hovered
-				ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-				ToolTip.text: "Search"
-			}
-		}
+            Layout.preferredWidth: 24
+            Layout.preferredHeight: 24
+            iconSize: Qt.size(16, 16)
+            backgroundRadius: 5
+            iconSource: internal.commonModuleResourcePath + "addplus.svg"
+            isShowIcon: true
+            iconColor: internal.black
+            backgroundColor: internal.white
+            isShowBackground: true
+            ToolTip.visible: hovered
+            ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+            ToolTip.text: "Add"
+        }
 
 		Item {
 			Layout.fillWidth: true
@@ -95,8 +89,8 @@ Item {
 	QtObject {
 		id: internal
 
-		readonly property color white: "#ffffff"
-		readonly property color black: "#000000"
+        readonly property color white: "#ffffff" // TODO: refactor to basic color
+        readonly property color black: "#000000" // TODO: refactor to accent color
 		readonly property string font: "Onest"
 
 		readonly property string commonModuleResourcePath: "qrc:/qt/qml/CommonModule/resources/icon/"
