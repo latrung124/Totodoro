@@ -8,13 +8,14 @@
 #ifndef MEDIAPLAYERVIEWMODEL_H
 #define MEDIAPLAYERVIEWMODEL_H
 
-#include <QObject>
 #include <QString>
 #include <QUrl>
 
+#include "view-models/ViewModel.h"
+
 class MediaPlaybackViewModel;
 
-class MediaPlayerViewModel : public QObject
+class MediaPlayerViewModel : public ViewModel
 {
 	Q_OBJECT
 	Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)

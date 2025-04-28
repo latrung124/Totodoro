@@ -9,7 +9,7 @@
 #include "MediaPlaybackViewModel.h"
 
 MediaPlayerViewModel::MediaPlayerViewModel(QObject *parent)
-    : QObject(parent)
+    : ViewModel(parent)
     , m_mediaPlaybackViewModel(std::make_unique<MediaPlaybackViewModel>())
 {
 }

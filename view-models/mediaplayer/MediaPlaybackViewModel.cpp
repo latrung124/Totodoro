@@ -19,7 +19,7 @@ using ServiceMessageUPtr = std::unique_ptr<Message>;
 }
 
 MediaPlaybackViewModel::MediaPlaybackViewModel(QObject *parent)
-    : QObject(parent)
+    : ViewModel(parent)
 {
 }
 

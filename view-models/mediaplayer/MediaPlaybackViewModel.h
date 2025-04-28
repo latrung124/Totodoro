@@ -8,9 +8,9 @@
 #ifndef MEDIAPLAYBACKVIEWMODEL_H
 #define MEDIAPLAYBACKVIEWMODEL_H
 
-#include <QObject>
+#include "view-models/ViewModel.h"
 
-class MediaPlaybackViewModel : public QObject
+class MediaPlaybackViewModel : public ViewModel
 {
 	Q_OBJECT
 	Q_PROPERTY(bool isPlaying READ isPlaying WRITE setIsPlaying NOTIFY isPlayingChanged)
