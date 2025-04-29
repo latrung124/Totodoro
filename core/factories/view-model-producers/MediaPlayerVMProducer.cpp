@@ -12,7 +12,7 @@
 
 #include "view-models/mediaplayer/MediaPlayerViewModel.h"
 
-std::unique_ptr<ViewModel> MediaPlayerVMProducer::createViewModel(ParamContainerBase *params)
+std::unique_ptr<QObject> MediaPlayerVMProducer::createViewModel(ParamContainerBase *params)
 {
 	return std::make_unique<MediaPlayerViewModel>();
 }

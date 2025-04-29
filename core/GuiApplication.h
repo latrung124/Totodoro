@@ -33,12 +33,17 @@ public:
 	void start();
 	void end();
 
+	QObject *rootObject() const;
+
 signals:
 	void destroySignal();
 
 private:
 	void startConnections();
 	void endConnections();
+
+	void initViewModels();
+	void setContexts();
 
 	QGuiApplication *m_app = nullptr;
 	ModelControllerPtr m_modelController = nullptr;

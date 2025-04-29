@@ -52,16 +52,45 @@ void GuiApplication::endConnections()
 {
 }
 
+void GuiApplication::setContexts()
+{
+	m_engine->rootContext()->setContextProperty("viewModelController", m_viewModelController.get());
+}
+
 void GuiApplication::start()
 {
 	MessageQueue::getInstance().start();
 
+	setContexts();
+
 	m_engine->addImportPath("qrc:/resources/qml");
 	m_engine->loadFromModule("Totodoro", "Main");
+	if (m_engine->rootObjects().isEmpty()) {
+		qFatal("Failed to load QML file.");
+	}
+
+	initViewModels();
+
 	startConnections();
 }
 
 void GuiApplication::end()
 {
 	MessageQueue::getInstance().stop();
+}
+
+QObject *GuiApplication::rootObject() const
+{
+	QObject *root = m_engine->rootObjects().first();
+	if (!root) {
+		return nullptr;
+	}
+
+	return root;
+}
+
+void GuiApplication::initViewModels()
+{
+	m_viewModelController->registerViewModels();
+	m_viewModelController->initMediaPlayerView(rootObject());
 }

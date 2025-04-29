@@ -80,7 +80,7 @@ T.Button {
     states: [
         State {
             name: "hovered"
-            when: !mouseArea.pressed && mouseArea.containsMouse
+            when: !mouseArea.pressed && mouseArea.containsMouse && control.enabled
             PropertyChanges {
                 target: contentItem
                 opacity: 0.8
@@ -93,7 +93,7 @@ T.Button {
         },
         State {
             name: "pressed"
-            when: mouseArea.pressed && mouseArea.containsMouse
+            when: mouseArea.pressed && mouseArea.containsMouse &&  control.enabled
             PropertyChanges {
                 target: contentItem
                 opacity: 0.5
@@ -118,6 +118,14 @@ T.Button {
             PropertyChanges {
                 target: background
                 opacity: 0.0
+            }
+        },
+        State {
+            name: "disabled"
+            when: !control.enabled
+            PropertyChanges {
+                target: contentItem
+                opacity: 0.5
             }
         }
     ]
