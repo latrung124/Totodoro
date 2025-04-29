@@ -2,20 +2,29 @@
  * File: MediaPlayerViewModel.cpp
  * Author: trung.la
  * Date: 02-05-2025
- * Description: ViewModel for MediaPlayer
+ * Description: View Model for MediaPlayer
  */
 
 #include "MediaPlayerViewModel.h"
 #include "MediaPlaybackViewModel.h"
 
 MediaPlayerViewModel::MediaPlayerViewModel(QObject *parent)
-    : ViewModel(parent)
+    : QObject(parent)
     , m_mediaPlaybackViewModel(std::make_unique<MediaPlaybackViewModel>())
 {
+	initDummyData();
 }
 
 MediaPlayerViewModel::~MediaPlayerViewModel()
 {
+}
+
+void MediaPlayerViewModel::initDummyData()
+{
+	m_title = "Dummy Title";
+	m_album = "Dummy Album";
+	m_artist = "Dummy Artist";
+	m_thumbnail = QUrl("qrc:/images/dummy_thumbnail.png");
 }
 
 QString MediaPlayerViewModel::title() const
@@ -28,6 +37,19 @@ void MediaPlayerViewModel::setTitle(const QString &title)
 	if (m_title != title) {
 		m_title = title;
 		emit titleChanged();
+	}
+}
+
+QString MediaPlayerViewModel::album() const
+{
+	return m_album;
+}
+
+void MediaPlayerViewModel::setAlbum(const QString &album)
+{
+	if (m_album != album) {
+		m_album = album;
+		emit albumChanged();
 	}
 }
 

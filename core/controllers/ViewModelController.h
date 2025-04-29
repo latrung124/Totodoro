@@ -8,27 +8,34 @@
 #ifndef VIEWMODELCONTROLLER_H
 #define VIEWMODELCONTROLLER_H
 
-#include <memory>
-
 #include <QObject>
 
+#include <memory>
+#include <typeindex>
+#include <unordered_map>
+
 class MediaPlayerViewModel;
+class ViewModelFactory;
 
 class ViewModelController : public QObject
 {
 	Q_OBJECT
 
 public:
-	using MediaPlayerViewModelPtr = std::shared_ptr<MediaPlayerViewModel>;
-	using MediaPlayerViewModelWPtr = std::weak_ptr<MediaPlayerViewModel>;
+	using ViewModelFactoryUPtr = std::unique_ptr<ViewModelFactory>;
 
 	ViewModelController(QObject *parent = nullptr);
 	~ViewModelController();
 
-	MediaPlayerViewModelWPtr getMediaPlayerViewModel() const;
+	void registerViewModels();
+
+	void initMediaPlayerView(QObject *obj);
 
 private:
-	MediaPlayerViewModelPtr m_mediaPlayerViewModel;
+	MediaPlayerViewModel *mediaPlayerViewModel();
+
+	ViewModelFactoryUPtr m_vmFactory;
+	std::unordered_map<std::type_index, std::unique_ptr<QObject>> m_viewModels;
 };
 
 #endif // VIEWMODELCONTROLLER_H

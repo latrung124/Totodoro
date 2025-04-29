@@ -35,7 +35,6 @@ set(CONFIG_CONST_VAL_SOURCES
 
 # set the view-models
 set(VM_SOURCES
-    view-models/ViewModel.h
     view-models/mediaplayer/MediaPlaybackViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.cpp

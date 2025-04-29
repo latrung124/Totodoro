@@ -16,6 +16,8 @@ import MediaPlayerModule 1.0
 Window {
     id: root
 
+    property QtObject model: null
+
     width: internal.windowWidth
     height: internal.windowHeight
 
@@ -129,6 +131,8 @@ Window {
 
             MediaPlayer {
                 id: mediaPlayer
+
+                objectName: "mediaPlayer"
 
                 Layout.preferredWidth: 406
                 Layout.preferredHeight: 48

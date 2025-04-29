@@ -2,7 +2,7 @@
  * File: MediaPlaybackViewModel.cpp
  * Author: trung.la
  * Date: 02-05-2025
- * Description: ViewModel for MediaPlayback
+ * Description: View Model for MediaPlayback
  */
 
 #include "MediaPlaybackViewModel.h"
@@ -19,12 +19,24 @@ using ServiceMessageUPtr = std::unique_ptr<Message>;
 }
 
 MediaPlaybackViewModel::MediaPlaybackViewModel(QObject *parent)
-    : ViewModel(parent)
+    : QObject(parent)
 {
+	initDummyData();
 }
 
 MediaPlaybackViewModel::~MediaPlaybackViewModel()
 {
+}
+
+void MediaPlaybackViewModel::initDummyData()
+{
+	m_isPlaying = false;
+	m_isPlayingEnabled = true;
+	m_isPauseEnabled = true;
+	m_isNextEnabled = true;
+	m_isPreviousEnabled = true;
+	m_isShuffleEnabled = false;
+	m_isRepeatEnabled = false;
 }
 
 bool MediaPlaybackViewModel::isPlaying() const
@@ -92,6 +104,32 @@ void MediaPlaybackViewModel::setIsPreviousEnabled(bool isPreviousEnabled)
 	}
 }
 
+bool MediaPlaybackViewModel::isShuffleEnabled() const
+{
+	return m_isShuffleEnabled;
+}
+
+void MediaPlaybackViewModel::setIsShuffleEnabled(bool isShuffleEnabled)
+{
+	if (m_isShuffleEnabled != isShuffleEnabled) {
+		m_isShuffleEnabled = isShuffleEnabled;
+		emit isShuffleEnabledChanged();
+	}
+}
+
+bool MediaPlaybackViewModel::isRepeatEnabled() const
+{
+	return m_isRepeatEnabled;
+}
+
+void MediaPlaybackViewModel::setIsRepeatEnabled(bool isRepeatEnabled)
+{
+	if (m_isRepeatEnabled != isRepeatEnabled) {
+		m_isRepeatEnabled = isRepeatEnabled;
+		emit isRepeatEnabledChanged();
+	}
+}
+
 void MediaPlaybackViewModel::play()
 {
 	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPlayAsyncMessage>();
@@ -123,4 +161,14 @@ void MediaPlaybackViewModel::previous()
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
+}
+
+void MediaPlaybackViewModel::shuffle()
+{
+	// TODO:Implement shuffle logic here
+}
+
+void MediaPlaybackViewModel::repeat()
+{
+	// TODO:Implement repeat logic here
 }

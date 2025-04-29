@@ -17,7 +17,7 @@ public:
 	MediaPlayerVMProducer() = default;
 	~MediaPlayerVMProducer() = default;
 
-	std::unique_ptr<ViewModel> createViewModel(ParamContainerBase *params = nullptr) override;
+	std::unique_ptr<QObject> createViewModel(ParamContainerBase *params = nullptr) override;
 };
 
 #endif // MEDIAPLAYERVMPRODUCER_H

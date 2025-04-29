@@ -2,23 +2,23 @@
  * File: MediaPlayerViewModel.h
  * Author: trung.la
  * Date: 02-05-2025
- * Description: ViewModel for MediaPlayer
+ * Description: View Model for MediaPlayer
  */
 
 #ifndef MEDIAPLAYERVIEWMODEL_H
 #define MEDIAPLAYERVIEWMODEL_H
 
+#include <QObject>
 #include <QString>
 #include <QUrl>
 
-#include "view-models/ViewModel.h"
-
 class MediaPlaybackViewModel;
 
-class MediaPlayerViewModel : public ViewModel
+class MediaPlayerViewModel : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
+	Q_PROPERTY(QString album READ album WRITE setAlbum NOTIFY albumChanged)
 	Q_PROPERTY(QString artist READ artist WRITE setArtist NOTIFY artistChanged)
 	Q_PROPERTY(QObject *mediaPlaybackViewModel READ mediaPlaybackViewModel WRITE
 	               setMediaPlaybackViewModel NOTIFY mediaPlaybackViewModelChanged)
@@ -31,6 +31,9 @@ public:
 	QString title() const;
 	void setTitle(const QString &title);
 
+	QString album() const;
+	void setAlbum(const QString &album);
+
 	QString artist() const;
 	void setArtist(const QString &artist);
 
@@ -42,15 +45,19 @@ public:
 
 signals:
 	void titleChanged();
+	void albumChanged();
 	void artistChanged();
 	void mediaPlaybackViewModelChanged();
 	void thumbnailChanged();
 
 private:
+	void initDummyData();
+
 	QString m_title;
+	QString m_album;
 	QString m_artist;
-	std::unique_ptr<MediaPlaybackViewModel> m_mediaPlaybackViewModel;
 	QUrl m_thumbnail;
+	std::unique_ptr<MediaPlaybackViewModel> m_mediaPlaybackViewModel;
 };
 
 #endif // MEDIAPLAYERVIEWMODEL_H

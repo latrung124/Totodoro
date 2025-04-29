@@ -3,15 +3,20 @@
  * Author: trung.la
  * Date: 04-26-2025
  * Description: ViewModelFactory class definition
- * This class is responsible for creating ViewModel instances.
+ * This class is responsible for creating View Model instances.
  */
 
 #ifndef VIEWMODELFACTORY_H
 #define VIEWMODELFACTORY_H
 
+#include <QObject>
+
 #include <functional>
 #include <memory>
 #include <typeindex>
+#include <utility>
+
+#include "core/factories/ParamContainer.h"
 
 class ViewModelProducer;
 
@@ -48,12 +53,12 @@ public:
 	 * If the type is not registered, it returns a nullptr.
 	 */
 	template<typename VMProducerType>
-	[[nodiscard]] std::unique_ptr<ViewModelProducer> createViewModel()
+	[[nodiscard]] std::unique_ptr<QObject> createViewModel()
 	{
-		std::type_index = std::type_index(typeid(VMProducerType));
+		std::type_index typeIndex = std::type_index(typeid(VMProducerType));
 		auto it = m_viewModelCreators.find(typeIndex);
 		if (it != m_viewModelCreators.end()) {
-			return it->second();
+			return it->second()->createViewModel();
 		}
 
 		return nullptr; // TODO: Handle error case (e.g., throw an exception or return a default instance)
@@ -69,15 +74,16 @@ public:
 	 * If the type is not registered, it returns a nullptr.
 	 */
 	template<typename ConcreteProducer, typename... Args>
-	[[nodiscard]] std::unique_ptr<ViewModelProducer> createViewModel(Args &&...args)
+	[[nodiscard]] std::unique_ptr<QObject> createViewModel(Args &&...args)
 	{
 		std::type_index typeIndex = std::type_index(typeid(ConcreteProducer));
 		auto it = m_viewModelCreators.find(typeIndex);
 		if (it != m_viewModelCreators.end()) {
-			auto params = std::make_unique<ParamContainer<Args...>>(std::forward<Args>(args)...);
+			auto params = std::make_unique<core::factories::ParamContainer<Args...>>(
+			    std::forward<Args>(args)...);
 			return it->second()->createViewModel(
-			    params.get()); // the unique_ptr will be passed to the producer, and after that, it
-			                   // will be deleted
+			    params->getParams()); // the unique_ptr will be passed to the producer, and after
+			                          // that, it will be deleted
 		}
 
 		return nullptr; // TODO: Handle error case (e.g., throw an exception or return a default instance)

@@ -14,6 +14,7 @@ Item {
     id: root
 
     property color basicColor: "#ffffff"
+    property QtObject model: null
 
     implicitWidth: 406
     implicitHeight: 48
@@ -84,7 +85,7 @@ Item {
                         lineHeight: 1.0
                         lineHeightMode: Text.FixedHeight
                         color: root.basicColor
-                        text: qsTr("Legends Never Die")
+                        text: model ? model.title : "Unknown"
                     }
                 }
 
@@ -120,7 +121,7 @@ Item {
                         lineHeight: 1.0
                         lineHeightMode: Text.FixedHeight
                         color: root.basicColor
-                        text: qsTr("Orchestral version")
+                        text: model ? model.album : "Unknown"
                     }
                 }
             }
@@ -140,6 +141,8 @@ Item {
                 RowLayout {
                     id: playbackControl
 
+                    property QtObject playbackModel: model ? model.mediaPlaybackViewModel : null
+
                     Layout.preferredWidth: 160
                     Layout.fillHeight: true
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
@@ -153,6 +156,7 @@ Item {
                         Layout.preferredHeight: internal.defaultButtonSize
                         Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                         buttonForm: MediaEnumeration.ButtonForm.Shuffle
+                        enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isShuffleEnabled : false
                         ToolTip.text: "Shuffle"
                         onButtonClicked: (form) => {
                             internal.handleMediaButtonClicked(form);
@@ -166,6 +170,7 @@ Item {
                         Layout.preferredHeight: internal.defaultButtonSize
                         Layout.alignment: Qt.AlignVCenter
                         buttonForm: MediaEnumeration.ButtonForm.Previous
+                        enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isPreviousEnabled : false
                         ToolTip.text: "Previous"
                         onButtonClicked: (form) => {
                             internal.handleMediaButtonClicked(form);
@@ -180,6 +185,7 @@ Item {
                         Layout.alignment: Qt.AlignVCenter
                         padding: 4
                         buttonForm: MediaEnumeration.ButtonForm.Play
+                        enabled: true //TODO: handle play/pause enable state
                         ToolTip.text: playPauseButton.buttonForm === MediaEnumeration.ButtonForm.Play ? "Pause" : "Play"
                         onButtonClicked: (form) => {
                             internal.handleMediaButtonClicked(form);
@@ -193,6 +199,7 @@ Item {
                         Layout.preferredHeight: internal.defaultButtonSize
                         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                         buttonForm: MediaEnumeration.ButtonForm.Next
+                        enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isNextEnabled : false
                         ToolTip.text: "Next"
                         onButtonClicked: (form) => {
                             internal.handleMediaButtonClicked(form);
@@ -206,6 +213,7 @@ Item {
                         Layout.preferredHeight: internal.defaultButtonSize
                         Layout.alignment: Qt.AlignVCenter
                         buttonForm: MediaEnumeration.ButtonForm.Repeat
+                        enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isRepeatEnabled : false
                         ToolTip.text: "Repeat"
                         onButtonClicked: (form) => {
                             internal.handleMediaButtonClicked(form);
