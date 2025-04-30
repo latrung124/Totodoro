@@ -35,8 +35,14 @@ set(CONFIG_CONST_VAL_SOURCES
 
 # set the view-models
 set(VM_SOURCES
+    view-models/home/HomeViewModel.h
+    view-models/userprofile/UserProfileViewModel.h
+    view-models/taskmanagement/TaskGroupsViewModel.h
     view-models/mediaplayer/MediaPlaybackViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.h
+    view-models/home/HomeViewModel.cpp
+    view-models/userprofile/UserProfileViewModel.cpp
+    view-models/taskmanagement/TaskGroupsViewModel.cpp
     view-models/mediaplayer/MediaPlayerViewModel.cpp
     view-models/mediaplayer/MediaPlaybackViewModel.cpp)
 
