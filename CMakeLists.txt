@@ -38,11 +38,15 @@ set(VM_SOURCES
     view-models/home/HomeViewModel.h
     view-models/userprofile/UserProfileViewModel.h
     view-models/taskmanagement/TaskGroupsViewModel.h
+    view-models/taskmanagement/TaskGroupViewModel.h
+    view-models/taskmanagement/TasksViewModel.h
     view-models/mediaplayer/MediaPlaybackViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.h
     view-models/home/HomeViewModel.cpp
     view-models/userprofile/UserProfileViewModel.cpp
     view-models/taskmanagement/TaskGroupsViewModel.cpp
+    view-models/taskmanagement/TaskGroupViewModel.cpp
+    view-models/taskmanagement/TasksViewModel.cpp
     view-models/mediaplayer/MediaPlayerViewModel.cpp
     view-models/mediaplayer/MediaPlaybackViewModel.cpp)
 
@@ -64,7 +68,8 @@ set(CONTROLLER_SOURCES
     core/controllers/ViewModelController.cpp core/controllers/ModelController.h
     core/controllers/ViewModelController.h)
 
-set(UTIL_SOURCES utils/ThreadGuard.h utils/ScopedThread.h)
+set(UTIL_SOURCES utils/ThreadGuard.h utils/ScopedThread.h
+                 utils/qmltypes/PriorityTypeClass.h)
 
 set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h

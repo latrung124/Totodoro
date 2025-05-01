@@ -18,6 +18,8 @@ File: main.cpp
 #include "core/services/producer/window-service/WPreviousAsyncMessageCreator.h"
 #include "core/services/producer/window-service/WTimelinePropertiesMessageCreator.h"
 
+#include "utils/qmltypes/PriorityTypeClass.h"
+
 #include "core/services/ServiceManager.h"
 #include <IWMediaService.h>
 
@@ -26,6 +28,7 @@ File: main.cpp
 
 #include <QGuiApplication>
 #include <QIcon>
+#include <QQmlEngine>
 
 void setApplicationAttribute()
 {
@@ -44,6 +47,17 @@ void setApplicationInfo()
 	QGuiApplication::setApplicationDisplayName(ApplicationDisplayName);
 	QGuiApplication::setApplicationVersion(ApplicationVersion);
 	QGuiApplication::setWindowIcon(QIcon(ApplicationIcon));
+}
+
+void registerQmlTypes()
+{
+	qRegisterMetaType<PriorityType>("PriorityType");
+	qmlRegisterUncreatableType<PriorityTypeClass>(
+	    "App.Enums", // QML namespace
+	    1,
+	    0, // Major and minor versions
+	    "PriorityType", // Enum group name in QML
+	    "Cannot create PriorityType in QML. Access enums only.");
 }
 
 void serviceRegister()
@@ -69,6 +83,8 @@ void serviceRegister()
 int main(int argc, char *argv[])
 {
 	QGuiApplication app(argc, argv);
+
+	registerQmlTypes();
 
 	setApplicationAttribute();
 	setApplicationInfo();
