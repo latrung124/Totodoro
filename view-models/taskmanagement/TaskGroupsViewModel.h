@@ -8,14 +8,41 @@
 #ifndef TASKGROUPSVIEWMODEL_H
 #define TASKGROUPSVIEWMODEL_H
 
-#include <QObject>
+#include <QAbstractListModel>
 
-class TaskGroupsViewModel : public QObject
+#include <vector>
+#include <memory>
+
+class TaskGroupViewModel;
+
+class TaskGroupsViewModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
+    using TaskGroupViewModelPtr = std::shared_ptr<TaskGroupViewModel>;
+
+    enum Role {
+        TaskGroupIdRole = Qt::UserRole,
+        IconRole,
+        NameRole,
+        DeadlineRole,
+        PriorityRole,
+        StatusRole,
+        DescriptionRole,
+        TaskCompletedRole,
+        TotalTaskRole,
+        TasksRole
+    };
+
     explicit TaskGroupsViewModel(QObject *parent = nullptr);
     ~TaskGroupsViewModel() override;
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
+
+private:
+    std::vector<TaskGroupViewModelPtr> m_taskGroups;
 };
 #endif // TASKGROUPSVIEWMODEL_H
