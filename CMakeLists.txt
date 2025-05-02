@@ -40,6 +40,7 @@ set(VM_SOURCES
     view-models/taskmanagement/TaskGroupsViewModel.h
     view-models/taskmanagement/TaskGroupViewModel.h
     view-models/taskmanagement/TasksViewModel.h
+    view-models/taskmanagement/TaskViewModel.h
     view-models/mediaplayer/MediaPlaybackViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.h
     view-models/home/HomeViewModel.cpp
@@ -47,6 +48,7 @@ set(VM_SOURCES
     view-models/taskmanagement/TaskGroupsViewModel.cpp
     view-models/taskmanagement/TaskGroupViewModel.cpp
     view-models/taskmanagement/TasksViewModel.cpp
+    view-models/taskmanagement/TaskViewModel.cpp
     view-models/mediaplayer/MediaPlayerViewModel.cpp
     view-models/mediaplayer/MediaPlaybackViewModel.cpp)
 
