@@ -1,5 +1,3 @@
-![# Totodoro Application](docs/logo/app_icon.png)
-
 Totodoro is an application that designed to enhance productivity by using the Pomodoro technique - a time management method that encourages focused work intervals followed by breaks.
 
 Totodoro can:
