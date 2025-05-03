@@ -4,10 +4,16 @@ File: main.cpp
 * Date: 02-12-2025
 * Description: This file contains the main function of the application.
 */
+#include <QGuiApplication>
+#include <QIcon>
+#include <QQmlEngine>
 
-#include "core/services/listeners/WMediaServiceListener.h"
+#include <IWMediaService.h>
 
 // TODO: move out of main
+#include "core/GuiApplication.h"
+
+#include "core/services/listeners/WMediaServiceListener.h"
 #include "core/services/producer/ServiceMessageProducer.h"
 #include "core/services/producer/window-service/WMediaInfoMessageCreator.h"
 #include "core/services/producer/window-service/WNextAsyncMessageCreator.h"
@@ -17,18 +23,12 @@ File: main.cpp
 #include "core/services/producer/window-service/WPlaybackInfoMessageCreator.h"
 #include "core/services/producer/window-service/WPreviousAsyncMessageCreator.h"
 #include "core/services/producer/window-service/WTimelinePropertiesMessageCreator.h"
+#include "core/services/ServiceManager.h"
 
+#include "utils/qmltypes/DynamicObjectStateClass.h"
 #include "utils/qmltypes/PriorityTypeClass.h"
 
-#include "core/services/ServiceManager.h"
-#include <IWMediaService.h>
-
 #include "config/const_val/ApplicationConst.h"
-#include "core/GuiApplication.h"
-
-#include <QGuiApplication>
-#include <QIcon>
-#include <QQmlEngine>
 
 void setApplicationAttribute()
 {
@@ -57,6 +57,14 @@ void registerQmlTypes()
 	    1,
 	    0, // Major and minor versions
 	    "PriorityType", // Enum group name in QML
+	    "Cannot create PriorityType in QML. Access enums only.");
+
+	qRegisterMetaType<DynamicObjectState>("DynamicObjectState");
+	qmlRegisterUncreatableType<DynamicObjectStateClass>(
+	    "App.Enums", // QML namespace
+	    1,
+	    0, // Major and minor versions
+	    "DynamicObjectState", // Enum group name in QML
 	    "Cannot create PriorityType in QML. Access enums only.");
 }
 
