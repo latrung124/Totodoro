@@ -36,6 +36,7 @@ set(CONFIG_CONST_VAL_SOURCES
 # set the view-models
 set(VM_SOURCES
     view-models/home/HomeViewModel.h
+    view-models/pomodoro/PomodoroViewModel.h
     view-models/userprofile/UserProfileViewModel.h
     view-models/taskmanagement/TaskGroupsViewModel.h
     view-models/taskmanagement/TaskGroupViewModel.h
@@ -44,6 +45,7 @@ set(VM_SOURCES
     view-models/mediaplayer/MediaPlaybackViewModel.h
     view-models/mediaplayer/MediaPlayerViewModel.h
     view-models/home/HomeViewModel.cpp
+    view-models/pomodoro/PomodoroViewModel.cpp
     view-models/userprofile/UserProfileViewModel.cpp
     view-models/taskmanagement/TaskGroupsViewModel.cpp
     view-models/taskmanagement/TaskGroupViewModel.cpp
@@ -70,8 +72,9 @@ set(CONTROLLER_SOURCES
     core/controllers/ViewModelController.cpp core/controllers/ModelController.h
     core/controllers/ViewModelController.h)
 
-set(UTIL_SOURCES utils/ThreadGuard.h utils/ScopedThread.h
-                 utils/qmltypes/PriorityTypeClass.h)
+set(UTIL_SOURCES
+    utils/ThreadGuard.h utils/ScopedThread.h utils/qmltypes/PriorityTypeClass.h
+    utils/qmltypes/DynamicObjectStateClass.h)
 
 set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h
