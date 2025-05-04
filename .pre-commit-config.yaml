@@ -19,10 +19,22 @@ repos:
         files: |
           (?x)(
             ^core/.* |
-            ^core/services/.* |
             ^core/controllers/.* |
+            ^core/factories/.* |
+            ^core/services/.* |
+            ^helpers/.* |
+            ^services/.* |
+            ^services/interfaces/.* |
+            ^services/service-factory/.* |
+            ^services/window-services/.* |
             ^config/const_val/.* |
             ^utils/.* |
+            ^utils/qmltypes/.* |
+            ^view-models/.* |
+            ^view-models/home/.* |
+            ^view-models/pomodoro/.* |
+            ^view-models/taskmanagement/.* |
+            ^view-models/userprofile/.* |
             ^view-models/mediaplayer/.* |
             ^models/.* |
             ^models/mediaplayer/.* |
