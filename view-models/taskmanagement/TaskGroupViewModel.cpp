@@ -109,30 +109,30 @@ QString TaskGroupViewModel::description() const
 	return m_description;
 }
 
-void TaskGroupViewModel::setTaskCompleted(int taskCompleted)
+int TaskGroupViewModel::completedTasks() const
 {
-	if (m_taskCompleted != taskCompleted) {
-		m_taskCompleted = taskCompleted;
-		emit taskCompletedChanged();
+	return m_completedTasks;
+}
+
+void TaskGroupViewModel::setCompletedTasks(int completedTasks)
+{
+	if (m_completedTasks != completedTasks) {
+		m_completedTasks = completedTasks;
+		emit completedTasksChanged();
 	}
 }
 
-int TaskGroupViewModel::taskCompleted() const
+int TaskGroupViewModel::totalTasks() const
 {
-	return m_taskCompleted;
+	return m_totalTasks;
 }
 
-void TaskGroupViewModel::setTotalTask(int totalTask)
+void TaskGroupViewModel::setTotalTasks(int totalTasks)
 {
-	if (m_totalTask != totalTask) {
-		m_totalTask = totalTask;
-		emit totalTaskChanged();
+	if (m_totalTasks != totalTasks) {
+		m_totalTasks = totalTasks;
+		emit totalTasksChanged();
 	}
-}
-
-int TaskGroupViewModel::totalTask() const
-{
-	return m_totalTask;
 }
 
 void TaskGroupViewModel::setTasks(const QObject *tasks)

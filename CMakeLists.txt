@@ -37,6 +37,7 @@ set(CONFIG_CONST_VAL_SOURCES
 set(VM_SOURCES
     view-models/home/HomeViewModel.h
     view-models/pomodoro/PomodoroViewModel.h
+    view-models/pomodoro/PomodoroTitleViewModel.h
     view-models/userprofile/UserProfileViewModel.h
     view-models/taskmanagement/TaskGroupsViewModel.h
     view-models/taskmanagement/TaskGroupViewModel.h
@@ -46,6 +47,7 @@ set(VM_SOURCES
     view-models/mediaplayer/MediaPlayerViewModel.h
     view-models/home/HomeViewModel.cpp
     view-models/pomodoro/PomodoroViewModel.cpp
+    view-models/pomodoro/PomodoroTitleViewModel.cpp
     view-models/userprofile/UserProfileViewModel.cpp
     view-models/taskmanagement/TaskGroupsViewModel.cpp
     view-models/taskmanagement/TaskGroupViewModel.cpp
@@ -74,7 +76,8 @@ set(CONTROLLER_SOURCES
 
 set(UTIL_SOURCES
     utils/ThreadGuard.h utils/ScopedThread.h utils/qmltypes/PriorityTypeClass.h
-    utils/qmltypes/DynamicObjectStateClass.h)
+    utils/qmltypes/MainTabTypeClass.h utils/qmltypes/DynamicObjectStateClass.h
+    utils/qmltypes/PomodoroStateClass.h)
 
 set(CORE_SOURCES
     core/services/ServiceConcreteHelper.h
@@ -114,7 +117,9 @@ set(CORE_FACTORY_SOURCES
     core/factories/ParamContainer.h
     core/factories/ViewModelFactory.h
     core/factories/view-model-producers/ViewModelProducer.h
+    core/factories/view-model-producers/HomeVMProducer.h
     core/factories/view-model-producers/MediaPlayerVMProducer.h
+    core/factories/view-model-producers/HomeVMProducer.cpp
     core/factories/view-model-producers/MediaPlayerVMProducer.cpp)
 
 set(CORE_SERVICE_STRATEGIES

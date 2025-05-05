@@ -12,10 +12,21 @@ import QtQuick.Layouts
 Item {
 	id: root
 
+	property QtObject model: null
+
 	property alias backgroundColor: background.color
 
 	implicitWidth: 296
 	implicitHeight: 586
+
+	onModelChanged: {
+		console.log("TaskGroupListPanel model changed!");
+		if (model) {
+			taskGroupListView.model = root.model;
+		} else {
+			console.log("TaskGroupListPanel model is null!");
+		}
+	}
 
 	Rectangle {
 		id: background
@@ -41,18 +52,27 @@ Item {
 			clip: true
 			spacing: 20
 
-			model: 5
-			delegate: TaskGroupItem {
-				required property int index
+			// delegate: TaskGroupItem {
+			// 	required property int index
 
+			// 	width: taskGroupListView.width
+			// 	height: 173
+			// 	name: model.name
+			// 	description: "default description"
+			// 	completedTasks: 1
+			// 	totalTasks: 8
+
+			// 	selected: ListView.isCurrentItem
+			// 	MouseArea {
+			// 		anchors.fill: parent
+			// 		onClicked: taskGroupListView.currentIndex = index
+			// 	}
+			// }
+
+			delegate: GroupItem {
 				width: taskGroupListView.width
 				height: 173
-
-				selected: ListView.isCurrentItem
-				MouseArea {
-					anchors.fill: parent
-					onClicked: taskGroupListView.currentIndex = index
-				}
+				name: model.name
 			}
 		}
 	}

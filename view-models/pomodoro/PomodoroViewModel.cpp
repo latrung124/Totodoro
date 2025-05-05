@@ -10,10 +10,23 @@
 PomodoroViewModel::PomodoroViewModel(QObject *parent)
     : QObject(parent)
 {
+	initDummyData();
 }
 
 PomodoroViewModel::~PomodoroViewModel()
 {
+}
+
+void PomodoroViewModel::initDummyData()
+{
+	setPomodoroTime(25 * 60); // 25 minutes
+	setProgressTime(5 * 60); // 5 minutes
+	setShortBreakTime(5 * 60); // 5 minutes
+	setLongBreakTime(15 * 60); // 15 minutes
+	setCurrentState(PomodoroState::Idle); // Initial state
+	setDynamicObjectState(DynamicObjectState::Egg);
+	setPomodoroCompleted(0);
+	setDynamicObject("default");
 }
 
 void PomodoroViewModel::setPomodoroTime(int time)
@@ -68,7 +81,7 @@ int PomodoroViewModel::longBreakTime() const
 	return m_longBreakTime;
 }
 
-void PomodoroViewModel::setCurrentState(int state)
+void PomodoroViewModel::setCurrentState(PomodoroState state)
 {
 	if (m_currentState != state) {
 		m_currentState = state;
@@ -76,7 +89,7 @@ void PomodoroViewModel::setCurrentState(int state)
 	}
 }
 
-int PomodoroViewModel::currentState() const
+PomodoroState PomodoroViewModel::currentState() const
 {
 	return m_currentState;
 }

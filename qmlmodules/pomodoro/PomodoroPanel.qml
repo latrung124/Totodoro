@@ -14,6 +14,8 @@ import CommonModule 1.0
 Item {
     id: root
 
+    property QtObject model: null
+
     property alias backgroundColor: background.color
 
     implicitWidth: 580

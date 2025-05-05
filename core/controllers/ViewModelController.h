@@ -14,7 +14,10 @@
 #include <typeindex>
 #include <unordered_map>
 
+#include "utils/qmltypes/MainTabTypeClass.h"
+
 class MediaPlayerViewModel;
+class HomeViewModel;
 class ViewModelFactory;
 
 class ViewModelController : public QObject
@@ -29,13 +32,21 @@ public:
 
 	void registerViewModels();
 
-	void initMediaPlayerView(QObject *obj);
+	void setRootObject(QObject *root);
+
+	void initMediaPlayerView();
+	void initHomeView();
+
+	// INVOKEABLE FUNCTIONS
+	Q_INVOKABLE void tabNavigation(MainTabType tabType);
 
 private:
 	MediaPlayerViewModel *mediaPlayerViewModel();
+	HomeViewModel *homeViewModel();
 
 	ViewModelFactoryUPtr m_vmFactory;
 	std::unordered_map<std::type_index, std::unique_ptr<QObject>> m_viewModels;
+	QObject *m_rootObject = nullptr;
 };
 
 #endif // VIEWMODELCONTROLLER_H

@@ -18,6 +18,8 @@ import UserProfileModule 1.0
 Item {
     id: root
 
+    property QtObject model: null
+
     property alias radius: backgroundRect.radius
     property alias backgroundColor: backgroundRect.color
 
@@ -58,12 +60,16 @@ Item {
                 UserProfilePanel {
                     id: userProfile
 
+                    model: root.model ? root.model.userProfile : null
+
                     Layout.preferredWidth: 42
                     Layout.fillHeight: true
                 }
 
 				TaskGroupListPanel {
 					id: taskGroupList
+
+                    model: root.model ? root.model.taskGroups : null
 
 					Layout.fillWidth: true
 					Layout.fillHeight: true
@@ -104,6 +110,8 @@ Item {
                         PomodoroTitlePanel {
                             id: title
 
+                            model: root.model ? root.model.pomodoroTitle : null
+
                             anchors.fill: parent
                             backgroundColor: "transparent"
                         }
@@ -122,6 +130,8 @@ Item {
                     PomodoroPanel {
                         id: pomodoroPanel
 
+                        model: root.model ? root.model.pomodoro : null
+
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignLeft
@@ -138,6 +148,10 @@ Item {
                         roundBottomLeft: false
 
                         TasksListPanel {
+                            id: tasksListPanel
+
+                            model: root.model ? root.model.tasks : null
+
                             width: parent.width
                             height: parent.height
                             backgroundColor: "transparent"

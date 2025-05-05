@@ -10,19 +10,31 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
+import App.Enums 1.0
 import CommonModule 1.0
 import TasksListModule 1.0
 
-Rectangle {
+Item {
 	id: root
 
 	property bool selected: false
 
+    property int priority: PriorityType.Medium
+	property string name: ""
+	property string description: ""
+	property int completedTasks: 0
+	property int totalTasks: 0
+
 	implicitWidth: 296
 	implicitHeight: 173
 
-	radius: 10
-	color: internal.backgroundColor
+	Rectangle {
+		id: background
+
+		anchors.fill: parent
+		radius: 10
+		color: internal.backgroundColor
+	}
 
 	ColumnLayout {
 		anchors {
@@ -35,6 +47,8 @@ Rectangle {
 			Layout.preferredHeight: moreIcon.height
 
 			Text {
+				id: taskPriorityText
+
 				Layout.alignment: Qt.AlignLeft
 
 				font {
@@ -43,8 +57,6 @@ Rectangle {
 					weight: Font.Medium
 				}
 				color: "#538EF5"
-
-				text: "Low Priority"
 			}
 
 			Item {
@@ -97,6 +109,8 @@ Rectangle {
 			}
 
 			Text {
+				id: groupNameText
+
 				Layout.fillWidth: true
 				Layout.preferredHeight: parent.height
 				Layout.leftMargin: 10
@@ -111,12 +125,13 @@ Rectangle {
 				elide: Text.ElideRight
 				maximumLineCount: 2
 				wrapMode: Text.Wrap
-				text: "72 Solomon Demon redrawing & " +
-					  "Chinese Zodiac 2025 making"
+				text: root.name
 			}
 		}
 
 		Text {
+			id: groupDescriptionText
+
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 
@@ -130,8 +145,7 @@ Rectangle {
 			elide: Text.ElideRight
 			maximumLineCount: 2
 			wrapMode: Text.Wrap
-			text: "Remake the 72 Solomon demon and " +
-				  "New Year Chinese Zodiac 2025"
+			text: root.description
 		}
 
 		TaskGroupProgressBar {
@@ -139,8 +153,8 @@ Rectangle {
 
 			Layout.fillWidth: true
 			Layout.preferredHeight: 6
-			totalTasks: 8
-			completedTasks: 6
+			totalTasks: root.totalTasks
+			completedTasks: root.completedTasks
 			isSelected: root.selected
 		}
 
@@ -149,6 +163,8 @@ Rectangle {
 			Layout.preferredHeight: calendarIcon.height
 
 			Text {
+				id: taskProgressText
+
 				Layout.alignment: Qt.AlignLeft
 
 				font {
@@ -156,7 +172,6 @@ Rectangle {
 					pixelSize: 12
 				}
 				color: internal.describeColor
-				text: "6/8 completed"
 			}
 
 			Item {
@@ -164,7 +179,7 @@ Rectangle {
 			}
 
 			RowLayout {
-				Layout.preferredWidth: calendarIcon.width + dayLeft.width + internal.spacing
+                Layout.preferredWidth: calendarIcon.width + dayLeftText.width + internal.spacing
 				Layout.preferredHeight: calendarIcon.height
 
 				OverlayedImage {
@@ -174,7 +189,7 @@ Rectangle {
 				}
 
 				Text {
-					id: dayLeft
+					id: dayLeftText
 
 					Layout.leftMargin: internal.spacing
 					Layout.alignment: Qt.AlignLeft
@@ -184,7 +199,6 @@ Rectangle {
 						pixelSize: 12
 					}
 					color: internal.selectedColor
-					text: "1 day left"
 				}
 			}
 		}

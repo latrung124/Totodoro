@@ -28,8 +28,8 @@ class TaskGroupViewModel : public QObject
 	Q_PROPERTY(QString status READ status WRITE setStatus NOTIFY statusChanged)
 	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
 	Q_PROPERTY(
-	    int taskCompleted READ taskCompleted WRITE setTaskCompleted NOTIFY taskCompletedChanged)
-	Q_PROPERTY(int totalTask READ totalTask WRITE setTotalTask NOTIFY totalTaskChanged)
+	    int completedTasks READ completedTasks WRITE setCompletedTasks NOTIFY completedTasksChanged)
+	Q_PROPERTY(int totalTasks READ totalTasks WRITE setTotalTasks NOTIFY totalTasksChanged)
 	Q_PROPERTY(QObject *tasks READ tasks WRITE setTasks NOTIFY tasksChanged)
 
 public:
@@ -59,11 +59,11 @@ public:
 	void setDescription(const QString &description);
 	QString description() const;
 
-	void setTaskCompleted(int taskCompleted);
-	int taskCompleted() const;
+	void setCompletedTasks(int completedTasks);
+	int completedTasks() const;
 
-	void setTotalTask(int totalTask);
-	int totalTask() const;
+	void setTotalTasks(int totalTasks);
+	int totalTasks() const;
 
 	void setTasks(const QObject *tasks);
 	QObject *tasks() const;
@@ -76,11 +76,13 @@ signals:
 	void priorityChanged();
 	void statusChanged();
 	void descriptionChanged();
-	void taskCompletedChanged();
-	void totalTaskChanged();
+	void completedTasksChanged();
+	void totalTasksChanged();
 	void tasksChanged();
 
 private:
+	int m_completedTasks = 0;
+	int m_totalTasks = 0;
 	QString m_taskGroupId;
 	QString m_icon;
 	QString m_name;
@@ -88,8 +90,6 @@ private:
 	PriorityType m_priority = PriorityType::Medium;
 	QString m_status;
 	QString m_description;
-	int m_taskCompleted = 0;
-	int m_totalTask = 0;
 	TasksViewModelPtr m_tasks;
 };
 

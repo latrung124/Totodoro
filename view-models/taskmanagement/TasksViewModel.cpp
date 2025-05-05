@@ -12,10 +12,25 @@
 TasksViewModel::TasksViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+	initDummyData();
 }
 
 TasksViewModel::~TasksViewModel()
 {
+}
+
+void TasksViewModel::initDummyData()
+{
+	auto task = std::make_shared<TaskViewModel>();
+	task->setTaskId(1);
+	task->setTaskName("Task Default");
+	task->setIcon("");
+	task->setTotalPomodoros(5);
+	task->setCompletedPomodoros(2);
+	task->setPriorityType(PriorityType::Medium);
+	task->setDescription("Description");
+
+	m_tasks.push_back(task);
 }
 
 int TasksViewModel::rowCount(const QModelIndex &parent) const

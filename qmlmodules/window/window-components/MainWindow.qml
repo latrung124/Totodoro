@@ -182,7 +182,6 @@ Window {
                 }
             }
         }
-
     }
 
     StackLayout {
@@ -217,10 +216,16 @@ Window {
                 WHomeTabLayout {
                     id: homeTabLayout
 
+                    objectName: "homeView"
+
                     width: homeTab.width
                     height: homeTab.height
 
                     radius: homeTab.radius
+
+                    onModelChanged: {
+                        console.log("Home tab model changed")
+                    }
                 }
             }
         }
@@ -233,6 +238,11 @@ Window {
             Layout.fillWidth: true
 
             triangleXCenter: internal.calculateTabBarXCenter(1)
+        }
+
+        onCurrentIndexChanged: {
+            console.log("Current index changed to: " + stackLayout.currentIndex);
+            viewModelController.tabNavigation(stackLayout.currentIndex);
         }
     }
 
