@@ -14,6 +14,8 @@ import CommonModule 1.0
 Item {
     id: root
 
+    property QtObject model: null
+
     implicitWidth: 42
     implicitHeight: 620
 

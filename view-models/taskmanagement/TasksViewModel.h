@@ -42,6 +42,8 @@ public:
 	QHash<int, QByteArray> roleNames() const override;
 
 private:
+	void initDummyData();
+
 	std::vector<TaskViewModelPtr> m_tasks;
 };
 

@@ -14,10 +14,26 @@
 TaskGroupsViewModel::TaskGroupsViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+	initDummyData();
 }
 
 TaskGroupsViewModel::~TaskGroupsViewModel()
 {
+}
+
+void TaskGroupsViewModel::initDummyData()
+{
+	// Initialize dummy data here if needed
+	auto taskGroup = std::make_shared<TaskGroupViewModel>();
+	taskGroup->setTaskGroupId("1");
+	taskGroup->setIcon("icon.png");
+	taskGroup->setName("Default Task Group");
+	taskGroup->setDeadline("2025-12-31");
+	taskGroup->setPriority(PriorityType::Medium);
+	taskGroup->setStatus("In Progress");
+	taskGroup->setDescription("This is a description of Default Task Group.");
+
+	m_taskGroups.push_back(taskGroup);
 }
 
 int TaskGroupsViewModel::rowCount(const QModelIndex &parent) const
@@ -48,10 +64,10 @@ QVariant TaskGroupsViewModel::data(const QModelIndex &index, int role) const
 		return taskGroup->status();
 	case DescriptionRole:
 		return taskGroup->description();
-	case TaskCompletedRole:
-		return taskGroup->taskCompleted();
-	case TotalTaskRole:
-		return taskGroup->totalTask();
+	case CompletedTasksRole:
+		return taskGroup->completedTasks();
+	case TotalTasksRole:
+		return taskGroup->totalTasks();
 	case TasksRole:
 		return QVariant::fromValue(taskGroup->tasks());
 	default:
@@ -69,7 +85,28 @@ QHash<int, QByteArray> TaskGroupsViewModel::roleNames() const
 	    {PriorityRole, "priority"},
 	    {StatusRole, "status"},
 	    {DescriptionRole, "description"},
-	    {TaskCompletedRole, "taskCompleted"},
-	    {TotalTaskRole, "totalTask"},
+	    {CompletedTasksRole, "completedTasks"},
+	    {TotalTasksRole, "totalTasks"},
 	    {TasksRole, "tasks"}};
+}
+
+QVariantMap TaskGroupsViewModel::get(int index) const
+{
+	// Used for debug on qml
+	if (index < 0 || index >= m_taskGroups.size()) {
+		return QVariantMap();
+	}
+	const auto &taskGroup = m_taskGroups[index];
+	QVariantMap taskGroupData;
+	taskGroupData["taskGroupId"] = taskGroup->taskGroupId();
+	taskGroupData["icon"] = taskGroup->icon();
+	taskGroupData["name"] = taskGroup->name();
+	taskGroupData["deadline"] = taskGroup->deadline();
+	taskGroupData["priority"] = static_cast<int>(taskGroup->priority());
+	taskGroupData["status"] = taskGroup->status();
+	taskGroupData["description"] = taskGroup->description();
+	taskGroupData["completedTasks"] = taskGroup->completedTasks();
+	taskGroupData["totalTasks"] = taskGroup->totalTasks();
+	taskGroupData["tasks"] = QVariant::fromValue(taskGroup->tasks());
+	return taskGroupData;
 }

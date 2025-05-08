@@ -85,7 +85,7 @@ Item {
                         lineHeight: 1.0
                         lineHeightMode: Text.FixedHeight
                         color: root.basicColor
-                        text: model ? model.title : "Unknown"
+                        text: root.model ? root.model.title : "Unknown"
                     }
                 }
 
@@ -121,7 +121,7 @@ Item {
                         lineHeight: 1.0
                         lineHeightMode: Text.FixedHeight
                         color: root.basicColor
-                        text: model ? model.album : "Unknown"
+                        text: root.model ? root.model.album : "Unknown"
                     }
                 }
             }
@@ -141,7 +141,7 @@ Item {
                 RowLayout {
                     id: playbackControl
 
-                    property QtObject playbackModel: model ? model.mediaPlaybackViewModel : null
+                    property QtObject playbackModel: root.model ? root.model.mediaPlaybackViewModel : null
 
                     Layout.preferredWidth: 160
                     Layout.fillHeight: true

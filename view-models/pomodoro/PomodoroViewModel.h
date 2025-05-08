@@ -11,6 +11,7 @@
 #include <QObject>
 
 #include "utils/qmltypes/DynamicObjectStateClass.h"
+#include "utils/qmltypes/PomodoroStateClass.h"
 
 class PomodoroViewModel : public QObject
 {
@@ -21,7 +22,8 @@ class PomodoroViewModel : public QObject
 	    int shortBreakTime READ shortBreakTime WRITE setShortBreakTime NOTIFY shortBreakTimeChanged)
 	Q_PROPERTY(
 	    int longBreakTime READ longBreakTime WRITE setLongBreakTime NOTIFY longBreakTimeChanged)
-	Q_PROPERTY(int currentState READ currentState WRITE setCurrentState NOTIFY currentStateChanged)
+	Q_PROPERTY(PomodoroState currentState READ currentState WRITE setCurrentState NOTIFY
+	               currentStateChanged)
 	Q_PROPERTY(DynamicObjectState dynamicObjectState READ getDynamicObjectState WRITE
 	               setDynamicObjectState NOTIFY dynamicObjectStateChanged)
 	Q_PROPERTY(int pomodoroCompleted READ pomodoroCompleted WRITE setPomodoroCompleted NOTIFY
@@ -45,8 +47,8 @@ public:
 	void setLongBreakTime(int time);
 	int longBreakTime() const;
 
-	void setCurrentState(int state);
-	int currentState() const;
+	void setCurrentState(PomodoroState state);
+	PomodoroState currentState() const;
 
 	void setDynamicObjectState(DynamicObjectState state);
 	DynamicObjectState getDynamicObjectState() const;
@@ -68,15 +70,17 @@ signals:
 	void dynamicObjectChanged();
 
 private:
+	void initDummyData();
+
 	// Time in seconds
 	int m_pomodoroTime = 0;
 	int m_progressTime = 0;
 	int m_shortBreakTime = 0;
 	int m_longBreakTime = 0;
-	int m_currentState = 0;
 	int m_pomodoroCompleted = 0;
-	QString m_dynamicObject;
+	PomodoroState m_currentState = PomodoroState::Idle;
 	DynamicObjectState m_dynamicObjectState = DynamicObjectState::Egg; // Default state is Egg
+	QString m_dynamicObject;
 };
 
 #endif // POMODORO_VIEW_MODEL_H

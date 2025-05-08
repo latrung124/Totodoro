@@ -64,6 +64,21 @@ void GuiApplication::start()
 	setContexts();
 
 	m_engine->addImportPath("qrc:/resources/qml");
+
+	// Handle objectCreated signal
+	connect(
+	    m_engine.get(),
+	    &QQmlApplicationEngine::objectCreated,
+	    this,
+	    [this](QObject *obj, const QUrl &url) {
+		    Q_UNUSED(url);
+		    if (!obj) {
+			    qFatal("Failed to load QML file.");
+		    }
+
+		    m_viewModelController->setRootObject(obj);
+	    });
+
 	m_engine->loadFromModule("Totodoro", "Main");
 	if (m_engine->rootObjects().isEmpty()) {
 		qFatal("Failed to load QML file.");
@@ -71,6 +86,7 @@ void GuiApplication::start()
 
 	initViewModels();
 
+	// Start some connections after the mainwindow was loaded.
 	startConnections();
 }
 
@@ -92,5 +108,7 @@ QObject *GuiApplication::rootObject() const
 void GuiApplication::initViewModels()
 {
 	m_viewModelController->registerViewModels();
-	m_viewModelController->initMediaPlayerView(rootObject());
+
+	m_viewModelController->initMediaPlayerView();
+	m_viewModelController->initHomeView(); // Start with Home View
 }

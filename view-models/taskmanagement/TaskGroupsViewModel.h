@@ -24,15 +24,15 @@ public:
 
 	enum Role
 	{
-		TaskGroupIdRole = Qt::UserRole,
+		TaskGroupIdRole = Qt::UserRole + 1,
 		IconRole,
 		NameRole,
 		DeadlineRole,
 		PriorityRole,
 		StatusRole,
 		DescriptionRole,
-		TaskCompletedRole,
-		TotalTaskRole,
+		CompletedTasksRole,
+		TotalTasksRole,
 		TasksRole
 	};
 
@@ -43,7 +43,11 @@ public:
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 	QHash<int, QByteArray> roleNames() const override;
 
+	Q_INVOKABLE QVariantMap get(int index) const; // Used for debug on qml
+
 private:
+	void initDummyData();
+
 	std::vector<TaskGroupViewModelPtr> m_taskGroups;
 };
 #endif // TASKGROUPSVIEWMODEL_H

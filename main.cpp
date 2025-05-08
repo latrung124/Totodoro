@@ -26,6 +26,8 @@ File: main.cpp
 #include "core/services/ServiceManager.h"
 
 #include "utils/qmltypes/DynamicObjectStateClass.h"
+#include "utils/qmltypes/MainTabTypeClass.h"
+#include "utils/qmltypes/PomodoroStateClass.h"
 #include "utils/qmltypes/PriorityTypeClass.h"
 
 #include "config/const_val/ApplicationConst.h"
@@ -66,6 +68,22 @@ void registerQmlTypes()
 	    0, // Major and minor versions
 	    "DynamicObjectState", // Enum group name in QML
 	    "Cannot create PriorityType in QML. Access enums only.");
+
+	qRegisterMetaType<MainTabType>("MainTabType");
+	qmlRegisterUncreatableType<MainTabTypeClass>(
+	    "App.Enums", // QML namespace
+	    1,
+	    0, // Major and minor versions
+	    "MainTabType", // Enum group name in QML
+	    "Cannot create MainTabType in QML. Access enums only.");
+
+	qRegisterMetaType<PomodoroState>("PomodoroState");
+	qmlRegisterUncreatableType<PomodoroStateClass>(
+	    "App.Enums", // QML namespace
+	    1,
+	    0, // Major and minor versions
+	    "PomodoroState", // Enum group name in QML
+	    "Cannot create PomodoroState in QML. Access enums only.");
 }
 
 void serviceRegister()
