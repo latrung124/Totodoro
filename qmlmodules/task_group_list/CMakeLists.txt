@@ -11,7 +11,6 @@ qt_add_qml_module(
   OUTPUT_DIRECTORY
   ${QT_QML_OUTPUT_DIRECTORY}/TaskGroupListModule
   QML_FILES
-  GroupItem.qml
   TaskGroupListPanel.qml
   TaskGroupListTitlePanel.qml
   TaskGroupProgressBar.qml

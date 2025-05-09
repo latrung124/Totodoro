@@ -52,27 +52,20 @@ Item {
 			clip: true
 			spacing: 20
 
-			// delegate: TaskGroupItem {
-			// 	required property int index
-
-			// 	width: taskGroupListView.width
-			// 	height: 173
-			// 	name: model.name
-			// 	description: "default description"
-			// 	completedTasks: 1
-			// 	totalTasks: 8
-
-			// 	selected: ListView.isCurrentItem
-			// 	MouseArea {
-			// 		anchors.fill: parent
-			// 		onClicked: taskGroupListView.currentIndex = index
-			// 	}
-			// }
-
-			delegate: GroupItem {
+			delegate: TaskGroupItem {
 				width: taskGroupListView.width
 				height: 173
 				name: model.name
+				description: model.description
+				completedTasks: model.completedTasks
+				totalTasks: model.totalTasks
+				priority: model.priority
+
+				selected: ListView.isCurrentItem
+				MouseArea {
+					anchors.fill: parent
+					onClicked: taskGroupListView.currentIndex = index
+				}
 			}
 		}
 	}

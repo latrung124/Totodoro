@@ -24,16 +24,20 @@ TaskGroupsViewModel::~TaskGroupsViewModel()
 void TaskGroupsViewModel::initDummyData()
 {
 	// Initialize dummy data here if needed
-	auto taskGroup = std::make_shared<TaskGroupViewModel>();
-	taskGroup->setTaskGroupId("1");
-	taskGroup->setIcon("icon.png");
-	taskGroup->setName("Default Task Group");
-	taskGroup->setDeadline("2025-12-31");
-	taskGroup->setPriority(PriorityType::Medium);
-	taskGroup->setStatus("In Progress");
-	taskGroup->setDescription("This is a description of Default Task Group.");
+	for (int i = 0; i < 10; ++i) {
+		auto taskGroup = std::make_shared<TaskGroupViewModel>();
+		taskGroup->setTaskGroupId(QString::number(i));
+		taskGroup->setIcon("icon.png");
+		taskGroup->setName(QString("Task Group %1").arg(i));
+		taskGroup->setDeadline("2025-12-31");
+		taskGroup->setPriority(PriorityType::Medium);
+		taskGroup->setStatus("In Progress");
+		taskGroup->setDescription(QString("This is a description of Task Group %1.").arg(i));
+		taskGroup->setCompletedTasks(i);
+		taskGroup->setTotalTasks(10);
 
-	m_taskGroups.push_back(taskGroup);
+		m_taskGroups.push_back(taskGroup);
+	}
 }
 
 int TaskGroupsViewModel::rowCount(const QModelIndex &parent) const

@@ -18,7 +18,6 @@ Item {
 	id: root
 
 	property bool selected: false
-
     property int priority: PriorityType.Medium
 	property string name: ""
 	property string description: ""
@@ -57,6 +56,7 @@ Item {
 					weight: Font.Medium
 				}
 				color: "#538EF5"
+				text: internal.getPriorityText(root.priority)
 			}
 
 			Item {
@@ -172,6 +172,7 @@ Item {
 					pixelSize: 12
 				}
 				color: internal.describeColor
+				text: internal.getTaskProgressText(root.completedTasks, root.totalTasks)
 			}
 
 			Item {
@@ -199,6 +200,7 @@ Item {
 						pixelSize: 12
 					}
 					color: internal.selectedColor
+					text: internal.getDayLeftText()
 				}
 			}
 		}
@@ -223,5 +225,27 @@ Item {
 		readonly property color selectedColor: root.selected ? white : black
 		readonly property color describeColor: root.selected ? mediumGray : darkGray
 		readonly property color taskProgressBarColor: root.selected ? white : darkGray
+
+		function getPriorityText(priority) {
+			switch (priority) {
+				case PriorityType.High:
+					return "High Priority";
+				case PriorityType.Medium:
+					return "Medium Priority";
+				case PriorityType.Low:
+					return "Low Priority";
+				default:
+					return "";
+			}
+		}
+
+		function getTaskProgressText(completedTasks, totalTasks) {
+			return completedTasks + "/" + totalTasks + " completed";
+		}
+
+		function getDayLeftText() {
+			// TODO: Implement this function to calculate the number of days left
+			return "3 days left";
+		}
 	}
 }
