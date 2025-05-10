@@ -10,10 +10,18 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
+import App.Enums 1.0
+
 Item {
 	id: root
 
 	property bool selected: false
+	property string name: ""
+	property string description: ""
+    property int priority: PriorityType.Medium
+	property int completedPomodoros: 0
+	property int totalPomodoros: 0
+	property string dueDate: "" // TODO: handle due date formatting
 
 	Rectangle {
 		id: checkBox
@@ -72,7 +80,7 @@ Item {
 
 					Image {
 						id: priority
-						source: "resources/priority/medium.svg"
+						source: internal.getTaskPriorityIcon(root.priority)
 					}
 
 					Text {
@@ -84,7 +92,7 @@ Item {
 							weight: Font.DemiBold
 						}
 						color: internal.textColor
-						text: "Medium"
+						text: internal.getTaskPriorityText(root.priority)
 					}
 
 					Rectangle {
@@ -122,6 +130,8 @@ Item {
 					}
 
 					Text {
+						id: taskName
+
 						Layout.alignment: Qt.AlignLeft
 
 						font {
@@ -130,12 +140,14 @@ Item {
 							weight: Font.DemiBold
 						}
 						color: internal.textColor
-						text: "Lesson 7"
+						text: root.name
 					}
 
 				}
 
 				Text {
+					id: taskDescription
+
 					font {
 						family: internal.font
 						pixelSize: 12
@@ -143,7 +155,7 @@ Item {
 					}
 					color: internal.descriptionColor
 					elide: Text.ElideLeft
-					text: "Learn something about animal."
+					text: root.description
 				}
 			}
 		}
@@ -169,5 +181,31 @@ Item {
 		readonly property color backgroundColor: root.selected ? darkestGray : lightestGray
 		readonly property color verticalBarColor: root.selected ? whiteAlpha10 : lightGray
 		readonly property color descriptionColor: root.selected ? mediumGray : darkGray
+
+		function getTaskPriorityText(priority) {
+			switch (priority) {
+				case PriorityType.Low:
+					return "Low";
+				case PriorityType.Medium:
+					return "Medium";
+				case PriorityType.High:
+					return "High";
+				default:
+					return "";
+			}
+		}
+
+		function getTaskPriorityIcon(priority) {
+			switch (priority) {
+				case PriorityType.Low:
+					return "resources/priority/low.svg";
+				case PriorityType.Medium:
+					return "resources/priority/medium.svg";
+				case PriorityType.High:
+					return "resources/priority/high.svg";
+				default:
+					return "";
+			}
+		}
 	}
 }

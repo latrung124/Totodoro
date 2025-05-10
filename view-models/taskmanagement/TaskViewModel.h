@@ -15,27 +15,26 @@
 class TaskViewModel : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(int taskId READ taskId WRITE setTaskId NOTIFY taskIdChanged)
-	Q_PROPERTY(QString taskName READ taskName WRITE setTaskName NOTIFY taskNameChanged)
+	Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
+	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 	Q_PROPERTY(QString icon READ icon WRITE setIcon NOTIFY iconChanged)
 	Q_PROPERTY(
 	    int totalPomodoros READ totalPomodoros WRITE setTotalPomodoros NOTIFY totalPomodorosChanged)
 	Q_PROPERTY(int completedPomodoros READ completedPomodoros WRITE setCompletedPomodoros NOTIFY
 	               completedPomodorosChanged)
-	Q_PROPERTY(
-	    PriorityType priorityType READ priorityType WRITE setPriorityType NOTIFY priorityTypeChanged)
+	Q_PROPERTY(PriorityType priority READ priority WRITE setPriority NOTIFY priorityChanged)
 	Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
-	Q_PROPERTY(QString deadline READ deadline WRITE setDeadline NOTIFY deadlineChanged)
+	Q_PROPERTY(QString dueDate READ dueDate WRITE setDueDate NOTIFY dueDateChanged)
 
 public:
 	explicit TaskViewModel(QObject *parent = nullptr);
 	~TaskViewModel() override;
 
-	int taskId() const;
-	void setTaskId(int id);
+	int id() const;
+	void setId(int id);
 
-	QString taskName() const;
-	void setTaskName(const QString &name);
+	QString name() const;
+	void setName(const QString &name);
 
 	QString icon() const;
 	void setIcon(const QString &iconPath);
@@ -46,34 +45,34 @@ public:
 	int completedPomodoros() const;
 	void setCompletedPomodoros(int count);
 
-	PriorityType priorityType() const;
-	void setPriorityType(PriorityType type);
+	PriorityType priority() const;
+	void setPriority(PriorityType type);
 
 	QString description() const;
 	void setDescription(const QString &description);
 
-	QString deadline() const;
-	void setDeadline(const QString &deadline);
+	QString dueDate() const;
+	void setDueDate(const QString &dueDate);
 
 signals:
-	void taskIdChanged();
-	void taskNameChanged();
+	void idChanged();
+	void nameChanged();
 	void iconChanged();
 	void totalPomodorosChanged();
 	void completedPomodorosChanged();
-	void priorityTypeChanged();
+	void priorityChanged();
 	void descriptionChanged();
-	void deadlineChanged();
+	void dueDateChanged();
 
 private:
-	int m_taskId = 0; // TODO: Use a unique identifier for each task
-	QString m_taskName;
+	int m_id = 0; // TODO: Use a unique identifier for each task
+	QString m_name;
 	QString m_icon;
 	int m_totalPomodoros = 0;
 	int m_completedPomodoros = 0;
-	PriorityType m_priorityType = PriorityType::Medium;
+	PriorityType m_priority = PriorityType::Medium;
 	QString m_description;
-	QString m_deadline;
+	QString m_dueDate;
 };
 
 #endif // TASKVIEWMODEL_H

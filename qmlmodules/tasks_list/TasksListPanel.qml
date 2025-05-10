@@ -21,6 +21,15 @@ Item {
     implicitWidth: 338
     implicitHeight: 586
 
+	onModelChanged: {
+		console.log("TasksListPanel: model changed");
+		if (model) {
+            tasksListView.model = root.model;
+		} else {
+			console.log("TasksListPanel: model is null");
+		}
+	}
+
 	Rectangle {
 		id: background
 		anchors.fill: parent
@@ -93,6 +102,8 @@ Item {
 		}
 
 		TasksListView {
+			id: tasksListView
+
 			Layout.preferredWidth: internal.taskItemWidth
 			Layout.fillHeight: true
 			Layout.alignment: Qt.AlignHCenter

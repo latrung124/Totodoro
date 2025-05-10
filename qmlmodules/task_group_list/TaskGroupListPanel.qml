@@ -60,8 +60,8 @@ Item {
 				completedTasks: model.completedTasks
 				totalTasks: model.totalTasks
 				priority: model.priority
-
 				selected: ListView.isCurrentItem
+
 				MouseArea {
 					anchors.fill: parent
 					onClicked: taskGroupListView.currentIndex = index

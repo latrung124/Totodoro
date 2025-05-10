@@ -21,16 +21,19 @@ TasksViewModel::~TasksViewModel()
 
 void TasksViewModel::initDummyData()
 {
-	auto task = std::make_shared<TaskViewModel>();
-	task->setTaskId(1);
-	task->setTaskName("Task Default");
-	task->setIcon("");
-	task->setTotalPomodoros(5);
-	task->setCompletedPomodoros(2);
-	task->setPriorityType(PriorityType::Medium);
-	task->setDescription("Description");
+	for (int i = 0; i < 10; ++i) {
+		auto task = std::make_shared<TaskViewModel>();
+		task->setId(i);
+		task->setName(QString("Task %1").arg(i));
+		task->setIcon("");
+		task->setTotalPomodoros(5);
+		task->setCompletedPomodoros(2);
+		task->setPriority(PriorityType::Medium);
+		task->setDescription(QString("Description of the task %1").arg(i));
+		task->setDueDate("2025-01-01");
 
-	m_tasks.push_back(task);
+		m_tasks.push_back(task);
+	}
 }
 
 int TasksViewModel::rowCount(const QModelIndex &parent) const
@@ -47,22 +50,22 @@ QVariant TasksViewModel::data(const QModelIndex &index, int role) const
 
 	const TaskViewModelPtr &task = m_tasks[index.row()];
 	switch (role) {
-	case TaskIdRole:
-		return task->taskId();
-	case TaskNameRole:
-		return task->taskName();
+	case IdRole:
+		return task->id();
+	case NameRole:
+		return task->name();
 	case IconRole:
 		return task->icon();
 	case TotalPomodorosRole:
 		return task->totalPomodoros();
 	case CompletedPomodorosRole:
 		return task->completedPomodoros();
-	case PriorityTypeRole:
-		return static_cast<int>(task->priorityType());
+	case PriorityRole:
+		return static_cast<int>(task->priority());
 	case DescriptionRole:
 		return task->description();
-	case DeadlineRole:
-		return task->deadline();
+	case DueDateRole:
+		return task->dueDate();
 	default:
 		return QVariant();
 	}
@@ -71,12 +74,13 @@ QVariant TasksViewModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> TasksViewModel::roleNames() const
 {
 	return {
-	    {TaskIdRole, "taskId"},
-	    {TaskNameRole, "taskName"},
+	    {IdRole, "id"},
+	    {NameRole, "name"},
 	    {IconRole, "icon"},
 	    {TotalPomodorosRole, "totalPomodoros"},
 	    {CompletedPomodorosRole, "completedPomodoros"},
-	    {PriorityTypeRole, "priorityType"},
+	    {PriorityRole, "priority"},
 	    {DescriptionRole, "description"},
-	    {DeadlineRole, "deadline"}};
+	    {DueDateRole, "dueDate"},
+	};
 }

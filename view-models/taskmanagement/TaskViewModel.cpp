@@ -16,29 +16,29 @@ TaskViewModel::~TaskViewModel()
 {
 }
 
-int TaskViewModel::taskId() const
+int TaskViewModel::id() const
 {
-	return m_taskId;
+	return m_id;
 }
 
-void TaskViewModel::setTaskId(int id)
+void TaskViewModel::setId(int id)
 {
-	if (m_taskId != id) {
-		m_taskId = id;
-		emit taskIdChanged();
+	if (m_id != id) {
+		m_id = id;
+		emit idChanged();
 	}
 }
 
-QString TaskViewModel::taskName() const
+QString TaskViewModel::name() const
 {
-	return m_taskName;
+	return m_name;
 }
 
-void TaskViewModel::setTaskName(const QString &name)
+void TaskViewModel::setName(const QString &name)
 {
-	if (m_taskName != name) {
-		m_taskName = name;
-		emit taskNameChanged();
+	if (m_name != name) {
+		m_name = name;
+		emit nameChanged();
 	}
 }
 
@@ -81,16 +81,16 @@ void TaskViewModel::setCompletedPomodoros(int count)
 	}
 }
 
-PriorityType TaskViewModel::priorityType() const
+PriorityType TaskViewModel::priority() const
 {
-	return m_priorityType;
+	return m_priority;
 }
 
-void TaskViewModel::setPriorityType(PriorityType type)
+void TaskViewModel::setPriority(PriorityType type)
 {
-	if (m_priorityType != type) {
-		m_priorityType = type;
-		emit priorityTypeChanged();
+	if (m_priority != type) {
+		m_priority = type;
+		emit priorityChanged();
 	}
 }
 
@@ -107,15 +107,15 @@ void TaskViewModel::setDescription(const QString &description)
 	}
 }
 
-QString TaskViewModel::deadline() const
+QString TaskViewModel::dueDate() const
 {
-	return m_deadline;
+	return m_dueDate;
 }
 
-void TaskViewModel::setDeadline(const QString &deadline)
+void TaskViewModel::setDueDate(const QString &dueDate)
 {
-	if (m_deadline != deadline) {
-		m_deadline = deadline;
-		emit deadlineChanged();
+	if (m_dueDate != dueDate) {
+		m_dueDate = dueDate;
+		emit dueDateChanged();
 	}
 }

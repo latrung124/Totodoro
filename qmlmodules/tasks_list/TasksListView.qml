@@ -14,6 +14,14 @@ Item {
 
 	property QtObject model: null
 
+	onModelChanged: {
+		if (model) {
+			tasksListView.model = root.model;
+		} else {
+			console.log("TasksListView: model is null");
+		}
+	}
+
 	Item {
 		implicitWidth: 16
 		implicitHeight: parent.height
@@ -43,13 +51,18 @@ Item {
 
 		clip: true
 		spacing: 20
-		model: 6
 
 		delegate: TaskItem {
 			implicitWidth: root.width
 			implicitHeight: 124
 
 			selected: ListView.isCurrentItem
+			name: model.name
+			description: model.description
+			priority: model.priority
+			completedPomodoros: model.completedPomodoros
+			totalPomodoros: model.totalPomodoros
+			dueDate: model.dueDate
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {

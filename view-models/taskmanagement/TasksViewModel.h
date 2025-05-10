@@ -24,14 +24,14 @@ public:
 
 	enum TaskRoles
 	{
-		TaskIdRole = Qt::UserRole + 1,
-		TaskNameRole,
+		IdRole = Qt::UserRole + 1,
+		NameRole,
 		IconRole,
 		TotalPomodorosRole,
 		CompletedPomodorosRole,
-		PriorityTypeRole,
+		PriorityRole,
 		DescriptionRole,
-		DeadlineRole
+		DueDateRole
 	};
 
 	explicit TasksViewModel(QObject *parent = nullptr);
