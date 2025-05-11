@@ -19,14 +19,43 @@ PomodoroViewModel::~PomodoroViewModel()
 
 void PomodoroViewModel::initDummyData()
 {
-	setPomodoroTime(25 * 60); // 25 minutes
-	setProgressTime(5 * 60); // 5 minutes
-	setShortBreakTime(5 * 60); // 5 minutes
-	setLongBreakTime(15 * 60); // 15 minutes
+	setTaskName("Task Name");
+	setTaskDescription("Task Description");
+	setPomodoroTime(25); // minutes
+	setProgressTime(0); // seconds
+	setShortBreakTime(5); // minutes
+	setLongBreakTime(15); // minutes
 	setCurrentState(PomodoroState::Idle); // Initial state
 	setDynamicObjectState(DynamicObjectState::Egg);
-	setPomodoroCompleted(0);
+	setCompletedPomodoros(1);
 	setDynamicObject("default");
+	setTotalTimeSpent(25 * 60); // 25 minutes because of 1 pomodoro completed
+}
+
+void PomodoroViewModel::setTaskName(const QString &name)
+{
+	if (m_taskName != name) {
+		m_taskName = name;
+		emit taskNameChanged();
+	}
+}
+
+QString PomodoroViewModel::taskName() const
+{
+	return m_taskName;
+}
+
+void PomodoroViewModel::setTaskDescription(const QString &description)
+{
+	if (m_taskDescription != description) {
+		m_taskDescription = description;
+		emit taskDescriptionChanged();
+	}
+}
+
+QString PomodoroViewModel::taskDescription() const
+{
+	return m_taskDescription;
 }
 
 void PomodoroViewModel::setPomodoroTime(int time)
@@ -107,17 +136,17 @@ DynamicObjectState PomodoroViewModel::getDynamicObjectState() const
 	return m_dynamicObjectState;
 }
 
-void PomodoroViewModel::setPomodoroCompleted(int completed)
+void PomodoroViewModel::setCompletedPomodoros(int completedPomodoros)
 {
-	if (m_pomodoroCompleted != completed) {
-		m_pomodoroCompleted = completed;
-		emit pomodoroCompletedChanged();
+	if (m_completedPomodoros != completedPomodoros) {
+		m_completedPomodoros = completedPomodoros;
+		emit completedPomodorosChanged();
 	}
 }
 
-int PomodoroViewModel::pomodoroCompleted() const
+int PomodoroViewModel::completedPomodoros() const
 {
-	return m_pomodoroCompleted;
+	return m_completedPomodoros;
 }
 
 void PomodoroViewModel::setDynamicObject(const QString &object)
@@ -131,4 +160,17 @@ void PomodoroViewModel::setDynamicObject(const QString &object)
 QString PomodoroViewModel::dynamicObject() const
 {
 	return m_dynamicObject;
+}
+
+void PomodoroViewModel::setTotalTimeSpent(int totalTime)
+{
+	if (m_totalTimeSpent != totalTime) {
+		m_totalTimeSpent = totalTime;
+		emit totalTimeSpentChanged();
+	}
+}
+
+int PomodoroViewModel::totalTimeSpent() const
+{
+	return m_totalTimeSpent;
 }

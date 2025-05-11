@@ -16,6 +16,9 @@
 class PomodoroViewModel : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString taskName READ taskName WRITE setTaskName NOTIFY taskNameChanged)
+	Q_PROPERTY(QString taskDescription READ taskDescription WRITE setTaskDescription NOTIFY
+	               taskDescriptionChanged)
 	Q_PROPERTY(int pomodoroTime READ pomodoroTime WRITE setPomodoroTime NOTIFY pomodoroTimeChanged)
 	Q_PROPERTY(int progressTime READ progressTime WRITE setProgressTime NOTIFY progressTimeChanged)
 	Q_PROPERTY(
@@ -26,14 +29,22 @@ class PomodoroViewModel : public QObject
 	               currentStateChanged)
 	Q_PROPERTY(DynamicObjectState dynamicObjectState READ getDynamicObjectState WRITE
 	               setDynamicObjectState NOTIFY dynamicObjectStateChanged)
-	Q_PROPERTY(int pomodoroCompleted READ pomodoroCompleted WRITE setPomodoroCompleted NOTIFY
-	               pomodoroCompletedChanged)
+	Q_PROPERTY(int completedPomodoros READ completedPomodoros WRITE setCompletedPomodoros NOTIFY
+	               completedPomodorosChanged)
 	Q_PROPERTY(
 	    QString dynamicObject READ dynamicObject WRITE setDynamicObject NOTIFY dynamicObjectChanged)
+	Q_PROPERTY(
+	    int totalTimeSpent READ totalTimeSpent WRITE setTotalTimeSpent NOTIFY totalTimeSpentChanged)
 
 public:
 	explicit PomodoroViewModel(QObject *parent = nullptr);
 	~PomodoroViewModel() override;
+
+	QString taskName() const;
+	void setTaskName(const QString &name);
+
+	QString taskDescription() const;
+	void setTaskDescription(const QString &description);
 
 	void setPomodoroTime(int time);
 	int pomodoroTime() const;
@@ -53,21 +64,27 @@ public:
 	void setDynamicObjectState(DynamicObjectState state);
 	DynamicObjectState getDynamicObjectState() const;
 
-	void setPomodoroCompleted(int completed);
-	int pomodoroCompleted() const;
+	void setCompletedPomodoros(int completedPomodoros);
+	int completedPomodoros() const;
 
 	void setDynamicObject(const QString &object);
 	QString dynamicObject() const;
 
+	void setTotalTimeSpent(int totalTime);
+	int totalTimeSpent() const;
+
 signals:
+	void taskNameChanged();
+	void taskDescriptionChanged();
 	void pomodoroTimeChanged();
 	void progressTimeChanged();
 	void shortBreakTimeChanged();
 	void longBreakTimeChanged();
 	void currentStateChanged();
 	void dynamicObjectStateChanged();
-	void pomodoroCompletedChanged();
 	void dynamicObjectChanged();
+	void completedPomodorosChanged();
+	void totalTimeSpentChanged();
 
 private:
 	void initDummyData();
@@ -77,10 +94,13 @@ private:
 	int m_progressTime = 0;
 	int m_shortBreakTime = 0;
 	int m_longBreakTime = 0;
-	int m_pomodoroCompleted = 0;
+	int m_completedPomodoros = 0;
+	int m_totalTimeSpent = 0;
 	PomodoroState m_currentState = PomodoroState::Idle;
 	DynamicObjectState m_dynamicObjectState = DynamicObjectState::Egg; // Default state is Egg
 	QString m_dynamicObject;
+	QString m_taskName;
+	QString m_taskDescription;
 };
 
 #endif // POMODORO_VIEW_MODEL_H

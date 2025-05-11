@@ -9,6 +9,7 @@
 import QtQuick
 import QtQuick.Layouts
 
+import App.Enums 1.0
 import CommonModule 1.0
 
 Item {
@@ -71,7 +72,7 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
 
                 Text {
-                    id: textTitle
+                    id: taskNameText
 
                     width: parent.width
                     height: parent.height
@@ -92,7 +93,7 @@ Item {
 
                     lineHeight: 1.0
                     lineHeightMode: Text.FixedHeight
-                    text: qsTr("Lesson 7")
+                    text: model ? model.taskName : qsTr("Default Task")
                 }
             }
         }
@@ -196,7 +197,7 @@ Item {
                         Repeater {
                             id: countedObjectlv4
 
-                            model: 2 // TODO: refactor with real model
+                            model: root.model ? root.model.completedPomodoros : 0
 
                             Item {
                                 id: countedObject
@@ -209,7 +210,7 @@ Item {
 
                                     width: parent.width
                                     height: parent.height
-                                    source: 'resources/monster-level-4.png'
+                                    source: 'resources/monster-level-4.png' // TODO: need update from model
                                     fillMode: Image.PreserveAspectFit
                                     smooth: true
                                 }
@@ -219,13 +220,13 @@ Item {
                 }
 
                 Item {
-                    id: descriptionTextItem
+                    id: taskDescriptionItem
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 18
 
                     Text {
-                        id: descriptionText
+                        id: taskDescriptionText
 
                         width: parent.width
                         height: parent.height
@@ -246,7 +247,7 @@ Item {
                         color: "#7f7f7f"
                         lineHeight: 1.0
                         lineHeightMode: Text.FixedHeight
-                        text: qsTr("Learn Chinese HSK 5!!!")
+                        text: model ? model.taskDescription : qsTr("Default Task Description")
                     }
                 }
             }
@@ -438,7 +439,7 @@ Item {
                             color: "#000000"
                             lineHeight: 1.0
                             lineHeightMode: Text.FixedHeight
-                            text: internal.calculateTotalPomodoroTime(internal.defaultPomodoroTime)
+                            text: internal.calculateTotalPomodoroTime()
                         }
                     }
                 }
@@ -459,7 +460,7 @@ Item {
             }
 
             internal.currentTime += internal.defaultDuration;
-            progressBar.value = internal.currentTime / (internal.defaultPomodoroTime * 60 * internal.defaultDuration);
+            progressBar.value = internal.currentTime / (model.pomodoroTime * 60 * internal.defaultDuration);
             pomodoroCurrentTimeText.text = internal.calculateCurrentPomodoroTime(pomodoroCurrentTimeText.text);
         }
     }
@@ -493,7 +494,8 @@ Item {
             pomodoroCurrentTimeText.text = "00:00:00";
         }
 
-        function calculateTotalPomodoroTime(time) {
+        function calculateTotalPomodoroTime() {
+            var time = model ? model.pomodoroTime : internal.defaultPomodoroTime;
             var hours = Math.floor(time/60);
             var remainMinutes = Math.floor(time % 60);
 
@@ -505,7 +507,7 @@ Item {
             var [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
 
             const CURRENT_SECONDS = (startMinutes * startHours * 60) + startSeconds;
-            const POMODORO_LIMIT_SECONDS = internal.defaultPomodoroTime * 60;
+            const POMODORO_LIMIT_SECONDS = model.pomodoroTime * 60;
 
             if (CURRENT_SECONDS === POMODORO_LIMIT_SECONDS) {
                 internal.timerReset();
