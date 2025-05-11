@@ -13,9 +13,27 @@
 class PomodoroTitleViewModel : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
+	Q_PROPERTY(QString icon READ icon WRITE setIcon NOTIFY iconChanged)
 
 public:
 	explicit PomodoroTitleViewModel(QObject *parent = nullptr);
 	~PomodoroTitleViewModel() override;
+
+	QString title() const;
+	void setTitle(const QString &title);
+
+	QString icon() const;
+	void setIcon(const QString &icon);
+
+signals:
+	void titleChanged();
+	void iconChanged();
+
+private:
+	void initDummyData();
+
+	QString m_title;
+	QString m_icon;
 };
 #endif // POMODOROTITLEVIEWMODEL_H

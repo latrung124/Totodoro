@@ -105,7 +105,7 @@ Item {
 
                             lineHeight: 1.0
                             lineHeightMode: Text.FixedHeight
-                            text: qsTr("Chinese Learning")
+                            text: root.model ? root.model.title : ""
                         }
                     }
 
