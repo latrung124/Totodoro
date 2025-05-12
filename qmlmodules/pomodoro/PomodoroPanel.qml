@@ -93,7 +93,7 @@ Item {
 
                     lineHeight: 1.0
                     lineHeightMode: Text.FixedHeight
-                    text: model ? model.taskName : qsTr("Default Task")
+                    text: root.model ? root.model.taskName : qsTr("Default Task")
                 }
             }
         }
@@ -247,7 +247,7 @@ Item {
                         color: "#7f7f7f"
                         lineHeight: 1.0
                         lineHeightMode: Text.FixedHeight
-                        text: model ? model.taskDescription : qsTr("Default Task Description")
+                        text: root.model ? root.model.taskDescription : qsTr("Default Task Description")
                     }
                 }
             }
@@ -402,7 +402,7 @@ Item {
                             color: "#000000"
                             lineHeight: 1.0
                             lineHeightMode: Text.FixedHeight
-                            text: qsTr("00:00:00") // TODO: update from model to match with progressBar.value
+                            text: root.model ? root.model.progressTime : qsTr("00:00:00")
                         }
                     }
 
@@ -454,14 +454,19 @@ Item {
         repeat: true
         interval: internal.defaultDuration
         onTriggered: {
+            if (!root.model) {
+                pomodoroTimer.stop();
+                return;
+            }
+
             if (progressBar.value === 1) {
                 internal.timerReset();
                 return;
             }
 
             internal.currentTime += internal.defaultDuration;
-            progressBar.value = internal.currentTime / (model.pomodoroTime * 60 * internal.defaultDuration);
-            pomodoroCurrentTimeText.text = internal.calculateCurrentPomodoroTime(pomodoroCurrentTimeText.text);
+            progressBar.value = internal.currentTime / (root.model.pomodoroTime * 60 * internal.defaultDuration);
+            root.model.progressTime = internal.calculateCurrentPomodoroTime(root.model.progressTime);
         }
     }
 
@@ -491,11 +496,11 @@ Item {
 
         function timerReset() {
             pomodoroButton.reset();
-            pomodoroCurrentTimeText.text = "00:00:00";
+            root.model.progressTime = "00:00:00";
         }
 
         function calculateTotalPomodoroTime() {
-            var time = model ? model.pomodoroTime : internal.defaultPomodoroTime;
+            var time = root.model ? root.model.pomodoroTime : internal.defaultPomodoroTime;
             var hours = Math.floor(time/60);
             var remainMinutes = Math.floor(time % 60);
 
@@ -511,7 +516,7 @@ Item {
 
             if (CURRENT_SECONDS === POMODORO_LIMIT_SECONDS) {
                 internal.timerReset();
-                return pomodoroCurrentTimeText.text;
+                return "00:00:00";
             }
 
             if (++startSeconds === 60) {

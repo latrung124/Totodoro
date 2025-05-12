@@ -22,7 +22,7 @@ void PomodoroViewModel::initDummyData()
 	setTaskName("Task Name");
 	setTaskDescription("Task Description");
 	setPomodoroTime(25); // minutes
-	setProgressTime(0); // seconds
+	setProgressTime("00:00:00"); // hh:mm:ss
 	setShortBreakTime(5); // minutes
 	setLongBreakTime(15); // minutes
 	setCurrentState(PomodoroState::Idle); // Initial state
@@ -71,7 +71,7 @@ int PomodoroViewModel::pomodoroTime() const
 	return m_pomodoroTime;
 }
 
-void PomodoroViewModel::setProgressTime(int time)
+void PomodoroViewModel::setProgressTime(QString time)
 {
 	if (m_progressTime != time) {
 		m_progressTime = time;
@@ -79,7 +79,7 @@ void PomodoroViewModel::setProgressTime(int time)
 	}
 }
 
-int PomodoroViewModel::progressTime() const
+QString PomodoroViewModel::progressTime() const
 {
 	return m_progressTime;
 }

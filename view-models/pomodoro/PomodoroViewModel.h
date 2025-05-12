@@ -20,7 +20,8 @@ class PomodoroViewModel : public QObject
 	Q_PROPERTY(QString taskDescription READ taskDescription WRITE setTaskDescription NOTIFY
 	               taskDescriptionChanged)
 	Q_PROPERTY(int pomodoroTime READ pomodoroTime WRITE setPomodoroTime NOTIFY pomodoroTimeChanged)
-	Q_PROPERTY(int progressTime READ progressTime WRITE setProgressTime NOTIFY progressTimeChanged)
+	Q_PROPERTY(
+	    QString progressTime READ progressTime WRITE setProgressTime NOTIFY progressTimeChanged)
 	Q_PROPERTY(
 	    int shortBreakTime READ shortBreakTime WRITE setShortBreakTime NOTIFY shortBreakTimeChanged)
 	Q_PROPERTY(
@@ -49,8 +50,8 @@ public:
 	void setPomodoroTime(int time);
 	int pomodoroTime() const;
 
-	void setProgressTime(int time);
-	int progressTime() const;
+	void setProgressTime(QString time);
+	QString progressTime() const;
 
 	void setShortBreakTime(int time);
 	int shortBreakTime() const;
@@ -91,13 +92,13 @@ private:
 
 	// Time in seconds
 	int m_pomodoroTime = 0;
-	int m_progressTime = 0;
 	int m_shortBreakTime = 0;
 	int m_longBreakTime = 0;
 	int m_completedPomodoros = 0;
 	int m_totalTimeSpent = 0;
 	PomodoroState m_currentState = PomodoroState::Idle;
 	DynamicObjectState m_dynamicObjectState = DynamicObjectState::Egg; // Default state is Egg
+	QString m_progressTime;
 	QString m_dynamicObject;
 	QString m_taskName;
 	QString m_taskDescription;
