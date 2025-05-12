@@ -75,6 +75,9 @@ public:
 		return std::static_pointer_cast<Interface>(m_services[serviceId]);
 	}
 
+	void startAllRegisteredServices();
+	void registerAllServiceListeners();
+
 private:
 	ServiceManager() = default;
 

@@ -18,6 +18,12 @@
 
 #include "core/factories/ViewModelFactory.h"
 
+ViewModelController &ViewModelController::getInstance()
+{
+	static ViewModelController instance;
+	return instance;
+}
+
 ViewModelController::ViewModelController(QObject *parent)
     : QObject(parent)
     , m_vmFactory(std::make_unique<ViewModelFactory>())

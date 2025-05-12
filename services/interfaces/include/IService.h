@@ -21,6 +21,9 @@ public:
 	virtual void registerListener(const IServiceListener *listener) = 0;
 	virtual void unregisterListener(const IServiceListener *listener) = 0;
 
+	virtual void start() = 0;
+	virtual void stop() = 0;
+
 	IService(const IService &) = delete;
 	IService &operator=(const IService &) = delete;
 	IService(IService &&) = delete;

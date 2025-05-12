@@ -7,7 +7,9 @@
 
 #include "core/services/strategies/window-service/WMediaInfoExtractStrategy.h"
 
-#include <iostream>
+#include <QDebug>
+
+#include "core/controllers/ModelController.h"
 
 #include "core/services/messages/window-service/WMediaInfoMessage.h"
 
@@ -22,5 +24,6 @@ void WMediaInfoExtractStrategy::execute(const WMediaInfoMessage &message)
 
 void WMediaInfoExtractStrategy::extract(const WMediaInfoMessage &message)
 {
-	std::cout << "Extracting media info!" << std::endl;
+	qDebug() << "WMediaInfoExtractStrategy::extract";
+	// TODO: emit signal to update model from worker thread
 }

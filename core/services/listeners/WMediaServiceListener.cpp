@@ -7,16 +7,21 @@
 
 #include "WMediaServiceListener.h"
 
-#include "core/services/messages/window-service/WMediaInfoMessage.h"
-#include "core/services/messages/window-service/WPlaybackControlsMessage.h"
-#include "core/services/messages/window-service/WPlaybackInfoMessage.h"
-#include "core/services/messages/window-service/WTimelinePropertiesMessage.h"
+#include "core/services/producer/window-service/WMediaInfoMessageCreator.h"
+#include "core/services/producer/window-service/WNextAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPauseAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPlayAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPlaybackControlsMessageCreator.h"
+#include "core/services/producer/window-service/WPlaybackInfoMessageCreator.h"
+#include "core/services/producer/window-service/WPreviousAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WTimelinePropertiesMessageCreator.h"
+
 #include "core/services/producer/ServiceMessageProducer.h"
 #include "core/services/queue/MessageQueue.h"
 
 void WMediaServiceListener::onMediaInfoChanged(const WMediaInfo &mediaInfo)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WMediaInfoMessage>();
+	auto message = ServiceMessageProducer::getInstance().produce<WMediaInfoMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -24,7 +29,7 @@ void WMediaServiceListener::onMediaInfoChanged(const WMediaInfo &mediaInfo)
 
 void WMediaServiceListener::onPlaybackControlsChanged(const WPlaybackControls &playbackControls)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackControls>();
+	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackControlsMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -32,7 +37,7 @@ void WMediaServiceListener::onPlaybackControlsChanged(const WPlaybackControls &p
 
 void WMediaServiceListener::onPlaybackStatusChanged(const WPlaybackInfo &playbackInfo)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackInfoMessage>();
+	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackInfoMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -41,7 +46,8 @@ void WMediaServiceListener::onPlaybackStatusChanged(const WPlaybackInfo &playbac
 void WMediaServiceListener::onTimelinePropertiesChanged(
     const WTimelineProperties &timelineProperties)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WTimelinePropertiesMessage>();
+	auto message =
+	    ServiceMessageProducer::getInstance().produce<WTimelinePropertiesMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}

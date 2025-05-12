@@ -8,7 +8,8 @@
 #ifndef SERVICE_MESSAGE_PRODUCER_H
 #define SERVICE_MESSAGE_PRODUCER_H
 
-#include <functional>
+#include <QDebug>
+
 #include <memory>
 #include <typeindex>
 #include <unordered_map>
@@ -43,7 +44,7 @@ public:
 	/**
 	 * @brief Registers a creator type for producing Message instances.
 	 *
-	 * This function stores a lambda function that creates an instance of
+	 * This function stores an instance of
 	 * `CreatorType` and associates it with the type information of `CreatorType`.
 	 *
 	 * @tparam CreatorType The type of the creator class, which must have a default constructor.
@@ -52,9 +53,7 @@ public:
 	void registerCreator()
 	{
 		std::type_index type = std::type_index(typeid(CreatorType));
-		m_creators[type] = []() {
-			return std::make_unique<CreatorType>();
-		};
+		m_creators[type] = std::make_shared<CreatorType>();
 	}
 
 	/**
@@ -73,20 +72,19 @@ public:
 		std::type_index type = std::type_index(typeid(CreatorType));
 		const auto &it = m_creators.find(type);
 		if (it != m_creators.end()) {
-			return it->second()->create();
+			return it->second->create();
+		} else {
+			qDebug() << "ServiceMessageProducer: No creator found for type" << type.name();
 		}
 
 		return nullptr;
 	}
 
 private:
-	/// Alias for a function that creates a `ServiceMessageCreator` instance.
-	using CreationFunc = std::function<std::unique_ptr<ServiceMessageCreator>()>;
-
 	ServiceMessageProducer() = default;
 
 	/// Stores the mapping between type indices and their corresponding creation functions.
-	std::unordered_map<std::type_index, CreationFunc> m_creators;
+	std::unordered_map<std::type_index, std::shared_ptr<ServiceMessageCreator>> m_creators;
 };
 
 #endif // SERVICE_MESSAGE_PRODUCER_H

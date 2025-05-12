@@ -13,6 +13,7 @@
 class ServiceMessageCreator
 {
 public:
+	ServiceMessageCreator() = default;
 	virtual ~ServiceMessageCreator() = default;
 
 	virtual ServiceMessageUPtr create() const = 0;

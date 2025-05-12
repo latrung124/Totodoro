@@ -30,6 +30,7 @@ std::shared_ptr<IService> createConcreteService(IServiceFactory *serviceFactory)
 		return nullptr;
 	}
 }
+
 } // namespace service_concrete_helper
 
 #endif // SERVICE_CONCRETE_HELPER_H

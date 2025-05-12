@@ -13,7 +13,6 @@ File: main.cpp
 // TODO: move out of main
 #include "core/GuiApplication.h"
 
-#include "core/services/listeners/WMediaServiceListener.h"
 #include "core/services/producer/ServiceMessageProducer.h"
 #include "core/services/producer/window-service/WMediaInfoMessageCreator.h"
 #include "core/services/producer/window-service/WNextAsyncMessageCreator.h"
@@ -91,10 +90,8 @@ void serviceRegister()
 	// TODO: refactor later, move out of main
 	auto service = ServiceManager::instance().registerService<IWMediaService>();
 	if (service != nullptr) {
-		service->registerListener(new WMediaServiceListener());
-
 		// Register service creators for Service Producer/Factory
-		auto producer = ServiceMessageProducer::getInstance();
+		auto &producer = ServiceMessageProducer::getInstance();
 		producer.registerCreator<WMediaInfoMessageCreator>();
 		producer.registerCreator<WPlaybackControlsMessageCreator>();
 		producer.registerCreator<WPlaybackInfoMessageCreator>();
@@ -104,6 +101,9 @@ void serviceRegister()
 		producer.registerCreator<WPreviousAsyncMessageCreator>();
 		producer.registerCreator<WTimelinePropertiesMessageCreator>();
 	}
+
+	ServiceManager::instance().startAllRegisteredServices();
+	ServiceManager::instance().registerAllServiceListeners();
 }
 
 int main(int argc, char *argv[])

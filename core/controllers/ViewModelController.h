@@ -27,7 +27,8 @@ class ViewModelController : public QObject
 public:
 	using ViewModelFactoryUPtr = std::unique_ptr<ViewModelFactory>;
 
-	ViewModelController(QObject *parent = nullptr);
+	static ViewModelController &getInstance();
+
 	~ViewModelController();
 
 	void registerViewModels();
@@ -41,6 +42,8 @@ public:
 	Q_INVOKABLE void tabNavigation(MainTabType tabType);
 
 private:
+	ViewModelController(QObject *parent = nullptr);
+
 	MediaPlayerViewModel *mediaPlayerViewModel();
 	HomeViewModel *homeViewModel();
 
