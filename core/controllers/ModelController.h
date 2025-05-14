@@ -8,24 +8,32 @@
 #ifndef MODELCONTROLLER_H
 #define MODELCONTROLLER_H
 
-#include <memory>
-
 #include <QObject>
+
+#include <memory>
 
 class MediaPlayerModel;
 
 class ModelController : public QObject
 {
+	Q_OBJECT
+
 public:
 	using MediaPlayerModelPtr = std::shared_ptr<MediaPlayerModel>;
 	using MediaPlayerModelWPtr = std::weak_ptr<MediaPlayerModel>;
 
-	explicit ModelController(QObject *parent = nullptr);
+	static ModelController &getInstance();
+
 	~ModelController();
 
 	MediaPlayerModelWPtr getMediaPlayerModel() const;
 
 private:
+	explicit ModelController(QObject *parent = nullptr);
+
+	void initConnections();
+	void deinitConnections();
+
 	MediaPlayerModelPtr m_mediaPlayerModel;
 };
 

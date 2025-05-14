@@ -30,13 +30,17 @@ public:
 	WindowSystemMedia(WindowSystemMedia &&) = delete;
 	WindowSystemMedia &&operator=(const WindowSystemMedia &&) = delete;
 
-	bool init();
+	bool systemInit();
 
 private:
+	template<typename Properties>
+	void updateMediaProperties(Properties &&properties);
+
 	void registerCurrentSessionChangedEvents();
 	void registerSessionPropertiesChangedEvents();
 
 	void removeOldTempThumbnail();
+	void getSyncMediaProperties(const GlobalSystemMediaTransportControlsSession &session);
 
 	GlobalSystemMediaTransportControlsSessionManager m_sessionManager{nullptr};
 	GlobalSystemMediaTransportControlsSession m_session{nullptr};

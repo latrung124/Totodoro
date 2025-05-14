@@ -12,7 +12,6 @@
 #include <QQmlContext>
 #include <QQuickWindow>
 
-#include "core/controllers/ModelController.h"
 #include "core/controllers/ViewModelController.h"
 
 #include "core/services/queue/MessageQueue.h"
@@ -20,8 +19,6 @@
 GuiApplication::GuiApplication(QGuiApplication *app, QObject *parent)
     : QObject(parent)
     , m_app(app)
-    , m_modelController(std::make_unique<ModelController>())
-    , m_viewModelController(std::make_unique<ViewModelController>())
     , m_engine(std::make_unique<QQmlApplicationEngine>())
 {
 }
@@ -54,7 +51,8 @@ void GuiApplication::endConnections()
 
 void GuiApplication::setContexts()
 {
-	m_engine->rootContext()->setContextProperty("viewModelController", m_viewModelController.get());
+	m_engine->rootContext()->setContextProperty(
+	    "viewModelController", &ViewModelController::getInstance());
 }
 
 void GuiApplication::start()
@@ -76,7 +74,7 @@ void GuiApplication::start()
 			    qFatal("Failed to load QML file.");
 		    }
 
-		    m_viewModelController->setRootObject(obj);
+		    ViewModelController::getInstance().setRootObject(obj);
 	    });
 
 	m_engine->loadFromModule("Totodoro", "Main");
@@ -107,8 +105,10 @@ QObject *GuiApplication::rootObject() const
 
 void GuiApplication::initViewModels()
 {
-	m_viewModelController->registerViewModels();
+	auto &vmController = ViewModelController::getInstance();
 
-	m_viewModelController->initMediaPlayerView();
-	m_viewModelController->initHomeView(); // Start with Home View
+	vmController.registerViewModels();
+
+	vmController.initMediaPlayerView();
+	vmController.initHomeView(); // Start with Home View
 }

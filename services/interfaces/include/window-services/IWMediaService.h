@@ -16,7 +16,6 @@ class WMEDIA_SERVICE_API IWMediaService : public IService
 public:
 	virtual ~IWMediaService() = default;
 
-	virtual void start() = 0;
 	virtual void getMediaInfo() = 0;
 	virtual bool playAsync() = 0;
 	virtual bool pauseAsync() = 0;

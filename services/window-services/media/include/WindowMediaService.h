@@ -36,6 +36,7 @@ public:
 	void unregisterListener(const IServiceListener *listener) override;
 
 	void start() override;
+	void stop() override;
 	void getMediaInfo() override;
 	bool playAsync() override;
 	bool pauseAsync() override;

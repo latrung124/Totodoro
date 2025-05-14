@@ -7,8 +7,9 @@
 
 #include "WindowMediaService.h"
 
-#include "WindowSystemMedia.h"
 #include <IWMediaServiceListener.h>
+
+#include "WindowSystemMedia.h"
 
 WindowMediaService::WindowMediaService()
 {
@@ -49,8 +50,12 @@ void WindowMediaService::unregisterListener(const IServiceListener *listener)
 
 void WindowMediaService::start()
 {
-	// Start the media service
 	m_systemMedia = std::make_unique<WindowSystemMedia>(this);
+}
+
+void WindowMediaService::stop()
+{
+	m_systemMedia.reset();
 }
 
 void WindowMediaService::getMediaInfo()

@@ -13,6 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <random>
+#include <thread>
 
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Storage.Streams.h>
@@ -117,18 +118,15 @@ std::chrono::system_clock::time_point convertDateTimeToChrono(DateTime winrtTime
 WindowSystemMedia::WindowSystemMedia(WindowMediaService *service)
     : m_service(service)
 {
-	if (init()) {
-		std::cout << "WindowSystemMedia initialized." << std::endl;
-	} else {
-		std::cerr << "Failed to initialize WindowSystemMedia." << std::endl;
-	}
+	std::thread init(&WindowSystemMedia::systemInit, this);
+	init.detach();
 }
 
 WindowSystemMedia::~WindowSystemMedia()
 {
 }
 
-bool WindowSystemMedia::init()
+bool WindowSystemMedia::systemInit()
 {
 	try {
 		IAsyncOperation<GlobalSystemMediaTransportControlsSessionManager> sessionManagerRes =
@@ -142,6 +140,7 @@ bool WindowSystemMedia::init()
 		m_session = m_sessionManager.GetCurrentSession();
 		if (m_session) {
 			registerSessionPropertiesChangedEvents();
+			getSyncMediaProperties(m_session);
 		}
 	} catch (const winrt::hresult_error &ex) {
 		winrt::hstring message = ex.message();
@@ -151,6 +150,102 @@ bool WindowSystemMedia::init()
 	}
 
 	return true;
+}
+
+template<>
+void WindowSystemMedia::updateMediaProperties(
+    GlobalSystemMediaTransportControlsSessionMediaProperties &&properties)
+{
+	removeOldTempThumbnail();
+
+	WMediaInfo mediaInfo{
+	    .albumTitle = winrt::to_string(properties.AlbumTitle()),
+	    .albumArtist = winrt::to_string(properties.AlbumArtist()),
+	    .totalTracks = properties.AlbumTrackCount(),
+	    .artist = winrt::to_string(properties.AlbumArtist()),
+	    .genres = {}, // TODO: handle genres data
+	    .playbackType = convertPlaybackType(properties.PlaybackType()),
+	    .subtitle = winrt::to_string(properties.Subtitle()),
+	    .thumbnail = saveThumbnailToFile(properties),
+	    .title = winrt::to_string(properties.Title()),
+	    .trackNumber = properties.TrackNumber(),
+	};
+	m_thumbnailPath = mediaInfo.thumbnail;
+	m_service->systemMediaPropertiesChanged(mediaInfo);
+}
+
+template<>
+void WindowSystemMedia::updateMediaProperties(
+    GlobalSystemMediaTransportControlsSessionPlaybackInfo &&playbackInfo)
+{
+	auto playbackControls = playbackInfo.Controls();
+	auto playbackStatus = playbackInfo.PlaybackStatus();
+	auto playbackType = playbackInfo.PlaybackType();
+	auto repeatMode = playbackInfo.AutoRepeatMode();
+
+	if (!playbackControls) {
+		return;
+	}
+
+	WPlaybackControls wPlaybackControls{
+	    .isChannelDownEnabled = playbackControls.IsChannelDownEnabled(),
+	    .isChannelUpEnabled = playbackControls.IsChannelUpEnabled(),
+	    .isFastForwardEnabled = playbackControls.IsFastForwardEnabled(),
+	    .isNextEnabled = playbackControls.IsNextEnabled(),
+	    .isPauseEnabled = playbackControls.IsPauseEnabled(),
+	    .isPlaybackPositionEnabled = playbackControls.IsPlaybackPositionEnabled(),
+	    .isPlaybackRateEnabled = playbackControls.IsPlaybackRateEnabled(),
+	    .isPlayEnabled = playbackControls.IsPlayEnabled(),
+	    .isPlayPauseToggleEnabled = playbackControls.IsPlayPauseToggleEnabled(),
+	    .isPreviousEnabled = playbackControls.IsPreviousEnabled(),
+	    .isRecordEnabled = playbackControls.IsRecordEnabled(),
+	    .isRepeatEnabled = playbackControls.IsRepeatEnabled(),
+	    .isRewindEnabled = playbackControls.IsRewindEnabled(),
+	    .isShuffleEnabled = playbackControls.IsShuffleEnabled(),
+	    .isStopEnabled = playbackControls.IsStopEnabled(),
+	};
+
+	WMediaPlaybackAutoRepeatMode wRepeatMode =
+	    repeatMode == nullptr
+	        ? WMediaPlaybackAutoRepeatMode::None
+	        : static_cast<WMediaPlaybackAutoRepeatMode>(repeatMode.Value());
+	WMediaPlaybackStatus wPlaybackStatus = static_cast<WMediaPlaybackStatus>(playbackStatus);
+	WMediaPlaybackType wPlaybackType = convertPlaybackType(playbackType);
+
+	bool isShuffled = false;
+	if (playbackInfo.IsShuffleActive()) {
+		isShuffled = playbackInfo.IsShuffleActive().Value();
+	}
+	double playbackRate = 0.0;
+	if (playbackInfo.PlaybackRate()) {
+		playbackRate = playbackInfo.PlaybackRate().Value();
+	}
+	WPlaybackInfo wPlaybackInfo{
+	    .autoRepeatMode = wRepeatMode,
+	    .playbackControls = wPlaybackControls,
+	    .isShuffled = isShuffled,
+	    .playbackRate = playbackRate,
+	    .playbackStatus = wPlaybackStatus,
+	    .playbackType = wPlaybackType,
+	};
+
+	m_service->systemPlaybackInfoChanged(wPlaybackInfo);
+}
+
+template<>
+void WindowSystemMedia::updateMediaProperties(
+    GlobalSystemMediaTransportControlsSessionTimelineProperties &&properties)
+{
+	WTimelineProperties wTimelineProperties{
+	    .endTime = properties.EndTime().count(),
+	    .startTime = properties.StartTime().count(),
+	    .lastUpdatedTime = convertDateTimeToChrono(properties.LastUpdatedTime()),
+	    .maxSeekTime = properties.MaxSeekTime().count(),
+	    .minSeekTime = properties.MinSeekTime().count(),
+	    .position = properties.Position().count(),
+	};
+
+	m_service->systemTimelinePropertiesChanged(wTimelineProperties);
 }
 
 void WindowSystemMedia::registerCurrentSessionChangedEvents()
@@ -166,7 +261,6 @@ void WindowSystemMedia::registerCurrentSessionChangedEvents()
 void WindowSystemMedia::registerSessionPropertiesChangedEvents()
 {
 	if (!m_session) {
-		std::cerr << "No session available." << std::endl;
 		return;
 	}
 
@@ -176,103 +270,35 @@ void WindowSystemMedia::registerSessionPropertiesChangedEvents()
 	        MediaPropertiesChangedEventArgs args) {
 		    // TODO: handle media properties changed
 		    const auto mediaPropertiesAsync = session.TryGetMediaPropertiesAsync();
-		    const auto mediaProperties = mediaPropertiesAsync.get();
-
-		    removeOldTempThumbnail();
-
-		    WMediaInfo mediaInfo{
-		        .albumTitle = winrt::to_string(mediaProperties.AlbumTitle()),
-		        .albumArtist = winrt::to_string(mediaProperties.AlbumArtist()),
-		        .totalTracks = mediaProperties.AlbumTrackCount(),
-		        .artist = winrt::to_string(mediaProperties.AlbumArtist()),
-		        .genres = {}, // TODO: handle genres data
-		        .playbackType = convertPlaybackType(mediaProperties.PlaybackType()),
-		        .subtitle = winrt::to_string(mediaProperties.Subtitle()),
-		        .thumbnail = saveThumbnailToFile(mediaProperties),
-		        .title = winrt::to_string(mediaProperties.Title()),
-		        .trackNumber = mediaProperties.TrackNumber(),
-		    };
-		    m_thumbnailPath = mediaInfo.thumbnail;
-		    m_service->systemMediaPropertiesChanged(mediaInfo);
+		    if (!mediaPropertiesAsync) {
+			    return;
+		    }
+		    updateMediaProperties(std::move(mediaPropertiesAsync.get()));
 	    });
 
 	m_session.PlaybackInfoChanged(
 	    [this](
 	        GlobalSystemMediaTransportControlsSession session, PlaybackInfoChangedEventArgs args) {
-		    auto playbackInfo = session.GetPlaybackInfo();
-		    auto playbackControls = playbackInfo.Controls();
-		    auto playbackStatus = playbackInfo.PlaybackStatus();
-		    auto playbackType = playbackInfo.PlaybackType();
-		    auto repeatMode = playbackInfo.AutoRepeatMode();
-
-		    if (!playbackControls) {
+		    if (!session) {
 			    return;
 		    }
-
-		    WPlaybackControls wPlaybackControls{
-		        .isChannelDownEnabled = playbackControls.IsChannelDownEnabled(),
-		        .isChannelUpEnabled = playbackControls.IsChannelUpEnabled(),
-		        .isFastForwardEnabled = playbackControls.IsFastForwardEnabled(),
-		        .isNextEnabled = playbackControls.IsNextEnabled(),
-		        .isPauseEnabled = playbackControls.IsPauseEnabled(),
-		        .isPlaybackPositionEnabled = playbackControls.IsPlaybackPositionEnabled(),
-		        .isPlaybackRateEnabled = playbackControls.IsPlaybackRateEnabled(),
-		        .isPlayEnabled = playbackControls.IsPlayEnabled(),
-		        .isPlayPauseToggleEnabled = playbackControls.IsPlayPauseToggleEnabled(),
-		        .isPreviousEnabled = playbackControls.IsPreviousEnabled(),
-		        .isRecordEnabled = playbackControls.IsRecordEnabled(),
-		        .isRepeatEnabled = playbackControls.IsRepeatEnabled(),
-		        .isRewindEnabled = playbackControls.IsRewindEnabled(),
-		        .isShuffleEnabled = playbackControls.IsShuffleEnabled(),
-		        .isStopEnabled = playbackControls.IsStopEnabled(),
-		    };
-
-		    WMediaPlaybackAutoRepeatMode wRepeatMode =
-		        repeatMode == nullptr
-		            ? WMediaPlaybackAutoRepeatMode::None
-		            : static_cast<WMediaPlaybackAutoRepeatMode>(repeatMode.Value());
-		    WMediaPlaybackStatus wPlaybackStatus = static_cast<WMediaPlaybackStatus>(playbackStatus);
-		    WMediaPlaybackType wPlaybackType = convertPlaybackType(playbackType);
-
-		    bool isShuffled = false;
-		    if (playbackInfo.IsShuffleActive()) {
-			    isShuffled = playbackInfo.IsShuffleActive().Value();
-		    }
-		    double playbackRate = 0.0;
-		    if (playbackInfo.PlaybackRate()) {
-			    playbackRate = playbackInfo.PlaybackRate().Value();
-		    }
-		    WPlaybackInfo wPlaybackInfo{
-		        .autoRepeatMode = wRepeatMode,
-		        .playbackControls = wPlaybackControls,
-		        .isShuffled = isShuffled,
-		        .playbackRate = playbackRate,
-		        .playbackStatus = wPlaybackStatus,
-		        .playbackType = wPlaybackType,
-		    };
-
-		    m_service->systemPlaybackInfoChanged(wPlaybackInfo);
+		    updateMediaProperties(std::move(session.GetPlaybackInfo()));
 	    });
 
 	m_session.TimelinePropertiesChanged(
 	    [this](
 	        GlobalSystemMediaTransportControlsSession session,
 	        TimelinePropertiesChangedEventArgs args) {
-		    const auto timelineProperties = session.GetTimelineProperties();
+		    if (!session) {
+			    return;
+		    }
+
+		    auto timelineProperties = session.GetTimelineProperties();
 		    if (!timelineProperties) {
 			    return;
 		    }
 
-		    WTimelineProperties wTimelineProperties{
-		        .endTime = timelineProperties.EndTime().count(),
-		        .startTime = timelineProperties.StartTime().count(),
-		        .lastUpdatedTime = convertDateTimeToChrono(timelineProperties.LastUpdatedTime()),
-		        .maxSeekTime = timelineProperties.MaxSeekTime().count(),
-		        .minSeekTime = timelineProperties.MinSeekTime().count(),
-		        .position = timelineProperties.Position().count(),
-		    };
-
-		    m_service->systemTimelinePropertiesChanged(wTimelineProperties);
+		    updateMediaProperties(std::move(timelineProperties));
 	    });
 }
 
@@ -281,4 +307,25 @@ void WindowSystemMedia::removeOldTempThumbnail()
 	if (!m_thumbnailPath.empty()) {
 		std::filesystem::remove(m_thumbnailPath);
 	}
+}
+
+void WindowSystemMedia::getSyncMediaProperties(
+    const GlobalSystemMediaTransportControlsSession &session)
+{
+	const auto mediaPropertiesAsync = session.TryGetMediaPropertiesAsync();
+	if (!mediaPropertiesAsync) {
+		std::cerr << "Failed to get media properties." << std::endl;
+		return;
+	}
+	updateMediaProperties(std::move(mediaPropertiesAsync.get()));
+
+	updateMediaProperties(std::move(session.GetPlaybackInfo()));
+
+	auto timelineProperties = session.GetTimelineProperties();
+	if (!timelineProperties) {
+		std::cerr << "Failed to get timeline properties." << std::endl;
+		return;
+	}
+
+	updateMediaProperties(std::move(timelineProperties));
 }

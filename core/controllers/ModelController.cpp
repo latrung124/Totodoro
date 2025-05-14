@@ -6,15 +6,34 @@
  */
 
 #include "ModelController.h"
+
+#include "core/controllers/ViewModelController.h"
+
 #include "models/mediaplayer/MediaPlayerModel.h"
+
+ModelController &ModelController::getInstance()
+{
+	static ModelController instance;
+	return instance;
+}
 
 ModelController::ModelController(QObject *parent)
     : QObject(parent)
     , m_mediaPlayerModel(std::make_shared<MediaPlayerModel>())
 {
+	initConnections();
 }
 
 ModelController::~ModelController()
+{
+	deinitConnections();
+}
+
+void ModelController::initConnections()
+{
+}
+
+void ModelController::deinitConnections()
 {
 }
 
