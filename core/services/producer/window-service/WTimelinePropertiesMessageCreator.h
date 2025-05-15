@@ -13,7 +13,7 @@
 class WTimelinePropertiesMessageCreator : public ServiceMessageCreator
 {
 public:
-	virtual ServiceMessageUPtr create() const override;
+	virtual ServiceMessageUPtr create(ParamContainerBase *param) const override;
 };
 
 #endif // WTIMELINEPROPERTIESMESSAGECREATOR_H

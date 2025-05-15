@@ -9,7 +9,19 @@
 #include "core/services/messages/window-service/WMediaInfoMessage.h"
 #include "core/services/strategies/window-service/WMediaInfoExtractStrategy.h"
 
-ServiceMessageUPtr WMediaInfoMessageCreator::create() const
+ServiceMessageUPtr WMediaInfoMessageCreator::create(ParamContainerBase *param) const
 {
-	return std::make_unique<WMediaInfoMessage>(std::make_unique<WMediaInfoExtractStrategy>());
+	auto *container =
+	    dynamic_cast<core::factories::ParamContainer<WMediaInfoMessage::WMediaInfo> *>(param);
+	if (container == nullptr) {
+		return std::make_unique<WMediaInfoMessage>(std::make_unique<WMediaInfoExtractStrategy>());
+	}
+
+	auto paramTuple = container->getParams();
+	auto mediaInfo = std::get<0>(paramTuple);
+
+	auto message = std::make_unique<WMediaInfoMessage>(
+	    std::make_unique<WMediaInfoExtractStrategy>());
+	message->setMediaInfo(mediaInfo);
+	return message;
 }

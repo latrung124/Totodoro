@@ -11,6 +11,7 @@
 #include "models/SystemDataModel.h"
 
 #include <memory>
+#include <mutex>
 #include <string>
 
 class MediaPlaybackModel;
@@ -29,14 +30,19 @@ public:
 	std::string artist() const;
 	void setArtist(const std::string &artist);
 
+	std::string album() const;
+	void setAlbum(const std::string &album);
+
 	std::string thumbnail() const;
 	void setThumbnail(const std::string &thumbnail);
 
 	MediaPlaybackModelPtr mediaPlaybackModel() const;
 
 private:
+	mutable std::mutex m_mutex;
 	std::string m_title;
 	std::string m_artist;
+	std::string m_album;
 	std::string m_thumbnail;
 	MediaPlaybackModelPtr m_mediaPlaybackModel;
 };

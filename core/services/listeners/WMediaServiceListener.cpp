@@ -21,7 +21,8 @@
 
 void WMediaServiceListener::onMediaInfoChanged(const WMediaInfo &mediaInfo)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WMediaInfoMessageCreator>();
+	auto message = ServiceMessageProducer::getInstance().produce<WMediaInfoMessageCreator>(
+	    mediaInfo);
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}

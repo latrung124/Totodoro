@@ -38,13 +38,14 @@ public:
 	void initMediaPlayerView();
 	void initHomeView();
 
+	MediaPlayerViewModel *mediaPlayerViewModel();
+
 	// INVOKEABLE FUNCTIONS
 	Q_INVOKABLE void tabNavigation(MainTabType tabType);
 
 private:
 	ViewModelController(QObject *parent = nullptr);
 
-	MediaPlayerViewModel *mediaPlayerViewModel();
 	HomeViewModel *homeViewModel();
 
 	ViewModelFactoryUPtr m_vmFactory;

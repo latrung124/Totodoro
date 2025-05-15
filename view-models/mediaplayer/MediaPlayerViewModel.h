@@ -50,6 +50,12 @@ signals:
 	void mediaPlaybackViewModelChanged();
 	void thumbnailChanged();
 
+public slots:
+	void onTitleChanged(const QString &title);
+	void onAlbumChanged(const QString &album);
+	void onArtistChanged(const QString &artist);
+	void onThumbnailChanged(const QUrl &thumbnail);
+
 private:
 	void initDummyData();
 

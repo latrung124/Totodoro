@@ -15,7 +15,7 @@ class WPauseAsyncMessageCreator : public ServiceMessageCreator
 public:
 	virtual ~WPauseAsyncMessageCreator() = default;
 
-	ServiceMessageUPtr create() const override;
+	ServiceMessageUPtr create(ParamContainerBase *param) const override;
 };
 
 #endif // WPAUSE_ASYNC_MESSAGE_CREATOR_H

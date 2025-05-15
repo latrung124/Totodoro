@@ -9,7 +9,7 @@
 #include "core/services/messages/window-service/WPauseAsyncMessage.h"
 #include "core/services/strategies/window-service/WPauseAsyncExtractStrategy.h"
 
-ServiceMessageUPtr WPauseAsyncMessageCreator::create() const
+ServiceMessageUPtr WPauseAsyncMessageCreator::create(ParamContainerBase *param) const
 {
 	return std::make_unique<WPauseAsyncMessage>(std::make_unique<WPauseAsyncExtractStrategy>());
 }

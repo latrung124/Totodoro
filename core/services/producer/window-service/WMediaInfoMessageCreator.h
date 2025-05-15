@@ -15,7 +15,7 @@ class WMediaInfoMessageCreator : public ServiceMessageCreator
 public:
 	virtual ~WMediaInfoMessageCreator() = default;
 
-	ServiceMessageUPtr create() const override;
+	ServiceMessageUPtr create(ParamContainerBase *param) const override;
 };
 
 #endif // WMEDIA_INFO_MESSAGE_CREATOR_H
