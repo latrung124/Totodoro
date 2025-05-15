@@ -9,7 +9,7 @@
 #include "core/services/messages/window-service/WTimelinePropertiesMessage.h"
 #include "core/services/strategies/window-service/WTimelinePropertiesExtractStrategy.h"
 
-ServiceMessageUPtr WTimelinePropertiesMessageCreator::create() const
+ServiceMessageUPtr WTimelinePropertiesMessageCreator::create(ParamContainerBase *param) const
 {
 	return std::make_unique<WTimelinePropertiesMessage>(
 	    std::make_unique<WTimelinePropertiesExtractStrategy>());

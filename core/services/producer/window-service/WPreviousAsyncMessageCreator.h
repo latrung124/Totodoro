@@ -15,7 +15,7 @@ class WPreviousAsyncMessageCreator : public ServiceMessageCreator
 public:
 	virtual ~WPreviousAsyncMessageCreator() = default;
 
-	ServiceMessageUPtr create() const override;
+	ServiceMessageUPtr create(ParamContainerBase *param) const override;
 };
 
 #endif // WPREVIOUS_ASYNC_MESSAGE_CREATOR_H

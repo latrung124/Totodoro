@@ -15,7 +15,7 @@ class WPlayAsyncMessageCreator : public ServiceMessageCreator
 public:
 	virtual ~WPlayAsyncMessageCreator() = default;
 
-	ServiceMessageUPtr create() const override;
+	ServiceMessageUPtr create(ParamContainerBase *param) const override;
 };
 
 #endif // WPLAY_ASYNC_MESSAGE_CREATOR_H

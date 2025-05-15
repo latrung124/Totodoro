@@ -9,7 +9,7 @@
 #include "core/services/messages/window-service/WPlaybackInfoMessage.h"
 #include "core/services/strategies/window-service/WPlaybackInfoExtractStrategy.h"
 
-ServiceMessageUPtr WPlaybackInfoMessageCreator::create() const
+ServiceMessageUPtr WPlaybackInfoMessageCreator::create(ParamContainerBase *param) const
 {
 	return std::make_unique<WPlaybackInfoMessage>(std::make_unique<WPlaybackInfoExtractStrategy>());
 }

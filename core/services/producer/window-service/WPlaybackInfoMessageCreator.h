@@ -15,7 +15,7 @@ class WPlaybackInfoMessageCreator : public ServiceMessageCreator
 public:
 	virtual ~WPlaybackInfoMessageCreator() = default;
 
-	ServiceMessageUPtr create() const override;
+	ServiceMessageUPtr create(ParamContainerBase *param) const override;
 };
 
 #endif // WPLAYBACK_INFO_MESSAGE_CREATOR_H

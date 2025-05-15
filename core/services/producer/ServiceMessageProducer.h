@@ -14,6 +14,7 @@
 #include <typeindex>
 #include <unordered_map>
 
+#include "core/factories/ParamContainer.h"
 #include "core/services/producer/ServiceMessageCreator.h"
 
 /**
@@ -66,13 +67,14 @@ public:
 	 * @return std::unique_ptr<Message> A unique pointer to the created `Message`
 	 *         instance, or `nullptr` if no matching creator is found.
 	 */
-	template<typename CreatorType>
-	[[nodiscard]] std::unique_ptr<Message> produce() const
+	template<typename CreatorType, typename... Args>
+	[[nodiscard]] std::unique_ptr<Message> produce(Args... args) const
 	{
+		using ParamContainer = core::factories::ParamContainer<Args...>;
 		std::type_index type = std::type_index(typeid(CreatorType));
 		const auto &it = m_creators.find(type);
 		if (it != m_creators.end()) {
-			return it->second->create();
+			return it->second->create(std::make_unique<ParamContainer>(args...).get());
 		} else {
 			qDebug() << "ServiceMessageProducer: No creator found for type" << type.name();
 		}

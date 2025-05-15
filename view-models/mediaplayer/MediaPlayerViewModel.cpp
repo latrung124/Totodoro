@@ -92,3 +92,23 @@ void MediaPlayerViewModel::setThumbnail(const QUrl &thumbnail)
 		emit thumbnailChanged();
 	}
 }
+
+void MediaPlayerViewModel::onTitleChanged(const QString &title)
+{
+	setTitle(title);
+}
+
+void MediaPlayerViewModel::onAlbumChanged(const QString &album)
+{
+	setAlbum(album);
+}
+
+void MediaPlayerViewModel::onArtistChanged(const QString &artist)
+{
+	setArtist(artist);
+}
+
+void MediaPlayerViewModel::onThumbnailChanged(const QUrl &thumbnail)
+{
+	setThumbnail(thumbnail);
+}

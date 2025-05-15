@@ -9,7 +9,7 @@
 #include "core/services/messages/window-service/WNextAsyncMessage.h"
 #include "core/services/strategies/window-service/WNextAsyncExtractStrategy.h"
 
-ServiceMessageUPtr WNextAsyncMessageCreator::create() const
+ServiceMessageUPtr WNextAsyncMessageCreator::create(ParamContainerBase *param) const
 {
 	return std::make_unique<WNextAsyncMessage>(std::make_unique<WNextAsyncExtractStrategy>());
 }

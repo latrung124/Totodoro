@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include "core/controllers/ModelController.h"
+#include "models/mediaplayer/MediaPlayerModel.h"
 
 #include "core/services/messages/window-service/WMediaInfoMessage.h"
 
@@ -25,5 +26,14 @@ void WMediaInfoExtractStrategy::execute(const WMediaInfoMessage &message)
 void WMediaInfoExtractStrategy::extract(const WMediaInfoMessage &message)
 {
 	qDebug() << "WMediaInfoExtractStrategy::extract";
-	// TODO: emit signal to update model from worker thread
+	auto mediaInfo = message.getMediaInfo();
+	auto model = ModelController::getInstance().getMediaPlayerModel(); // still in worker thread
+	if (auto modelPtr = model.lock()) {
+		modelPtr->setTitle(mediaInfo.title);
+		modelPtr->setArtist(mediaInfo.artist);
+		modelPtr->setAlbum(mediaInfo.albumTitle);
+		modelPtr->setThumbnail(mediaInfo.thumbnail);
+	} else {
+		qDebug() << "Failed to lock MediaPlayerModel";
+	}
 }
