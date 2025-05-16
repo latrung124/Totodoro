@@ -33,12 +33,12 @@ void MediaPlayerModel::setTitle(const std::string &title)
 		if (m_title != title) {
 			m_title = title;
 		}
-	}
 
-	auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
-	if (viewModel) {
-		QMetaObject::invokeMethod(
-		    viewModel, "onTitleChanged", Q_ARG(QString, QString::fromStdString(m_title)));
+		auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
+		if (viewModel) {
+			QMetaObject::invokeMethod(
+			    viewModel, "onTitleChanged", Q_ARG(QString, QString::fromStdString(m_title)));
+		}
 	}
 }
 
@@ -55,12 +55,12 @@ void MediaPlayerModel::setArtist(const std::string &artist)
 		if (m_artist != artist) {
 			m_artist = artist;
 		}
-	}
 
-	auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
-	if (viewModel) {
-		QMetaObject::invokeMethod(
-		    viewModel, "onArtistChanged", Q_ARG(QString, QString::fromStdString(m_artist)));
+		auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
+		if (viewModel) {
+			QMetaObject::invokeMethod(
+			    viewModel, "onArtistChanged", Q_ARG(QString, QString::fromStdString(m_artist)));
+		}
 	}
 }
 
@@ -77,12 +77,12 @@ void MediaPlayerModel::setAlbum(const std::string &album)
 		if (m_album != album) {
 			m_album = album;
 		}
-	}
 
-	auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
-	if (viewModel) {
-		QMetaObject::invokeMethod(
-		    viewModel, "onAlbumChanged", Q_ARG(QString, QString::fromStdString(m_album)));
+		auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
+		if (viewModel) {
+			QMetaObject::invokeMethod(
+			    viewModel, "onAlbumChanged", Q_ARG(QString, QString::fromStdString(m_album)));
+		}
 	}
 }
 
@@ -99,14 +99,14 @@ void MediaPlayerModel::setThumbnail(const std::string &thumbnail)
 		if (m_thumbnail != thumbnail) {
 			m_thumbnail = thumbnail;
 		}
-	}
 
-	auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
-	if (viewModel) {
-		QMetaObject::invokeMethod(
-		    viewModel,
-		    "onThumbnailChanged",
-		    Q_ARG(QUrl, QUrl::fromLocalFile(QString::fromStdString(m_thumbnail))));
+		auto viewModel = ViewModelController::getInstance().mediaPlayerViewModel();
+		if (viewModel) {
+			QMetaObject::invokeMethod(
+			    viewModel,
+			    "onThumbnailChanged",
+			    Q_ARG(QUrl, QUrl::fromLocalFile(QString::fromStdString(m_thumbnail))));
+		}
 	}
 }
 

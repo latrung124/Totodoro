@@ -7,9 +7,14 @@
 
 #include "core/services/strategies/window-service/WPlaybackInfoExtractStrategy.h"
 
-#include <iostream>
+#include <QDebug>
+
+#include "core/controllers/ModelController.h"
 
 #include "core/services/messages/window-service/WPlaybackInfoMessage.h"
+
+#include "models/mediaplayer/MediaPlaybackModel.h"
+#include "models/mediaplayer/MediaPlayerModel.h"
 
 WPlaybackInfoExtractStrategy::~WPlaybackInfoExtractStrategy()
 {
@@ -22,5 +27,21 @@ void WPlaybackInfoExtractStrategy::execute(const WPlaybackInfoMessage &message)
 
 void WPlaybackInfoExtractStrategy::extract(const WPlaybackInfoMessage &message)
 {
-	std::cout << "Extracting playback info message" << std::endl;
+	// TODO: consider to refactor because of too much dependency in strategy class
+	using WMediaPlaybackStatus = window_services::media::utils::WMediaPlaybackStatus;
+
+	qDebug() << "WPlaybackInfoExtractStrategy::extract";
+	auto playbackInfo = message.getWPlaybackInfo();
+	auto model = ModelController::getInstance().getMediaPlayerModel();
+	if (auto modelPtr = model.lock()) {
+		auto mediaPlaybackModel = modelPtr->mediaPlaybackModel();
+		if (mediaPlaybackModel) {
+			mediaPlaybackModel->setIsPlaying(
+			    playbackInfo.playbackStatus == WMediaPlaybackStatus::Playing);
+		} else {
+			qDebug() << "MediaPlaybackModel is null";
+		}
+	} else {
+		qDebug() << "MediaPlayerModel is null";
+	}
 }

@@ -172,3 +172,28 @@ void MediaPlaybackViewModel::repeat()
 {
 	// TODO:Implement repeat logic here
 }
+
+void MediaPlaybackViewModel::onIsPlayingChanged(bool isPlaying)
+{
+	setIsPlaying(isPlaying);
+}
+
+void MediaPlaybackViewModel::onIsPlayingEnabledChanged(bool isPlayingEnabled)
+{
+	setIsPlayingEnabled(isPlayingEnabled);
+}
+
+void MediaPlaybackViewModel::onIsPauseEnabledChanged(bool isPauseEnabled)
+{
+	setIsPauseEnabled(isPauseEnabled);
+}
+
+void MediaPlaybackViewModel::onIsNextEnabledChanged(bool isNextEnabled)
+{
+	setIsNextEnabled(isNextEnabled);
+}
+
+void MediaPlaybackViewModel::onIsPreviousEnabledChanged(bool isPreviousEnabled)
+{
+	setIsPreviousEnabled(isPreviousEnabled);
+}

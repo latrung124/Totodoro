@@ -69,6 +69,12 @@ public slots:
 	void shuffle();
 	void repeat();
 
+	void onIsPlayingChanged(bool isPlaying);
+	void onIsPlayingEnabledChanged(bool isPlayingEnabled);
+	void onIsPauseEnabledChanged(bool isPauseEnabled);
+	void onIsNextEnabledChanged(bool isNextEnabled);
+	void onIsPreviousEnabledChanged(bool isPreviousEnabled);
+
 private:
 	void initDummyData();
 

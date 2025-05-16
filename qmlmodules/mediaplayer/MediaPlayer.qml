@@ -184,8 +184,8 @@ Item {
                         Layout.preferredHeight: internal.defaultPlayPauseButtonSize
                         Layout.alignment: Qt.AlignVCenter
                         padding: 4
-                        buttonForm: MediaEnumeration.ButtonForm.Play
-                        enabled: true //TODO: handle play/pause enable state
+                        buttonForm: internal.getPlayPauseButtonForm(playbackControl.playbackModel ? playbackControl.playbackModel.isPlaying : false)
+                        enabled: internal.getPlayPauseButtonEnabled()
                         ToolTip.text: playPauseButton.buttonForm === MediaEnumeration.ButtonForm.Play ? "Pause" : "Play"
                         onButtonClicked: (form) => {
                             internal.handleMediaButtonClicked(form);
@@ -240,6 +240,23 @@ Item {
 
         readonly property int defaultButtonSize: 24
         readonly property int defaultPlayPauseButtonSize: 32
+
+        function getPlayPauseButtonForm(isPlaying) {
+            if (isPlaying) {
+                return MediaEnumeration.ButtonForm.Pause;
+            } else {
+                return MediaEnumeration.ButtonForm.Play;
+            }
+        }
+
+        function getPlayPauseButtonEnabled() {
+            if (!playbackControl.playbackModel) {
+                return false;
+            }
+
+            var playbackModel = playbackControl.playbackModel;
+            return playbackModel.isPlaying ? playbackModel.isPlayingEnabled : playbackModel.isPauseEnabled;
+        }
 
         function handleMediaButtonClicked(form) {
             //TODO: implement model to handle these actions.

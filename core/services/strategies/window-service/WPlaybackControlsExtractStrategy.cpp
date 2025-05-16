@@ -7,9 +7,13 @@
 
 #include "core/services/strategies/window-service/WPlaybackControlsExtractStrategy.h"
 
-#include <iostream>
+#include <QDebug>
 
+#include "core/controllers/ModelController.h"
 #include "core/services/messages/window-service/WPlaybackControlsMessage.h"
+
+#include "models/mediaplayer/MediaPlaybackModel.h"
+#include "models/mediaplayer/MediaPlayerModel.h"
 
 WPlaybackControlsExtractStrategy::~WPlaybackControlsExtractStrategy()
 {
@@ -22,5 +26,19 @@ void WPlaybackControlsExtractStrategy::execute(const WPlaybackControlsMessage &m
 
 void WPlaybackControlsExtractStrategy::extract(const WPlaybackControlsMessage &message)
 {
-	std::cout << "Extracting playback controls!" << std::endl;
+	// TODO: consider to refactor because of too much dependency in strategy class
+	qDebug() << "WPlaybackControlsExtractStrategy::extract";
+	auto playbackControls = message.getWPlaybackControls();
+	auto model = ModelController::getInstance().getMediaPlayerModel(); // still in worker thread
+	if (auto modelPtr = model.lock()) {
+		auto mediaPlaybackModel = modelPtr->mediaPlaybackModel();
+		if (mediaPlaybackModel) {
+			mediaPlaybackModel->setIsPlayingEnabled(playbackControls.isPlayEnabled);
+			mediaPlaybackModel->setIsPauseEnabled(playbackControls.isPauseEnabled);
+			mediaPlaybackModel->setIsNextEnabled(playbackControls.isNextEnabled);
+			mediaPlaybackModel->setIsPreviousEnabled(playbackControls.isPreviousEnabled);
+		}
+	} else {
+		qDebug() << "Failed to lock MediaPlayerModel";
+	}
 }
