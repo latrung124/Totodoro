@@ -30,7 +30,8 @@ void WMediaServiceListener::onMediaInfoChanged(const WMediaInfo &mediaInfo)
 
 void WMediaServiceListener::onPlaybackControlsChanged(const WPlaybackControls &playbackControls)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackControlsMessageCreator>();
+	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackControlsMessageCreator>(
+	    playbackControls);
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -38,7 +39,8 @@ void WMediaServiceListener::onPlaybackControlsChanged(const WPlaybackControls &p
 
 void WMediaServiceListener::onPlaybackStatusChanged(const WPlaybackInfo &playbackInfo)
 {
-	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackInfoMessageCreator>();
+	auto message = ServiceMessageProducer::getInstance().produce<WPlaybackInfoMessageCreator>(
+	    playbackInfo);
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}

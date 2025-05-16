@@ -10,6 +10,8 @@
 
 #include "models/SystemDataModel.h"
 
+#include <mutex>
+
 class MediaPlaybackModel
 {
 public:
@@ -32,6 +34,7 @@ public:
 	void setIsPreviousEnabled(bool isPreviousEnabled);
 
 private:
+	mutable std::mutex m_mutex;
 	bool m_isPlaying = false;
 	bool m_isPlayingEnabled = false;
 	bool m_isPauseEnabled = false;

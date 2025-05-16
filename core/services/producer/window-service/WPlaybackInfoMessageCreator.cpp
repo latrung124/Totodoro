@@ -11,5 +11,18 @@
 
 ServiceMessageUPtr WPlaybackInfoMessageCreator::create(ParamContainerBase *param) const
 {
-	return std::make_unique<WPlaybackInfoMessage>(std::make_unique<WPlaybackInfoExtractStrategy>());
+	auto *container =
+	    dynamic_cast<core::factories::ParamContainer<WPlaybackInfoMessage::WPlaybackInfo> *>(param);
+	if (container == nullptr) {
+		return std::make_unique<WPlaybackInfoMessage>(
+		    std::make_unique<WPlaybackInfoExtractStrategy>());
+	}
+
+	auto paramTuple = container->getParams();
+	auto playbackInfo = std::get<0>(paramTuple);
+
+	auto message = std::make_unique<WPlaybackInfoMessage>(
+	    std::make_unique<WPlaybackInfoExtractStrategy>());
+	message->setWPlaybackInfo(playbackInfo);
+	return message;
 }
