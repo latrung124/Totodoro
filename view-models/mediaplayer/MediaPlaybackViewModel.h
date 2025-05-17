@@ -10,6 +10,8 @@
 
 #include <QObject>
 
+class MediaPlaybackModel;
+
 class MediaPlaybackViewModel : public QObject
 {
 	Q_OBJECT
@@ -51,6 +53,8 @@ public:
 
 	bool isRepeatEnabled() const;
 	void setIsRepeatEnabled(bool isRepeatEnabled);
+
+	void updateMediaPlaybackFromModel(const MediaPlaybackModel &model);
 
 signals:
 	void isPlayingChanged();

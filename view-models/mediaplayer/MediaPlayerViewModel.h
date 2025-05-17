@@ -14,6 +14,8 @@
 
 class MediaPlaybackViewModel;
 
+class MediaPlayerModel;
+
 class MediaPlayerViewModel : public QObject
 {
 	Q_OBJECT
@@ -42,6 +44,8 @@ public:
 
 	QUrl thumbnail() const;
 	void setThumbnail(const QUrl &thumbnail);
+
+	void updateMediaPlayerFromModel(const MediaPlayerModel &model);
 
 signals:
 	void titleChanged();

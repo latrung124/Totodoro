@@ -8,6 +8,8 @@
 #include "MediaPlayerViewModel.h"
 #include "MediaPlaybackViewModel.h"
 
+#include "models/mediaplayer/MediaPlayerModel.h"
+
 MediaPlayerViewModel::MediaPlayerViewModel(QObject *parent)
     : QObject(parent)
     , m_mediaPlaybackViewModel(std::make_unique<MediaPlaybackViewModel>())
@@ -111,4 +113,23 @@ void MediaPlayerViewModel::onArtistChanged(const QString &artist)
 void MediaPlayerViewModel::onThumbnailChanged(const QUrl &thumbnail)
 {
 	setThumbnail(thumbnail);
+}
+
+void MediaPlayerViewModel::updateMediaPlayerFromModel(const MediaPlayerModel &model)
+{
+	setTitle(QString::fromStdString(model.title()));
+	setAlbum(QString::fromStdString(model.album()));
+	setArtist(QString::fromStdString(model.artist()));
+	setThumbnail(QUrl::fromLocalFile(QString::fromStdString(model.thumbnail())));
+
+	auto mediaPlaybackModel = model.mediaPlaybackModel();
+	if (!mediaPlaybackModel) {
+		return;
+	}
+
+	if (!m_mediaPlaybackViewModel) {
+		m_mediaPlaybackViewModel = std::make_unique<MediaPlaybackViewModel>();
+	}
+
+	m_mediaPlaybackViewModel->updateMediaPlaybackFromModel(*mediaPlaybackModel);
 }

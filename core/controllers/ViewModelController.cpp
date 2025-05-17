@@ -10,13 +10,15 @@
 #include <QDebug>
 #include <QVariant>
 
-#include "view-models/home/HomeViewModel.h"
-#include "view-models/mediaplayer/MediaPlayerViewModel.h"
-
 #include "core/factories/view-model-producers/HomeVMProducer.h"
 #include "core/factories/view-model-producers/MediaPlayerVMProducer.h"
 
 #include "core/factories/ViewModelFactory.h"
+
+#include "core/controllers/ModelController.h"
+
+#include "view-models/home/HomeViewModel.h"
+#include "view-models/mediaplayer/MediaPlayerViewModel.h"
 
 ViewModelController &ViewModelController::getInstance()
 {
@@ -107,9 +109,12 @@ void ViewModelController::initMediaPlayerView()
 	}
 
 	auto mediaPlayerVM = mediaPlayerViewModel();
-	if (mediaPlayerVM) {
-		obj->setProperty("model", QVariant::fromValue(mediaPlayerVM));
+	auto mediaPlayerModel = ModelController::getInstance().getMediaPlayerModel();
+	if (auto mediaPlayerModelPtr = mediaPlayerModel.lock(); mediaPlayerModelPtr && mediaPlayerVM) {
+		mediaPlayerVM->updateMediaPlayerFromModel(*mediaPlayerModelPtr);
 	}
+
+	obj->setProperty("model", QVariant::fromValue(mediaPlayerVM));
 }
 
 void ViewModelController::initHomeView()

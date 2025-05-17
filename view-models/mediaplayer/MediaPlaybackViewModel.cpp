@@ -14,6 +14,8 @@
 #include "core/services/producer/ServiceMessageProducer.h"
 #include "core/services/queue/MessageQueue.h"
 
+#include "models/mediaplayer/MediaPlaybackModel.h"
+
 namespace {
 using ServiceMessageUPtr = std::unique_ptr<Message>;
 }
@@ -196,4 +198,13 @@ void MediaPlaybackViewModel::onIsNextEnabledChanged(bool isNextEnabled)
 void MediaPlaybackViewModel::onIsPreviousEnabledChanged(bool isPreviousEnabled)
 {
 	setIsPreviousEnabled(isPreviousEnabled);
+}
+
+void MediaPlaybackViewModel::updateMediaPlaybackFromModel(const MediaPlaybackModel &model)
+{
+	setIsPlaying(model.isPlaying());
+	setIsPlayingEnabled(model.isPlayingEnabled());
+	setIsPauseEnabled(model.isPauseEnabled());
+	setIsNextEnabled(model.isNextEnabled());
+	setIsPreviousEnabled(model.isPreviousEnabled());
 }
