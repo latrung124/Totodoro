@@ -7,9 +7,12 @@
 
 #include "core/services/strategies/window-service/WPlayAsyncExtractStrategy.h"
 
-#include <iostream>
+#include <QDebug>
+
+#include <IWMediaService.h>
 
 #include "core/services/messages/window-service/WPlayAsyncMessage.h"
+#include "core/services/ServiceManager.h"
 
 WPlayAsyncExtractStrategy::~WPlayAsyncExtractStrategy()
 {
@@ -22,5 +25,11 @@ void WPlayAsyncExtractStrategy::execute(const WPlayAsyncMessage &message)
 
 void WPlayAsyncExtractStrategy::extract(const WPlayAsyncMessage &message)
 {
-	std::cout << "Extracting play async message" << std::endl;
+	qDebug() << "WPlayAsyncExtractStrategy::extract()";
+	auto service = ServiceManager::instance().getService<IWMediaService>();
+	if (service != nullptr) {
+		service->playAsync();
+	} else {
+		qDebug() << "WPlayAsyncExtractStrategy::extract() - Service not found";
+	}
 }

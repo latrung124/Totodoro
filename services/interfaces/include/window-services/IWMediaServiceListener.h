@@ -24,7 +24,8 @@ public:
 
 	virtual void onMediaInfoChanged(const WMediaInfo &mediaInfo) = 0;
 	virtual void onPlaybackControlsChanged(const WPlaybackControls &playbackControls) = 0;
-	virtual void onPlaybackStatusChanged(const WPlaybackInfo &playbackInfo) = 0;
+	virtual void onPlaybackStatusChanged(
+	    const WPlaybackInfo &playbackInfo) = 0; // TODO: rename to onPlaybackInfoChanged
 	virtual void onTimelinePropertiesChanged(const WTimelineProperties &timelineProperties) = 0;
 };
 

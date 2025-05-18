@@ -19,6 +19,7 @@ public:
 	    winrt::Windows::Media::Control::GlobalSystemMediaTransportControlsSessionManager;
 	using GlobalSystemMediaTransportControlsSession =
 	    winrt::Windows::Media::Control::GlobalSystemMediaTransportControlsSession;
+	using IAsyncOperationBool = winrt::Windows::Foundation::IAsyncOperation<bool>;
 
 	WindowSystemMedia(WindowMediaService *service);
 	WindowSystemMedia() = delete;
@@ -31,6 +32,11 @@ public:
 	WindowSystemMedia &&operator=(const WindowSystemMedia &&) = delete;
 
 	bool systemInit();
+
+	IAsyncOperationBool tryPlayAsync();
+	IAsyncOperationBool tryPauseAsync();
+	IAsyncOperationBool tryNextAsync();
+	IAsyncOperationBool tryPreviousAsync();
 
 private:
 	template<typename Properties>

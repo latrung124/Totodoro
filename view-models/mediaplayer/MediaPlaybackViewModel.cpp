@@ -7,12 +7,13 @@
 
 #include "MediaPlaybackViewModel.h"
 
-#include "core/services/messages/window-service/WNextAsyncMessage.h"
-#include "core/services/messages/window-service/WPauseAsyncMessage.h"
-#include "core/services/messages/window-service/WPlayAsyncMessage.h"
-#include "core/services/messages/window-service/WPreviousAsyncMessage.h"
 #include "core/services/producer/ServiceMessageProducer.h"
 #include "core/services/queue/MessageQueue.h"
+
+#include "core/services/producer/window-service/WNextAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPauseAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPlayAsyncMessageCreator.h"
+#include "core/services/producer/window-service/WPreviousAsyncMessageCreator.h"
 
 #include "models/mediaplayer/MediaPlaybackModel.h"
 
@@ -134,7 +135,14 @@ void MediaPlaybackViewModel::setIsRepeatEnabled(bool isRepeatEnabled)
 
 void MediaPlaybackViewModel::play()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPlayAsyncMessage>();
+	if ((m_isPlaying && m_isPlayingEnabled) || !m_isPlayingEnabled) {
+		return;
+	}
+
+	// TODO: Implement another MessageQueue for requesting, that will be distinguished from
+	// the response queue
+	ServiceMessageUPtr message =
+	    ServiceMessageProducer::getInstance().produce<WPlayAsyncMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -142,7 +150,14 @@ void MediaPlaybackViewModel::play()
 
 void MediaPlaybackViewModel::pause()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WPauseAsyncMessage>();
+	if (!m_isPlaying || !m_isPauseEnabled) {
+		return;
+	}
+
+	// TODO: Implement another MessageQueue for requesting, that will be distinguished from
+	// the response queue
+	ServiceMessageUPtr message =
+	    ServiceMessageProducer::getInstance().produce<WPauseAsyncMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -150,7 +165,10 @@ void MediaPlaybackViewModel::pause()
 
 void MediaPlaybackViewModel::next()
 {
-	ServiceMessageUPtr message = ServiceMessageProducer::getInstance().produce<WNextAsyncMessage>();
+	// TODO: Implement another MessageQueue for requesting, that will be distinguished from
+	// the response queue
+	ServiceMessageUPtr message =
+	    ServiceMessageProducer::getInstance().produce<WNextAsyncMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}
@@ -158,8 +176,10 @@ void MediaPlaybackViewModel::next()
 
 void MediaPlaybackViewModel::previous()
 {
+	// TODO: Implement another MessageQueue for requesting, that will be distinguished from
+	// the response queue
 	ServiceMessageUPtr message =
-	    ServiceMessageProducer::getInstance().produce<WPreviousAsyncMessage>();
+	    ServiceMessageProducer::getInstance().produce<WPreviousAsyncMessageCreator>();
 	if (message) {
 		MessageQueue::getInstance().push(std::move(message));
 	}

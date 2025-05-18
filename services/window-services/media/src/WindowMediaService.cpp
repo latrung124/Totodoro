@@ -65,25 +65,53 @@ void WindowMediaService::getMediaInfo()
 
 bool WindowMediaService::playAsync()
 {
-	// Play media asynchronously
+	if (!m_systemMedia) {
+		return false;
+	}
+
+	if (!m_systemMedia->tryPlayAsync()) {
+		return false;
+	}
+
 	return true;
 }
 
 bool WindowMediaService::pauseAsync()
 {
-	// Pause media asynchronously
+	if (!m_systemMedia) {
+		return false;
+	}
+
+	if (!m_systemMedia->tryPauseAsync()) {
+		return false;
+	}
+
 	return true;
 }
 
 bool WindowMediaService::nextAsync()
 {
-	// Play next media asynchronously
+	if (!m_systemMedia) {
+		return false;
+	}
+
+	if (!m_systemMedia->tryNextAsync()) {
+		return false;
+	}
+
 	return true;
 }
 
 bool WindowMediaService::previousAsync()
 {
-	// Play previous media asynchronously
+	if (!m_systemMedia) {
+		return false;
+	}
+
+	if (!m_systemMedia->tryPreviousAsync()) {
+		return false;
+	}
+
 	return true;
 }
 
@@ -103,6 +131,16 @@ void WindowMediaService::systemPlaybackInfoChanged(const WPlaybackInfo &wPlaybac
 	for (const auto &listener : m_listeners) {
 		if (auto l = dynamic_cast<IWMediaServiceListener *>(listener)) {
 			l->onPlaybackStatusChanged(wPlaybackInfo);
+		}
+	}
+}
+
+void WindowMediaService::systemPlaybackControlsChanged(const WPlaybackControls &wPlaybackControls)
+{
+	// Notify listeners about playback controls changed
+	for (const auto &listener : m_listeners) {
+		if (auto l = dynamic_cast<IWMediaServiceListener *>(listener)) {
+			l->onPlaybackControlsChanged(wPlaybackControls);
 		}
 	}
 }

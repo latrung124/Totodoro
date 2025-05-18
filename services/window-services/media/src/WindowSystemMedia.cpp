@@ -178,6 +178,10 @@ template<>
 void WindowSystemMedia::updateMediaProperties(
     GlobalSystemMediaTransportControlsSessionPlaybackInfo &&playbackInfo)
 {
+	if (!m_service) {
+		return;
+	}
+
 	auto playbackControls = playbackInfo.Controls();
 	auto playbackStatus = playbackInfo.PlaybackStatus();
 	auto playbackType = playbackInfo.PlaybackType();
@@ -204,6 +208,8 @@ void WindowSystemMedia::updateMediaProperties(
 	    .isShuffleEnabled = playbackControls.IsShuffleEnabled(),
 	    .isStopEnabled = playbackControls.IsStopEnabled(),
 	};
+
+	m_service->systemPlaybackControlsChanged(wPlaybackControls);
 
 	WMediaPlaybackAutoRepeatMode wRepeatMode =
 	    repeatMode == nullptr
@@ -328,4 +334,60 @@ void WindowSystemMedia::getSyncMediaProperties(
 	}
 
 	updateMediaProperties(std::move(timelineProperties));
+}
+
+WindowSystemMedia::IAsyncOperationBool WindowSystemMedia::tryPlayAsync()
+try {
+	if (m_session) {
+		bool tResult = co_await m_session.TryPlayAsync();
+		co_return tResult;
+	}
+
+	co_return false;
+} catch (const winrt::hresult_error &ex) {
+	// Handle any exceptions
+	std::wcout << L"Error trying to play media: " << ex.message().c_str() << std::endl;
+	co_return false;
+}
+
+WindowSystemMedia::IAsyncOperationBool WindowSystemMedia::tryPauseAsync()
+try {
+	if (m_session) {
+		bool tResult = co_await m_session.TryPauseAsync();
+		co_return tResult;
+	}
+
+	co_return false;
+} catch (const winrt::hresult_error &ex) {
+	// Handle any exceptions
+	std::wcout << L"Error trying to play media: " << ex.message().c_str() << std::endl;
+	co_return false;
+}
+
+WindowSystemMedia::IAsyncOperationBool WindowSystemMedia::tryNextAsync()
+try {
+	if (m_session) {
+		bool tResult = co_await m_session.TrySkipNextAsync();
+		co_return tResult;
+	}
+
+	co_return false;
+} catch (const winrt::hresult_error &ex) {
+	// Handle any exceptions
+	std::wcout << L"Error trying to play media: " << ex.message().c_str() << std::endl;
+	co_return false;
+}
+
+WindowSystemMedia::IAsyncOperationBool WindowSystemMedia::tryPreviousAsync()
+try {
+	if (m_session) {
+		bool tResult = co_await m_session.TrySkipPreviousAsync();
+		co_return tResult;
+	}
+
+	co_return false;
+} catch (const winrt::hresult_error &ex) {
+	// Handle any exceptions
+	std::wcout << L"Error trying to play media: " << ex.message().c_str() << std::endl;
+	co_return false;
 }
