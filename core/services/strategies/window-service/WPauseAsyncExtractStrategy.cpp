@@ -7,7 +7,11 @@
 
 #include "core/services/strategies/window-service/WPauseAsyncExtractStrategy.h"
 
-#include <iostream>
+#include <QDebug>
+
+#include <IWMediaService.h>
+
+#include "core/services/ServiceManager.h"
 
 #include "core/services/messages/window-service/WPauseAsyncMessage.h"
 
@@ -22,5 +26,11 @@ void WPauseAsyncExtractStrategy::execute(const WPauseAsyncMessage &message)
 
 void WPauseAsyncExtractStrategy::extract(const WPauseAsyncMessage &message)
 {
-	std::cout << "Extracting pause async message" << std::endl;
+	qDebug() << "WPauseAsyncExtractStrategy::extract()";
+	auto service = ServiceManager::instance().getService<IWMediaService>();
+	if (service != nullptr) {
+		service->pauseAsync();
+	} else {
+		qDebug() << "WPauseAsyncExtractStrategy::extract() - Service not found";
+	}
 }

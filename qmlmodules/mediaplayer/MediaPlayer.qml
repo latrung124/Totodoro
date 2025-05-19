@@ -159,7 +159,7 @@ Item {
                         enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isShuffleEnabled : false
                         ToolTip.text: "Shuffle"
                         onButtonClicked: (form) => {
-                            internal.handleMediaButtonClicked(form);
+                            internal.handleMediaButtonClicked(form, playbackControl.playbackModel);
                         }
                     }
 
@@ -173,7 +173,7 @@ Item {
                         enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isPreviousEnabled : false
                         ToolTip.text: "Previous"
                         onButtonClicked: (form) => {
-                            internal.handleMediaButtonClicked(form);
+                            internal.handleMediaButtonClicked(form, playbackControl.playbackModel);
                         }
                     }
 
@@ -188,7 +188,7 @@ Item {
                         enabled: internal.getPlayPauseButtonEnabled()
                         ToolTip.text: playPauseButton.buttonForm === MediaEnumeration.ButtonForm.Play ? "Pause" : "Play"
                         onButtonClicked: (form) => {
-                            internal.handleMediaButtonClicked(form);
+                            internal.handleMediaButtonClicked(form, playbackControl.playbackModel);
                         }
                     }
 
@@ -202,7 +202,7 @@ Item {
                         enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isNextEnabled : false
                         ToolTip.text: "Next"
                         onButtonClicked: (form) => {
-                            internal.handleMediaButtonClicked(form);
+                            internal.handleMediaButtonClicked(form, playbackControl.playbackModel);
                         }
                     }
 
@@ -216,7 +216,7 @@ Item {
                         enabled: playbackControl.playbackModel ? playbackControl.playbackModel.isRepeatEnabled : false
                         ToolTip.text: "Repeat"
                         onButtonClicked: (form) => {
-                            internal.handleMediaButtonClicked(form);
+                            internal.handleMediaButtonClicked(form, playbackControl.playbackModel);
                         }
                     }
                 }
@@ -228,7 +228,7 @@ Item {
                     buttonForm: MediaEnumeration.ButtonForm.Sound
                     ToolTip.text: "Mute"
                     onButtonClicked: (form) => {
-                        internal.handleMediaButtonClicked(form);
+                        internal.handleMediaButtonClicked(form, playbackControl.playbackModel);
                     }
                 }
             }
@@ -250,15 +250,15 @@ Item {
         }
 
         function getPlayPauseButtonEnabled() {
-            if (!playbackControl.playbackModel) {
+            var playbackModel = playbackControl.playbackModel;
+            if (!playbackModel) {
                 return false;
             }
 
-            var playbackModel = playbackControl.playbackModel;
-            return playbackModel.isPlaying ? playbackModel.isPlayingEnabled : playbackModel.isPauseEnabled;
+            return playbackModel.isPlaying ? playbackModel.isPauseEnabled : playbackModel.isPlayingEnabled;
         }
 
-        function handleMediaButtonClicked(form) {
+        function handleMediaButtonClicked(form, model) {
             //TODO: implement model to handle these actions.
             switch (form) {
             case MediaEnumeration.ButtonForm.None:
@@ -266,11 +266,21 @@ Item {
                 break
             case MediaEnumeration.ButtonForm.Play: {
                 console.log("Play button clicked!")
+                if (!model) {
+                    console.log("playback view model is null!")
+                }
+
+                model.play();
                 playPauseButton.buttonForm = MediaEnumeration.ButtonForm.Pause;
                 break
             }
             case MediaEnumeration.ButtonForm.Pause: {
                 console.log("Pause button clicked!")
+                if (!model) {
+                    console.log("playback view model is null!")
+                }
+
+                model.pause();
                 playPauseButton.buttonForm = MediaEnumeration.ButtonForm.Play;
                 break
             }

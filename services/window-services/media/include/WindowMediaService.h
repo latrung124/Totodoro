@@ -20,6 +20,7 @@ class WMEDIA_SERVICE_API WindowMediaService : public IWMediaService
 public:
 	using WMediaInfo = window_services::media::utils::WMediaInfo;
 	using WPlaybackInfo = window_services::media::utils::WPlaybackInfo;
+	using WPlaybackControls = window_services::media::utils::WPlaybackControls;
 	using WTimelineProperties = window_services::media::utils::WTimelineProperties;
 	using WindowSystemMediaUPtr = std::unique_ptr<WindowSystemMedia>;
 
@@ -45,6 +46,7 @@ public:
 
 	void systemMediaPropertiesChanged(const WMediaInfo &wMediaInfo);
 	void systemPlaybackInfoChanged(const WPlaybackInfo &wPlaybackInfo);
+	void systemPlaybackControlsChanged(const WPlaybackControls &wPlaybackControls);
 	void systemTimelinePropertiesChanged(const WTimelineProperties &wTimelineProperties);
 
 private:
