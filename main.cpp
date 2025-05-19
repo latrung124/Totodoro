@@ -115,10 +115,10 @@ int main(int argc, char *argv[])
 	setApplicationAttribute();
 	setApplicationInfo();
 
-	serviceRegister();
-
 	GuiApplication guiApp(&app);
 	guiApp.start();
+
+	serviceRegister();
 
 	return app.exec();
 }
