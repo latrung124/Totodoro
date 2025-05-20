@@ -26,6 +26,26 @@ Item {
         color: "transparent"
         border.color: root.basicColor
         radius: 10
+        border.width: 0.5
+
+        Image {
+            id: artwork
+
+            anchors {
+                fill: parent
+                margins: 1
+            }
+            source: internal.defaultArtwork
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+
+            onStatusChanged: {
+                if (artwork.status === Image.Error) {
+                    console.log("Error loading image:", artwork.source);
+                    // TODO: in case artwork was from model, we can used default artwork
+                }
+            }
+        }
     }
 
     RowLayout {
@@ -240,6 +260,7 @@ Item {
 
         readonly property int defaultButtonSize: 24
         readonly property int defaultPlayPauseButtonSize: 32
+        readonly property string defaultArtwork: "resources/default-media-artwork.png"
 
         function getPlayPauseButtonForm(isPlaying) {
             if (isPlaying) {

@@ -60,6 +60,7 @@ Item {
 				completedTasks: model.completedTasks
 				totalTasks: model.totalTasks
 				priority: model.priority
+				icon: model.icon
 				selected: ListView.isCurrentItem
 
 				MouseArea {

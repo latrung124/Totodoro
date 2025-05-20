@@ -21,4 +21,5 @@ qt_add_qml_module(
   "resources/previous-button.png"
   "resources/repeat-button.png"
   "resources/shuffle-button.png"
-  "resources/sound-button.png")
+  "resources/sound-button.png"
+  "resources/default-media-artwork.png")

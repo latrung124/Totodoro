@@ -27,7 +27,7 @@ void TaskGroupsViewModel::initDummyData()
 	for (int i = 0; i < 10; ++i) {
 		auto taskGroup = std::make_shared<TaskGroupViewModel>();
 		taskGroup->setTaskGroupId(QString::number(i));
-		taskGroup->setIcon("icon.png");
+		taskGroup->setIcon("default-task-icon.png");
 		taskGroup->setName(QString("Task Group %1").arg(i));
 		taskGroup->setDeadline("2025-12-31");
 		taskGroup->setPriority(PriorityType::Medium);
