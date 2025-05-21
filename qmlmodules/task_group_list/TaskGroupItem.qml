@@ -23,6 +23,7 @@ Item {
 	property string description: ""
 	property int completedTasks: 0
 	property int totalTasks: 0
+	property string icon: ""
 
 	implicitWidth: 296
 	implicitHeight: 173
@@ -95,16 +96,14 @@ Item {
 				Layout.alignment: Qt.AlignLeft
 
 				radius: 4
-				border.width: 1
+				color: internal.backgroundIconColor
 
-				Image {
+				OverlayedImage {
 					anchors {
-						fill: parent
 						centerIn: parent
-						margins: 1
 					}
-					fillMode: Image.PreserveAspectFit
-					source: "resources/icon/demon.png"
+					color: internal.selectedColor
+					source: internal.resourcePath + root.icon
 				}
 			}
 
@@ -222,6 +221,7 @@ Item {
 		readonly property color black: "#000000"
 
 		readonly property color backgroundColor: root.selected ? darkestGray : white
+		readonly property color backgroundIconColor: root.selected ? "#494949" : "#EFEFEF"
 		readonly property color selectedColor: root.selected ? white : black
 		readonly property color describeColor: root.selected ? mediumGray : darkGray
 		readonly property color taskProgressBarColor: root.selected ? white : darkGray

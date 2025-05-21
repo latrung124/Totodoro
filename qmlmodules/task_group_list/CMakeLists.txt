@@ -17,4 +17,5 @@ qt_add_qml_module(
   TaskGroupItem.qml
   RESOURCES
   "resources/icon/calendar.svg"
-  "resources/icon/demon.png")
+  "resources/icon/demon.png"
+  "resources/icon/default-task-icon.png")
