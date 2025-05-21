@@ -110,9 +110,8 @@ Item {
                         PomodoroTitlePanel {
                             id: title
 
+							anchors.fill: parent
                             model: root.model ? root.model.pomodoroTitle : null
-
-                            anchors.fill: parent
                             backgroundColor: "transparent"
                         }
                     }
@@ -127,36 +126,54 @@ Item {
 
                     spacing: 1
 
-                    PomodoroPanel {
-                        id: pomodoroPanel
+					Item {
+						id: pomodoroPanelItem
 
-                        model: root.model ? root.model.pomodoro : null
+						Layout.fillWidth: true
+						Layout.fillHeight: true
+						Layout.alignment: Qt.AlignLeft
 
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.alignment: Qt.AlignLeft
-                    }
+						PomodoroPanel {
+							id: pomodoroPanel
 
-                    RoundedRectangle {
-                        Layout.preferredWidth: 338
-                        Layout.fillHeight: true
-                        Layout.alignment: Qt.AlignRight
-                        radius: root.radius
-                        fillColor: internal.rightPanelColor
-                        roundTopLeft: false
-                        roundTopRight: false
-                        roundBottomLeft: false
+							anchors {
+								fill: parent
+								bottom: parent.bottom
+								bottomMargin: 1
+							}
+							model: root.model ? root.model.pomodoro : null
+						}
+					}
 
-                        TasksListPanel {
-                            id: tasksListPanel
+					Item {
+						id: tasksListPanelItem
 
-                            model: root.model ? root.model.tasks : null
+						Layout.preferredWidth: 338
+						Layout.fillHeight: true
+						Layout.alignment: Qt.AlignRight
 
-                            width: parent.width
-                            height: parent.height
-                            backgroundColor: "transparent"
-                        }
-                    }
+						RoundedRectangle {
+							anchors {
+								fill: parent
+								bottom: parent.bottom
+								bottomMargin: 1
+							}
+
+							radius: root.radius
+							fillColor: internal.rightPanelColor
+							roundTopLeft: false
+							roundTopRight: false
+							roundBottomLeft: false
+
+							TasksListPanel {
+								id: tasksListPanel
+
+								anchors.fill: parent
+								model: root.model ? root.model.tasks : null
+								backgroundColor: "transparent"
+							}
+						}
+					}
                 }
             }
         }
