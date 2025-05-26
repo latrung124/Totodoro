@@ -1,0 +1,57 @@
+environment: local # Change to "cloud" for deployment
+
+services:
+  user_service:
+    local: "localhost:50051"
+    cloud: "user-service.prod.svc.cluster.local:80" #temporarily using this
+    security: # mTLS configuration should be configured in environment variables
+      ca_cert: "/mTLS/ca.crt"
+      client_cert: "/mTLS/user-service.crt"
+      client_key: "/mTLS/user-service.key"
+      server_cert: "/mTLS/user-service.crt"
+      server_key: "/mTLS/user-service.key"
+  task_management_service:
+    local: "localhost:50052"
+    cloud: "task-service.prod.svc.cluster.local:80" #temporarily using this
+    security: # mTLS configuration should be configured in environment variables
+      ca_cert: "/mTLS/ca.crt"
+      client_cert: "/mTLS/task-management-service.crt"
+      client_key: "/mTLS/task-management-service.key"
+      server_cert: "/mTLS/task-management-service.crt"
+      server_key: "/mTLS/task-management-service.key"
+  notification_service:
+    local: "localhost:50053"
+    cloud: "notification-service.prod.svc.cluster.local:80" #temporarily using this
+    security: # mTLS configuration should be configured in environment variables
+      ca_cert: "/mTLS/ca.crt"
+      client_cert: "/mTLS/notification-service.crt"
+      client_key: "/mTLS/notification-service.key"
+      server_cert: "/mTLS/notification-service.crt"
+      server_key: "/mTLS/notification-service.key"
+  logging_service:
+    local: "localhost:50054"
+    cloud: "logging-service.prod.svc.cluster.local:80" #temporarily using this
+    security: # mTLS configuration should be configured in environment variables
+      ca_cert: "/mTLS/ca.crt"
+      client_cert: "/mTLS/logging-service.crt"
+      client_key: "/mTLS/logging-service.key"
+      server_cert: "/mTLS/logging-service.crt"
+      server_key: "/mTLS/logging-service.key"
+  statistics_service:
+    local: "localhost:50055"
+    cloud: "statistics-service.prod.svc.cluster.local:80" #temporarily using this
+    security: # mTLS configuration should be configured in environment variables
+      ca_cert: "/mTLS/ca.crt"
+      client_cert: "/mTLS/statistics-service.crt"
+      client_key: "/mTLS/statistics-service.key"
+      server_cert: "/mTLS/statistics-service.crt"
+      server_key: "/mTLS/statistics-service.key"
+  pomodoro_service:
+    local: "localhost:50056"
+    cloud: "pomodoro-service.prod.svc.cluster.local:80" #temporarily using this
+    security: # mTLS configuration should be configured in environment variables
+      ca_cert: "/mTLS/ca.crt"
+      client_cert: "/mTLS/pomodoro-service.crt"
+      client_key: "/mTLS/pomodoro-service.key"
+      server_cert: "/mTLS/pomodoro-service.crt"
+      server_key: "/mTLS/pomodoro-service.key"
