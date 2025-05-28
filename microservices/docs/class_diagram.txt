@@ -61,11 +61,11 @@ class RateLimiter {
 ' ********************** USER SERVICE **********************
 class UserService {
   + start(): void
-  - handler: UserHandler
+  - handler: UserProfileHandler
   - repository: IUserRepository
 }
 
-class UserHandler {
+class UserProfileHandler {
   + create_user(request: CreateUserRequest): UserResponse
   - validator: UserValidator
 }
@@ -118,9 +118,9 @@ GatewayService --> AuthMiddleware : uses
 GatewayService --> RateLimiter : uses
 
 ' User Service
-UserService --> UserHandler : contains
-UserHandler --> UserValidator : uses
-UserHandler --> IUserRepository : depends
+UserService --> UserProfileHandler : contains
+UserProfileHandler --> UserValidator : uses
+UserProfileHandler --> IUserRepository : depends
 SQLUserRepository ..|> IUserRepository
 SQLUserRepository --> DatabaseFactory : uses
 
