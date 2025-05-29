@@ -5,15 +5,15 @@
 * Description: This file implements the UserProfileService class, which is responsible for managing user profiles in the microservices architecture.
 */
 
-#include "microservices/services/userprofile/UserProfileService.h"
+#include "UserProfileService.h"
 
 #include <iostream>
 
 #include <user_service.pb.h>
 
-#include "microservices/services/userprofile/models/User.h"
-#include "microservices/services/userprofile/handlers/UserProfileHandler.h"
-#include "microservices/services/userprofile/repositories/SQLiteUserRepository.h"
+#include "User.h"
+#include "UserProfileHandler.h"
+#include "SQLiteUserRepository.h"
 
 UserProfileService::UserProfileService(int port, IUserRepositoryUPtr userRepository)
     : m_port(port), m_userRepository(std::move(userRepository))

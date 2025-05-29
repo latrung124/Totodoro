@@ -8,7 +8,7 @@
 #ifndef COMMON_DATABASE_SQLITECONNECTION_H_
 #define COMMON_DATABASE_SQLITECONNECTION_H_
 
-#include "microservices/connection/IDatabaseConnection.h"
+#include "connection/IDatabaseConnection.h"
 
 class SQLiteConnection : public IDatabaseConnection
 {

@@ -8,9 +8,10 @@
 
 #include <iostream>
 
-#include "microservices/connection/SQLiteConnection.h"
-#include "microservices/services/userprofile/handlers/UserProfileHandler.h"
-#include "microservices/services/userprofile/UserProfileService.h"
+#include "connection/SQLiteConnection.h"
+#include "SQLiteUserRepository.h"
+#include "UserProfileHandler.h"
+#include "UserProfileService.h"
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
 	    std::string(DB_SOURCE_PATH) + "/UserProfile.db");
 	auto repository = std::make_unique<SQLiteUserRepository>(dbConnection);
 
-	UserService service(50051, std::move(repository));
+	UserProfileService service(50051, std::move(repository));
 	service.start();
 
 	return EXIT_SUCCESS;

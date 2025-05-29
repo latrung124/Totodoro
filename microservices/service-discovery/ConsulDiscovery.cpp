@@ -5,7 +5,7 @@
 * Description: Implementation of service discovery using Consul
 */
 
-#include "microservices/common/service-discovery/ConsulDiscovery.h"
+#include "service-discovery/ConsulDiscovery.h"
 
 #include <algorithm>
 #include <stdexcept>
@@ -27,12 +27,12 @@ ConsulDiscovery::~ConsulDiscovery()
 {
 }
 
-std::vector<std::string> ConsulDiscovery::discover(const std::string& name)
+std::vector<std::string> ConsulDiscovery::discover(std::string serviceName)
 {
     using namespace nlohmann;
     using namespace httplib;
 
-    std::string path = "/v1/health/service/" + name;
+    std::string path = "/v1/health/service/" + serviceName;
 
     httplib::Result res = m_client.Get(path.c_str());
     if (!res || res->status != 200) {

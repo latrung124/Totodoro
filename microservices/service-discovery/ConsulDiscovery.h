@@ -13,7 +13,7 @@
 
 #include <httplib.h>
 
-#include "microservices/common/service-discovery/IServiceDiscovery.h"
+#include "service-discovery/IServiceDiscovery.h"
 
 namespace microservices::service_discovery
 {
@@ -24,7 +24,7 @@ public:
     ConsulDiscovery(std::string_view addr = "localhost", int port = 8500, bool enabledHealthCheck = true);
     virtual ~ConsulDiscovery();
 
-    virtual std::vector<std::string> discover(const std::string& name) override;
+    virtual std::vector<std::string> discover(std::string serviceName) override;
     virtual void registerService(const std::string &name, const std::string &url, int port) override;
     virtual void unregisterService(const std::string &name, const std::string &url, int port) override;
 

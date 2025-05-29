@@ -5,7 +5,7 @@
 * Description: This file contains the definitions of the SQLiteUserRepository class.
 */
 
-#include "microservices/services/userprofile/repositories/SQLiteUserRepository.h"
+#include "SQLiteUserRepository.h"
 
 SQLiteUserRepository::SQLiteUserRepository(const std::shared_ptr<IDatabaseConnection> &connection)
     : m_connection(connection)

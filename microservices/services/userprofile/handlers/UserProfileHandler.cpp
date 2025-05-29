@@ -5,12 +5,12 @@
 * Description: This file implements the UserProfileHandler class, which is responsible for handling user-related operations in the microservices architecture.
 */
 
-#include "microservices/services/userprofile/handlers/UserProfileHandler.h"
+#include "UserProfileHandler.h"
 
 #include "user_service.pb.h"
 
-#include "microservices/services/userprofile/models/User.h"
-#include "microservices/services/useprofile/repositories/SQLiteUserRepository.h"
+#include "User.h"
+#include "SQLiteUserRepository.h"
 
 UserProfileHandler::UserProfileHandler(UserRepositoryUPtr userRepository)
     : m_userRepository(std::move(userRepository))

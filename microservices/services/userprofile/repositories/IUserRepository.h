@@ -12,7 +12,7 @@
 #include <vector>
 #include <optional>
 
-#include "microservices/services/userprofile/models/User.h"
+#include "User.h"
 
 class IUserRepository
 {

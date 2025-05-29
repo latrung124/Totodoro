@@ -8,7 +8,7 @@
 #ifndef ISERVICEDISCOVERY_H
 #define ISERVICEDISCOVERY_H
 
-#include <string_view>
+#include <string>
 #include <vector>
 
 namespace microservices {
@@ -20,9 +20,9 @@ class IServiceDiscovery
 public:
     virtual ~IServiceDiscovery() = default;
 
-    virtual std::vector<std::string> discover(std::string_view &serviceName) = 0;
-    virtual void registerService(std::string_view &name, std::string_view &endpoint) = 0;
-    virtual void unregisterService(std::string_view &name, std::string_view &endpoint) = 0;
+    virtual std::vector<std::string> discover(std::string serviceName) = 0;
+    virtual void registerService(const std::string &name, const std::string &url, int port) = 0;
+    virtual void unregisterService(const std::string &name, const std::string &url, int port) = 0;
 };
 
 } // namespace service_discovery

@@ -5,7 +5,7 @@
 * Description: This file contains the definitions for SQLite connection
 */
 
-#include "microservices/connection/SQLiteConnection.h"
+#include "connection/SQLiteConnection.h"
 
 #include <iostream>
 

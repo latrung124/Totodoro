@@ -10,9 +10,9 @@
 
 #include <memory>
 
-#include "microservices/connection/IDatabaseConnection.h"
+#include "connection/IDatabaseConnection.h"
 
-#include "microservices/services/userprofile/repositories/IUserRepository.h"
+#include "IUserRepository.h"
 
 class SQLiteUserRepository : public IUserRepository
 {

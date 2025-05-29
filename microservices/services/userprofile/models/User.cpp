@@ -5,7 +5,7 @@
 * Description: This file implements the User class, which represents a user in the microservices architecture.
 */
 
-#include "microservices/services/userprofile/models/User.h"
+#include "User.h"
 
 User::User(const std::string& userId, const std::string& userName, const std::string& email, const std::string& createAt, const std::string& updateAt)
     : m_userId(userId), m_userName(userName), m_email(email), m_createAt(createAt), m_updateAt(updateAt)
