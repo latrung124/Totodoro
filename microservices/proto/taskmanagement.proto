@@ -1,0 +1,212 @@
+/*
+* File: taskmanagement.proto
+* Author: trung.la
+* Date: 06-02-2025
+* Description: Protobuf definitions for Task Management Service
+* This service handles task groups and individual tasks for users.
+*/
+
+syntax = "proto3";
+
+package task_management;
+
+import "google/protobuf/timestamp.proto";
+
+// =======================
+// ==== DATA STRUCTURE ===
+// =======================
+
+// Represents a group of related tasks.
+message TaskGroup {
+  string group_id = 1;                     // UUID
+  string user_id = 2;                      // Foreign key to User (UserProfile service)
+  string name = 3;                         // Group name
+  string description = 4;                  // Optional
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+// Represents a Pomodoro session associated with a task.
+message TaskSession {
+  string session_id = 1;                   // UUID
+  string user_id = 2;                      // Foreign key to User (UserProfile service)
+  string task_id = 3;                      // Nullable, associated task
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;  // Nullable
+  string status = 6;                       // One of: "completed", "skipped", "failed"
+}
+
+// ==========================
+// ==== GROUP OPERATIONS ====
+// ==========================
+
+message CreateTaskGroupRequest {
+  string user_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CreateTaskGroupResponse {
+  TaskGroup group = 1;
+}
+
+message GetTaskGroupsRequest {
+  string user_id = 1;
+}
+
+message GetTaskGroupsResponse {
+  repeated TaskGroup groups = 1;
+}
+
+// ===========================
+// ==== SESSION OPERATIONS ====
+// ===========================
+
+message CreateTaskSessionRequest {
+  string user_id = 1;
+  string task_id = 2; // Optional: can be empty if free session
+  google.protobuf.Timestamp start_time = 3;
+}
+
+message CreateTaskSessionResponse {
+  TaskSession session = 1;
+}
+
+message EndTaskSessionRequest {
+  string session_id = 1;
+  google.protobuf.Timestamp end_time = 2;
+  string status = 3; // Must be "completed", "skipped", or "failed"
+}
+
+message EndTaskSessionResponse {
+  TaskSession session = 1;
+}
+
+message GetTaskSessionsRequest {
+  string user_id = 1;
+  string task_id = 2; // Optional: filter sessions by task
+}
+
+message GetTaskSessionsResponse {
+  repeated TaskSession sessions = 1;
+}
+
+// =======================
+// ==== SERVICE DEFINITION ====
+// =======================
+
+service TaskManagementService {
+  // Task Group
+  rpc CreateTaskGroup(CreateTaskGroupRequest) returns (CreateTaskGroupResponse);
+  rpc GetTaskGroups(GetTaskGroupsRequest) returns (GetTaskGroupsResponse);
+
+  // Pomodoro Sessions
+  rpc CreateTaskSession(CreateTaskSessionRequest) returns (CreateTaskSessionResponse);
+  rpc EndTaskSession(EndTaskSessionRequest) returns (EndTaskSessionResponse);
+  rpc GetTaskSessions(GetTaskSessionsRequest) returns (GetTaskSessionsResponse);
+}
+syntax = "proto3";
+
+package task_management;
+
+import "google/protobuf/timestamp.proto";
+
+// Represents a group of related tasks.
+message TaskGroup {
+  string group_id = 1;                     // UUID
+  string user_id = 2;                      // Foreign key to User (from UserProfile service)
+  string name = 3;                         // Group name
+  string description = 4;                  // Optional
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+// Represents an individual task.
+message Task {
+  string task_id = 1;                      // UUID
+  string user_id = 2;                      // Foreign key to User (from UserProfile service)
+  string group_id = 3;                     // Foreign key to TaskGroup (nullable)
+  string title = 4;
+  string description = 5;
+  bool is_completed = 6;
+  google.protobuf.Timestamp deadline = 7;  // Optional
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+// ==== REQUESTS AND RESPONSES ====
+
+// TaskGroup CRUD
+message CreateTaskGroupRequest {
+  string user_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CreateTaskGroupResponse {
+  TaskGroup group = 1;
+}
+
+message GetTaskGroupsRequest {
+  string user_id = 1;
+}
+
+message GetTaskGroupsResponse {
+  repeated TaskGroup groups = 1;
+}
+
+// Task CRUD
+message CreateTaskRequest {
+  string user_id = 1;
+  string group_id = 2;
+  string title = 3;
+  string description = 4;
+  google.protobuf.Timestamp deadline = 5;
+}
+
+message CreateTaskResponse {
+  Task task = 1;
+}
+
+message GetTasksRequest {
+  string user_id = 1;
+  string group_id = 2; // Optional: filter by group
+}
+
+message GetTasksResponse {
+  repeated Task tasks = 1;
+}
+
+message UpdateTaskRequest {
+  string task_id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp deadline = 4;
+  bool is_completed = 5;
+}
+
+message UpdateTaskResponse {
+  Task task = 1;
+}
+
+message DeleteTaskRequest {
+  string task_id = 1;
+}
+
+message DeleteTaskResponse {
+  bool success = 1;
+}
+
+// ==== SERVICE DEFINITION ====
+
+service TaskManagementService {
+  // Task group operations
+  rpc CreateTaskGroup(CreateTaskGroupRequest) returns (CreateTaskGroupResponse);
+  rpc GetTaskGroups(GetTaskGroupsRequest) returns (GetTaskGroupsResponse);
+
+  // Task operations
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+}
