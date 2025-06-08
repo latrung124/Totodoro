@@ -51,6 +51,20 @@ void SQLiteUserRepository::insert(const User &user)
 
 void SQLiteUserRepository::update(const User &user)
 {
+    const std::string sql =
+            "UPDATE Users SET "
+            "email = '" + user.getEmail() + "', "
+            "username = '" + user.getUserName() + "', "
+            "updated_at = '" + user.getUpdateAt() + "' "
+            "WHERE user_id = '" + user.getUserId() + "'";
+
+    auto const connection = m_connection.lock();
+    if (!connection)
+    {
+        return;
+    }
+
+    connection->transaction(sql);
 }
 
 void SQLiteUserRepository::remove(const User &user)
@@ -82,10 +96,36 @@ std::optional<User> SQLiteUserRepository::findById(const std::string &userId)
 
 std::optional<User> SQLiteUserRepository::findByUserName(const std::string &userName)
 {
+    const std::string sql = "SELECT * FROM Users WHERE username = '" + userName + "'";
+    auto const connection = m_connection.lock();
+    if (!connection)
+    {
+        return std::nullopt;
+    }
+
+    SQLite::Statement query(*connection->connection(), sql);
+    if (query.executeStep())
+    {
+        return User{ query.getColumn(0).getText(), query.getColumn(1).getText(), query.getColumn(2).getText(), query.getColumn(3).getText(), query.getColumn(4).getText()};
+    }
+
     return std::nullopt;
 }
 
 std::optional<User> SQLiteUserRepository::findByEmail(const std::string &email)
 {
+    const std::string sql = "SELECT * FROM Users WHERE email = '" + email + "'";
+    auto const connection = m_connection.lock();
+    if (!connection)
+    {
+        return std::nullopt;
+    }
+
+    SQLite::Statement query(*connection->connection(), sql);
+    if (query.executeStep())
+    {
+        return User{ query.getColumn(0).getText(), query.getColumn(1).getText(), query.getColumn(2).getText(), query.getColumn(3).getText(), query.getColumn(4).getText()};
+    }
+
     return std::nullopt;
 }

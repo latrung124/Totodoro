@@ -9,6 +9,7 @@
 #define USER_HANDLER_H
 
 #include <memory>
+#include <optional>
 
 class User;
 class IUserRepository;
@@ -28,6 +29,8 @@ public:
     ~UserProfileHandler();
 
     User createUser(CreateUserRequest const &request);
+    void updateUser(User const &user);
+    std::optional<User> getUser(User const &user);
 
 private:
     UserRepositoryUPtr m_userRepository;

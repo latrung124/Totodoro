@@ -24,8 +24,11 @@ public:
     ~UserProfileService() = default;
 
     void start();
+    void stop();
 
 private:
+    void registerEndpoints();
+
     int m_port;
 
     httplib::Server m_server;
