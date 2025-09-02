@@ -35,10 +35,8 @@ else()
     ${PROTO_FILES})
 endif()
 
-set(SOURCES
-    connection/IDatabaseConnection.h connection/SQLiteConnection.cpp
-    connection/SQLiteConnection.h service-discovery/IServiceDiscovery.h
-    service-discovery/ConsulDiscovery.cpp service-discovery/ConsulDiscovery.h)
+set(SOURCES connection/IDatabaseConnection.h connection/SQLiteConnection.cpp
+            connection/SQLiteConnection.h)
 
 add_library(microservices STATIC ${SOURCES} ${PROTO_SOURCES})
 
