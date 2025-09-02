@@ -1,0 +1,404 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "UserService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/users": {
+      "post": {
+        "operationId": "UserService_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/user_serviceCreateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user_serviceCreateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/v1/users/{userId}": {
+      "get": {
+        "operationId": "UserService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/user_serviceGetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      },
+      "patch": {
+        "operationId": "UserService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/user_serviceUpdateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserServiceUpdateUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/v1/users/{userId}/settings": {
+      "get": {
+        "operationId": "UserService_GetSettings",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/user_serviceGetSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      },
+      "put": {
+        "operationId": "UserService_UpdateSettings",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/user_serviceUpdateSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserServiceUpdateSettingsBody"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "UserServiceUpdateSettingsBody": {
+      "type": "object",
+      "properties": {
+        "pomodoroDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shortBreakDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "longBreakDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "autoStartShortBreak": {
+          "type": "boolean"
+        },
+        "autoStartLongBreak": {
+          "type": "boolean"
+        },
+        "autoStartPomodoro": {
+          "type": "boolean"
+        },
+        "pomodoroInterval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "theme": {
+          "type": "string"
+        },
+        "shortBreakNotification": {
+          "type": "boolean"
+        },
+        "longBreakNotification": {
+          "type": "boolean"
+        },
+        "pomodoroNotification": {
+          "type": "boolean"
+        },
+        "autoStartMusic": {
+          "type": "boolean"
+        },
+        "language": {
+          "type": "string"
+        },
+        "autoStartNextTask": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UserServiceUpdateUserBody": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "user_serviceCreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "user_serviceCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/user_serviceUser"
+        }
+      }
+    },
+    "user_serviceGetSettingsResponse": {
+      "type": "object",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/user_serviceSettings"
+        }
+      }
+    },
+    "user_serviceGetUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/user_serviceUser"
+        }
+      }
+    },
+    "user_serviceSettings": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "pomodoroDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shortBreakDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "longBreakDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "autoStartShortBreak": {
+          "type": "boolean"
+        },
+        "autoStartLongBreak": {
+          "type": "boolean"
+        },
+        "autoStartPomodoro": {
+          "type": "boolean"
+        },
+        "pomodoroInterval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "theme": {
+          "type": "string"
+        },
+        "shortBreakNotification": {
+          "type": "boolean"
+        },
+        "longBreakNotification": {
+          "type": "boolean"
+        },
+        "pomodoroNotification": {
+          "type": "boolean"
+        },
+        "autoStartMusic": {
+          "type": "boolean"
+        },
+        "language": {
+          "type": "string"
+        },
+        "autoStartNextTask": {
+          "type": "boolean"
+        }
+      }
+    },
+    "user_serviceUpdateSettingsResponse": {
+      "type": "object",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/user_serviceSettings"
+        }
+      }
+    },
+    "user_serviceUpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/user_serviceUser"
+        }
+      }
+    },
+    "user_serviceUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "===== ENTITIES ====="
+    }
+  }
+}

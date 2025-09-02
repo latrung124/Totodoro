@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "pomodoro_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PomodoroService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/sessions/users/{userId}": {
+      "get": {
+        "summary": "List all sessions for a user (optionally filter by task_id)",
+        "operationId": "PomodoroService_GetSessions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pomodoro_serviceGetSessionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskId",
+            "description": "Optional filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PomodoroService"
+        ]
+      },
+      "post": {
+        "summary": "Create a new session",
+        "description": "fixed",
+        "operationId": "PomodoroService_CreateSession",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pomodoro_serviceCreateSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PomodoroServiceCreateSessionBody"
+            }
+          }
+        ],
+        "tags": [
+          "PomodoroService"
+        ]
+      }
+    },
+    "/v1/sessions/{sessionId}": {
+      "get": {
+        "summary": "Get a session by ID",
+        "description": "fixed",
+        "operationId": "PomodoroService_GetSessionById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pomodoro_serviceGetSessionByIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PomodoroService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a session",
+        "operationId": "PomodoroService_DeleteSession",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pomodoro_serviceDeleteSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PomodoroService"
+        ]
+      },
+      "patch": {
+        "summary": "Update a session (partial update)",
+        "description": "fixed",
+        "operationId": "PomodoroService_UpdateSession",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pomodoro_serviceUpdateSessionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PomodoroServiceUpdateSessionBody"
+            }
+          }
+        ],
+        "tags": [
+          "PomodoroService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "PomodoroServiceCreateSessionBody": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sessionType": {
+          "$ref": "#/definitions/pomodoro_serviceSessionType"
+        },
+        "numberInCycle": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "===== REQUESTS AND RESPONSES ====="
+    },
+    "PomodoroServiceUpdateSessionBody": {
+      "type": "object",
+      "properties": {
+        "progress": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "$ref": "#/definitions/pomodoro_serviceSessionStatus"
+        },
+        "sessionType": {
+          "$ref": "#/definitions/pomodoro_serviceSessionType"
+        },
+        "numberInCycle": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lastUpdate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pomodoro_serviceCreateSessionResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/pomodoro_servicePomodoroSession"
+        }
+      }
+    },
+    "pomodoro_serviceDeleteSessionResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pomodoro_serviceGetSessionByIdResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/pomodoro_servicePomodoroSession"
+        }
+      }
+    },
+    "pomodoro_serviceGetSessionsResponse": {
+      "type": "object",
+      "properties": {
+        "sessions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pomodoro_servicePomodoroSession"
+          }
+        }
+      }
+    },
+    "pomodoro_servicePomodoroSession": {
+      "type": "object",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "title": "UUID - Primary key"
+        },
+        "userId": {
+          "type": "string",
+          "title": "FK to UserProfile.users"
+        },
+        "taskId": {
+          "type": "string",
+          "title": "FK to TaskManagement.tasks (NOT NULL)"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Required"
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Seconds elapsed"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Nullable"
+        },
+        "status": {
+          "$ref": "#/definitions/pomodoro_serviceSessionStatus",
+          "description": "Running, Paused, Completed, etc."
+        },
+        "sessionType": {
+          "$ref": "#/definitions/pomodoro_serviceSessionType",
+          "title": "Pomodoro, Short Break, Long Break"
+        },
+        "numberInCycle": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Position in pomodoro cycle"
+        },
+        "lastUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Last updated time"
+        }
+      },
+      "title": "===== ENTITY DEFINITIONS ====="
+    },
+    "pomodoro_serviceSessionStatus": {
+      "type": "string",
+      "enum": [
+        "SESSION_STATUS_UNSPECIFIED",
+        "SESSION_STATUS_IDLE",
+        "SESSION_STATUS_IN_PROGRESS",
+        "SESSION_STATUS_PENDING",
+        "SESSION_STATUS_COMPLETED"
+      ],
+      "default": "SESSION_STATUS_UNSPECIFIED",
+      "title": "===== ENUM DEFINITIONS ====="
+    },
+    "pomodoro_serviceSessionType": {
+      "type": "string",
+      "enum": [
+        "SESSION_TYPE_UNSPECIFIED",
+        "SESSION_TYPE_SHORT_BREAK",
+        "SESSION_TYPE_LONG_BREAK"
+      ],
+      "default": "SESSION_TYPE_UNSPECIFIED"
+    },
+    "pomodoro_serviceUpdateSessionResponse": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "$ref": "#/definitions/pomodoro_servicePomodoroSession"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

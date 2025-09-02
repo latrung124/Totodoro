@@ -1,0 +1,704 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "task_management_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TaskManagementService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/task-groups": {
+      "post": {
+        "summary": "Task group operations",
+        "operationId": "TaskManagementService_CreateTaskGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementCreateTaskGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/task_managementCreateTaskGroupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      }
+    },
+    "/v1/task-groups/users/{userId}": {
+      "get": {
+        "operationId": "TaskManagementService_GetTaskGroups",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementGetTaskGroupsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      }
+    },
+    "/v1/task-groups/{groupId}": {
+      "delete": {
+        "operationId": "TaskManagementService_DeleteTaskGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementDeleteTaskGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      },
+      "patch": {
+        "operationId": "TaskManagementService_UpdateTaskGroup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementUpdateTaskGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskManagementServiceUpdateTaskGroupBody"
+            }
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      }
+    },
+    "/v1/task-groups/{groupId}/tasks": {
+      "get": {
+        "operationId": "TaskManagementService_GetTasks2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementGetTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupId",
+            "description": "Optional: filter by group",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      },
+      "post": {
+        "summary": "Task operations",
+        "operationId": "TaskManagementService_CreateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementCreateTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskManagementServiceCreateTaskBody"
+            }
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      }
+    },
+    "/v1/tasks/users/{userId}": {
+      "get": {
+        "operationId": "TaskManagementService_GetTasks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementGetTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupId",
+            "description": "Optional: filter by group",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      }
+    },
+    "/v1/tasks/{taskId}": {
+      "delete": {
+        "operationId": "TaskManagementService_DeleteTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementDeleteTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      },
+      "patch": {
+        "operationId": "TaskManagementService_UpdateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/task_managementUpdateTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskManagementServiceUpdateTaskBody"
+            }
+          }
+        ],
+        "tags": [
+          "TaskManagementService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "TaskManagementServiceCreateTaskBody": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "$ref": "#/definitions/task_managementTaskPriority"
+        },
+        "status": {
+          "$ref": "#/definitions/task_managementTaskStatus"
+        },
+        "totalPomodoros": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Task CRUD"
+    },
+    "TaskManagementServiceUpdateTaskBody": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "$ref": "#/definitions/task_managementTaskPriority"
+        },
+        "status": {
+          "$ref": "#/definitions/task_managementTaskStatus"
+        },
+        "completedPomodoros": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPomodoros": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "TaskManagementServiceUpdateTaskGroupBody": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/task_managementTaskGroupStatus"
+        },
+        "priority": {
+          "$ref": "#/definitions/task_managementTaskGroupPriority"
+        },
+        "completedTasks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTasks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "task_managementCreateTaskGroupRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "$ref": "#/definitions/task_managementTaskGroupPriority"
+        },
+        "status": {
+          "$ref": "#/definitions/task_managementTaskGroupStatus"
+        },
+        "totalTasks": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "TaskGroup CRUD"
+    },
+    "task_managementCreateTaskGroupResponse": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/task_managementTaskGroup"
+        }
+      }
+    },
+    "task_managementCreateTaskResponse": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/task_managementTask"
+        }
+      }
+    },
+    "task_managementDeleteTaskGroupResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "task_managementDeleteTaskResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "task_managementGetTaskGroupsResponse": {
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/task_managementTaskGroup"
+          }
+        }
+      }
+    },
+    "task_managementGetTasksResponse": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/task_managementTask"
+          }
+        }
+      }
+    },
+    "task_managementTask": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "completedPomodoros": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPomodoros": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "priority": {
+          "$ref": "#/definitions/task_managementTaskPriority"
+        },
+        "status": {
+          "$ref": "#/definitions/task_managementTaskStatus"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "Represents an individual task."
+    },
+    "task_managementTaskGroup": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "$ref": "#/definitions/task_managementTaskGroupPriority"
+        },
+        "status": {
+          "$ref": "#/definitions/task_managementTaskGroupStatus"
+        },
+        "completedTasks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTasks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "Represents a group of related tasks."
+    },
+    "task_managementTaskGroupPriority": {
+      "type": "string",
+      "enum": [
+        "TASK_GROUP_PRIORITY_UNSPECIFIED",
+        "TASK_GROUP_PRIORITY_LOW",
+        "TASK_GROUP_PRIORITY_MEDIUM",
+        "TASK_GROUP_PRIORITY_HIGH"
+      ],
+      "default": "TASK_GROUP_PRIORITY_UNSPECIFIED",
+      "title": "==== ENUMS ===="
+    },
+    "task_managementTaskGroupStatus": {
+      "type": "string",
+      "enum": [
+        "TASK_GROUP_STATUS_UNSPECIFIED",
+        "TASK_GROUP_STATUS_IDLE",
+        "TASK_GROUP_STATUS_PENDING",
+        "TASK_GROUP_STATUS_IN_PROGRESS",
+        "TASK_GROUP_STATUS_COMPLETED"
+      ],
+      "default": "TASK_GROUP_STATUS_UNSPECIFIED"
+    },
+    "task_managementTaskPriority": {
+      "type": "string",
+      "enum": [
+        "TASK_PRIORITY_UNSPECIFIED",
+        "TASK_PRIORITY_LOW",
+        "TASK_PRIORITY_MEDIUM",
+        "TASK_PRIORITY_HIGH"
+      ],
+      "default": "TASK_PRIORITY_UNSPECIFIED"
+    },
+    "task_managementTaskStatus": {
+      "type": "string",
+      "enum": [
+        "TASK_STATUS_UNSPECIFIED",
+        "TASK_STATUS_IDLE",
+        "TASK_STATUS_PENDING",
+        "TASK_STATUS_IN_PROGRESS",
+        "TASK_STATUS_COMPLETED"
+      ],
+      "default": "TASK_STATUS_UNSPECIFIED"
+    },
+    "task_managementUpdateTaskGroupResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "task_managementUpdateTaskResponse": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/task_managementTask"
+        }
+      }
+    }
+  }
+}
