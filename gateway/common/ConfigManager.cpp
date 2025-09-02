@@ -2,16 +2,16 @@
 * File: ConfigManager.cpp
 * Author: trung.la
 * Date: 03-27-2025
-* Description: This file contains the definitions for the ConfigManager class, which manages configuration settings for the microservices.
+* Description: This file contains the definitions for the ConfigManager class, which manages configuration settings for the gateway.
 */
 
-#include "microservices/common/ConfigManager.h"
+#include "gateway/common/ConfigManager.h"
 
 #include <yaml-cpp/yaml.h>
 
-microservices::common::ConfigManager::ConfigManager(std::string_view configFilePath)
+gateway::common::ConfigManager::ConfigManager(std::string_view configFilePath)
 {
-    using namespace microservices::common;
+    using namespace gateway::common;
     // Load configuration from yaml file
     YAML::Node config = YAML::LoadFile(std::string(configPath));
     m_env = config["environment"].as<std::string>();
@@ -22,7 +22,7 @@ microservices::common::ConfigManager::ConfigManager(std::string_view configFileP
     }
 }
 
-std::string microservices::common::ConfigManager::getServiceUrl(const std::string &serviceName) const
+std::string gateway::common::ConfigManager::getServiceUrl(const std::string &serviceName) const
 {
     // Get service URL from configuration
     // ...
