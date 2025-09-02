@@ -48,6 +48,3 @@ target_include_directories(
 target_link_libraries(
   microservices PUBLIC protobuf::libprotobuf yaml-cpp httplib::httplib
                        SQLiteCpp nlohmann_json::nlohmann_json)
-
-# other services
-add_subdirectory(services)
