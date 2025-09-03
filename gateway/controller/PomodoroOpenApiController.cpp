@@ -97,60 +97,6 @@ namespace gateway {
 
 void PomodoroOpenApiController::registerRoutes(httplib::Server& server, const std::string& baseUrl)
 {
-    // POST /v1/sessions -> create a pomodoro session
-    server.Post(R"(^/v1/sessions$)", [baseUrl](const httplib::Request& req, httplib::Response& res) {
-        // Parse body
-        OAIPomodoroServiceCreateSessionBody body;
-        if (!req.body.empty()) {
-            const auto bodyStr = QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size()));
-            body.fromJson(bodyStr);
-        }
-
-        // Prepare API
-        OAIPomodoroServiceApi api;
-        api.setBaseUrl(QString::fromStdString(baseUrl));
-
-        QByteArray out;
-        int status = 500;
-
-        const bool ok = waitForResponse(
-            // success connector
-            [&](auto slot) {
-                QObject::connect(&api, &OAIPomodoroServiceApi::pomodoro_serviceCreateSessionSignal, slot);
-            },
-            // error connector
-            [&](auto slot) {
-                QObject::connect(&api, &OAIPomodoroServiceApi::pomodoro_serviceCreateSessionSignalE, slot);
-            },
-            // invoke upstream request
-            [&]() {
-                api.pomodoro_serviceCreateSession(body);
-            },
-            10000, // timeout ms
-            out, status
-        );
-
-        res.status = status;
-        res.set_content(out.constData(), "application/json");
-    });
-
-    // Catch-all for any /v1/sessions/* endpoint (not implemented yet)
-    auto notImplemented = [](const httplib::Request& req, httplib::Response& res) {
-        QJsonObject err{
-            {"error", "Not Implemented"},
-            {"path", QString::fromStdString(req.path)},
-            {"message", "Endpoint under /v1/sessions/* is not implemented in the gateway"}
-        };
-        const auto json = QJsonDocument(err).toJson(QJsonDocument::Compact);
-        res.status = 501;
-        res.set_content(json.constData(), "application/json");
-    };
-
-    server.Get(R"(^/v1/sessions/.*$)", notImplemented);
-    server.Post(R"(^/v1/sessions/.*$)", notImplemented);
-    server.Put(R"(^/v1/sessions/.*$)", notImplemented);
-    server.Delete(R"(^/v1/sessions/.*$)", notImplemented);
-    server.Patch(R"(^/v1/sessions/.*$)", notImplemented);
 }
 
 }

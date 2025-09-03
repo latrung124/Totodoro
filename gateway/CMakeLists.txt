@@ -17,11 +17,20 @@ add_subdirectory(generated/user_service.swagger_client/client)
 add_subdirectory(generated/task_management_service.swagger_client/client)
 
 set(GATEWAY_HEADERS
-    connection/IDatabaseConnection.h connection/SQLiteConnection.h
+    connection/IDatabaseConnection.h
+    connection/SQLiteConnection.h
+    factory/IPomodoroApiClientFactory.h
+    factory/PomodoroApiClientFactory.h
+    command/IApiCommand.h
+    command/CreateSessionCommand.h
+    handler/IResponseHandler.h
+    handler/JsonResponseHandler.h
     controller/PomodoroOpenApiController.h)
 
-set(GATEWAY_SOURCES connection/SQLiteConnection.cpp
-                    controller/PomodoroOpenApiController.cpp)
+set(GATEWAY_SOURCES
+    connection/SQLiteConnection.cpp factory/PomodoroApiClientFactory.cpp
+    command/CreateSessionCommand.cpp handler/JsonResponseHandler.cpp
+    controller/PomodoroOpenApiController.cpp)
 
 add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
 
@@ -34,6 +43,9 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/controller
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/common
+    ${CMAKE_CURRENT_SOURCE_DIR}/command
+    ${CMAKE_CURRENT_SOURCE_DIR}/factory
+    ${CMAKE_CURRENT_SOURCE_DIR}/handler
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/pomodoro_service.swagger_client/client
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/user_service.swagger_client/client
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/task_management_service.swagger_client/client
