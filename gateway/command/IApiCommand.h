@@ -9,12 +9,15 @@
 
 #include "IResponseHandler.h"
 
-#include <functional>
+#include <QObject>
+
 #include <memory>
 
-class IApiCommand
+class IApiCommand : public QObject
 {
+    Q_OBJECT
 public:
+    IApiCommand(QObject* parent = nullptr) : QObject(parent) {}
     virtual ~IApiCommand() = default;
 
     // Execute the command

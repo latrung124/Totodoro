@@ -7,18 +7,44 @@
 
 #include "CreateSessionCommand.h"
 
+#include <QEventLoop>
+#include <QTimer>
+
+CreateSessionCommand::CreateSessionCommand(const QString& userId, 
+    const OAIPomodoroServiceCreateSessionBody& body,
+    IPomodoroApiClientFactoryPtr factory,
+    const QString& baseUrl,
+    QObject* parent)
+    : IApiCommand(parent),
+      mUserId(userId),
+      mBody(body),
+      mFactory(factory),
+      mBaseUrl(baseUrl),
+      mResponseHandler(nullptr),
+      mApiClient(nullptr)
+{
+}
+
 void CreateSessionCommand::execute()
 {
-    // Implementation to call the Pomodoro API to create a session
-    // This is a placeholder; actual implementation would involve using the OAIPomodoroServiceApi
 }
 
 void CreateSessionCommand::setResponseHandler(IResponseHandlerPtr handler)
 {
+    mResponseHandler = handler;
 }
 
 IResponseHandlerPtr CreateSessionCommand::getResponseHandler() const
 {
-    return nullptr; // Placeholder; actual implementation would return the stored response handler
+    return mResponseHandler;
+}
+
+void CreateSessionCommand::onSessionCreated(const OAIPomodoro_serviceCreateSessionResponse& response)
+{
+}
+
+void CreateSessionCommand::onSessionError(const OAIPomodoro_serviceCreateSessionResponse& summary, 
+                                         QNetworkReply::NetworkError errorType, const QString& errorStr)
+{
 }
 

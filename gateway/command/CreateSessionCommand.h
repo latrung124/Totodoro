@@ -8,14 +8,39 @@
 #pragma once
 
 #include "IApiCommand.h"
+#include "IPomodoroApiClientFactory.h"
+
+#include <OAIPomodoroServiceCreateSessionBody.h>
+#include <OAIPomodoro_serviceCreateSessionResponse.h>
 
 class CreateSessionCommand : public IApiCommand
 {
+    Q_OBJECT
 public:
-    CreateSessionCommand() = default;
+    using OAIPomodoroServiceCreateSessionBody = OpenAPI::OAIPomodoroServiceCreateSessionBody;
+    using OAIPomodoro_serviceCreateSessionResponse = OpenAPI::OAIPomodoro_serviceCreateSessionResponse;
+    CreateSessionCommand(const QString& userId, 
+        const OAIPomodoroServiceCreateSessionBody& body,
+        IPomodoroApiClientFactoryPtr factory,
+        const QString& baseUrl,
+        QObject* parent = nullptr);
     ~CreateSessionCommand() override = default;
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;
     IResponseHandlerPtr getResponseHandler() const override;
+
+private slots:
+    // Private slots to handle API responses
+    void onSessionCreated(const OAIPomodoro_serviceCreateSessionResponse& response);
+    void onSessionError(const OAIPomodoro_serviceCreateSessionResponse& summary, 
+                       QNetworkReply::NetworkError errorType, const QString& errorStr);
+
+private:
+    QString mUserId;
+    OAIPomodoroServiceCreateSessionBody mBody;
+    IPomodoroApiClientFactoryPtr mFactory;
+    QString mBaseUrl;
+    IResponseHandlerPtr mResponseHandler;
+    std::shared_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;
 };

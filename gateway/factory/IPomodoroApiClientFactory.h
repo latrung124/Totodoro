@@ -21,3 +21,5 @@ public:
     // Create and return a new instance of OAIPomodoroServiceApi
     virtual std::shared_ptr<OpenAPI::OAIPomodoroServiceApi> createClient(const QString& baseUrl) = 0;
 };
+
+using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
