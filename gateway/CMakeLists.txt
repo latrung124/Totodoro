@@ -23,6 +23,7 @@ set(GATEWAY_HEADERS
     factory/PomodoroApiClientFactory.h
     command/IApiCommand.h
     command/CreateSessionCommand.h
+    command/GetSessionByIdCommand.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
     controller/PomodoroOpenApiController.h)
@@ -30,7 +31,7 @@ set(GATEWAY_HEADERS
 set(GATEWAY_SOURCES
     connection/SQLiteConnection.cpp factory/PomodoroApiClientFactory.cpp
     command/CreateSessionCommand.cpp handler/JsonResponseHandler.cpp
-    controller/PomodoroOpenApiController.cpp)
+    command/GetSessionByIdCommand.cpp controller/PomodoroOpenApiController.cpp)
 
 add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
 

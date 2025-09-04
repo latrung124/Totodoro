@@ -27,6 +27,21 @@ CreateSessionCommand::CreateSessionCommand(const QString& userId,
 
 void CreateSessionCommand::execute()
 {
+    if (!mFactory) {
+        return;
+    }
+
+    if (mApiClient) {
+        return; // Already executing
+    }
+
+    mApiClient = mFactory->createClient(mBaseUrl);
+    connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceCreateSessionSignal,
+            this, &CreateSessionCommand::onSessionCreated);
+    connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceCreateSessionSignalError,
+            this, &CreateSessionCommand::onSessionError);
+
+    mApiClient->pomodoroServiceCreateSession(mUserId, mBody);
 }
 
 void CreateSessionCommand::setResponseHandler(IResponseHandlerPtr handler)
@@ -41,10 +56,35 @@ IResponseHandlerPtr CreateSessionCommand::getResponseHandler() const
 
 void CreateSessionCommand::onSessionCreated(const OAIPomodoro_serviceCreateSessionResponse& response)
 {
+    if (!mResponseHandler) {
+        return;
+    }
+
+    auto const json = response.asJson();
+    mResponseHandler->handleSuccess(json.toUtf8());
+    mApiClient.get()->deleteLater();
+    deleteLater();
 }
 
 void CreateSessionCommand::onSessionError(const OAIPomodoro_serviceCreateSessionResponse& summary, 
                                          QNetworkReply::NetworkError errorType, const QString& errorStr)
 {
+    if (!mResponseHandler) {
+        return;
+    }
+
+    auto errorMessage = errorStr;
+    if (errorMessage.isEmpty()) {
+        auto const json = summary.asJson();
+        if (!json.isEmpty()) {
+            errorMessage = json;
+        } else {
+            errorMessage = "Unknown error occurred";
+        }
+    }
+
+    mResponseHandler->handleError(errorType, errorMessage.toUtf8());
+    mApiClient.get()->deleteLater();
+    deleteLater();
 }
 
