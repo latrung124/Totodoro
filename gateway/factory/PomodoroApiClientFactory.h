@@ -12,5 +12,5 @@
 class PomodoroApiClientFactory : public IPomodoroApiClientFactory
 {
 public:
-    std::shared_ptr<OpenAPI::OAIPomodoroServiceApi> createClient(const QString& baseUrl) override;
+    std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> createClient(const QString& baseUrl) override;
 };

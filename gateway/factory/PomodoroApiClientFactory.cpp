@@ -7,8 +7,7 @@
 
 #include "PomodoroApiClientFactory.h"
 
-std::shared_ptr<OpenAPI::OAIPomodoroServiceApi> PomodoroApiClientFactory::createClient(const QString& baseUrl)
+std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> PomodoroApiClientFactory::createClient(const QString& baseUrl)
 {
-    auto client = std::make_shared<OpenAPI::OAIPomodoroServiceApi>();
-    return client;
+    return std::make_unique<OpenAPI::OAIPomodoroServiceApi>();
 }

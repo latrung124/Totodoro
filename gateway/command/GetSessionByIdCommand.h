@@ -40,5 +40,5 @@ private:
     IPomodoroApiClientFactoryPtr mFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-    std::shared_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;
+    std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;
 };

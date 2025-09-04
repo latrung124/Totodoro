@@ -33,6 +33,9 @@ void GetSessionByIdCommand::execute()
     }
 
     mApiClient = mFactory->createClient(mBaseUrl);
+    if (!mApiClient) {
+        return;
+    }
     connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceGetSessionByIdSignal,
             this, &GetSessionByIdCommand::onSessionRetrieved);
     connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceGetSessionByIdSignalError,
