@@ -25,15 +25,18 @@ GetSessionByIdCommand::GetSessionByIdCommand(const QString& userId,
 void GetSessionByIdCommand::execute()
 {
     if (!mFactory) {
+        qWarning() << "API client factory is null.";
         return;
     }
 
     if (mApiClient) {
+        qWarning() << "API client is already created.";
         return; // Already executing
     }
 
     mApiClient = mFactory->createClient(mBaseUrl);
     if (!mApiClient) {
+        qWarning() << "Failed to create API client.";
         return;
     }
     connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceGetSessionByIdSignal,
@@ -57,19 +60,19 @@ IResponseHandlerPtr GetSessionByIdCommand::getResponseHandler() const
 void GetSessionByIdCommand::onSessionRetrieved(const OAIPomodoro_serviceGetSessionByIdResponse& response)
 {
     if (!mResponseHandler) {
+        qWarning() << "Response handler is not set.";
         return;
     }
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
-    mApiClient.get()->deleteLater();
-    deleteLater();
 }
 
 void GetSessionByIdCommand::onSessionError(const OAIPomodoro_serviceGetSessionByIdResponse& summary,
                                           QNetworkReply::NetworkError errorType, const QString& errorStr)
 {
     if (!mResponseHandler) {
+        qWarning() << "Response handler is not set.";
         return;
     }
 
@@ -84,6 +87,4 @@ void GetSessionByIdCommand::onSessionError(const OAIPomodoro_serviceGetSessionBy
     }
 
     mResponseHandler->handleError(errorType, errorMessage.toUtf8());
-    mApiClient.get()->deleteLater();
-    deleteLater();
 }
