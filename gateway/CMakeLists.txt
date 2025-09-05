@@ -28,6 +28,7 @@ set(GATEWAY_HEADERS
     command/pomodoro/GetSessionsCommand.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
+    processor/AsyncRequestProcessor.h
     controller/PomodoroOpenApiController.h)
 
 set(GATEWAY_SOURCES
@@ -38,6 +39,7 @@ set(GATEWAY_SOURCES
     command/pomodoro/GetSessionByIdCommand.cpp
     command/pomodoro/UpdateSessionCommand.cpp
     command/pomodoro/GetSessionsCommand.cpp
+    processor/AsyncRequestProcessor.cpp
     controller/PomodoroOpenApiController.cpp)
 
 add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
@@ -54,6 +56,7 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/command
     ${CMAKE_CURRENT_SOURCE_DIR}/command/pomodoro
     ${CMAKE_CURRENT_SOURCE_DIR}/factory
+    ${CMAKE_CURRENT_SOURCE_DIR}/processor
     ${CMAKE_CURRENT_SOURCE_DIR}/handler
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/pomodoro_service.swagger_client/client
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/user_service.swagger_client/client
