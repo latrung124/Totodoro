@@ -25,6 +25,7 @@ set(GATEWAY_HEADERS
     command/CreateSessionCommand.h
     command/GetSessionByIdCommand.h
     command/UpdateSessionCommand.h
+    command/GetSessionsCommand.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
     controller/PomodoroOpenApiController.h)
@@ -36,6 +37,7 @@ set(GATEWAY_SOURCES
     handler/JsonResponseHandler.cpp
     command/GetSessionByIdCommand.cpp
     command/UpdateSessionCommand.cpp
+    command/GetSessionsCommand.cpp
     controller/PomodoroOpenApiController.cpp)
 
 add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
