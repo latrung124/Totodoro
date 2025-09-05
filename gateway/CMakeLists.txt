@@ -22,10 +22,10 @@ set(GATEWAY_HEADERS
     factory/IPomodoroApiClientFactory.h
     factory/PomodoroApiClientFactory.h
     command/IApiCommand.h
-    command/CreateSessionCommand.h
-    command/GetSessionByIdCommand.h
-    command/UpdateSessionCommand.h
-    command/GetSessionsCommand.h
+    command/pomodoro/CreateSessionCommand.h
+    command/pomodoro/GetSessionByIdCommand.h
+    command/pomodoro/UpdateSessionCommand.h
+    command/pomodoro/GetSessionsCommand.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
     controller/PomodoroOpenApiController.h)
@@ -33,11 +33,11 @@ set(GATEWAY_HEADERS
 set(GATEWAY_SOURCES
     connection/SQLiteConnection.cpp
     factory/PomodoroApiClientFactory.cpp
-    command/CreateSessionCommand.cpp
     handler/JsonResponseHandler.cpp
-    command/GetSessionByIdCommand.cpp
-    command/UpdateSessionCommand.cpp
-    command/GetSessionsCommand.cpp
+    command/pomodoro/CreateSessionCommand.cpp
+    command/pomodoro/GetSessionByIdCommand.cpp
+    command/pomodoro/UpdateSessionCommand.cpp
+    command/pomodoro/GetSessionsCommand.cpp
     controller/PomodoroOpenApiController.cpp)
 
 add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
@@ -52,6 +52,7 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${CMAKE_CURRENT_SOURCE_DIR}/command
+    ${CMAKE_CURRENT_SOURCE_DIR}/command/pomodoro
     ${CMAKE_CURRENT_SOURCE_DIR}/factory
     ${CMAKE_CURRENT_SOURCE_DIR}/handler
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/pomodoro_service.swagger_client/client
