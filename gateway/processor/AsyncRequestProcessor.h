@@ -26,6 +26,7 @@ public:
      * @param command The API command to process.
      * @param timeoutMs The maximum time to wait for the command to complete, in milliseconds. Default is 5000 ms.
      * If the command does not complete within this time, it will be aborted.
+     * @return true if the command completed successfully, false if it timed out or failed.
      */
-    void processCommand(IApiCommandPtr command, int timeoutMs = 5000);
+    bool processCommand(IApiCommandPtr command, int timeoutMs = 10000);
 };

@@ -11,14 +11,14 @@
 #include <QTimer>
 #include <QDebug>
 
-#include "command/IApiCommand.h"
-#include "handler/IResponseHandler.h"
+#include "IApiCommand.h"
+#include "IResponseHandler.h"
 
-void AsyncRequestProcessor::processCommand(IApiCommandPtr command, int timeoutMs)
+bool AsyncRequestProcessor::processCommand(IApiCommandPtr command, int timeoutMs)
 {
     if (!command) {
         qWarning() << "AsyncRequestProcessor: Command is null.";
-        return;
+        return false;
     }
 
     QEventLoop loop;
@@ -26,7 +26,8 @@ void AsyncRequestProcessor::processCommand(IApiCommandPtr command, int timeoutMs
     timer.setSingleShot(true);
 
     // Connect to command completion
-    QObject::connect(command.get(), &QObject::destroyed, &loop, &QEventLoop::quit);
+    QObject::connect(command.get(), &IApiCommand::completed,
+                     &loop, &QEventLoop::quit);
     QObject::connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
     // Execute the command
@@ -38,17 +39,17 @@ void AsyncRequestProcessor::processCommand(IApiCommandPtr command, int timeoutMs
     // Start the event loop and wait for either the command to finish or the timeout
     loop.exec();
 
-    if (timer.isActive()) {
-        // Command finished before timeout
-        timer.stop();
-    } else {
-        // Timeout occurred
-        qWarning() << "AsyncRequestProcessor: Command timed out after" << timeoutMs << "ms.";
+    // Check if we timed out
+    if (!timer.isActive()) {
+        // Timeout occurred, notify the response handler
         auto handler = command->getResponseHandler();
         if (handler) {
             handler->handleTimeout();
-        } else {
-            qWarning() << "AsyncRequestProcessor: No response handler to handle timeout error.";
         }
+        return false;
     }
+
+    // Check if command was successful
+    auto handler = command->getResponseHandler();
+    return handler && handler->isSuccessful();
 }

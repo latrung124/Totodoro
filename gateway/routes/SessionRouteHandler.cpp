@@ -7,13 +7,14 @@
 
 #include "SessionRouteHandler.h"
 
+#include "JsonResponseHandler.h"
+#include "AsyncRequestProcessor.h"
+
 #include "CreateSessionCommand.h"
 #include "GetSessionByIdCommand.h"
 #include "UpdateSessionCommand.h"
 #include "GetSessionsCommand.h"
 
-#include <QEventLoop>
-#include <QTimer>
 #include <QString>
 
 SessionRouteHandler::SessionRouteHandler(AsyncRequestProcessorPtr requestProcessor,
@@ -82,9 +83,35 @@ bool SessionRouteHandler::canHandle(const std::string& path, const std::string& 
     return false;
 }
 
+std::shared_ptr<IResponseHandler> SessionRouteHandler::createResponseHandler() const
+{
+    return std::make_shared<JsonResponseHandler>();
+}
+
 void SessionRouteHandler::handleCreateSession(const httplib::Request& req, httplib::Response& res)
 {
+    const auto userId = QString::fromStdString(extractPathParam(req, 1)); // 1 is the first capture group
+    if (userId.isEmpty()) {
+        res.status = 400;
+        res.set_content(R"({"error": "User ID is required"})", "application/json");
+        return;
+    }
+
+    OpenAPI::OAIPomodoroServiceCreateSessionBody body;
+    const auto bodyStr = QString::fromUtf8(req.body.c_str(), static_cast<int>(req.body.size()));
+    body.fromJson(bodyStr);
+
+    auto command = std::make_shared<CreateSessionCommand>(userId, body, mApiClientFactory, QString::fromStdString(mBaseUrl));
+
+    auto responseHandler = createResponseHandler();
+    command->setResponseHandler(responseHandler);
+
+    // Process the command - this will block until completion or timeout
+    bool success = mRequestProcessor->processCommand(command, 10000);
     
+    // Set the response based on the command execution
+    res.status = responseHandler->getStatusCode();
+    res.set_content(responseHandler->getResponseData().constData(), "application/json");
 }
 
 void SessionRouteHandler::handleGetSession(const httplib::Request& req, httplib::Response& res)

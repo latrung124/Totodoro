@@ -23,6 +23,8 @@ public:
     virtual void handleRequest(const httplib::Request& req, httplib::Response& res) = 0;
     virtual bool canHandle(const std::string& path, const std::string& method) const = 0;
 
+    virtual std::shared_ptr<IResponseHandler> createResponseHandler() const = 0;
+
 protected:
     std::shared_ptr<AsyncRequestProcessor> mRequestProcessor;
     std::shared_ptr<IPomodoroApiClientFactory> mApiClientFactory;

@@ -39,6 +39,8 @@ public:
     bool canHandle(const std::string& path, const std::string& method) const override;
     void handleRequest(const httplib::Request& req, httplib::Response& res) override;
 
+    std::shared_ptr<IResponseHandler> createResponseHandler() const override;
+
 private:
     void initializeRoutes();
 
