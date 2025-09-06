@@ -63,12 +63,13 @@ void CreateSessionCommand::onSessionCreated(const OAIPomodoro_serviceCreateSessi
 {
     if (!mResponseHandler) {
         qWarning() << "Response handler is not set.";
+        emit completed();
         return;
     }
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
-    emit completed(true);
+    emit completed();
 }
 
 void CreateSessionCommand::onSessionError(const OAIPomodoro_serviceCreateSessionResponse& summary, 
@@ -76,6 +77,7 @@ void CreateSessionCommand::onSessionError(const OAIPomodoro_serviceCreateSession
 {
     if (!mResponseHandler) {
         qWarning() << "Response handler is not set.";
+        emit completed();
         return;
     }
 
@@ -90,6 +92,6 @@ void CreateSessionCommand::onSessionError(const OAIPomodoro_serviceCreateSession
     }
 
     mResponseHandler->handleError(errorType, errorMessage.toUtf8());
-    emit completed(false);
+    emit completed();
 }
 

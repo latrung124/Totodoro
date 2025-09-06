@@ -60,11 +60,13 @@ void UpdateSessionCommand::onSessionUpdated(const OAIPomodoro_serviceUpdateSessi
 {
     if (!mResponseHandler) {
         qWarning() << "Response handler is not set.";
+        emit completed();
         return;
     }
 
     auto const json = summary.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
+    emit completed();
 }
 
 void UpdateSessionCommand::onSessionError(const OAIPomodoro_serviceUpdateSessionResponse& summary,
@@ -72,6 +74,7 @@ void UpdateSessionCommand::onSessionError(const OAIPomodoro_serviceUpdateSession
 {
     if (!mResponseHandler) {
         qWarning() << "Response handler is not set.";
+        emit completed();
         return;
     }
 
@@ -81,4 +84,5 @@ void UpdateSessionCommand::onSessionError(const OAIPomodoro_serviceUpdateSession
     }
 
     mResponseHandler->handleError(errorType, errorMessage.toUtf8());
+    emit completed();
 }

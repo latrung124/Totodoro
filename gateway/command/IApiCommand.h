@@ -36,5 +36,5 @@ public:
 
 signals:
     /// Signal emitted when the command is completed
-    void completed(bool success);
+    void completed();
 };
