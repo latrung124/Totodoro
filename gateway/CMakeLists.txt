@@ -26,6 +26,8 @@ set(GATEWAY_HEADERS
     command/pomodoro/GetSessionByIdCommand.h
     command/pomodoro/UpdateSessionCommand.h
     command/pomodoro/GetSessionsCommand.h
+    routes/IRouteHandler.h
+    routes/SessionRouteHandler.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
     processor/AsyncRequestProcessor.h
@@ -39,6 +41,7 @@ set(GATEWAY_SOURCES
     command/pomodoro/GetSessionByIdCommand.cpp
     command/pomodoro/UpdateSessionCommand.cpp
     command/pomodoro/GetSessionsCommand.cpp
+    routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
     controller/PomodoroOpenApiController.cpp)
 
@@ -58,6 +61,7 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/factory
     ${CMAKE_CURRENT_SOURCE_DIR}/processor
     ${CMAKE_CURRENT_SOURCE_DIR}/handler
+    ${CMAKE_CURRENT_SOURCE_DIR}/routes
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/pomodoro_service.swagger_client/client
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/user_service.swagger_client/client
     ${CMAKE_CURRENT_SOURCE_DIR}/generated/task_management_service.swagger_client/client
