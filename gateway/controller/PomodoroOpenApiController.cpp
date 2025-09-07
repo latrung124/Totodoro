@@ -9,7 +9,7 @@
 
 #include <QDebug>
 
-#include "SessionRouteHandler.h"
+#include "RouteHandlerFactory.h"
 
 namespace gateway {
 
@@ -24,7 +24,12 @@ void PomodoroOpenApiController::initializeHandlers(AsyncRequestProcessorPtr requ
                                                    IPomodoroApiClientFactoryPtr apiClientFactory,
                                                    const std::string& baseUrl)
 {
-    auto sessionHandler = std::make_shared<SessionRouteHandler>(requestProcessor, apiClientFactory, baseUrl);
+    auto sessionHandler = RouteHandlerFactory::createHandler(
+        gateway::RouteHandlerType::Session,
+        requestProcessor,
+        apiClientFactory,
+        baseUrl
+    );
     mRouter.addHandler(sessionHandler);
 }
 
