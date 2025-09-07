@@ -26,6 +26,7 @@ set(GATEWAY_HEADERS
     command/pomodoro/GetSessionByIdCommand.h
     command/pomodoro/UpdateSessionCommand.h
     command/pomodoro/GetSessionsCommand.h
+    command/pomodoro/DeleteSessionCommand.h
     routes/IRouteHandler.h
     routes/SessionRouteHandler.h
     handler/IResponseHandler.h
@@ -41,6 +42,7 @@ set(GATEWAY_SOURCES
     command/pomodoro/GetSessionByIdCommand.cpp
     command/pomodoro/UpdateSessionCommand.cpp
     command/pomodoro/GetSessionsCommand.cpp
+    command/pomodoro/DeleteSessionCommand.cpp
     routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
     controller/PomodoroOpenApiController.cpp)
