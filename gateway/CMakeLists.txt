@@ -21,6 +21,8 @@ set(GATEWAY_HEADERS
     connection/SQLiteConnection.h
     factory/IPomodoroApiClientFactory.h
     factory/PomodoroApiClientFactory.h
+    factory/RouteHandlerFactory.h
+    common/CommonDefine.h
     command/IApiCommand.h
     command/pomodoro/CreateSessionCommand.h
     command/pomodoro/GetSessionByIdCommand.h
@@ -37,6 +39,7 @@ set(GATEWAY_HEADERS
 set(GATEWAY_SOURCES
     connection/SQLiteConnection.cpp
     factory/PomodoroApiClientFactory.cpp
+    factory/RouteHandlerFactory.cpp
     handler/JsonResponseHandler.cpp
     command/pomodoro/CreateSessionCommand.cpp
     command/pomodoro/GetSessionByIdCommand.cpp
