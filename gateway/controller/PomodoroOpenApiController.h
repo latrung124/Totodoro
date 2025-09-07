@@ -8,19 +8,41 @@
 #pragma once
 
 #include <string>
+#include <memory>
+
 #include <httplib.h>
 
+#include "RequestRouter.h"
+
+class AsyncRequestProcessor;
+class IPomodoroApiClientFactory;
+
 namespace gateway {
-    
+
 class PomodoroOpenApiController {
 public:
+    using AsyncRequestProcessorPtr = std::shared_ptr<AsyncRequestProcessor>;
+    using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
+
+    PomodoroOpenApiController(AsyncRequestProcessorPtr requestProcessor,
+                              IPomodoroApiClientFactoryPtr apiClientFactory,
+                              const std::string& baseUrl);
+
+    ~PomodoroOpenApiController() = default;
+
     /**
      * @brief Registers all Pomodoro-related routes on the given server with the specified base URL.
      * 
      * @param server Reference to the httplib::Server instance where routes will be registered.
-     * @param baseUrl The base URL prefix for all Pomodoro routes.
      */
-    static void registerRoutes(httplib::Server& server, const std::string& baseUrl);
+    void registerRoutes(httplib::Server& server);
+
+private:
+    void initializeHandlers(AsyncRequestProcessorPtr requestProcessor,
+                            IPomodoroApiClientFactoryPtr apiClientFactory,
+                            const std::string& baseUrl);
+
+    RequestRouter mRouter;
 };
 
 } // namespace gateway
