@@ -19,7 +19,7 @@ class GetSessionByIdCommand : public IApiCommand
 public:
     using OAIPomodoro_serviceGetSessionByIdResponse = OpenAPI::OAIPomodoro_serviceGetSessionByIdResponse;
     using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
-    GetSessionByIdCommand(const QString& userId,
+    GetSessionByIdCommand(
         const QString& sessionId,
         IPomodoroApiClientFactoryPtr factory,
         const QString& baseUrl,
@@ -35,7 +35,6 @@ private slots:
     void onSessionError(const OAIPomodoro_serviceGetSessionByIdResponse& summary,
                        QNetworkReply::NetworkError errorType, const QString& errorStr);
 private:
-    QString mUserId;
     QString mSessionId;
     IPomodoroApiClientFactoryPtr mFactory;
     QString mBaseUrl;

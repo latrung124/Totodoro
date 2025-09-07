@@ -7,13 +7,12 @@
 
 #include "GetSessionByIdCommand.h"
 
-GetSessionByIdCommand::GetSessionByIdCommand(const QString& userId,
+GetSessionByIdCommand::GetSessionByIdCommand(
     const QString& sessionId,
     IPomodoroApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
-      mUserId(userId),
       mSessionId(sessionId),
       mFactory(factory),
       mBaseUrl(baseUrl),

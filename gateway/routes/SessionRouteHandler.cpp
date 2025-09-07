@@ -14,6 +14,7 @@
 #include "GetSessionByIdCommand.h"
 #include "UpdateSessionCommand.h"
 #include "GetSessionsCommand.h"
+#include "DeleteSessionCommand.h"
 
 #include <QString>
 
@@ -116,21 +117,103 @@ void SessionRouteHandler::handleCreateSession(const httplib::Request& req, httpl
 
 void SessionRouteHandler::handleGetSession(const httplib::Request& req, httplib::Response& res)
 {
+    const auto sessionId = QString::fromStdString(extractPathParam(req, 1)); // 1 is the first capture group
+    if (sessionId.isEmpty()) {
+        res.status = 400;
+        res.set_content(R"({"error": "Session ID is required"})", "application/json");
+        return;
+    }
+
+    auto command = std::make_shared<GetSessionByIdCommand>(sessionId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+
+    auto responseHandler = createResponseHandler();
+    command->setResponseHandler(responseHandler);
+
+    // Process the command - this will block until completion or timeout
+    bool success = mRequestProcessor->processCommand(command, 10000);
+    
+    // Set the response based on the command execution
+    res.status = responseHandler->getStatusCode();
+    res.set_content(responseHandler->getResponseData().constData(), "application/json");
 }
 
 void SessionRouteHandler::handleUpdateSession(const httplib::Request& req, httplib::Response& res)
 {
+    const auto sessionId = QString::fromStdString(extractPathParam(req, 1)); // 1 is the first capture group
+    if (sessionId.isEmpty()) {
+        res.status = 400;
+        res.set_content(R"({"error": "Session ID is required"})", "application/json");
+        return;
+    }
+
+    OpenAPI::OAIPomodoroServiceUpdateSessionBody body;
+    const auto bodyStr = QString::fromUtf8(req.body.c_str(), static_cast<int>(req.body.size()));
+    body.fromJson(bodyStr);
+
+    auto command = std::make_shared<UpdateSessionCommand>(mApiClientFactory, body, sessionId, QString::fromStdString(mBaseUrl));
+    auto responseHandler = createResponseHandler();
+    command->setResponseHandler(responseHandler);
+
+    // Process the command - this will block until completion or timeout
+    bool success = mRequestProcessor->processCommand(command, 10000);
+
+    // Set the response based on the command execution
+    res.status = responseHandler->getStatusCode();
+    res.set_content(responseHandler->getResponseData().constData(), "application/json");
 }
 
 void SessionRouteHandler::handleDeleteSession(const httplib::Request& req, httplib::Response& res)
 {
+    const auto sessionId = QString::fromStdString(extractPathParam(req, 1)); // 1 is the first capture group
+    if (sessionId.isEmpty()) {
+        res.status = 400;
+        res.set_content(R"({"error": "Session ID is required"})", "application/json");
+        return;
+    }
+
+    auto command = std::make_shared<DeleteSessionCommand>(sessionId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto responseHandler = createResponseHandler();
+    command->setResponseHandler(responseHandler);
+
+    // Process the command - this will block until completion or timeout
+    bool success = mRequestProcessor->processCommand(command, 10000);
+
+    // Set the response based on the command execution
+    res.status = responseHandler->getStatusCode();
+    res.set_content(responseHandler->getResponseData().constData(), "application/json");
 }
 
 void SessionRouteHandler::handleGetUserSessions(const httplib::Request& req, httplib::Response& res)
 {
+    const auto userId = QString::fromStdString(extractPathParam(req, 1));
+    if (userId.isEmpty()) {
+        res.status = 400;
+        res.set_content(R"({"error":"Missing userId"})", "application/json");
+        return;
+    }
+
+    // Extract optional taskId query parameter
+    QString taskId;
+    auto taskIdIt = req.params.find("taskId");
+    if (taskIdIt != req.params.end()) {
+        taskId = QString::fromStdString(taskIdIt->second);
+    }
+
+    auto command = std::make_shared<GetSessionsCommand>(
+        userId, taskId, mApiClientFactory, QString::fromStdString(mBaseUrl)
+    );
+
+    auto responseHandler = createResponseHandler();
+    command->setResponseHandler(responseHandler);
 }
 
 std::string SessionRouteHandler::extractPathParam(const httplib::Request& req, size_t index) const
 {
+    std::smatch matches;
+    for (const auto& route : mRoutePatterns) {
+        if (std::regex_match(req.path, matches, route.pattern) && index < matches.size()) {
+            return matches[index].str();
+        }
+    }
     return "";
 }
