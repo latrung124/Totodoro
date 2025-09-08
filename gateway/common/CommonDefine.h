@@ -8,8 +8,11 @@
 #pragma once
 
 #include <stdint.h>
+#include <string_view>
 
 namespace gateway {
+
+constexpr std::string_view kBaseUrl = "http://localhost:8081";
 
 enum class RouteHandlerType : uint8_t
 {

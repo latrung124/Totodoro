@@ -34,7 +34,8 @@ set(GATEWAY_HEADERS
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
     processor/AsyncRequestProcessor.h
-    controller/PomodoroOpenApiController.h)
+    controller/PomodoroOpenApiController.h
+    Gateway.h)
 
 set(GATEWAY_SOURCES
     connection/SQLiteConnection.cpp
@@ -48,7 +49,8 @@ set(GATEWAY_SOURCES
     command/pomodoro/DeleteSessionCommand.cpp
     routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
-    controller/PomodoroOpenApiController.cpp)
+    controller/PomodoroOpenApiController.cpp
+    Gateway.cpp)
 
 add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
 

@@ -38,6 +38,13 @@ public:
     void registerRoutes(httplib::Server& server);
 
 private:
+    /**
+     * @brief Initializes route handlers for Pomodoro-related endpoints.
+     * 
+     * @param requestProcessor Shared pointer to the AsyncRequestProcessor for handling asynchronous requests.
+     * @param apiClientFactory Shared pointer to the IPomodoroApiClientFactory for creating API clients.
+     * @param baseUrl Base URL for the Pomodoro API endpoints.
+     */
     void initializeHandlers(AsyncRequestProcessorPtr requestProcessor,
                             IPomodoroApiClientFactoryPtr apiClientFactory,
                             const std::string& baseUrl);
