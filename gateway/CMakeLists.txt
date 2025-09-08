@@ -30,6 +30,7 @@ set(GATEWAY_HEADERS
     command/pomodoro/GetSessionsCommand.h
     command/pomodoro/DeleteSessionCommand.h
     routes/IRouteHandler.h
+    routes/RequestRouter.h
     routes/SessionRouteHandler.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
@@ -47,6 +48,7 @@ set(GATEWAY_SOURCES
     command/pomodoro/UpdateSessionCommand.cpp
     command/pomodoro/GetSessionsCommand.cpp
     command/pomodoro/DeleteSessionCommand.cpp
+    routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
     controller/PomodoroOpenApiController.cpp

@@ -7,6 +7,8 @@
 
 #include "RequestRouter.h"
 
+#include "IRouteHandler.h"
+
 void RequestRouter::addHandler(IRouteHandlerPtr handler)
 {
     mHandlers.push_back(std::move(handler));
@@ -16,9 +18,9 @@ void RequestRouter::handleRequest(const httplib::Request& req, httplib::Response
 {
     for (const auto& handler : mHandlers)
     {
-        if (handler->canHandle(req))
+        if (handler->canHandle(req.path, req.method))
         {
-            handler->handle(req, res);
+            handler->handleRequest(req, res);
             return;
         }
     }
