@@ -8,6 +8,7 @@
 #pragma once
 
 #include <QByteArray>
+#include <QVariantMap>
 
 /**
  * @brief Interface for handling API responses.
@@ -22,11 +23,13 @@ public:
     virtual void handleTimeout() = 0;
 
     QByteArray getResponseData() const { return mResponse; }
+    QVariantMap getParsedData() const { return mParsedData; }
     int getStatusCode() const { return mStatusCode; }
     bool isSuccessful() const { return mIsSuccess; }
 
 protected:
     QByteArray mResponse;
+    QVariantMap mParsedData;
     int mStatusCode = 0;
     bool mIsSuccess = false;
 };

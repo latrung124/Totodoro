@@ -27,6 +27,9 @@ add_subdirectory(qmlmodules)
 # add services subdirectory
 add_subdirectory(services)
 
+# add gateway subdirectory
+add_subdirectory(gateway)
+
 list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/out")
 
 # set the config and const val sources
@@ -238,7 +241,7 @@ set(QML_PLUGINS
 set(SERVICE_LIBRARIES WMediaService ServiceFactory)
 
 target_link_libraries(appTotodoro PRIVATE Qt6::Quick ${QML_PLUGINS}
-                                          ${SERVICE_LIBRARIES})
+                                          ${SERVICE_LIBRARIES} gateway)
 
 include(GNUInstallDirs)
 install(
@@ -246,5 +249,3 @@ install(
   BUNDLE DESTINATION .
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-
-add_subdirectory(gateway)

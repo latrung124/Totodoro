@@ -22,6 +22,8 @@ set(GATEWAY_HEADERS
     factory/IPomodoroApiClientFactory.h
     factory/PomodoroApiClientFactory.h
     factory/RouteHandlerFactory.h
+    helper/TimeTransformer.h
+    helper/SessionDataTransformer.h
     common/CommonDefine.h
     command/IApiCommand.h
     command/pomodoro/CreateSessionCommand.h
@@ -43,6 +45,8 @@ set(GATEWAY_SOURCES
     factory/PomodoroApiClientFactory.cpp
     factory/RouteHandlerFactory.cpp
     handler/JsonResponseHandler.cpp
+    helper/TimeTransformer.cpp
+    helper/SessionDataTransformer.cpp
     command/pomodoro/CreateSessionCommand.cpp
     command/pomodoro/GetSessionByIdCommand.cpp
     command/pomodoro/UpdateSessionCommand.cpp
@@ -65,6 +69,7 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/controller
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/common
+    ${CMAKE_CURRENT_SOURCE_DIR}/helper
     ${CMAKE_CURRENT_SOURCE_DIR}/command
     ${CMAKE_CURRENT_SOURCE_DIR}/command/pomodoro
     ${CMAKE_CURRENT_SOURCE_DIR}/factory

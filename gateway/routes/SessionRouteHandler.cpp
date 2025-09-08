@@ -7,6 +7,8 @@
 
 #include "SessionRouteHandler.h"
 
+#include <QString>
+
 #include "JsonResponseHandler.h"
 #include "AsyncRequestProcessor.h"
 
@@ -15,8 +17,6 @@
 #include "UpdateSessionCommand.h"
 #include "GetSessionsCommand.h"
 #include "DeleteSessionCommand.h"
-
-#include <QString>
 
 SessionRouteHandler::SessionRouteHandler(AsyncRequestProcessorPtr requestProcessor,
                                          IPomodoroApiClientFactoryPtr apiClientFactory,
@@ -30,31 +30,31 @@ SessionRouteHandler::SessionRouteHandler(AsyncRequestProcessorPtr requestProcess
 
 void SessionRouteHandler::initializeRoutes()
 {
-    // GET /v1/sessions/users/{userId}
+    // GET /v1/sessions/users/{userId} - List all sessions for a user
     mRoutePatterns.emplace_back(
         std::regex(R"(^/v1/sessions/users/([^/]+)$)"),
         "GET",
         [this](const httplib::Request& req, httplib::Response& res) { handleGetUserSessions(req, res); });
 
-    // POST /v1/sessions/users/{userId}
+    // POST /v1/sessions/users/{userId} - Create a new session
     mRoutePatterns.emplace_back(
         std::regex(R"(^/v1/sessions/users/([^/]+)$)"),
         "POST",
         [this](const httplib::Request& req, httplib::Response& res) { handleCreateSession(req, res); });
 
-    // GET /v1/sessions/{sessionId}
+    // GET /v1/sessions/{sessionId} - Get a session by ID
     mRoutePatterns.emplace_back(
         std::regex(R"(^/v1/sessions/([^/]+)$)"),
         "GET",
         [this](const httplib::Request& req, httplib::Response& res) { handleGetSession(req, res); });
 
-    // DELETE /v1/sessions/{sessionId}
+    // DELETE /v1/sessions/{sessionId} - Delete a session
     mRoutePatterns.emplace_back(
         std::regex(R"(^/v1/sessions/([^/]+)$)"),
         "DELETE",
         [this](const httplib::Request& req, httplib::Response& res) { handleDeleteSession(req, res); });
 
-    // PATCH /v1/sessions/{sessionId}
+    // PATCH /v1/sessions/{sessionId} - Update a session
     mRoutePatterns.emplace_back(
         std::regex(R"(^/v1/sessions/([^/]+)$)"),
         "PATCH",
@@ -109,6 +109,10 @@ void SessionRouteHandler::handleCreateSession(const httplib::Request& req, httpl
 
     // Process the command - this will block until completion or timeout
     bool success = mRequestProcessor->processCommand(command, 10000);
+
+    if (!success) {
+        qWarning() << "Failed to process CreateSessionCommand";
+    }
     
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();
@@ -131,6 +135,9 @@ void SessionRouteHandler::handleGetSession(const httplib::Request& req, httplib:
 
     // Process the command - this will block until completion or timeout
     bool success = mRequestProcessor->processCommand(command, 10000);
+    if (!success) {
+        qWarning() << "Failed to process GetSessionByIdCommand";
+    }
     
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();
@@ -156,6 +163,9 @@ void SessionRouteHandler::handleUpdateSession(const httplib::Request& req, httpl
 
     // Process the command - this will block until completion or timeout
     bool success = mRequestProcessor->processCommand(command, 10000);
+    if (!success) {
+        qWarning() << "Failed to process UpdateSessionCommand";
+    }
 
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();
@@ -177,6 +187,9 @@ void SessionRouteHandler::handleDeleteSession(const httplib::Request& req, httpl
 
     // Process the command - this will block until completion or timeout
     bool success = mRequestProcessor->processCommand(command, 10000);
+    if (!success) {
+        qWarning() << "Failed to process DeleteSessionCommand";
+    }
 
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();
@@ -203,8 +216,40 @@ void SessionRouteHandler::handleGetUserSessions(const httplib::Request& req, htt
         userId, taskId, mApiClientFactory, QString::fromStdString(mBaseUrl)
     );
 
+    if (!command) {
+        res.status = 500;
+        res.set_content(R"({"error":"Failed to create command"})", "application/json");
+        return;
+    }
+
     auto responseHandler = createResponseHandler();
+    if (!responseHandler) {
+        res.status = 500;
+        res.set_content(R"({"error":"Failed to create response handler"})", "application/json");
+        return;
+    }
+
     command->setResponseHandler(responseHandler);
+
+    // Process the command - this will block until completion or timeout
+    bool success = mRequestProcessor->processCommand(command, 10000);
+
+    if (success) {
+        QList<QVariantMap> sessions = command->getSessions();
+
+        QJsonObject responseJson;
+        QJsonArray sessionsArray;
+        
+        for (const QVariantMap& session : sessions) {
+            sessionsArray.append(QJsonObject::fromVariantMap(session));
+        }
+        
+        responseJson["sessions"] = sessionsArray;
+    }
+
+    // Set the response based on the command execution
+    res.status = responseHandler->getStatusCode();
+    res.set_content(responseHandler->getResponseData().constData(), "application/json");
 }
 
 std::string SessionRouteHandler::extractPathParam(const httplib::Request& req, size_t index) const

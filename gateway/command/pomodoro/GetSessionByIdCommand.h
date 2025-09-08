@@ -29,6 +29,7 @@ public:
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;
     IResponseHandlerPtr getResponseHandler() const override;
+
 private slots:
     // Private slots to handle API responses
     void onSessionRetrieved(const OAIPomodoro_serviceGetSessionByIdResponse& response);

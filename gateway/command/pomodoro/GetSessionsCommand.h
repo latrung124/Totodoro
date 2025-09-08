@@ -7,6 +7,9 @@
 
 #pragma once
 
+#include <QList>
+#include <QVariantMap>
+
 #include "IApiCommand.h"
 
 #include "IPomodoroApiClientFactory.h"
@@ -30,6 +33,8 @@ public:
     void setResponseHandler(IResponseHandlerPtr handler) override;
     IResponseHandlerPtr getResponseHandler() const override;
 
+    QList<QVariantMap> getSessions() const;
+
 private slots:
     void onSessionsRetrieved(const OAIPomodoro_serviceGetSessionsResponse& response);
     void onSessionsError(const OAIPomodoro_serviceGetSessionsResponse& response, QNetworkReply::NetworkError errorType, const QString& errorStr);
@@ -39,6 +44,7 @@ private:
     QString mTaskId;
     IPomodoroApiClientFactoryPtr mFactory;
     QString mBaseUrl;
+    QList<QVariantMap> mSessions;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;
 };

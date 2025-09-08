@@ -7,6 +7,11 @@
 
 #include "GetSessionsCommand.h"
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QVariantList>
+#include <QJsonDocument>
+
 GetSessionsCommand::GetSessionsCommand(const QString& userId,
     const QString& taskId,
     IPomodoroApiClientFactoryPtr factory,
@@ -57,6 +62,11 @@ IResponseHandlerPtr GetSessionsCommand::getResponseHandler() const
     return mResponseHandler;
 }
 
+QList<QVariantMap> GetSessionsCommand::getSessions() const
+{
+    return mSessions;
+}
+
 void GetSessionsCommand::onSessionsRetrieved(const OAIPomodoro_serviceGetSessionsResponse& response)
 {
     if (!mResponseHandler) {
@@ -67,6 +77,29 @@ void GetSessionsCommand::onSessionsRetrieved(const OAIPomodoro_serviceGetSession
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+    if (doc.isNull() || !doc.isObject()) {
+        qWarning() << "Failed to parse JSON response";
+        emit completed();
+        return;
+    }
+
+    QJsonObject obj = doc.object();
+    if (!obj.contains("sessions") || !obj["sessions"].isArray()) {
+        qWarning() << "JSON response does not contain 'sessions' array";
+        emit completed();
+        return;
+    }
+
+    QJsonArray sessionsArray = obj["sessions"].toArray();
+    for (const QJsonValue& sessionValue : sessionsArray) {
+        if (sessionValue.isObject()) {
+            mSessions.append(sessionValue.toObject().toVariantMap());
+        } else {
+            qWarning() << "Session entry is not an object";
+        }
+    }
+
     emit completed();
 }
 
