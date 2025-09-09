@@ -145,6 +145,12 @@ void SessionRouteHandler::handleGetSession(const httplib::Request& req, httplib:
     if (!success) {
         qWarning() << "Failed to process GetSessionByIdCommand";
     }
+
+    QJsonObject session = command->getSession();
+    if (session.isEmpty()) {
+        qWarning() << "No session data returned from GetSessionByIdCommand";
+    }
+    // TODO: Send the JSON response to Model layer
     
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();

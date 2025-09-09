@@ -66,6 +66,14 @@ void GetSessionByIdCommand::onSessionRetrieved(const OAIPomodoro_serviceGetSessi
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+    QJsonObject obj = doc.object();
+    if (obj.contains("session") && obj["session"].isObject()) {
+        mSession = obj["session"].toObject();
+    } else {
+        qWarning() << "Response JSON does not contain 'session' object";
+    }
+    
     emit completed();
 }
 
