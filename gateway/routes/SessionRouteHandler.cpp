@@ -204,6 +204,12 @@ void SessionRouteHandler::handleDeleteSession(const httplib::Request& req, httpl
         qWarning() << "Failed to process DeleteSessionCommand";
     }
 
+    bool isDeleted = command->isDeleted();
+    if (!isDeleted) {
+        qWarning() << "Session was not deleted successfully";
+    }
+    // TODO: Send the bool to Model layer
+
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();
     res.set_content(responseHandler->getResponseData().constData(), "application/json");

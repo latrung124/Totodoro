@@ -8,12 +8,14 @@
 #include "DeleteSessionCommand.h"
 
 #include <QDebug>
+#include <QJsonObject>
 
 DeleteSessionCommand::DeleteSessionCommand(const QString& sessionId,
     IPomodoroApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
+      mDeleted(false),
       mSessionId(sessionId),
       mFactory(factory),
       mBaseUrl(baseUrl),
@@ -67,8 +69,21 @@ void DeleteSessionCommand::onSessionDeleted(const OAIPomodoro_serviceDeleteSessi
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
-    emit completed();
 
+    QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+    if (!doc.isObject() || doc.isNull()) {
+        qWarning() << "Failed to parse JSON response or response is not an object.";
+        emit completed();
+        return;
+    }
+
+    QJsonObject obj = doc.object();
+    if (obj.contains("success") && obj["success"].isBool()) {
+        mDeleted = obj["success"].toBool();
+    } else {
+        qWarning() << "Response JSON does not contain 'success' boolean";
+    }
+    emit completed();
 }
 
 void DeleteSessionCommand::onSessionError(const OAIPomodoro_serviceDeleteSessionResponse& summary,
@@ -94,4 +109,7 @@ void DeleteSessionCommand::onSessionError(const OAIPomodoro_serviceDeleteSession
     emit completed();
 }
 
-
+bool DeleteSessionCommand::isDeleted() const
+{
+    return mDeleted;
+}

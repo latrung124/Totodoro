@@ -27,6 +27,8 @@ public:
     void setResponseHandler(IResponseHandlerPtr handler) override;
     IResponseHandlerPtr getResponseHandler() const override;
 
+    bool isDeleted() const;
+
 private slots:
     // Private slots to handle API responses
     void onSessionDeleted(const OAIPomodoro_serviceDeleteSessionResponse& response);
@@ -34,6 +36,7 @@ private slots:
                        QNetworkReply::NetworkError errorType, const QString& errorStr);
 
 private:
+    bool mDeleted;
     QString mSessionId;
     IPomodoroApiClientFactoryPtr mFactory;
     QString mBaseUrl;
