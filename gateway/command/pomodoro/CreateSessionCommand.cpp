@@ -69,6 +69,22 @@ void CreateSessionCommand::onSessionCreated(const OAIPomodoro_serviceCreateSessi
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+    if (doc.isNull() || !doc.isObject()) {
+        qWarning() << "Failed to parse JSON response";
+        emit completed();
+        return;
+    }
+
+    QJsonObject obj = doc.object();
+    if (!obj.contains("session") || !obj["session"].isObject()) {
+        qWarning() << "Response does not contain a valid 'session' object";
+        emit completed();
+        return;
+    }
+
+    mSession = obj["session"].toObject();
+
     emit completed();
 }
 
@@ -95,3 +111,7 @@ void CreateSessionCommand::onSessionError(const OAIPomodoro_serviceCreateSession
     emit completed();
 }
 
+QJsonObject CreateSessionCommand::getSession() const
+{
+   return mSession;
+}

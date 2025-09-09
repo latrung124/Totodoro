@@ -113,6 +113,13 @@ void SessionRouteHandler::handleCreateSession(const httplib::Request& req, httpl
     if (!success) {
         qWarning() << "Failed to process CreateSessionCommand";
     }
+
+    QJsonObject session = command->getSession();
+    if (session.isEmpty()) {
+        qWarning() << "No session data returned from CreateSessionCommand";
+    }
+    // TODO: Send the JSON response to Model layer
+
     
     // Set the response based on the command execution
     res.status = responseHandler->getStatusCode();
@@ -245,6 +252,7 @@ void SessionRouteHandler::handleGetUserSessions(const httplib::Request& req, htt
         }
         
         responseJson["sessions"] = sessionsArray;
+        //TODO: Send the JSON response to Model layer
     }
 
     // Set the response based on the command execution

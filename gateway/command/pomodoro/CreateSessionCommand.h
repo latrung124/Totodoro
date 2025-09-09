@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <QJsonObject>
+
 #include "IApiCommand.h"
 #include "IPomodoroApiClientFactory.h"
 
@@ -30,6 +32,8 @@ public:
     void setResponseHandler(IResponseHandlerPtr handler) override;
     IResponseHandlerPtr getResponseHandler() const override;
 
+    QJsonObject getSession() const;
+
 private slots:
     // Private slots to handle API responses
     void onSessionCreated(const OAIPomodoro_serviceCreateSessionResponse& response);
@@ -38,6 +42,7 @@ private slots:
 
 private:
     QString mUserId;
+    QJsonObject mSession;
     OAIPomodoroServiceCreateSessionBody mBody;
     IPomodoroApiClientFactoryPtr mFactory;
     QString mBaseUrl;
