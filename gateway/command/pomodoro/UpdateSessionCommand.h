@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <QJsonObject>
+
 #include "IApiCommand.h"
 
 #include "IPomodoroApiClientFactory.h"
@@ -31,12 +33,15 @@ public:
     void setResponseHandler(IResponseHandlerPtr handler) override;
     IResponseHandlerPtr getResponseHandler() const override;
 
+    QJsonObject getSession() const;
+
 private slots:
     void onSessionUpdated(const OAIPomodoro_serviceUpdateSessionResponse& summary);
     void onSessionError(const OAIPomodoro_serviceUpdateSessionResponse& summary,
                        QNetworkReply::NetworkError errorType, const QString& errorStr);
 
 private:
+    QJsonObject mSession;
     IPomodoroApiClientFactoryPtr mApiClientFactory;
     OAIPomodoroServiceUpdateSessionBody mUpdateSessionBody;
     QString mSessionId;

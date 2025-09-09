@@ -66,6 +66,19 @@ void UpdateSessionCommand::onSessionUpdated(const OAIPomodoro_serviceUpdateSessi
 
     auto const json = summary.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+    if (!doc.isObject() || doc.isNull()) {
+        qWarning() << "Failed to parse JSON response or response is not an object.";
+        emit completed();
+        return;
+    }
+
+    if (doc.object().contains("session") && doc.object()["session"].isObject()) {
+        mSession = doc.object()["session"].toObject();
+    } else {
+        qWarning() << "Response JSON does not contain 'session' object";
+    }
+
     emit completed();
 }
 
@@ -85,4 +98,9 @@ void UpdateSessionCommand::onSessionError(const OAIPomodoro_serviceUpdateSession
 
     mResponseHandler->handleError(errorType, errorMessage.toUtf8());
     emit completed();
+}
+
+QJsonObject UpdateSessionCommand::getSession() const
+{
+    return mSession;
 }

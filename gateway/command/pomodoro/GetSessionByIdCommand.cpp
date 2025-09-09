@@ -67,6 +67,12 @@ void GetSessionByIdCommand::onSessionRetrieved(const OAIPomodoro_serviceGetSessi
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
     QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
+    if (!doc.isObject() || doc.isNull()) {
+        qWarning() << "Failed to parse response JSON or it is not an object";
+        emit completed();
+        return;
+    }
+
     QJsonObject obj = doc.object();
     if (obj.contains("session") && obj["session"].isObject()) {
         mSession = obj["session"].toObject();
@@ -98,4 +104,9 @@ void GetSessionByIdCommand::onSessionError(const OAIPomodoro_serviceGetSessionBy
 
     mResponseHandler->handleError(errorType, errorMessage.toUtf8());
     emit completed();
+}
+
+QJsonObject GetSessionByIdCommand::getSession() const
+{
+    return mSession;
 }
