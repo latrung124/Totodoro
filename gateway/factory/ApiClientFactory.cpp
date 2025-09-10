@@ -17,7 +17,7 @@ std::unique_ptr<QObject> ApiClientFactory::createClient(gateway::RouteType route
         return std::make_unique<OpenAPI::OAIPomodoroServiceApi>();
     }
 
-    if (routeType == gateway::RouteType::Task) {
+    if (routeType == gateway::RouteType::TaskManagement) {
         return std::make_unique<OpenAPI::OAITaskManagementServiceApi>();
     }
 

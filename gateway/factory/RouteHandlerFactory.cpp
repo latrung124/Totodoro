@@ -19,7 +19,7 @@ std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
         case gateway::RouteType::Session:
             return std::make_shared<SessionRouteHandler>(processor, factory, baseUrl);
             break;
-        case gateway::RouteType::Task:
+        case gateway::RouteType::TaskManagement:
             // return std::make_shared<TaskRouteHandler>(processor, factory, baseUrl);
             break;
         case gateway::RouteType::User:

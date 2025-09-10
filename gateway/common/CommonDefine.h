@@ -17,7 +17,7 @@ constexpr std::string_view kBaseUrl = "http://localhost:8081";
 enum class RouteType : uint8_t
 {
     Session,
-    Task,
+    TaskManagement,
     User,
     Notification
 };
