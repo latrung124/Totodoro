@@ -14,7 +14,7 @@ namespace gateway {
 
 constexpr std::string_view kBaseUrl = "http://localhost:8081";
 
-enum class RouteHandlerType : uint8_t
+enum class RouteType : uint8_t
 {
     Session,
     Task,

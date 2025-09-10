@@ -10,22 +10,22 @@
 #include "SessionRouteHandler.h"
 
 std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
-    gateway::RouteHandlerType handlerType,
+    gateway::RouteType handlerType,
     std::shared_ptr<AsyncRequestProcessor> processor,
-    std::shared_ptr<IPomodoroApiClientFactory> factory,
+    std::shared_ptr<ApiClientFactory> factory,
     const std::string& baseUrl
 ) {
     switch (handlerType) {
-        case gateway::RouteHandlerType::Session:
+        case gateway::RouteType::Session:
             return std::make_shared<SessionRouteHandler>(processor, factory, baseUrl);
             break;
-        case gateway::RouteHandlerType::Task:
+        case gateway::RouteType::Task:
             // return std::make_shared<TaskRouteHandler>(processor, factory, baseUrl);
             break;
-        case gateway::RouteHandlerType::User:
+        case gateway::RouteType::User:
             // return std::make_shared<UserRouteHandler>(processor, factory, baseUrl);
             break;
-        case gateway::RouteHandlerType::Notification:
+        case gateway::RouteType::Notification:
             // return std::make_shared<NotificationRouteHandler>(processor, factory, baseUrl);
             break;
         default:

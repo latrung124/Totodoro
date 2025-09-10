@@ -13,7 +13,7 @@
 #include "PomodoroOpenApiController.h"
 
 #include "AsyncRequestProcessor.h"
-#include "PomodoroApiClientFactory.h"
+#include "ApiClientFactory.h"
 
 namespace gateway
 {
@@ -26,9 +26,9 @@ bool Gateway::initialize()
         return false;
     }
 
-    auto apiClientFactory = std::make_shared<PomodoroApiClientFactory>();
+    auto apiClientFactory = std::make_shared<ApiClientFactory>();
     if (apiClientFactory == nullptr) {
-        qCritical() << "Failed to create PomodoroApiClientFactory";
+        qCritical() << "Failed to create ApiClientFactory";
         return false;
     }
 

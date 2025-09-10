@@ -1,0 +1,29 @@
+/**
+ * @file ApiClientFactory.h
+ * @author trung.la
+ * @date 09-03-2025
+ * @brief Implementation of factory for creating API client instances.
+ */
+
+#include "ApiClientFactory.h"
+
+#include "OAIPomodoroServiceApi.h"
+#include "OAITaskManagementServiceApi.h"
+#include "OAIUserServiceApi.h"
+
+std::unique_ptr<QObject> ApiClientFactory::createClient(gateway::RouteType routeType, const QString& baseUrl) const
+{
+    if (routeType == gateway::RouteType::Session) {
+        return std::make_unique<OpenAPI::OAIPomodoroServiceApi>();
+    }
+
+    if (routeType == gateway::RouteType::Task) {
+        return std::make_unique<OpenAPI::OAITaskManagementServiceApi>();
+    }
+
+    if (routeType == gateway::RouteType::User) {
+        return std::make_unique<OpenAPI::OAIUserServiceApi>();
+    }
+
+    return nullptr;
+}

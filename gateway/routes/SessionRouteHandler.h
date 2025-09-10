@@ -15,13 +15,13 @@
 #include "IRouteHandler.h"
 
 #include "AsyncRequestProcessor.h"
-#include "IPomodoroApiClientFactory.h"
+#include "ApiClientFactory.h"
 
 class SessionRouteHandler : public IRouteHandler
 {
 public:
     using AsyncRequestProcessorPtr = std::shared_ptr<AsyncRequestProcessor>;
-    using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
+    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     using HandlerFn = std::function<void(const httplib::Request&, httplib::Response&)>;
 
     struct RoutePattern {
@@ -33,7 +33,7 @@ public:
     };
 
     SessionRouteHandler(AsyncRequestProcessorPtr requestProcessor,
-                        IPomodoroApiClientFactoryPtr apiClientFactory,
+                        ApiClientFactoryPtr apiClientFactory,
                         const std::string& baseUrl);
 
     bool canHandle(const std::string& path, const std::string& method) const override;

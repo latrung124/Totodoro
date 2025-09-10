@@ -7,9 +7,12 @@
 
 #pragma once
 
-#include "IApiCommand.h"
-#include "IPomodoroApiClientFactory.h"
+#include <QNetworkReply>
 
+#include "ApiClientFactory.h"
+#include "IApiCommand.h"
+
+#include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoro_serviceDeleteSessionResponse.h>
 
 class DeleteSessionCommand : public IApiCommand
@@ -18,7 +21,7 @@ class DeleteSessionCommand : public IApiCommand
 public:
     using OAIPomodoro_serviceDeleteSessionResponse = OpenAPI::OAIPomodoro_serviceDeleteSessionResponse;
     DeleteSessionCommand(const QString& sessionId,
-        IPomodoroApiClientFactoryPtr factory,
+        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~DeleteSessionCommand() override = default;
@@ -38,7 +41,7 @@ private slots:
 private:
     bool mDeleted;
     QString mSessionId;
-    IPomodoroApiClientFactoryPtr mFactory;
+    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;

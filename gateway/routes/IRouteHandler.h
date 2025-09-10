@@ -13,7 +13,7 @@
 #include <httplib.h>
 
 class AsyncRequestProcessor;
-class IPomodoroApiClientFactory;
+class ApiClientFactory;
 class IResponseHandler;
 
 class IRouteHandler {
@@ -27,6 +27,6 @@ public:
 
 protected:
     std::shared_ptr<AsyncRequestProcessor> mRequestProcessor;
-    std::shared_ptr<IPomodoroApiClientFactory> mApiClientFactory;
+    std::shared_ptr<ApiClientFactory> mApiClientFactory;
     std::string mBaseUrl;
 };

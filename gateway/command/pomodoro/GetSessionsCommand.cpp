@@ -14,13 +14,13 @@
 
 GetSessionsCommand::GetSessionsCommand(const QString& userId,
     const QString& taskId,
-    IPomodoroApiClientFactoryPtr factory,
+    ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mUserId(userId),
       mTaskId(taskId),
-      mFactory(factory),
+      mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
@@ -29,7 +29,7 @@ GetSessionsCommand::GetSessionsCommand(const QString& userId,
 
 void GetSessionsCommand::execute()
 {
-    if (!mFactory) {
+    if (!mApiClientFactory) {
         qWarning() << "API client factory is null.";
         return;
     }
@@ -39,11 +39,16 @@ void GetSessionsCommand::execute()
         return; // Already executing
     }
 
-    mApiClient = mFactory->createClient(mBaseUrl);
-    if (!mApiClient) {
-        qWarning() << "Failed to create API client.";
+    // Create as QObject then cast to the concrete API type and transfer ownership
+    auto objClient = mApiClientFactory->createClient(gateway::RouteType::Session, mBaseUrl);
+    auto raw = qobject_cast<OpenAPI::OAIPomodoroServiceApi*>(objClient.get());
+    if (!raw) {
+        qWarning() << "Failed to create Pomodoro API client (type mismatch).";
         return;
     }
+    mApiClient.reset(raw);
+    objClient.release(); // ownership moved to mApiClient
+
     connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceGetSessionsSignal,
             this, &GetSessionsCommand::onSessionsRetrieved);
     connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceGetSessionsSignalError,

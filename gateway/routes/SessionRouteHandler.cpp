@@ -19,7 +19,7 @@
 #include "DeleteSessionCommand.h"
 
 SessionRouteHandler::SessionRouteHandler(AsyncRequestProcessorPtr requestProcessor,
-                                         IPomodoroApiClientFactoryPtr apiClientFactory,
+                                         ApiClientFactoryPtr apiClientFactory,
                                          const std::string& baseUrl)
 {
     mRequestProcessor = requestProcessor;

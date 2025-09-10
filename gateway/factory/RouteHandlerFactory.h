@@ -14,14 +14,14 @@
 
 class IRouteHandler;
 class AsyncRequestProcessor;
-class IPomodoroApiClientFactory;
+class ApiClientFactory;
 
 class RouteHandlerFactory {
 public:
     static std::shared_ptr<IRouteHandler> createHandler(
-        gateway::RouteHandlerType handlerType,
+        gateway::RouteType handlerType,
         std::shared_ptr<AsyncRequestProcessor> processor,
-        std::shared_ptr<IPomodoroApiClientFactory> factory,
+        std::shared_ptr<ApiClientFactory> factory,
         const std::string& baseUrl
     );
 };

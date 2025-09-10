@@ -14,18 +14,18 @@
 namespace gateway {
 
 PomodoroOpenApiController::PomodoroOpenApiController(AsyncRequestProcessorPtr requestProcessor,
-                                                     IPomodoroApiClientFactoryPtr apiClientFactory,
+                                                     ApiClientFactoryPtr apiClientFactory,
                                                      const std::string& baseUrl)
 {
     initializeHandlers(requestProcessor, apiClientFactory, baseUrl);
 }
 
 void PomodoroOpenApiController::initializeHandlers(AsyncRequestProcessorPtr requestProcessor,
-                                                   IPomodoroApiClientFactoryPtr apiClientFactory,
+                                                   ApiClientFactoryPtr apiClientFactory,
                                                    const std::string& baseUrl)
 {
     auto sessionHandler = RouteHandlerFactory::createHandler(
-        gateway::RouteHandlerType::Session,
+        gateway::RouteType::Session,
         requestProcessor,
         apiClientFactory,
         baseUrl

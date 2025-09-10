@@ -19,8 +19,7 @@ add_subdirectory(generated/task_management_service.swagger_client/client)
 set(GATEWAY_HEADERS
     connection/IDatabaseConnection.h
     connection/SQLiteConnection.h
-    factory/IPomodoroApiClientFactory.h
-    factory/PomodoroApiClientFactory.h
+    factory/ApiClientFactory.h
     factory/RouteHandlerFactory.h
     helper/TimeTransformer.h
     helper/SessionDataTransformer.h
@@ -42,7 +41,7 @@ set(GATEWAY_HEADERS
 
 set(GATEWAY_SOURCES
     connection/SQLiteConnection.cpp
-    factory/PomodoroApiClientFactory.cpp
+    factory/ApiClientFactory.cpp
     factory/RouteHandlerFactory.cpp
     handler/JsonResponseHandler.cpp
     helper/TimeTransformer.cpp

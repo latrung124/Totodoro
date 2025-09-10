@@ -11,20 +11,20 @@
 #include <QVariantMap>
 
 #include "IApiCommand.h"
+#include "ApiClientFactory.h"
 
-#include "IPomodoroApiClientFactory.h"
-
+#include <OAIPomodoroServiceApi.h>
 #include "OAIPomodoro_serviceGetSessionsResponse.h"
 
 class GetSessionsCommand : public IApiCommand {
     Q_OBJECT
 public:
     using OAIPomodoro_serviceGetSessionsResponse = OpenAPI::OAIPomodoro_serviceGetSessionsResponse;
-    using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
+    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
 
     GetSessionsCommand(const QString& userId,
         const QString& taskId,
-        IPomodoroApiClientFactoryPtr factory,
+        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~GetSessionsCommand() override = default;
@@ -42,7 +42,7 @@ private slots:
 private:
     QString mUserId;
     QString mTaskId;
-    IPomodoroApiClientFactoryPtr mFactory;
+    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     QList<QVariantMap> mSessions;
     IResponseHandlerPtr mResponseHandler;

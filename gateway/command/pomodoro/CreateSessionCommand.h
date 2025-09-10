@@ -7,11 +7,13 @@
 
 #pragma once
 
+#include <QNetworkReply>
 #include <QJsonObject>
 
 #include "IApiCommand.h"
-#include "IPomodoroApiClientFactory.h"
+#include "ApiClientFactory.h"
 
+#include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoroServiceCreateSessionBody.h>
 #include <OAIPomodoro_serviceCreateSessionResponse.h>
 
@@ -23,7 +25,7 @@ public:
     using OAIPomodoro_serviceCreateSessionResponse = OpenAPI::OAIPomodoro_serviceCreateSessionResponse;
     CreateSessionCommand(const QString& userId, 
         const OAIPomodoroServiceCreateSessionBody& body,
-        IPomodoroApiClientFactoryPtr factory,
+        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~CreateSessionCommand() override = default;
@@ -44,7 +46,7 @@ private:
     QString mUserId;
     QJsonObject mSession;
     OAIPomodoroServiceCreateSessionBody mBody;
-    IPomodoroApiClientFactoryPtr mFactory;
+    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;

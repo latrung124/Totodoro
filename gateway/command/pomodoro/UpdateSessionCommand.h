@@ -10,19 +10,21 @@
 #include <QJsonObject>
 
 #include "IApiCommand.h"
+#include "ApiClientFactory.h"
 
-#include "IPomodoroApiClientFactory.h"
+#include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoroServiceUpdateSessionBody.h>
+#include <OAIPomodoro_serviceUpdateSessionResponse.h>
 
 class UpdateSessionCommand : public IApiCommand
 {
     Q_OBJECT
 public:
-    using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
+    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     using OAIPomodoroServiceUpdateSessionBody = OpenAPI::OAIPomodoroServiceUpdateSessionBody;
     using OAIPomodoro_serviceUpdateSessionResponse = OpenAPI::OAIPomodoro_serviceUpdateSessionResponse;
     using OAIPomodoroServiceApiUPtr = std::unique_ptr<OpenAPI::OAIPomodoroServiceApi>;
-    UpdateSessionCommand(const IPomodoroApiClientFactoryPtr& apiClientFactory,
+    UpdateSessionCommand(const ApiClientFactoryPtr& apiClientFactory,
                          const OAIPomodoroServiceUpdateSessionBody& updateSessionBody,
                          const QString& sessionId,
                          const QString& baseUrl,
@@ -42,7 +44,7 @@ private slots:
 
 private:
     QJsonObject mSession;
-    IPomodoroApiClientFactoryPtr mApiClientFactory;
+    ApiClientFactoryPtr mApiClientFactory;
     OAIPomodoroServiceUpdateSessionBody mUpdateSessionBody;
     QString mSessionId;
     QString mBaseUrl;

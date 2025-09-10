@@ -8,11 +8,13 @@
 #pragma once
 
 #include <QJsonObject>
+#include <QNetworkReply>
 
 #include "IApiCommand.h"
 
-#include "IPomodoroApiClientFactory.h"
+#include "ApiClientFactory.h"
 
+#include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoro_serviceGetSessionByIdResponse.h>
 
 class GetSessionByIdCommand : public IApiCommand
@@ -20,10 +22,10 @@ class GetSessionByIdCommand : public IApiCommand
     Q_OBJECT
 public:
     using OAIPomodoro_serviceGetSessionByIdResponse = OpenAPI::OAIPomodoro_serviceGetSessionByIdResponse;
-    using IPomodoroApiClientFactoryPtr = std::shared_ptr<IPomodoroApiClientFactory>;
+    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     GetSessionByIdCommand(
         const QString& sessionId,
-        IPomodoroApiClientFactoryPtr factory,
+        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~GetSessionByIdCommand() override = default;
@@ -42,7 +44,7 @@ private slots:
 private:
     QString mSessionId;
     QJsonObject mSession;
-    IPomodoroApiClientFactoryPtr mFactory;
+    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;
