@@ -32,6 +32,7 @@ set(GATEWAY_HEADERS
     command/pomodoro/DeleteSessionCommand.h
     command/taskmanagement/CreateTaskGroupCommand.h
     command/taskmanagement/GetTaskGroupsCommand.h
+    command/taskmanagement/DeleteTaskGroupCommand.h
     routes/IRouteHandler.h
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
@@ -55,6 +56,7 @@ set(GATEWAY_SOURCES
     command/pomodoro/DeleteSessionCommand.cpp
     command/taskmanagement/CreateTaskGroupCommand.cpp
     command/taskmanagement/GetTaskGroupsCommand.cpp
+    command/taskmanagement/DeleteTaskGroupCommand.cpp
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
