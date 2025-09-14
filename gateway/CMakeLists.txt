@@ -36,6 +36,7 @@ set(GATEWAY_HEADERS
     command/taskmanagement/UpdateTaskGroupCommand.h
     command/taskmanagement/CreateTaskCommand.h
     command/taskmanagement/DeleteTaskCommand.h
+    command/taskmanagement/GetTasksCommand.h
     routes/IRouteHandler.h
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
@@ -63,6 +64,7 @@ set(GATEWAY_SOURCES
     command/taskmanagement/UpdateTaskGroupCommand.cpp
     command/taskmanagement/CreateTaskCommand.cpp
     command/taskmanagement/DeleteTaskCommand.cpp
+    command/taskmanagement/GetTasksCommand.cpp
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
