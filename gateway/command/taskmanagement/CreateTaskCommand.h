@@ -18,17 +18,19 @@
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>
-#include <OAITask_managementCreateTaskRequest.h>
+#include <OAITaskManagementServiceCreateTaskBody.h>
 #include <OAITask_managementCreateTaskResponse.h>
 
 class CreateTaskCommand : public IApiCommand
 {
     Q_OBJECT
 public:
-    using OAIRequest  = OpenAPI::OAITask_managementCreateTaskRequest;
+    using OAIRequest  = OpenAPI::OAITaskManagementServiceCreateTaskBody;
     using OAIResponse = OpenAPI::OAITask_managementCreateTaskResponse;
+    using OAITaskManagementServiceApi = OpenAPI::OAITaskManagementServiceApi;
 
-    CreateTaskCommand(const OAIRequest& body,
+    CreateTaskCommand(const QString& groupId,
+                      const OAIRequest& body,
                       ApiClientFactoryPtr factory,
                       const QString& baseUrl,
                       QObject* parent = nullptr);
@@ -47,12 +49,11 @@ private slots:
                  const QString& errorStr);
 
 private:
+    QString mGroupId;
     OAIRequest mBody;
     QJsonObject mTask;
-
     ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-
-    std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;
-}
+    std::unique_ptr<OAITaskManagementServiceApi> mApiClient;
+};
