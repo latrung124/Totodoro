@@ -1,22 +1,19 @@
 /**
- * @file DeleteTaskGroupCommand.cpp
+ * @file DeleteTaskCommand.cpp
  * @author trung.la
- * @date 09-11-2025
- * @brief Implementation of DeleteTaskGroupCommand to delete a task group via the OpenAPI client.
+ * @date 09-14-2025
+ * @brief Implementation of DeleteTaskCommand class that handles deleting a task via the OpenAPI client.
  */
 
-#include "DeleteTaskGroupCommand.h"
+#include "DeleteTaskCommand.h"
 
-#include <QDebug>
-#include <QJsonObject>
-
-DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,
+DeleteTaskCommand::DeleteTaskCommand(const QString& taskId,
     ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mDeleted(false),
-      mGroupId(groupId),
+      mTaskId(taskId),
       mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
@@ -24,7 +21,7 @@ DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,
 {
 }
 
-void DeleteTaskGroupCommand::execute()
+void DeleteTaskCommand::execute()
 {
     if (!mApiClientFactory) {
         qWarning() << "API client factory is null.";
@@ -46,44 +43,42 @@ void DeleteTaskGroupCommand::execute()
     mApiClient.reset(raw);
     objClient.release(); // ownership moved to mApiClient
 
-    connect(mApiClient.get(), &OpenAPI::OAITaskManagementServiceApi::taskManagementServiceDeleteTaskGroupSignal,
-            this, &DeleteTaskGroupCommand::onTaskGroupDeleted);
-    connect(mApiClient.get(), &OpenAPI::OAITaskManagementServiceApi::taskManagementServiceDeleteTaskGroupSignalError,
-            this, &DeleteTaskGroupCommand::onTaskGroupError);
+    connect(mApiClient.get(), &OpenAPI::OAITaskManagementServiceApi::taskManagementServiceDeleteTaskSignal,
+            this, &DeleteTaskCommand::onTaskDeleted);
+    connect(mApiClient.get(), &OpenAPI::OAITaskManagementServiceApi::taskManagementServiceDeleteTaskSignalError,
+            this, &DeleteTaskCommand::onTaskError);
 
-    mApiClient->taskManagementServiceDeleteTaskGroup(mGroupId);
+    mApiClient->taskManagementServiceDeleteTask(mTaskId);
 }
 
-void DeleteTaskGroupCommand::setResponseHandler(IResponseHandlerPtr handler)
+void DeleteTaskCommand::setResponseHandler(IResponseHandlerPtr handler)
 {
     mResponseHandler = handler;
 }
 
-IResponseHandlerPtr DeleteTaskGroupCommand::getResponseHandler() const
+IResponseHandlerPtr DeleteTaskCommand::getResponseHandler() const
 {
     return mResponseHandler;
 }
 
-bool DeleteTaskGroupCommand::isDeleted() const
+bool DeleteTaskCommand::isDeleted() const
 {
     return mDeleted;
 }
 
-void DeleteTaskGroupCommand::onTaskGroupDeleted(const OAITask_managementDeleteTaskGroupResponse& response)
+void DeleteTaskCommand::onTaskDeleted(const OAITask_managementDeleteTaskResponse& response)
 {
     if (!mResponseHandler) {
-        qWarning() << "DeleteTaskGroupCommand: Response handler is not set.";
-        emit completed();
+        qWarning() << "Response handler is not set.";
         return;
     }
 
     auto const json = response.asJson();
     mResponseHandler->handleSuccess(json.toUtf8());
 
-    // Assuming the response contains a field indicating deletion success
     QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8());
     if (doc.isNull() || !doc.isObject()) {
-        qWarning() << "DeleteTaskGroupCommand: Failed to parse JSON response";
+        qWarning() << "DeleteTaskCommand: Invalid JSON response.";
         emit completed();
         return;
     }
@@ -92,29 +87,28 @@ void DeleteTaskGroupCommand::onTaskGroupDeleted(const OAITask_managementDeleteTa
     if (obj.contains("success") && obj["success"].isBool()) {
         mDeleted = obj["success"].toBool();
     } else {
-        qWarning() << "DeleteTaskGroupCommand: JSON response does not contain 'deleted' boolean";
+        qWarning() << "DeleteTaskCommand: JSON response does not contain 'success' boolean.";
     }
 
     emit completed();
 }
 
-void DeleteTaskGroupCommand::onTaskGroupError(const OAITask_managementDeleteTaskGroupResponse& summary,
-                                       QNetworkReply::NetworkError errorType,
-                                       const QString& errorStr)
+void DeleteTaskCommand::onTaskError(const OAITask_managementDeleteTaskResponse& response,
+                                   QNetworkReply::NetworkError errorType, const QString& errorStr)
 {
     if (!mResponseHandler) {
-        qWarning() << "DeleteTaskGroupCommand: Response handler is not set.";
+        qWarning() << "DeleteTaskCommand: Response handler is not set.";
         emit completed();
         return;
     }
 
     QString msg = errorStr;
     if (msg.isEmpty()) {
-        const auto json = summary.asJson();
+        const auto json = response.asJson();
         if (!json.isEmpty()) {
             msg = json;
         } else {
-            msg = "Unknown error occurred during DeleteTaskGroupCommand";
+            msg = "Unknown error occurred during DeleteTaskCommand";
         }
     }
 
