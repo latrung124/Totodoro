@@ -42,6 +42,7 @@ set(GATEWAY_HEADERS
     command/user/GetUserCommand.h
     command/user/UpdateUserCommand.h
     command/user/GetSettingsCommand.h
+    command/user/UpdateSettingsCommand.h
     routes/IRouteHandler.h
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
@@ -75,6 +76,7 @@ set(GATEWAY_SOURCES
     command/user/GetUserCommand.cpp
     command/user/UpdateUserCommand.cpp
     command/user/GetSettingsCommand.cpp
+    command/user/UpdateSettingsCommand.cpp
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
