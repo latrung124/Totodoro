@@ -8,6 +8,9 @@ set(INTERFACE_HEADERS
     include/window-services/IWMediaService.h
     include/window-services/IWMediaServiceListener.h
     include/window-services/WMediaServiceUtils.h
+    include/apigateway-service/IApiGatewayService.h
+    include/apigateway-service/IApiGatewayServiceListener.h
+    include/apigateway-service/ApiGatewayServiceUtils.h
     export-headers/ServiceExport.h
     export-headers/ServiceFactoryExport.h
     export-headers/WindowServiceExport.h)
@@ -20,11 +23,13 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/window-services>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/apigateway-service>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/export-headers>
     $<INSTALL_INTERFACE:include/services/interfaces>
     $<INSTALL_INTERFACE:include/services/interfaces/export-headers>
     $<INSTALL_INTERFACE:include/services/interfaces/include>
-    $<INSTALL_INTERFACE:include/services/interfaces/include/window-services>)
+    $<INSTALL_INTERFACE:include/services/interfaces/include/window-services>
+    $<INSTALL_INTERFACE:include/services/interfaces/include/apigateway-service>)
 
 install(
   TARGETS Interfaces

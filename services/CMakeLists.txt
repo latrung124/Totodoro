@@ -12,11 +12,13 @@ include(CMakePackageConfigHelpers)
 
 add_definitions(-DSERVICE_LIBRARY_EXPORTS)
 add_definitions(-DWMEDIA_SERVICE_LIBRARY_EXPORTS)
+add_definitions(-DAPIGATEWAY_SERVICE_LIBRARY_EXPORTS)
 add_definitions(-DSERVICE_FACTORY_LIBRARY_EXPORTS)
 
 add_subdirectory(interfaces)
 add_subdirectory(window-services)
 add_subdirectory(service-factory)
+add_subdirectory(apigateway-service)
 
 install(
   EXPORT ServicesTargets
