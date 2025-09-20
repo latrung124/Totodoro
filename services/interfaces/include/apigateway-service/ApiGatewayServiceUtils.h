@@ -14,7 +14,7 @@
 
 namespace apigateway_service { namespace utils { namespace user {
 
-struct UserInfo
+struct Information
 {
 	std::string userId;
 	std::string email;

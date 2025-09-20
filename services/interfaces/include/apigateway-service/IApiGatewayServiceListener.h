@@ -9,12 +9,18 @@
 #define IAPI_GATEWAY_SERVICE_LISTENER_H
 
 #include "../IServiceListener.h"
+#include <ApiGatewayServiceUtils.h>
 
 class IApiGatewayServiceListener : public IServiceListener
 {
 public:
 	IApiGatewayServiceListener() = default;
 	virtual ~IApiGatewayServiceListener() = default;
+
+	virtual void onUserInformationChanged(
+	    const apigateway_service::utils::user::Information &info) = 0;
+	virtual void onUserSettingsChanged(
+	    const apigateway_service::utils::user::Settings &settings) = 0;
 };
 
 #endif // IAPI_GATEWAY_SERVICE_LISTENER_H
