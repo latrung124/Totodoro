@@ -38,6 +38,12 @@ public:
 	void requestUpdateUserInformation(const Information &info) override;
 	void requestUpdateUserSettings(const Settings &settings) override;
 
+	void onResponseCreateUser(const Information &userInformation);
+	void onResponseGetUserInformation(const Information &userInformation);
+	void onResponseGetUserSettings(const Settings &settings);
+	void onResponseUpdateUserInformation(const Information &userInformation);
+	void onResponseUpdateUserSettings(const Settings &settings);
+
 private:
 	std::vector<IServiceListener *> m_listeners; // TODO: change to map for faster access the listener
 };

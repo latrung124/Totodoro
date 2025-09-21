@@ -6,6 +6,7 @@
  */
 
 #include "ApiGatewayService.h"
+#include "IApiGatewayServiceListener.h"
 
 namespace {
 using Information = apigateway_service::utils::user::Information;
@@ -82,4 +83,54 @@ void ApiGatewayService::requestUpdateUserInformation(const Information &info)
 void ApiGatewayService::requestUpdateUserSettings(const Settings &settings)
 {
 	// Simulate updating user settings (replace with actual implementation)
+}
+
+void ApiGatewayService::onResponseCreateUser(const Information &userInformation)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onUserInformationChanged(userInformation);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseGetUserInformation(const Information &userInformation)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onUserInformationChanged(userInformation);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseGetUserSettings(const Settings &settings)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onUserSettingsChanged(settings);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseUpdateUserInformation(const Information &userInformation)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onUserInformationChanged(userInformation);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseUpdateUserSettings(const Settings &settings)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onUserSettingsChanged(settings);
+		}
+	}
 }
