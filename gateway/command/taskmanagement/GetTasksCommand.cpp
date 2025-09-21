@@ -8,11 +8,13 @@
 #include "GetTasksCommand.h"
 
 GetTasksCommand::GetTasksCommand(const QString& userId,
+    const QString& groupId,
     ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mUserId(userId),
+      mGroupId(groupId),
       mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
@@ -47,7 +49,7 @@ void GetTasksCommand::execute()
     connect(mApiClient.get(), &OpenAPI::OAITaskManagementServiceApi::taskManagementServiceGetTasksSignalError,
             this, &GetTasksCommand::onTasksError);
 
-    mApiClient->taskManagementServiceGetTasks(mUserId);
+    mApiClient->taskManagementServiceGetTasks(mUserId, mGroupId);
 }
 
 void GetTasksCommand::setResponseHandler(IResponseHandlerPtr handler)

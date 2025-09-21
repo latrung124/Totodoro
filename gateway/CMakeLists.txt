@@ -47,6 +47,7 @@ set(GATEWAY_HEADERS
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
     routes/UserRouteHandler.h
+    routes/TaskManagementRouteHandler.h
     handler/IResponseHandler.h
     handler/JsonResponseHandler.h
     processor/AsyncRequestProcessor.h
@@ -81,6 +82,7 @@ set(GATEWAY_SOURCES
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     routes/UserRouteHandler.cpp
+    routes/TaskManagementRouteHandler.cpp
     processor/AsyncRequestProcessor.cpp
     controller/PomodoroOpenApiController.cpp
     Gateway.cpp)
@@ -100,6 +102,7 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/command
     ${CMAKE_CURRENT_SOURCE_DIR}/command/pomodoro
     ${CMAKE_CURRENT_SOURCE_DIR}/command/user
+    ${CMAKE_CURRENT_SOURCE_DIR}/command/taskmanagement
     ${CMAKE_CURRENT_SOURCE_DIR}/factory
     ${CMAKE_CURRENT_SOURCE_DIR}/processor
     ${CMAKE_CURRENT_SOURCE_DIR}/handler

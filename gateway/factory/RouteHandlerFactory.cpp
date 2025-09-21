@@ -9,6 +9,7 @@
 
 #include "SessionRouteHandler.h"
 #include "UserRouteHandler.h"
+#include "TaskManagementRouteHandler.h"
 
 std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
     gateway::RouteType handlerType,
@@ -21,7 +22,7 @@ std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
             return std::make_shared<SessionRouteHandler>(processor, factory, baseUrl);
             break;
         case gateway::RouteType::TaskManagement:
-            // return std::make_shared<TaskRouteHandler>(processor, factory, baseUrl);
+            return std::make_shared<TaskManagementRouteHandler>(processor, factory, baseUrl);
             break;
         case gateway::RouteType::User:
             return std::make_shared<UserRouteHandler>(processor, factory, baseUrl);

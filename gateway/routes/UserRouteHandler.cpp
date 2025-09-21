@@ -252,7 +252,7 @@ void UserRouteHandler::handleUpdateSettings(const httplib::Request& req, httplib
         return;
     }
 
-    OpenAPI::OAIUserServiceUpdateSettingsBody body; // Adjust if generator naming differs
+    OpenAPI::OAIUserServiceUpdateSettingsBody body;
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
     auto command = std::make_shared<UpdateSettingsCommand>(mApiClientFactory, body, userId, QString::fromStdString(mBaseUrl));
