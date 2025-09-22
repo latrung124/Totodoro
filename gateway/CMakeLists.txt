@@ -24,6 +24,8 @@ set(GATEWAY_HEADERS
     helper/TimeTransformer.h
     helper/SessionDataTransformer.h
     common/CommonDefine.h
+    common/ApiResponse.h
+    common/UserProperties.h
     command/IApiCommand.h
     command/pomodoro/CreateSessionCommand.h
     command/pomodoro/GetSessionByIdCommand.h
@@ -43,6 +45,8 @@ set(GATEWAY_HEADERS
     command/user/UpdateUserCommand.h
     command/user/GetSettingsCommand.h
     command/user/UpdateSettingsCommand.h
+    manager/IApiGatewayManager.h
+    manager/UserApiGatewayManager.h
     routes/IRouteHandler.h
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
@@ -79,6 +83,7 @@ set(GATEWAY_SOURCES
     command/user/UpdateUserCommand.cpp
     command/user/GetSettingsCommand.cpp
     command/user/UpdateSettingsCommand.cpp
+    manager/UserApiGatewayManager.cpp
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     routes/UserRouteHandler.cpp
@@ -103,6 +108,7 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/command/pomodoro
     ${CMAKE_CURRENT_SOURCE_DIR}/command/user
     ${CMAKE_CURRENT_SOURCE_DIR}/command/taskmanagement
+    ${CMAKE_CURRENT_SOURCE_DIR}/manager
     ${CMAKE_CURRENT_SOURCE_DIR}/factory
     ${CMAKE_CURRENT_SOURCE_DIR}/processor
     ${CMAKE_CURRENT_SOURCE_DIR}/handler
