@@ -26,6 +26,7 @@ set(GATEWAY_HEADERS
     common/CommonDefine.h
     common/ApiResponse.h
     common/UserProperties.h
+    common/TaskProperties.h
     command/IApiCommand.h
     command/pomodoro/CreateSessionCommand.h
     command/pomodoro/GetSessionByIdCommand.h
@@ -47,6 +48,7 @@ set(GATEWAY_HEADERS
     command/user/UpdateSettingsCommand.h
     manager/IApiGatewayManager.h
     manager/UserApiGatewayManager.h
+    manager/TaskManagementApiGatewayManager.h
     routes/IRouteHandler.h
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
@@ -84,6 +86,7 @@ set(GATEWAY_SOURCES
     command/user/GetSettingsCommand.cpp
     command/user/UpdateSettingsCommand.cpp
     manager/UserApiGatewayManager.cpp
+    manager/TaskManagementApiGatewayManager.cpp
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     routes/UserRouteHandler.cpp
