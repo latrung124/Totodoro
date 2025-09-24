@@ -50,6 +50,7 @@ set(GATEWAY_HEADERS
     manager/IApiGatewayManager.h
     manager/UserApiGatewayManager.h
     manager/TaskManagementApiGatewayManager.h
+    manager/PomodoroApiGatewayManager.h
     routes/IRouteHandler.h
     routes/RequestRouter.h
     routes/SessionRouteHandler.h
@@ -88,6 +89,7 @@ set(GATEWAY_SOURCES
     command/user/UpdateSettingsCommand.cpp
     manager/UserApiGatewayManager.cpp
     manager/TaskManagementApiGatewayManager.cpp
+    manager/PomodoroApiGatewayManager.cpp
     routes/RequestRouter.cpp
     routes/SessionRouteHandler.cpp
     routes/UserRouteHandler.cpp

@@ -13,7 +13,7 @@
 
 namespace gateway
 {
-    enum class SessionStatus : uint8_t
+    enum class PomodoroSessionStatus : uint8_t
     {
         idle,
         inprogress,
@@ -21,19 +21,19 @@ namespace gateway
         completed
     };
 
-    enum class SessionType : uint8_t
+    enum class PomodoroSessionType : uint8_t
     {
         short_break,
         long_break
     };
 
-    struct SessionProperties
+    struct PomodoroSessionProperties
     {
         std::string sessionId;
         std::string userId;
         std::string taskId;
-        SessionType type;
-        SessionStatus status;
+        PomodoroSessionType type;
+        PomodoroSessionStatus status;
         uint16_t progress;
         uint16_t numberInCycle;
         std::chrono::system_clock::time_point startTime;
