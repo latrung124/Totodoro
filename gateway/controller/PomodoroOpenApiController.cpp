@@ -25,7 +25,7 @@ void PomodoroOpenApiController::initializeHandlers(AsyncRequestProcessorPtr requ
                                                    const std::string& baseUrl)
 {
     auto sessionHandler = RouteHandlerFactory::createHandler(
-        gateway::RouteType::Session,
+        gateway::RouteType::Pomodoro,
         requestProcessor,
         apiClientFactory,
         baseUrl

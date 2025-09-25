@@ -11,9 +11,9 @@
 
 #include "CommonDefine.h"
 #include "PomodoroOpenApiController.h"
-
 #include "AsyncRequestProcessor.h"
 #include "ApiClientFactory.h"
+#include "ApiGatewayManagerFactory.h"
 
 namespace gateway
 {
@@ -37,6 +37,10 @@ bool Gateway::initialize()
         apiClientFactory,
         kBaseUrl.data()
     );
+
+    mApiGatewayManagers[gateway::RouteType::Pomodoro] = ApiGatewayManagerFactory::createManager(gateway::RouteType::Pomodoro);
+    mApiGatewayManagers[gateway::RouteType::TaskManagement] = ApiGatewayManagerFactory::createManager(gateway::RouteType::TaskManagement);
+    mApiGatewayManagers[gateway::RouteType::User] = ApiGatewayManagerFactory::createManager(gateway::RouteType::User);
 
     return true;
 }

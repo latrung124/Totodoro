@@ -21,6 +21,7 @@ set(GATEWAY_HEADERS
     connection/SQLiteConnection.h
     factory/ApiClientFactory.h
     factory/RouteHandlerFactory.h
+    factory/ApiGatewayManagerFactory.h
     helper/TimeTransformer.h
     helper/SessionDataTransformer.h
     common/CommonDefine.h
@@ -66,6 +67,7 @@ set(GATEWAY_SOURCES
     connection/SQLiteConnection.cpp
     factory/ApiClientFactory.cpp
     factory/RouteHandlerFactory.cpp
+    factory/ApiGatewayManagerFactory.cpp
     handler/JsonResponseHandler.cpp
     helper/TimeTransformer.cpp
     helper/SessionDataTransformer.cpp

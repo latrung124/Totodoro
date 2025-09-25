@@ -40,7 +40,7 @@ void GetSessionsCommand::execute()
     }
 
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::Session, mBaseUrl);
+    auto objClient = mApiClientFactory->createClient(gateway::RouteType::Pomodoro, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAIPomodoroServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Pomodoro API client (type mismatch).";

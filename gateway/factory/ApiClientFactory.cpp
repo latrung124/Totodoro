@@ -13,7 +13,7 @@
 
 std::unique_ptr<QObject> ApiClientFactory::createClient(gateway::RouteType routeType, const QString& baseUrl) const
 {
-    if (routeType == gateway::RouteType::Session) {
+    if (routeType == gateway::RouteType::Pomodoro) {
         return std::make_unique<OpenAPI::OAIPomodoroServiceApi>();
     }
 

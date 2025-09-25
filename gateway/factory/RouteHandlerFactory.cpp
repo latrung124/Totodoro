@@ -18,7 +18,7 @@ std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
     const std::string& baseUrl
 ) {
     switch (handlerType) {
-        case gateway::RouteType::Session:
+        case gateway::RouteType::Pomodoro:
             return std::make_shared<SessionRouteHandler>(processor, factory, baseUrl);
             break;
         case gateway::RouteType::TaskManagement:

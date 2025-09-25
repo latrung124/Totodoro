@@ -8,6 +8,11 @@
 #pragma once
 
 #include <memory>
+#include <map>
+
+#include "CommonDefine.h"
+
+class IApiGatewayManager;
 
 namespace gateway {
 
@@ -25,7 +30,8 @@ public:
 private:
     bool initialize();
 
-    std::shared_ptr<PomodoroOpenApiController> mPomodoroController;    
+    std::shared_ptr<PomodoroOpenApiController> mPomodoroController;
+    std::map<gateway::RouteType, std::shared_ptr<IApiGatewayManager>> mApiGatewayManagers;
 };
 
 } // namespace gateway
