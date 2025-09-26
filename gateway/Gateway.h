@@ -27,6 +27,8 @@ public:
     bool start();
     bool stop();
 
+    std::weak_ptr<IApiGatewayManager> getApiGatewayManager(gateway::RouteType routeType) const;
+
 private:
     bool initialize();
 

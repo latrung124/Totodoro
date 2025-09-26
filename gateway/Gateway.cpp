@@ -62,4 +62,14 @@ bool Gateway::stop()
     return true;
 }
 
+std::weak_ptr<IApiGatewayManager> Gateway::getApiGatewayManager(gateway::RouteType routeType) const
+{
+    auto it = mApiGatewayManagers.find(routeType);
+    if (it != mApiGatewayManagers.end()) {
+        return it->second;
+    }
+
+    return std::weak_ptr<IApiGatewayManager>();
+}
+
 } // namespace gateway
