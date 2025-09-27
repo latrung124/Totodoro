@@ -28,7 +28,7 @@ public:
     using ErrorCallback = std::function<void(const std::string&)>;
     using PomodoroSessionContainer = std::vector<gateway::PomodoroSessionProperties>;
 
-    PomodoroApiGatewayManager() = default;
+    explicit PomodoroApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~PomodoroApiGatewayManager() override = default;
 
     bool onCreatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps,

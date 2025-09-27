@@ -7,8 +7,12 @@
 
 #pragma once
 
-class IApiGatewayManager
+#include <QObject>
+
+class IApiGatewayManager : public QObject
 {
+    Q_OBJECT
 public:
+    explicit IApiGatewayManager(QObject* parent = nullptr) : QObject(parent) {}
     virtual ~IApiGatewayManager() = default;
 };

@@ -30,7 +30,7 @@ public:
     using TaskContainer = std::vector<gateway::TaskProperties>;
     using TaskGroupContainer = std::vector<gateway::TaskGroupProperties>;
 
-    TaskManagementApiGatewayManager() = default;
+    explicit TaskManagementApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~TaskManagementApiGatewayManager() override = default;
 
     bool onCreateTask(const gateway::TaskProperties& taskProps,

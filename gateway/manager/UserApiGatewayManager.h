@@ -28,7 +28,7 @@ public:
     using ResponseCallback = std::function<void(const ApiResponsePtr&)>;
     using ErrorCallback = std::function<void(const std::string&)>;
 
-    UserApiGatewayManager() = default;
+    explicit UserApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~UserApiGatewayManager() override = default;
 
     bool onCreateUser(const gateway::UserProperties& userProps,
