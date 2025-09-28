@@ -10,14 +10,14 @@
 #include <QDebug>
 #include <QJsonObject>
 
+#include "ApiClientFactory.h"
+
 DeleteSessionCommand::DeleteSessionCommand(const QString& sessionId,
-    ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mDeleted(false),
       mSessionId(sessionId),
-      mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
@@ -26,18 +26,13 @@ DeleteSessionCommand::DeleteSessionCommand(const QString& sessionId,
 
 void DeleteSessionCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     if (mApiClient) {
         qWarning() << "API client is already created.";
         return; // Already executing
     }
 
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::Pomodoro, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::Pomodoro, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAIPomodoroServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Pomodoro API client (type mismatch).";

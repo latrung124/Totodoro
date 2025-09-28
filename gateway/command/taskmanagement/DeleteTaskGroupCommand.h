@@ -9,7 +9,6 @@
 
 #include <QNetworkReply>
 
-#include "ApiClientFactory.h"
 #include "IApiCommand.h"
 
 #include <OAITaskManagementServiceApi.h>
@@ -21,7 +20,6 @@ class DeleteTaskGroupCommand : public IApiCommand
 public:
     using OAITask_managementDeleteTaskGroupResponse = OpenAPI::OAITask_managementDeleteTaskGroupResponse;
     DeleteTaskGroupCommand(const QString& groupId,
-        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~DeleteTaskGroupCommand() override = default;
@@ -41,7 +39,6 @@ private slots:
 private:
     bool mDeleted;
     QString mGroupId;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;

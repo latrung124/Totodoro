@@ -9,13 +9,13 @@
 
 #include <QDebug>
 
-UpdateTaskGroupCommand::UpdateTaskGroupCommand(const ApiClientFactoryPtr& apiClientFactory,
-                                           const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
-                                           const QString& taskGroupId,
-                                           const QString& baseUrl,
-                                           QObject* parent)
+#include "ApiClientFactory.h"
+
+UpdateTaskGroupCommand::UpdateTaskGroupCommand(const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
+                                                const QString& taskGroupId,
+                                                const QString& baseUrl,
+                                                QObject* parent)
     : IApiCommand(parent),
-      mApiClientFactory(apiClientFactory),
       mUpdateTaskGroupBody(updateTaskGroupBody),
       mTaskGroupId(taskGroupId),
       mBaseUrl(baseUrl),
@@ -25,13 +25,8 @@ UpdateTaskGroupCommand::UpdateTaskGroupCommand(const ApiClientFactoryPtr& apiCli
 
 void UpdateTaskGroupCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::TaskManagement, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::TaskManagement, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAITaskManagementServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Pomodoro API client (type mismatch).";

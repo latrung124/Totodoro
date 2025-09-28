@@ -17,7 +17,7 @@
 class ApiClientFactory
 {
 public:
-    std::unique_ptr<QObject> createClient(gateway::RouteType routeType, const QString& baseUrl) const;
+    static std::unique_ptr<QObject> createClient(gateway::RouteType routeType, const QString& baseUrl);
 };
 
 using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;

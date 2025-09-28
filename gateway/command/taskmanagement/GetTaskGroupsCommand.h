@@ -14,7 +14,6 @@
 #include <memory>
 
 #include "IApiCommand.h"
-#include "ApiClientFactory.h"
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>
@@ -27,7 +26,6 @@ public:
     using OAIResponse = OpenAPI::OAITask_managementGetTaskGroupsResponse;
 
     GetTaskGroupsCommand(const QString& userId,
-                           ApiClientFactoryPtr factory,
                            const QString& baseUrl,
                            QObject* parent = nullptr);
 
@@ -47,7 +45,6 @@ private slots:
 private:
     QString mUserId;
     QList<QVariantMap> mGroups;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;

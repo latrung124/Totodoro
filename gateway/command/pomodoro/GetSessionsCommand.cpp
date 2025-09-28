@@ -12,15 +12,15 @@
 #include <QVariantList>
 #include <QJsonDocument>
 
+#include "ApiClientFactory.h"
+
 GetSessionsCommand::GetSessionsCommand(const QString& userId,
     const QString& taskId,
-    ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mUserId(userId),
       mTaskId(taskId),
-      mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
@@ -29,18 +29,13 @@ GetSessionsCommand::GetSessionsCommand(const QString& userId,
 
 void GetSessionsCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     if (mApiClient) {
         qWarning() << "API client is already created.";
         return; // Already executing
     }
 
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::Pomodoro, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::Pomodoro, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAIPomodoroServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Pomodoro API client (type mismatch).";

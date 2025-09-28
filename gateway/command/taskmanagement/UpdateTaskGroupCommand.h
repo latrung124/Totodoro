@@ -10,7 +10,6 @@
 #include <QJsonObject>
 
 #include "IApiCommand.h"
-#include "ApiClientFactory.h"
 
 #include <OAITaskManagementServiceApi.h>
 #include <OAITaskManagementServiceUpdateTaskGroupBody.h>
@@ -20,15 +19,13 @@ class UpdateTaskGroupCommand : public IApiCommand
 {
     Q_OBJECT
 public:
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     using OAITaskManagementServiceUpdateTaskGroupBody = OpenAPI::OAITaskManagementServiceUpdateTaskGroupBody;
     using OAITask_managementUpdateTaskGroupResponse = OpenAPI::OAITask_managementUpdateTaskGroupResponse;
     using OAITaskManagementServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
-    UpdateTaskGroupCommand(const ApiClientFactoryPtr& apiClientFactory,
-                         const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
-                         const QString& taskGroupId,
-                         const QString& baseUrl,
-                         QObject* parent = nullptr);
+    UpdateTaskGroupCommand(const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
+                            const QString& taskGroupId,
+                            const QString& baseUrl,
+                            QObject* parent = nullptr);
     ~UpdateTaskGroupCommand() override = default;
 
     void execute() override;
@@ -44,7 +41,6 @@ private slots:
 
 private:
     QJsonObject mTaskGroup;
-    ApiClientFactoryPtr mApiClientFactory;
     OAITaskManagementServiceUpdateTaskGroupBody mUpdateTaskGroupBody;
     QString mTaskGroupId;
     QString mBaseUrl;

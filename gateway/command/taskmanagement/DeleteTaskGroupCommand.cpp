@@ -10,14 +10,14 @@
 #include <QDebug>
 #include <QJsonObject>
 
+#include "ApiClientFactory.h"
+
 DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,
-    ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mDeleted(false),
       mGroupId(groupId),
-      mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
@@ -26,18 +26,8 @@ DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,
 
 void DeleteTaskGroupCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
-    if (mApiClient) {
-        qWarning() << "API client is already created.";
-        return; // Already executing
-    }
-
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::TaskManagement, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::TaskManagement, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAITaskManagementServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Task Management API client (type mismatch).";

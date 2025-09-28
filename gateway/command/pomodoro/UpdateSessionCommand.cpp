@@ -9,13 +9,13 @@
 
 #include <QDebug>
 
-UpdateSessionCommand::UpdateSessionCommand(const ApiClientFactoryPtr& apiClientFactory,
-                                           const OAIPomodoroServiceUpdateSessionBody& updateSessionBody,
+#include "ApiClientFactory.h"
+
+UpdateSessionCommand::UpdateSessionCommand(const OAIPomodoroServiceUpdateSessionBody& updateSessionBody,
                                            const QString& sessionId,
                                            const QString& baseUrl,
                                            QObject* parent)
     : IApiCommand(parent),
-      mApiClientFactory(apiClientFactory),
       mUpdateSessionBody(updateSessionBody),
       mSessionId(sessionId),
       mBaseUrl(baseUrl),
@@ -25,13 +25,8 @@ UpdateSessionCommand::UpdateSessionCommand(const ApiClientFactoryPtr& apiClientF
 
 void UpdateSessionCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::Pomodoro, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::Pomodoro, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAIPomodoroServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Pomodoro API client (type mismatch).";

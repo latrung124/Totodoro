@@ -12,8 +12,6 @@
 
 #include "IApiCommand.h"
 
-#include "ApiClientFactory.h"
-
 #include <OAIUserServiceApi.h>
 #include <OAIUser_serviceGetUserResponse.h>
 
@@ -22,10 +20,8 @@ class GetUserCommand : public IApiCommand
     Q_OBJECT
 public:
     using OAIUser_serviceGetUserResponse = OpenAPI::OAIUser_serviceGetUserResponse;
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     GetUserCommand(
         const QString& userId,
-        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~GetUserCommand() override = default;
@@ -44,7 +40,6 @@ private slots:
 private:
     QString mUserId;
     QJsonObject mUser;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIUserServiceApi> mApiClient;

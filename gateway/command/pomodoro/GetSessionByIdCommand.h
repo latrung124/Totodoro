@@ -12,8 +12,6 @@
 
 #include "IApiCommand.h"
 
-#include "ApiClientFactory.h"
-
 #include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoro_serviceGetSessionByIdResponse.h>
 
@@ -22,10 +20,8 @@ class GetSessionByIdCommand : public IApiCommand
     Q_OBJECT
 public:
     using OAIPomodoro_serviceGetSessionByIdResponse = OpenAPI::OAIPomodoro_serviceGetSessionByIdResponse;
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     GetSessionByIdCommand(
         const QString& sessionId,
-        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~GetSessionByIdCommand() override = default;
@@ -44,7 +40,6 @@ private slots:
 private:
     QString mSessionId;
     QJsonObject mSession;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;

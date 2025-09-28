@@ -7,14 +7,14 @@
 
 #include "GetSettingsCommand.h"
 
+#include "ApiClientFactory.h"
+
 GetSettingsCommand::GetSettingsCommand(
     const QString& userId,
-    ApiClientFactoryPtr factory,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mUserId(userId),
-      mApiClientFactory(factory),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
@@ -23,18 +23,13 @@ GetSettingsCommand::GetSettingsCommand(
 
 void GetSettingsCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     if (mApiClient) {
         qWarning() << "API client is already created.";
         return; // Already executing
     }
     
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::User, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::User, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAIUserServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Pomodoro API client (type mismatch).";

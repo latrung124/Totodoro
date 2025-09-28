@@ -28,7 +28,6 @@ public:
 
     GetTasksCommand(const QString& userId,
                     const QString& groupId,
-                           ApiClientFactoryPtr factory,
                            const QString& baseUrl,
                            QObject* parent = nullptr);
 
@@ -49,7 +48,6 @@ private:
     QString mUserId;
     QString mGroupId;
     QList<QVariantMap> mTasks;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;

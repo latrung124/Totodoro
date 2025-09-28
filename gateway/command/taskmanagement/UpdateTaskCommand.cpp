@@ -7,14 +7,14 @@
 
 #include "UpdateTaskCommand.h"
 
-UpdateTaskCommand::UpdateTaskCommand(const ApiClientFactoryPtr& apiClientFactory,
-    const OAITaskManagementServiceUpdateTaskBody& updateTaskBody,
+#include "ApiClientFactory.h"
+
+UpdateTaskCommand::UpdateTaskCommand(const OAITaskManagementServiceUpdateTaskBody& updateTaskBody,
     const QString& taskId,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mTask(),
-      mApiClientFactory(apiClientFactory),
       mUpdateTaskBody(updateTaskBody),
       mTaskId(taskId),
       mBaseUrl(baseUrl),
@@ -25,18 +25,13 @@ UpdateTaskCommand::UpdateTaskCommand(const ApiClientFactoryPtr& apiClientFactory
 
 void UpdateTaskCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     if (mApiClient) {
         qWarning() << "API client is already created.";
         return; // Already executing
     }
 
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::TaskManagement, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::TaskManagement, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAITaskManagementServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create Task Management API client (type mismatch).";

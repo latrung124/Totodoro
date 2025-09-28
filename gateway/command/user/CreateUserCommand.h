@@ -8,7 +8,6 @@
 #pragma once
 
 #include "IApiCommand.h"
-#include "ApiClientFactory.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUser_serviceCreateUserRequest.h>
@@ -18,13 +17,11 @@ class CreateUserCommand : public IApiCommand
 {
     Q_OBJECT
 public:
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     using OAIUser_serviceCreateUserRequest = OpenAPI::OAIUser_serviceCreateUserRequest;
     using OAIUser_serviceCreateUserResponse = OpenAPI::OAIUser_serviceCreateUserResponse;
     using OAIUserServiceApiUPtr = std::unique_ptr<OpenAPI::OAIUserServiceApi>;
 
-    CreateUserCommand(const ApiClientFactoryPtr& apiClientFactory,
-                      const OAIUser_serviceCreateUserRequest& createUserRequest,
+    CreateUserCommand(const OAIUser_serviceCreateUserRequest& createUserRequest,
                       const QString& baseUrl,
                       QObject* parent = nullptr);
     ~CreateUserCommand() override = default;
@@ -42,7 +39,6 @@ private slots:
 
 private:
     QJsonObject mUser;
-    ApiClientFactoryPtr mApiClientFactory;
     OAIUser_serviceCreateUserRequest mCreateUserRequest;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;

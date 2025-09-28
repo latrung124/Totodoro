@@ -144,7 +144,7 @@ void TaskManagementRouteHandler::handleCreateTaskGroup(const httplib::Request& r
     OpenAPI::OAITask_managementCreateTaskGroupRequest body;
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
-    auto command = std::make_shared<CreateTaskGroupCommand>(body, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<CreateTaskGroupCommand>(body, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -166,7 +166,7 @@ void TaskManagementRouteHandler::handleGetTaskGroups(const httplib::Request& req
         return;
     }
 
-    auto command = std::make_shared<GetTaskGroupsCommand>(userId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<GetTaskGroupsCommand>(userId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -196,7 +196,7 @@ void TaskManagementRouteHandler::handleUpdateTaskGroup(const httplib::Request& r
     OpenAPI::OAITaskManagementServiceUpdateTaskGroupBody body;
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
-    auto command = std::make_shared<UpdateTaskGroupCommand>(mApiClientFactory, body, groupId, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<UpdateTaskGroupCommand>(body, groupId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -218,7 +218,7 @@ void TaskManagementRouteHandler::handleDeleteTaskGroup(const httplib::Request& r
         return;
     }
 
-    auto command = std::make_shared<DeleteTaskGroupCommand>(groupId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<DeleteTaskGroupCommand>(groupId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -255,7 +255,7 @@ void TaskManagementRouteHandler::handleCreateTask(const httplib::Request& req, h
     // body may not include groupId field; if generated model has setGroupId(), set it (pseudo):
     // body.setGroupId(groupId);
 
-    auto command = std::make_shared<CreateTaskCommand>(groupId, body, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<CreateTaskCommand>(groupId, body, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -299,7 +299,7 @@ void TaskManagementRouteHandler::handleGetTasks(const httplib::Request& req, htt
         return;
     }
 
-    auto command = std::make_shared<GetTasksCommand>(userId, groupId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<GetTasksCommand>(userId, groupId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -330,7 +330,7 @@ void TaskManagementRouteHandler::handleUpdateTask(const httplib::Request& req, h
     OpenAPI::OAITaskManagementServiceUpdateTaskBody body;
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
-    auto command = std::make_shared<UpdateTaskCommand>(mApiClientFactory, body, taskId, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<UpdateTaskCommand>(body, taskId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -353,7 +353,7 @@ void TaskManagementRouteHandler::handleDeleteTask(const httplib::Request& req, h
         return;
     }
 
-    auto command = std::make_shared<DeleteTaskCommand>(taskId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<DeleteTaskCommand>(taskId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 

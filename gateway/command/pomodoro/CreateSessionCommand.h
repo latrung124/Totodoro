@@ -25,7 +25,6 @@ public:
     using OAIPomodoro_serviceCreateSessionResponse = OpenAPI::OAIPomodoro_serviceCreateSessionResponse;
     CreateSessionCommand(const QString& userId, 
         const OAIPomodoroServiceCreateSessionBody& body,
-        ApiClientFactoryPtr factory,
         const QString& baseUrl,
         QObject* parent = nullptr);
     ~CreateSessionCommand() override = default;
@@ -46,7 +45,6 @@ private:
     QString mUserId;
     QJsonObject mSession;
     OAIPomodoroServiceCreateSessionBody mBody;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;

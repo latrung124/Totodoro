@@ -10,7 +10,6 @@
 #include <QJsonObject>
 
 #include "IApiCommand.h"
-#include "ApiClientFactory.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUserServiceUpdateSettingsBody.h>
@@ -20,12 +19,10 @@ class UpdateSettingsCommand : public IApiCommand
 {
     Q_OBJECT
 public:
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     using OAIUserServiceUpdateSettingsBody = OpenAPI::OAIUserServiceUpdateSettingsBody;
     using OAIUser_serviceUpdateSettingsResponse = OpenAPI::OAIUser_serviceUpdateSettingsResponse;
     using OAIUserServiceApiUPtr = std::unique_ptr<OpenAPI::OAIUserServiceApi>;
-    UpdateSettingsCommand(const ApiClientFactoryPtr& apiClientFactory,
-                         const OAIUserServiceUpdateSettingsBody& updateSettingsBody,
+    UpdateSettingsCommand(const OAIUserServiceUpdateSettingsBody& updateSettingsBody,
                          const QString& userId,
                          const QString& baseUrl,
                          QObject* parent = nullptr);
@@ -44,7 +41,6 @@ private slots:
 
 private:
     QJsonObject mSettings;
-    ApiClientFactoryPtr mApiClientFactory;
     OAIUserServiceUpdateSettingsBody mUpdateSettingsBody;
     QString mUserId;
     QString mBaseUrl;

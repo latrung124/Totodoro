@@ -14,7 +14,6 @@
 #include <memory>
 
 #include "IApiCommand.h"
-#include "ApiClientFactory.h"
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>
@@ -31,7 +30,6 @@ public:
 
     CreateTaskCommand(const QString& groupId,
                       const OAIRequest& body,
-                      ApiClientFactoryPtr factory,
                       const QString& baseUrl,
                       QObject* parent = nullptr);
 
@@ -52,7 +50,6 @@ private:
     QString mGroupId;
     OAIRequest mBody;
     QJsonObject mTask;
-    ApiClientFactoryPtr mApiClientFactory;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
     std::unique_ptr<OAITaskManagementServiceApi> mApiClient;

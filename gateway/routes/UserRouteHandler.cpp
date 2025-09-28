@@ -114,7 +114,7 @@ void UserRouteHandler::handleCreateUser(const httplib::Request& req, httplib::Re
     }
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
-    auto command = std::make_shared<CreateUserCommand>(mApiClientFactory, body, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<CreateUserCommand>(body, QString::fromStdString(mBaseUrl));
     if (!command) {
         res.status = 500;
         res.set_content(R"({"error":"Failed to create command"})", "application/json");
@@ -149,7 +149,7 @@ void UserRouteHandler::handleGetUser(const httplib::Request& req, httplib::Respo
         return;
     }
 
-    auto command = std::make_shared<GetUserCommand>(userId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<GetUserCommand>(userId, QString::fromStdString(mBaseUrl));
     if (!command) {
         res.status = 500;
         res.set_content(R"({"error":"Failed to create command"})", "application/json");
@@ -188,7 +188,7 @@ void UserRouteHandler::handleUpdateUser(const httplib::Request& req, httplib::Re
     OpenAPI::OAIUserServiceUpdateUserBody body;
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
-    auto command = std::make_shared<UpdateUserCommand>(mApiClientFactory, body, userId, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<UpdateUserCommand>(body, userId, QString::fromStdString(mBaseUrl));
     if (!command) {
         res.status = 500;
         res.set_content(R"({"error":"Failed to create command"})", "application/json");
@@ -216,7 +216,7 @@ void UserRouteHandler::handleGetSettings(const httplib::Request& req, httplib::R
         return;
     }
 
-    auto command = std::make_shared<GetSettingsCommand>(userId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<GetSettingsCommand>(userId, QString::fromStdString(mBaseUrl));
     if (!command) {
         res.status = 500;
         res.set_content(R"({"error":"Failed to create command"})", "application/json");
@@ -255,7 +255,7 @@ void UserRouteHandler::handleUpdateSettings(const httplib::Request& req, httplib
     OpenAPI::OAIUserServiceUpdateSettingsBody body;
     body.fromJson(QString::fromUtf8(req.body.data(), static_cast<int>(req.body.size())));
 
-    auto command = std::make_shared<UpdateSettingsCommand>(mApiClientFactory, body, userId, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<UpdateSettingsCommand>(body, userId, QString::fromStdString(mBaseUrl));
     if (!command) {
         res.status = 500;
         res.set_content(R"({"error":"Failed to create command"})", "application/json");

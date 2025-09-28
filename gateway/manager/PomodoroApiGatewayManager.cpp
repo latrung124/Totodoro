@@ -47,7 +47,6 @@ bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSes
     auto command = factory.createTyped<CreateSessionCommand>(
         QString::fromStdString(sessionProps.userId),
         OpenAPI::OAIPomodoroServiceCreateSessionBody(),
-        nullptr, // Assuming ApiClientFactoryPtr is managed elsewhere
         "",
         nullptr // Set parent to this manager for QObject hierarchy
     );

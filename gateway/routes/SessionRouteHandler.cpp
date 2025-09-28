@@ -102,7 +102,7 @@ void SessionRouteHandler::handleCreateSession(const httplib::Request& req, httpl
     const auto bodyStr = QString::fromUtf8(req.body.c_str(), static_cast<int>(req.body.size()));
     body.fromJson(bodyStr);
 
-    auto command = std::make_shared<CreateSessionCommand>(userId, body, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<CreateSessionCommand>(userId, body, QString::fromStdString(mBaseUrl));
 
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
@@ -135,7 +135,7 @@ void SessionRouteHandler::handleGetSession(const httplib::Request& req, httplib:
         return;
     }
 
-    auto command = std::make_shared<GetSessionByIdCommand>(sessionId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<GetSessionByIdCommand>(sessionId, QString::fromStdString(mBaseUrl));
 
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
@@ -170,7 +170,7 @@ void SessionRouteHandler::handleUpdateSession(const httplib::Request& req, httpl
     const auto bodyStr = QString::fromUtf8(req.body.c_str(), static_cast<int>(req.body.size()));
     body.fromJson(bodyStr);
 
-    auto command = std::make_shared<UpdateSessionCommand>(mApiClientFactory, body, sessionId, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<UpdateSessionCommand>(body, sessionId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -194,7 +194,7 @@ void SessionRouteHandler::handleDeleteSession(const httplib::Request& req, httpl
         return;
     }
 
-    auto command = std::make_shared<DeleteSessionCommand>(sessionId, mApiClientFactory, QString::fromStdString(mBaseUrl));
+    auto command = std::make_shared<DeleteSessionCommand>(sessionId, QString::fromStdString(mBaseUrl));
     auto responseHandler = createResponseHandler();
     command->setResponseHandler(responseHandler);
 
@@ -232,7 +232,7 @@ void SessionRouteHandler::handleGetUserSessions(const httplib::Request& req, htt
     }
 
     auto command = std::make_shared<GetSessionsCommand>(
-        userId, taskId, mApiClientFactory, QString::fromStdString(mBaseUrl)
+        userId, taskId, QString::fromStdString(mBaseUrl)
     );
 
     if (!command) {

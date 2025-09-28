@@ -7,13 +7,13 @@
 
 #include "CreateUserCommand.h"
 
-CreateUserCommand::CreateUserCommand(const ApiClientFactoryPtr& apiClientFactory,
-    const OAIUser_serviceCreateUserRequest& createUserRequest,
+#include "ApiClientFactory.h"
+
+CreateUserCommand::CreateUserCommand(const OAIUser_serviceCreateUserRequest& createUserRequest,
     const QString& baseUrl,
     QObject* parent)
     : IApiCommand(parent),
       mUser(),
-      mApiClientFactory(apiClientFactory),
       mCreateUserRequest(createUserRequest),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
@@ -23,18 +23,13 @@ CreateUserCommand::CreateUserCommand(const ApiClientFactoryPtr& apiClientFactory
 
 void CreateUserCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "API client factory is null.";
-        return;
-    }
-
     if (mApiClient) {
         qWarning() << "API client is already created.";
         return; // Already executing
     }
 
     // Create as QObject then cast to the concrete API type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::User, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::User, mBaseUrl);
     auto raw = qobject_cast<OpenAPI::OAIUserServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "Failed to create User API client (type mismatch).";

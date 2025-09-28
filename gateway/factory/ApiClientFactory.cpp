@@ -11,7 +11,7 @@
 #include "OAITaskManagementServiceApi.h"
 #include "OAIUserServiceApi.h"
 
-std::unique_ptr<QObject> ApiClientFactory::createClient(gateway::RouteType routeType, const QString& baseUrl) const
+std::unique_ptr<QObject> ApiClientFactory::createClient(gateway::RouteType routeType, const QString& baseUrl)
 {
     if (routeType == gateway::RouteType::Pomodoro) {
         return std::make_unique<OpenAPI::OAIPomodoroServiceApi>();

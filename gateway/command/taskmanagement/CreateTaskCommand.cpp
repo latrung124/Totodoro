@@ -14,16 +14,16 @@
 
 #include <OAITask_managementTask.h> // optional: if you need to inspect the model
 
+#include "ApiClientFactory.h"
+
 
 CreateTaskCommand::CreateTaskCommand(const QString& groupId,
                                      const OAIRequest& body,
-                                     ApiClientFactoryPtr factory,
                                      const QString& baseUrl,
                                      QObject* parent)
     : IApiCommand(parent)
     , mGroupId(groupId)
     , mBody(body)
-    , mApiClientFactory(std::move(factory))
     , mBaseUrl(baseUrl)
 {
 }
@@ -45,13 +45,9 @@ QJsonObject CreateTaskCommand::getTask() const
 
 void CreateTaskCommand::execute()
 {
-    if (!mApiClientFactory) {
-        qWarning() << "CreateTaskCommand: ApiClientFactory is null";
-        if (mResponseHandler) {
-            mResponseHandler->handleError(QNetworkReply::NetworkError::UnknownNetworkError,
-                                          R"({"error":"Internal error: no ApiClientFactory"})");
-        }
-        return;
+    if (mResponseHandler) {
+        mResponseHandler->handleError(QNetworkReply::NetworkError::UnknownNetworkError,
+                                      R"({"error":"Internal error: no ApiClientFactory"})");
     }
 
     if (mApiClient) {
@@ -60,7 +56,7 @@ void CreateTaskCommand::execute()
     }
 
     // Factory returns std::unique_ptr<QObject>, cast to concrete type and transfer ownership
-    auto objClient = mApiClientFactory->createClient(gateway::RouteType::TaskManagement, mBaseUrl);
+    auto objClient = ApiClientFactory::createClient(gateway::RouteType::TaskManagement, mBaseUrl);
     auto raw = qobject_cast<OAITaskManagementServiceApi*>(objClient.get());
     if (!raw) {
         qWarning() << "CreateTaskCommand: qobject_cast<OAITaskManagementServiceApi*> failed";
