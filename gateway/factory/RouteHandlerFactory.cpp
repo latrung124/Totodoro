@@ -14,21 +14,20 @@
 std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
     gateway::RouteType handlerType,
     std::shared_ptr<AsyncRequestProcessor> processor,
-    std::shared_ptr<ApiClientFactory> factory,
     const std::string& baseUrl
 ) {
     switch (handlerType) {
         case gateway::RouteType::Pomodoro:
-            return std::make_shared<SessionRouteHandler>(processor, factory, baseUrl);
+            return std::make_shared<SessionRouteHandler>(processor, baseUrl);
             break;
         case gateway::RouteType::TaskManagement:
-            return std::make_shared<TaskManagementRouteHandler>(processor, factory, baseUrl);
+            return std::make_shared<TaskManagementRouteHandler>(processor, baseUrl);
             break;
         case gateway::RouteType::User:
-            return std::make_shared<UserRouteHandler>(processor, factory, baseUrl);
+            return std::make_shared<UserRouteHandler>(processor, baseUrl);
             break;
         case gateway::RouteType::Notification:
-            // return std::make_shared<NotificationRouteHandler>(processor, factory, baseUrl);
+            // return std::make_shared<NotificationRouteHandler>(processor, baseUrl);
             break;
         default:
             return nullptr;

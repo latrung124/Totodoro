@@ -22,11 +22,9 @@
 #include "DeleteTaskGroupCommand.h"
 
 TaskManagementRouteHandler::TaskManagementRouteHandler(AsyncRequestProcessorPtr requestProcessor,
-                                                       ApiClientFactoryPtr apiClientFactory,
                                                        const std::string& baseUrl)
 {
     mRequestProcessor = requestProcessor;
-    mApiClientFactory = apiClientFactory;
     mBaseUrl = baseUrl;
     initializeRoutes();
 }

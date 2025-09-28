@@ -15,13 +15,11 @@
 #include "IRouteHandler.h"
 
 #include "AsyncRequestProcessor.h"
-#include "ApiClientFactory.h"
 
 class UserRouteHandler : public IRouteHandler
 {
 public:
     using AsyncRequestProcessorPtr = std::shared_ptr<AsyncRequestProcessor>;
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
     using HandlerFn = std::function<void(const httplib::Request&, httplib::Response&)>;
 
     struct RoutePattern {
@@ -33,7 +31,6 @@ public:
     };
 
     UserRouteHandler(AsyncRequestProcessorPtr requestProcessor,
-                     ApiClientFactoryPtr apiClientFactory,
                      const std::string& baseUrl);
 
     bool canHandle(const std::string& path, const std::string& method) const override;

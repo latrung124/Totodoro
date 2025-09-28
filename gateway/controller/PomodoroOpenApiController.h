@@ -15,17 +15,14 @@
 #include "RequestRouter.h"
 
 class AsyncRequestProcessor;
-class ApiClientFactory;
 
 namespace gateway {
 
 class PomodoroOpenApiController {
 public:
     using AsyncRequestProcessorPtr = std::shared_ptr<AsyncRequestProcessor>;
-    using ApiClientFactoryPtr = std::shared_ptr<ApiClientFactory>;
 
     PomodoroOpenApiController(AsyncRequestProcessorPtr requestProcessor,
-                              ApiClientFactoryPtr apiClientFactory,
                               const std::string& baseUrl);
 
     ~PomodoroOpenApiController() = default;
@@ -46,7 +43,6 @@ private:
      * @param baseUrl Base URL for the Pomodoro API endpoints.
      */
     void initializeHandlers(AsyncRequestProcessorPtr requestProcessor,
-                            ApiClientFactoryPtr apiClientFactory,
                             const std::string& baseUrl);
 
     RequestRouter mRouter;

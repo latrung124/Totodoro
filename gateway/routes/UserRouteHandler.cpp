@@ -21,11 +21,9 @@
 #include "UpdateSettingsCommand.h"
 
 UserRouteHandler::UserRouteHandler(AsyncRequestProcessorPtr requestProcessor,
-                                   ApiClientFactoryPtr apiClientFactory,
                                    const std::string& baseUrl)
 {
     mRequestProcessor = requestProcessor;
-    mApiClientFactory = apiClientFactory;
     mBaseUrl = baseUrl;
     initializeRoutes();
 }

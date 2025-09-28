@@ -19,11 +19,9 @@
 #include "DeleteSessionCommand.h"
 
 SessionRouteHandler::SessionRouteHandler(AsyncRequestProcessorPtr requestProcessor,
-                                         ApiClientFactoryPtr apiClientFactory,
                                          const std::string& baseUrl)
 {
     mRequestProcessor = requestProcessor;
-    mApiClientFactory = apiClientFactory;
     mBaseUrl = baseUrl;
     initializeRoutes();
 }
