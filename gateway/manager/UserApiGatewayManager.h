@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include <string>
-#include <memory>
-#include <functional>
+#include <map>
 
 #include "IApiGatewayManager.h"
 
@@ -17,7 +15,6 @@ namespace gateway
 {
     struct UserProperties;
     struct UserSettings;
-    
     struct ApiResponse;
 }
 
@@ -31,23 +28,15 @@ public:
     explicit UserApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~UserApiGatewayManager() override = default;
 
-    bool onCreateUser(const gateway::UserProperties& userProps,
-                      const ResponseCallback& onSuccess,
-                      const ErrorCallback& onError);
+    bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
+    bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
-    bool onGetUser(const gateway::UserProperties& userProps,
-                   const ResponseCallback& onSuccess,
-                   const ErrorCallback& onError);
-    
-    bool onUpdateUser(const gateway::UserProperties& userProps,
-                      const ResponseCallback& onSuccess,
-                      const ErrorCallback& onError);
+    bool createUser(const gateway::UserProperties& userProps);
+    bool getUserProperties(const std::string& userId);
+    bool updateUserProperties(const gateway::UserProperties& userProps);
+    bool getUserSettings(const std::string& userId);
+    bool updateUserSettings(const gateway::UserSettings& userSettings);
 
-    bool onGetUserSettings(const std::string& userId,
-                           const ResponseCallback& onSuccess,
-                           const ErrorCallback& onError);
-
-    bool onUpdateUserSettings(const gateway::UserSettings& settings,
-                              const ResponseCallback& onSuccess,
-                              const ErrorCallback& onError);
+private:
+    std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
 };

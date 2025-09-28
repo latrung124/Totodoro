@@ -14,6 +14,28 @@ namespace gateway {
 
 constexpr std::string_view kBaseUrl = "http://localhost:8081";
 
+enum class RequestType : uint8_t
+{
+    CreatePomodoroSession = 0,
+    GetPomodoroSessions,
+    UpdatePomodoroSession,
+    DeletePomodoroSession,
+    CreateTask,
+    GetTasks,
+    UpdateTask,
+    DeleteTask,
+    CreateTaskGroup,
+    GetTaskGroups,
+    UpdateTaskGroup,
+    DeleteTaskGroup,
+    CreateUser,
+    GetUserProperties,
+    UpdateUserProperties,
+    GetUserSettings,
+    UpdateUserSettings,
+    Unknown
+};
+
 enum class RouteType : uint8_t
 {
     Pomodoro,

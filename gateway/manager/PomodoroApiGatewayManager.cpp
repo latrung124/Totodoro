@@ -7,55 +7,65 @@
 
 #include "PomodoroApiGatewayManager.h"
 
+#include <QDebug>
+
 #include "CommonDefine.h"
 #include "PomodoroProperties.h"
 #include "ApiResponse.h"
 
-bool PomodoroApiGatewayManager::onCreatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps,
-                                                       const ResponseCallback& onSuccess,
-                                                       const ErrorCallback& onError)
+bool PomodoroApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
-    // Implementation for creating a Pomodoro session via the Pomodoro API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    if (m_responseCallbacks.find(requestType) != m_responseCallbacks.end())
+    {
+        qDebug() << "Callback for request type" << static_cast<int>(requestType) << "is already registered.";
+        return false; // Callback for this request type already registered
+    }
 
-    return true; // Return true if the operation was initiated successfully
+    m_responseCallbacks[requestType] = callback;
+    return true;
 }
 
-bool PomodoroApiGatewayManager::onGetPomodoroSessions(const std::string& userId,
-                                                     PomodoroSessionContainer& outSessions,
-                                                     const ResponseCallback& onSuccess,
-                                                     const ErrorCallback& onError)
+bool PomodoroApiGatewayManager::unregisterResponseCallback(gateway::RequestType requestType)
 {
-    // Implementation for retrieving Pomodoro sessions via the Pomodoro API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, populate outSessions and invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    auto it = m_responseCallbacks.find(requestType);
+    if (it == m_responseCallbacks.end())
+    {
+        qDebug() << "No callback found for request type" << static_cast<int>(requestType) << "to unregister.";
+        return false; // No callback found for this request type
+    }
 
-    return true; // Return true if the operation was initiated successfully
+    m_responseCallbacks.erase(it);
+    return true;
 }
 
-bool PomodoroApiGatewayManager::onUpdatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps,
-                                                       const ResponseCallback& onSuccess,
-                                                       const ErrorCallback& onError)
+bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
 {
-    // Implementation for updating a Pomodoro session via the Pomodoro API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for creating a Pomodoro session
+    // This is a placeholder implementation
+    qDebug() << "Creating Pomodoro session for user:" << QString::fromStdString(sessionProps.userId);
+    return true;
 }
 
-bool PomodoroApiGatewayManager::onDeletePomodoroSession(const std::string& sessionId,
-                                                       const ResponseCallback& onSuccess,
-                                                       const ErrorCallback& onError)
+bool PomodoroApiGatewayManager::getPomodoroSessions(const std::string& userId)
 {
-    // Implementation for deleting a Pomodoro session via the Pomodoro API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    // Implementation for retrieving Pomodoro sessions for a user
+    // This is a placeholder implementation
+    qDebug() << "Retrieving Pomodoro sessions for user:" << QString::fromStdString(userId);
+    return true;
+}
 
-    return true; // Return true if the operation was initiated successfully
+bool PomodoroApiGatewayManager::updatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
+{
+    // Implementation for updating a Pomodoro session
+    // This is a placeholder implementation
+    qDebug() << "Updating Pomodoro session:" << QString::fromStdString(sessionProps.sessionId);
+    return true;
+}
+
+bool PomodoroApiGatewayManager::deletePomodoroSession(const std::string& sessionId)
+{
+    // Implementation for deleting a Pomodoro session
+    // This is a placeholder implementation
+    qDebug() << "Deleting Pomodoro session:" << QString::fromStdString(sessionId);
+    return true;
 }

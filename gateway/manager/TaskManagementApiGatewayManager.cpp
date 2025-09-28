@@ -7,104 +7,96 @@
 
 #include "TaskManagementApiGatewayManager.h"
 
+#include <QDebug>
+
 #include "CommonDefine.h"
 #include "TaskProperties.h"
 #include "ApiResponse.h"
 
-bool TaskManagementApiGatewayManager::onCreateTask(const gateway::TaskProperties& taskProps,
-                                                  const ResponseCallback& onSuccess,
-                                                  const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
-    // Implementation for creating a task via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    if (m_responseCallbacks.find(requestType) != m_responseCallbacks.end())
+    {
+        qDebug() << "Callback for request type" << static_cast<int>(requestType) << "is already registered.";
+        return false; // Callback for this request type already registered
+    }
 
-    return true; // Return true if the operation was initiated successfully
+    m_responseCallbacks[requestType] = callback;
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onGetTasks(const std::string& groupId,
-                                                TaskContainer& outTasks,
-                                                const ResponseCallback& onSuccess,
-                                                const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::unregisterResponseCallback(gateway::RequestType requestType)
 {
-    // Implementation for retrieving tasks via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, populate outTasks and invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    auto it = m_responseCallbacks.find(requestType);
+    if (it == m_responseCallbacks.end())
+    {
+        qDebug() << "No callback found for request type" << static_cast<int>(requestType) << "to unregister.";
+        return false; // No callback found for this request type
+    }
 
-    return true; // Return true if the operation was initiated successfully
+    m_responseCallbacks.erase(it);
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onUpdateTask(const gateway::TaskProperties& taskProps,
-                                                  const ResponseCallback& onSuccess,
-                                                  const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::createTask(const gateway::TaskProperties& taskProperties)
 {
-    // Implementation for updating a task via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for creating a task
+    // This is a placeholder implementation
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onDeleteTask(const std::string& taskId,
-                                                  const ResponseCallback& onSuccess,
-                                                  const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::getTasks(const std::string& groupId)
 {
-    // Implementation for deleting a task via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for retrieving tasks for a group
+    // This is a placeholder implementation
+    qDebug() << "Retrieving tasks for group ID:" << QString::fromStdString(groupId);
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onCreateTaskGroup(const gateway::TaskGroupProperties& groupProps,
-                                                       const ResponseCallback& onSuccess,
-                                                       const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::updateTask(const gateway::TaskProperties& taskProperties)
 {
-    // Implementation for creating a task group via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for updating a task
+    // This is a placeholder implementation
+    qDebug() << "Updating task ID:" << QString::fromStdString(taskProperties.taskId);
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onGetTasksGroups(const std::string& userId,
-                                                      TaskGroupContainer& outGroups,
-                                                      const ResponseCallback& onSuccess,
-                                                      const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::deleteTask(const std::string& taskId)
 {
-    // Implementation for retrieving task groups via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, populate outGroups and invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for deleting a task
+    // This is a placeholder implementation
+    qDebug() << "Deleting task ID:" << QString::fromStdString(taskId);
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onUpdateTaskGroup(const gateway::TaskGroupProperties& groupProps,
-                                                       const ResponseCallback& onSuccess,
-                                                       const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::createTaskGroup(const gateway::TaskGroupProperties& groupProperties)
 {
-    // Implementation for updating a task group via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for creating a task group
+    // This is a placeholder implementation
+    qDebug() << "Creating task group:" << QString::fromStdString(groupProperties.name);
+    return true;
 }
 
-bool TaskManagementApiGatewayManager::onDeleteTaskGroup(const std::string& groupId,
-                                                       const ResponseCallback& onSuccess,
-                                                       const ErrorCallback& onError)
+bool TaskManagementApiGatewayManager::getTaskGroups(const std::string& userId)
 {
-    // Implementation for deleting a task group via the Task Management API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    // Implementation for retrieving task groups for a user
+    // This is a placeholder implementation
+    qDebug() << "Retrieving task groups for user ID:" << QString::fromStdString(userId);
+    return true;
+}
 
-    return true; // Return true if the operation was initiated successfully
+bool TaskManagementApiGatewayManager::updateTaskGroup(const gateway::TaskGroupProperties& groupProperties)
+{
+    // Implementation for updating a task group
+    // This is a placeholder implementation
+    qDebug() << "Updating task group ID:" << QString::fromStdString(groupProperties.groupId);
+    return true;
+}
+
+bool TaskManagementApiGatewayManager::deleteTaskGroup(const std::string& groupId)
+{
+    // Implementation for deleting a task group
+    // This is a placeholder implementation
+    qDebug() << "Deleting task group ID:" << QString::fromStdString(groupId);
+    return true;
 }

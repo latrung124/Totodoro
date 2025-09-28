@@ -7,44 +7,35 @@
 
 #pragma once
 
-#include <string>
-#include <memory>
-#include <functional>
+#include <map>
 
 #include "IApiGatewayManager.h"
 
 namespace gateway
 {
     struct PomodoroSessionProperties;
-    
     struct ApiResponse;
 }
 
 class PomodoroApiGatewayManager : public IApiGatewayManager
 {
+    Q_OBJECT
 public:
     using ApiResponsePtr = std::shared_ptr<gateway::ApiResponse>;
     using ResponseCallback = std::function<void(const ApiResponsePtr&)>;
-    using ErrorCallback = std::function<void(const std::string&)>;
     using PomodoroSessionContainer = std::vector<gateway::PomodoroSessionProperties>;
 
     explicit PomodoroApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~PomodoroApiGatewayManager() override = default;
 
-    bool onCreatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps,
-                                 const ResponseCallback& onSuccess,
-                                 const ErrorCallback& onError);
+    bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
+    bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
-    bool onGetPomodoroSessions(const std::string& userId,
-                               PomodoroSessionContainer& outSessions,
-                               const ResponseCallback& onSuccess,
-                               const ErrorCallback& onError);
-    
-    bool onUpdatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps,
-                                 const ResponseCallback& onSuccess,
-                                 const ErrorCallback& onError);
+    bool createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps);
+    bool getPomodoroSessions(const std::string& userId);
+    bool updatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps);
+    bool deletePomodoroSession(const std::string& sessionId);
 
-    bool onDeletePomodoroSession(const std::string& sessionId,
-                                 const ResponseCallback& onSuccess,
-                                 const ErrorCallback& onError);
+private:
+    std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
 };

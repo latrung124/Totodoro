@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include <string>
-#include <memory>
-#include <functional>
+#include <map>
 
 #include "IApiGatewayManager.h"
 
@@ -17,7 +15,6 @@ namespace gateway
 {
     struct TaskProperties;
     struct TaskGroupProperties;
-    
     struct ApiResponse;
 }
 
@@ -33,37 +30,18 @@ public:
     explicit TaskManagementApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~TaskManagementApiGatewayManager() override = default;
 
-    bool onCreateTask(const gateway::TaskProperties& taskProps,
-                      const ResponseCallback& onSuccess,
-                      const ErrorCallback& onError);
+    bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
+    bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
-    bool onGetTasks(const std::string& groupId,
-                   TaskContainer& outTasks,
-                   const ResponseCallback& onSuccess,
-                   const ErrorCallback& onError);
-    
-    bool onUpdateTask(const gateway::TaskProperties& taskProps,
-                      const ResponseCallback& onSuccess,
-                      const ErrorCallback& onError);
+    bool createTask(const gateway::TaskProperties& taskProperties);
+    bool getTasks(const std::string& groupId);
+    bool updateTask(const gateway::TaskProperties& taskProperties);
+    bool deleteTask(const std::string& taskId);
+    bool createTaskGroup(const gateway::TaskGroupProperties& groupProperties);
+    bool getTaskGroups(const std::string& userId);
+    bool updateTaskGroup(const gateway::TaskGroupProperties& groupProperties);
+    bool deleteTaskGroup(const std::string& groupId);
 
-    bool onDeleteTask(const std::string& taskId,
-                      const ResponseCallback& onSuccess,
-                      const ErrorCallback& onError);
-
-    bool onCreateTaskGroup(const gateway::TaskGroupProperties& groupProps,
-                           const ResponseCallback& onSuccess,
-                           const ErrorCallback& onError);
-
-    bool onGetTasksGroups(const std::string& userId,
-                        TaskGroupContainer& outGroups,
-                        const ResponseCallback& onSuccess,
-                        const ErrorCallback& onError);
-    
-    bool onUpdateTaskGroup(const gateway::TaskGroupProperties& groupProps,
-                           const ResponseCallback& onSuccess,
-                           const ErrorCallback& onError);
-
-    bool onDeleteTaskGroup(const std::string& groupId,
-                           const ResponseCallback& onSuccess,
-                           const ErrorCallback& onError);
+private:
+    std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
 };

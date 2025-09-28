@@ -7,67 +7,72 @@
 
 #include "UserApiGatewayManager.h"
 
+#include <QDebug>
+
 #include "CommonDefine.h"
 #include "UserProperties.h"
 #include "ApiResponse.h"
 
-
-bool UserApiGatewayManager::onCreateUser(const gateway::UserProperties& userProps,
-                                        const ResponseCallback& onSuccess,
-                                        const ErrorCallback& onError)
+bool UserApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
-    // Implementation for creating a user via the User API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    if (m_responseCallbacks.find(requestType) != m_responseCallbacks.end())
+    {
+        qDebug() << "Callback for request type" << static_cast<int>(requestType) << "is already registered.";
+        return false; // Callback for this request type already registered
+    }
 
-    return true; // Return true if the operation was initiated successfully
+    m_responseCallbacks[requestType] = callback;
+    return true;
 }
 
-bool UserApiGatewayManager::onGetUser(const gateway::UserProperties& userProps,
-                                     const ResponseCallback& onSuccess,
-                                     const ErrorCallback& onError)
+bool UserApiGatewayManager::unregisterResponseCallback(gateway::RequestType requestType)
 {
-    // Implementation for retrieving a user via the User API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    auto it = m_responseCallbacks.find(requestType);
+    if (it == m_responseCallbacks.end())
+    {
+        qDebug() << "No callback found for request type" << static_cast<int>(requestType) << "to unregister.";
+        return false; // No callback found for this request type
+    }
 
-    return true; // Return true if the operation was initiated successfully
+    m_responseCallbacks.erase(it);
+    return true;
 }
 
-bool UserApiGatewayManager::onUpdateUser(const gateway::UserProperties& userProps,
-                                        const ResponseCallback& onSuccess,
-                                        const ErrorCallback& onError)
+bool UserApiGatewayManager::createUser(const gateway::UserProperties& userProps)
 {
-    // Implementation for updating a user via the User API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for creating a user
+    // This is a placeholder implementation
+    return true;
 }
 
-bool UserApiGatewayManager::onGetUserSettings(const std::string& userId,
-                                            const ResponseCallback& onSuccess,
-                                            const ErrorCallback& onError)
+bool UserApiGatewayManager::getUserProperties(const std::string& userId)
 {
-    // Implementation for retrieving user settings via the User API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
-
-    return true; // Return true if the operation was initiated successfully
+    // Implementation for retrieving user properties
+    // This is a placeholder implementation
+    qDebug() << "Retrieving properties for user ID:" << QString::fromStdString(userId);
+    return true;
 }
 
-bool UserApiGatewayManager::onUpdateUserSettings(const gateway::UserSettings& settings,
-                                               const ResponseCallback& onSuccess,
-                                               const ErrorCallback& onError)
+bool UserApiGatewayManager::updateUserProperties(const gateway::UserProperties& userProps)
 {
-    // Implementation for updating user settings via the User API
-    // This is a placeholder implementation. Actual HTTP request logic should be added here.
-    // On success, invoke onSuccess with an ApiResponsePtr
-    // On error, invoke onError with an error message
+    // Implementation for updating user properties
+    // This is a placeholder implementation
+    qDebug() << "Updating properties for user ID:" << QString::fromStdString(userProps.userId);
+    return true;
+}
 
-    return true; // Return true if the operation was initiated successfully
+bool UserApiGatewayManager::getUserSettings(const std::string& userId)
+{
+    // Implementation for retrieving user settings
+    // This is a placeholder implementation
+    qDebug() << "Retrieving settings for user ID:" << QString::fromStdString(userId);
+    return true;
+}
+
+bool UserApiGatewayManager::updateUserSettings(const gateway::UserSettings& userSettings)
+{
+    // Implementation for updating user settings
+    // This is a placeholder implementation
+    qDebug() << "Updating settings for user ID:" << QString::fromStdString(userSettings.userId);
+    return true;
 }
