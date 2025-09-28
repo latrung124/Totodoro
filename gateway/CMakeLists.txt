@@ -22,6 +22,7 @@ set(GATEWAY_HEADERS
     factory/ApiClientFactory.h
     factory/RouteHandlerFactory.h
     factory/ApiGatewayManagerFactory.h
+    factory/ApiCommandFactory.h
     helper/TimeTransformer.h
     helper/SessionDataTransformer.h
     common/CommonDefine.h

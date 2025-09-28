@@ -12,6 +12,8 @@
 #include "CommonDefine.h"
 #include "PomodoroProperties.h"
 #include "ApiResponse.h"
+#include "ApiCommandFactory.h"
+#include "CreateSessionCommand.h"
 
 bool PomodoroApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
@@ -40,9 +42,25 @@ bool PomodoroApiGatewayManager::unregisterResponseCallback(gateway::RequestType 
 
 bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
 {
-    // Implementation for creating a Pomodoro session
-    // This is a placeholder implementation
-    qDebug() << "Creating Pomodoro session for user:" << QString::fromStdString(sessionProps.userId);
+    // Sample implementation for creating a Pomodoro session
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<CreateSessionCommand>(
+        QString::fromStdString(sessionProps.userId),
+        OpenAPI::OAIPomodoroServiceCreateSessionBody(),
+        nullptr, // Assuming ApiClientFactoryPtr is managed elsewhere
+        "",
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create CreateSessionCommand.";
+        return false;
+    }
+
+
+    //TODO: Set up response handler and connect signals/slots as needed
+
     return true;
 }
 
