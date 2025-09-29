@@ -72,6 +72,7 @@ set(GATEWAY_SOURCES
     handler/JsonResponseHandler.cpp
     helper/TimeTransformer.cpp
     helper/SessionDataTransformer.cpp
+    common/PomodoroProperties.cpp
     command/pomodoro/CreateSessionCommand.cpp
     command/pomodoro/GetSessionByIdCommand.cpp
     command/pomodoro/UpdateSessionCommand.cpp

@@ -32,7 +32,7 @@ public:
     bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
     bool createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps);
-    bool getPomodoroSessions(const std::string& userId);
+    bool getPomodoroSessions(const std::string& userId, const std::string& taskId);
     bool updatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps);
     bool deletePomodoroSession(const std::string& sessionId);
 

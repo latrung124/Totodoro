@@ -8,12 +8,16 @@
 #include "PomodoroApiGatewayManager.h"
 
 #include <QDebug>
+#include <QString>
 
 #include "CommonDefine.h"
 #include "PomodoroProperties.h"
 #include "ApiResponse.h"
 #include "ApiCommandFactory.h"
 #include "CreateSessionCommand.h"
+#include "GetSessionsCommand.h"
+#include "UpdateSessionCommand.h"
+#include "DeleteSessionCommand.h"
 
 bool PomodoroApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
@@ -42,12 +46,14 @@ bool PomodoroApiGatewayManager::unregisterResponseCallback(gateway::RequestType 
 
 bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
 {
+    qDebug() << "Creating Pomodoro session for user:" << QString::fromStdString(sessionProps.userId);
     // Sample implementation for creating a Pomodoro session
+    QString createSessionBodyQStr = QString::fromStdString(sessionProps.toCreateSessionBodyJsonString());
     ApiCommandFactory& factory = ApiCommandFactory::instance();
     auto command = factory.createTyped<CreateSessionCommand>(
         QString::fromStdString(sessionProps.userId),
-        OpenAPI::OAIPomodoroServiceCreateSessionBody(),
-        "",
+        OpenAPI::OAIPomodoroServiceCreateSessionBody(createSessionBodyQStr),
+        gateway::kBaseUrl.data(),
         nullptr // Set parent to this manager for QObject hierarchy
     );
 
@@ -57,32 +63,80 @@ bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSes
         return false;
     }
 
-
     //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
 
     return true;
 }
 
-bool PomodoroApiGatewayManager::getPomodoroSessions(const std::string& userId)
+bool PomodoroApiGatewayManager::getPomodoroSessions(const std::string& userId, const std::string& taskId)
 {
-    // Implementation for retrieving Pomodoro sessions for a user
-    // This is a placeholder implementation
     qDebug() << "Retrieving Pomodoro sessions for user:" << QString::fromStdString(userId);
+    QString userIdQStr = QString::fromStdString(userId);
+    QString taskIdQStr = QString::fromStdString(taskId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<GetSessionsCommand>(
+        userIdQStr,
+        taskIdQStr,
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create GetSessionsCommand.";
+        return false;
+    }
+
+    // TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
+
     return true;
 }
 
 bool PomodoroApiGatewayManager::updatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
 {
-    // Implementation for updating a Pomodoro session
-    // This is a placeholder implementation
     qDebug() << "Updating Pomodoro session:" << QString::fromStdString(sessionProps.sessionId);
+    QString updateSessionBodyQStr = QString::fromStdString(sessionProps.toUpdateSessionBodyJsonString());
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<UpdateSessionCommand>(
+        OpenAPI::OAIPomodoroServiceUpdateSessionBody(updateSessionBodyQStr),
+        QString::fromStdString(sessionProps.sessionId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create UpdateSessionCommand.";
+        return false;
+    }
+
+    // TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
+
     return true;
 }
 
 bool PomodoroApiGatewayManager::deletePomodoroSession(const std::string& sessionId)
 {
-    // Implementation for deleting a Pomodoro session
-    // This is a placeholder implementation
     qDebug() << "Deleting Pomodoro session:" << QString::fromStdString(sessionId);
+    QString sessionIdQStr = QString::fromStdString(sessionId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<DeleteSessionCommand>(
+        sessionIdQStr,
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create DeleteSessionCommand.";
+        return false;
+    }
+
+    // TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
+
     return true;
 }
