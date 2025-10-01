@@ -26,9 +26,67 @@ enum class TaskStatus : uint8_t
 {
     idle,
     pending,
-    inprogress,
+    in_progress,
     completed
 };
+
+static std::string taskPriorityToString(TaskPriority priority)
+{
+    switch (priority)
+    {
+        case TaskPriority::low:
+            return "TASK_PRIORITY_LOW";
+        case TaskPriority::medium:
+            return "TASK_PRIORITY_MEDIUM";
+        case TaskPriority::high:
+            return "TASK_PRIORITY_HIGH";
+        default:
+            return "TASK_PRIORITY_UNSPECIFIED";
+    }
+}
+
+static std::string taskStatusToString(TaskStatus status)
+{
+    switch (status)
+    {
+        case TaskStatus::idle:
+            return "TASK_STATUS_IDLE";
+        case TaskStatus::pending:
+            return "TASK_STATUS_PENDING";
+        case TaskStatus::in_progress:
+            return "TASK_STATUS_IN_PROGRESS";
+        case TaskStatus::completed:
+            return "TASK_STATUS_COMPLETED";
+        default:
+            return "TASK_STATUS_UNSPECIFIED";
+    }
+}
+
+static TaskPriority stringToTaskPriority(const std::string& priorityStr)
+{
+    if (priorityStr == "TASK_PRIORITY_LOW")
+        return TaskPriority::low;
+    else if (priorityStr == "TASK_PRIORITY_MEDIUM")
+        return TaskPriority::medium;
+    else if (priorityStr == "TASK_PRIORITY_HIGH")
+        return TaskPriority::high;
+    else
+        return TaskPriority::medium; // Default to medium if unspecified
+}
+
+static TaskStatus stringToTaskStatus(const std::string& statusStr)
+{
+    if (statusStr == "TASK_STATUS_IDLE")
+        return TaskStatus::idle;
+    else if (statusStr == "TASK_STATUS_PENDING")
+        return TaskStatus::pending;
+    else if (statusStr == "TASK_STATUS_IN_PROGRESS")
+        return TaskStatus::in_progress;
+    else if (statusStr == "TASK_STATUS_COMPLETED")
+        return TaskStatus::completed;
+    else
+        return TaskStatus::idle; // Default to idle if unspecified
+}
 
 struct TaskProperties {
     uint16_t totalPomodoros;
@@ -57,6 +115,10 @@ struct TaskProperties {
         , lastUpdatedTime(std::chrono::system_clock::now())
     {
     }
+
+    std::string toJsonString() const;
+    std::string toCreateTaskBodyJsonString() const;
+    std::string toUpdateTaskBodyJsonString() const;
 };
 
 // ================================= Task Group Properties =================================
@@ -98,6 +160,10 @@ struct TaskGroupProperties {
         , lastUpdatedTime(std::chrono::system_clock::now())
     {
     }
+
+    std::string toJsonString() const;
+    std::string toCreateTaskGroupBodyJsonString() const;
+    std::string toUpdateTaskGroupBodyJsonString() const;
 };
 
 }

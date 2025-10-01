@@ -73,6 +73,7 @@ set(GATEWAY_SOURCES
     helper/TimeTransformer.cpp
     helper/SessionDataTransformer.cpp
     common/PomodoroProperties.cpp
+    common/TaskProperties.cpp
     command/pomodoro/CreateSessionCommand.cpp
     command/pomodoro/GetSessionByIdCommand.cpp
     command/pomodoro/UpdateSessionCommand.cpp
