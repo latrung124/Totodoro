@@ -20,6 +20,10 @@ struct UserProperties
     std::string userName;
 	std::chrono::system_clock::time_point createdTime;
 	std::chrono::system_clock::time_point lastUpdatedTime;
+    
+    std::string toJsonString() const;
+    std::string toCreateUserBodyJsonString() const;
+    std::string toUpdateUserBodyJsonString() const;
 };
 
 struct UserSettings
@@ -39,6 +43,9 @@ struct UserSettings
     bool pomodoroNotification;
     bool autoStartMusic;
     bool autoStartNextTask;
+
+    std::string toJsonString() const;
+    std::string toUpdateSettingsBodyJsonString() const;
 };
 
 } // namespace gateway
