@@ -34,7 +34,7 @@ public:
     bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
     bool createTask(const gateway::TaskProperties& taskProperties);
-    bool getTasks(const std::string& groupId);
+    bool getTasks(const std::string& groupId, const std::string& userId = "");
     bool updateTask(const gateway::TaskProperties& taskProperties);
     bool deleteTask(const std::string& taskId);
     bool createTaskGroup(const gateway::TaskGroupProperties& groupProperties);

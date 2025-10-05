@@ -138,6 +138,64 @@ enum TaskGroupStatus : uint8_t
     completed
 };
 
+static std::string taskGroupPriorityToString(TaskGroupPriority priority)
+{
+    switch (priority)
+    {
+        case TaskGroupPriority::low:
+            return "TASK_GROUP_PRIORITY_LOW";
+        case TaskGroupPriority::medium:
+            return "TASK_GROUP_PRIORITY_MEDIUM";
+        case TaskGroupPriority::high:
+            return "TASK_GROUP_PRIORITY_HIGH";
+        default:
+            return "TASK_GROUP_PRIORITY_UNSPECIFIED";
+    }
+}
+
+static std::string taskGroupStatusToString(TaskGroupStatus status)
+{
+    switch (status)
+    {
+        case TaskGroupStatus::idle:
+            return "TASK_GROUP_STATUS_IDLE";
+        case TaskGroupStatus::pending:
+            return "TASK_GROUP_STATUS_PENDING";
+        case TaskGroupStatus::inprogress:
+            return "TASK_GROUP_STATUS_IN_PROGRESS";
+        case TaskGroupStatus::completed:
+            return "TASK_GROUP_STATUS_COMPLETED";
+        default:
+            return "TASK_GROUP_STATUS_UNSPECIFIED";
+    }
+}
+
+static TaskGroupPriority stringToTaskGroupPriority(const std::string& priorityStr)
+{
+    if (priorityStr == "TASK_GROUP_PRIORITY_LOW")
+        return TaskGroupPriority::low;
+    else if (priorityStr == "TASK_GROUP_PRIORITY_MEDIUM")
+        return TaskGroupPriority::medium;
+    else if (priorityStr == "TASK_GROUP_PRIORITY_HIGH")
+        return TaskGroupPriority::high;
+    else
+        return TaskGroupPriority::medium; // Default to medium if unspecified
+}
+
+static TaskGroupStatus stringToTaskGroupStatus(const std::string& statusStr)
+{
+    if (statusStr == "TASK_GROUP_STATUS_IDLE")
+        return TaskGroupStatus::idle;
+    else if (statusStr == "TASK_GROUP_STATUS_PENDING")
+        return TaskGroupStatus::pending;
+    else if (statusStr == "TASK_GROUP_STATUS_IN_PROGRESS")
+        return TaskGroupStatus::inprogress;
+    else if (statusStr == "TASK_GROUP_STATUS_COMPLETED")
+        return TaskGroupStatus::completed;
+    else
+        return TaskGroupStatus::idle; // Default to idle if unspecified
+}
+
 struct TaskGroupProperties {
     std::string groupId;
     std::string userId;

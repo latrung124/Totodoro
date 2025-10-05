@@ -129,8 +129,8 @@ namespace gateway
         j["name"] = name;
         j["icon"] = icon;
         j["description"] = description;
-        j["priority"] = static_cast<uint8_t>(priority);
-        j["status"] = static_cast<uint8_t>(status);
+        j["priority"] = taskGroupPriorityToString(priority);
+        j["status"] = taskGroupStatusToString(status);
         j["totalTasks"] = totalTasks;
         if (deadline != std::chrono::system_clock::time_point::max())
         {
@@ -157,8 +157,8 @@ namespace gateway
         j["name"] = name;
         j["icon"] = icon;
         j["description"] = description;
-        j["priority"] = static_cast<uint8_t>(priority);
-        j["status"] = static_cast<uint8_t>(status);
+        j["priority"] = taskGroupPriorityToString(priority);
+        j["status"] = taskGroupStatusToString(status);
         j["completedTasks"] = completedTasks;
         j["totalTasks"] = totalTasks;
         if (deadline != std::chrono::system_clock::time_point::max())

@@ -12,7 +12,7 @@
 
 namespace gateway {
 
-constexpr std::string_view kBaseUrl = "http://localhost:8081";
+constexpr std::string_view kBaseUrl = "http://localhost:8081"; // Just for testing purpose, we will replace it later with actual URLs in env config
 
 enum class RequestType : uint8_t
 {

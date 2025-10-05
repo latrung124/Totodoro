@@ -13,6 +13,16 @@
 #include "TaskProperties.h"
 #include "ApiResponse.h"
 
+#include "ApiCommandFactory.h"
+#include "CreateTaskCommand.h"
+#include "GetTasksCommand.h"
+#include "UpdateTaskCommand.h"
+#include "DeleteTaskCommand.h"
+#include "CreateTaskGroupCommand.h"
+#include "GetTaskGroupsCommand.h"
+#include "UpdateTaskGroupCommand.h"
+#include "DeleteTaskGroupCommand.h"
+
 bool TaskManagementApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
     if (m_responseCallbacks.find(requestType) != m_responseCallbacks.end())
@@ -40,63 +50,177 @@ bool TaskManagementApiGatewayManager::unregisterResponseCallback(gateway::Reques
 
 bool TaskManagementApiGatewayManager::createTask(const gateway::TaskProperties& taskProperties)
 {
-    // Implementation for creating a task
-    // This is a placeholder implementation
+    qDebug() << "Creating task:" << QString::fromStdString(taskProperties.name);
+    QString createTaskBodyQStr = QString::fromStdString(taskProperties.toCreateTaskBodyJsonString());
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<CreateTaskCommand>(
+        QString::fromStdString(taskProperties.groupId),
+        OpenAPI::OAITaskManagementServiceCreateTaskBody(createTaskBodyQStr),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create CreateTaskCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
-bool TaskManagementApiGatewayManager::getTasks(const std::string& groupId)
+bool TaskManagementApiGatewayManager::getTasks(const std::string& groupId, const std::string& userId)
 {
-    // Implementation for retrieving tasks for a group
-    // This is a placeholder implementation
     qDebug() << "Retrieving tasks for group ID:" << QString::fromStdString(groupId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<GetTasksCommand>(
+        QString::fromStdString(groupId),
+        QString::fromStdString(userId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create GetTasksCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool TaskManagementApiGatewayManager::updateTask(const gateway::TaskProperties& taskProperties)
 {
-    // Implementation for updating a task
-    // This is a placeholder implementation
-    qDebug() << "Updating task ID:" << QString::fromStdString(taskProperties.taskId);
+    qDebug() << "Updating task ID:" << QString::fromStdString(taskProperties.taskId)
+            << "with name:" << QString::fromStdString(taskProperties.name);
+    QString updateTaskBodyQStr = QString::fromStdString(taskProperties.toUpdateTaskBodyJsonString());
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<UpdateTaskCommand>(
+        OpenAPI::OAITaskManagementServiceUpdateTaskBody(updateTaskBodyQStr),
+        QString::fromStdString(taskProperties.taskId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create UpdateTaskCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool TaskManagementApiGatewayManager::deleteTask(const std::string& taskId)
 {
-    // Implementation for deleting a task
-    // This is a placeholder implementation
     qDebug() << "Deleting task ID:" << QString::fromStdString(taskId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<DeleteTaskCommand>(
+        QString::fromStdString(taskId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create DeleteTaskCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool TaskManagementApiGatewayManager::createTaskGroup(const gateway::TaskGroupProperties& groupProperties)
 {
-    // Implementation for creating a task group
-    // This is a placeholder implementation
     qDebug() << "Creating task group:" << QString::fromStdString(groupProperties.name);
+    QString createGroupBodyQStr = QString::fromStdString(groupProperties.toCreateTaskGroupBodyJsonString());
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<CreateTaskGroupCommand>(
+        OpenAPI::OAITask_managementCreateTaskGroupRequest(createGroupBodyQStr),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create CreateTaskGroupCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool TaskManagementApiGatewayManager::getTaskGroups(const std::string& userId)
 {
-    // Implementation for retrieving task groups for a user
-    // This is a placeholder implementation
     qDebug() << "Retrieving task groups for user ID:" << QString::fromStdString(userId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<GetTaskGroupsCommand>(
+        QString::fromStdString(userId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create GetTaskGroupsCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool TaskManagementApiGatewayManager::updateTaskGroup(const gateway::TaskGroupProperties& groupProperties)
 {
-    // Implementation for updating a task group
-    // This is a placeholder implementation
     qDebug() << "Updating task group ID:" << QString::fromStdString(groupProperties.groupId);
+    QString updateGroupBodyQStr = QString::fromStdString(groupProperties.toUpdateTaskGroupBodyJsonString());
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<UpdateTaskGroupCommand>(
+        OpenAPI::OAITaskManagementServiceUpdateTaskGroupBody(updateGroupBodyQStr),
+        QString::fromStdString(groupProperties.groupId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create UpdateTaskGroupCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool TaskManagementApiGatewayManager::deleteTaskGroup(const std::string& groupId)
 {
-    // Implementation for deleting a task group
-    // This is a placeholder implementation
     qDebug() << "Deleting task group ID:" << QString::fromStdString(groupId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<DeleteTaskGroupCommand>(
+        QString::fromStdString(groupId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create DeleteTaskGroupCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
