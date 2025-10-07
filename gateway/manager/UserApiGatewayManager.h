@@ -18,12 +18,15 @@ namespace gateway
     struct ApiResponse;
 }
 
+class JsonResponseHandler;
+
 class UserApiGatewayManager : public IApiGatewayManager
 {
 public:
     using ApiResponsePtr = std::shared_ptr<gateway::ApiResponse>;
     using ResponseCallback = std::function<void(const ApiResponsePtr&)>;
     using ErrorCallback = std::function<void(const std::string&)>;
+    using ResponseHandlerPtr = std::shared_ptr<JsonResponseHandler>;
 
     explicit UserApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
     ~UserApiGatewayManager() override = default;
@@ -39,4 +42,5 @@ public:
 
 private:
     std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
+    ResponseHandlerPtr m_responseHandler;
 };

@@ -13,6 +13,7 @@
 #include "UserProperties.h"
 #include "ApiResponse.h"
 #include "ApiCommandFactory.h"
+#include "JsonResponseHandler.h"
 #include "CreateUserCommand.h"
 #include "GetUserCommand.h"
 #include "UpdateUserCommand.h"
@@ -61,8 +62,9 @@ bool UserApiGatewayManager::createUser(const gateway::UserProperties& userProps)
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -82,8 +84,9 @@ bool UserApiGatewayManager::getUserProperties(const std::string& userId)
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -105,8 +108,9 @@ bool UserApiGatewayManager::updateUserProperties(const gateway::UserProperties& 
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -126,14 +130,14 @@ bool UserApiGatewayManager::getUserSettings(const std::string& userId)
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
 bool UserApiGatewayManager::updateUserSettings(const gateway::UserSettings& userSettings)
 {
-    // This is a placeholder implementation
     qDebug() << "Updating settings for user ID:" << QString::fromStdString(userSettings.userId);
     ApiCommandFactory& factory = ApiCommandFactory::instance();
     auto command = factory.createTyped<UpdateSettingsCommand>(
@@ -149,7 +153,8 @@ bool UserApiGatewayManager::updateUserSettings(const gateway::UserSettings& user
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
