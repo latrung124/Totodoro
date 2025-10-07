@@ -12,6 +12,12 @@
 #include "CommonDefine.h"
 #include "UserProperties.h"
 #include "ApiResponse.h"
+#include "ApiCommandFactory.h"
+#include "CreateUserCommand.h"
+#include "GetUserCommand.h"
+#include "UpdateUserCommand.h"
+#include "GetSettingsCommand.h"
+#include "UpdateSettingsCommand.h"
 
 bool UserApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
@@ -40,39 +46,110 @@ bool UserApiGatewayManager::unregisterResponseCallback(gateway::RequestType requ
 
 bool UserApiGatewayManager::createUser(const gateway::UserProperties& userProps)
 {
-    // Implementation for creating a user
-    // This is a placeholder implementation
+    qDebug() << "Creating user with username:" << QString::fromStdString(userProps.userName);
+    QString createUserBodyQStr = QString::fromStdString(userProps.toCreateUserBodyJsonString());
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<CreateUserCommand>(
+        OpenAPI::OAIUser_serviceCreateUserRequest(createUserBodyQStr),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create CreateUserCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool UserApiGatewayManager::getUserProperties(const std::string& userId)
 {
-    // Implementation for retrieving user properties
-    // This is a placeholder implementation
     qDebug() << "Retrieving properties for user ID:" << QString::fromStdString(userId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<GetUserCommand>(
+        QString::fromStdString(userId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create GetUserCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool UserApiGatewayManager::updateUserProperties(const gateway::UserProperties& userProps)
 {
-    // Implementation for updating user properties
-    // This is a placeholder implementation
     qDebug() << "Updating properties for user ID:" << QString::fromStdString(userProps.userId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    QString updateUserBodyQStr = QString::fromStdString(userProps.toUpdateUserBodyJsonString());
+    auto command = factory.createTyped<UpdateUserCommand>(
+        OpenAPI::OAIUserServiceUpdateUserBody(updateUserBodyQStr),
+        QString::fromStdString(userProps.userId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create UpdateUserCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool UserApiGatewayManager::getUserSettings(const std::string& userId)
 {
-    // Implementation for retrieving user settings
-    // This is a placeholder implementation
     qDebug() << "Retrieving settings for user ID:" << QString::fromStdString(userId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<GetSettingsCommand>(
+        QString::fromStdString(userId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create GetSettingsCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
 
 bool UserApiGatewayManager::updateUserSettings(const gateway::UserSettings& userSettings)
 {
-    // Implementation for updating user settings
     // This is a placeholder implementation
     qDebug() << "Updating settings for user ID:" << QString::fromStdString(userSettings.userId);
+    ApiCommandFactory& factory = ApiCommandFactory::instance();
+    auto command = factory.createTyped<UpdateSettingsCommand>(
+        OpenAPI::OAIUserServiceUpdateSettingsBody(QString::fromStdString(userSettings.toJsonString())),
+        QString::fromStdString(userSettings.userId),
+        gateway::kBaseUrl.data(),
+        nullptr // Set parent to this manager for QObject hierarchy
+    );
+
+    if (!command)
+    {
+        qDebug() << "Failed to create UpdateSettingsCommand.";
+        return false;
+    }
+
+    //TODO: Set up response handler and connect signals/slots as needed
+    // And handle the result appropriately
     return true;
 }
