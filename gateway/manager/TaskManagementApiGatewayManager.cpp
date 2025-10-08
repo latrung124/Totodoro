@@ -14,6 +14,7 @@
 #include "ApiResponse.h"
 
 #include "ApiCommandFactory.h"
+#include "JsonResponseHandler.h"
 #include "CreateTaskCommand.h"
 #include "GetTasksCommand.h"
 #include "UpdateTaskCommand.h"
@@ -22,6 +23,11 @@
 #include "GetTaskGroupsCommand.h"
 #include "UpdateTaskGroupCommand.h"
 #include "DeleteTaskGroupCommand.h"
+
+TaskManagementApiGatewayManager::TaskManagementApiGatewayManager(QObject* parent)
+    : IApiGatewayManager(parent), m_responseHandler(std::make_shared<JsonResponseHandler>())
+{
+}
 
 bool TaskManagementApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
@@ -66,8 +72,9 @@ bool TaskManagementApiGatewayManager::createTask(const gateway::TaskProperties& 
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -88,8 +95,9 @@ bool TaskManagementApiGatewayManager::getTasks(const std::string& groupId, const
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -112,8 +120,9 @@ bool TaskManagementApiGatewayManager::updateTask(const gateway::TaskProperties& 
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -133,8 +142,9 @@ bool TaskManagementApiGatewayManager::deleteTask(const std::string& taskId)
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -155,8 +165,9 @@ bool TaskManagementApiGatewayManager::createTaskGroup(const gateway::TaskGroupPr
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -176,8 +187,9 @@ bool TaskManagementApiGatewayManager::getTaskGroups(const std::string& userId)
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -199,8 +211,9 @@ bool TaskManagementApiGatewayManager::updateTaskGroup(const gateway::TaskGroupPr
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }
 
@@ -220,7 +233,8 @@ bool TaskManagementApiGatewayManager::deleteTaskGroup(const std::string& groupId
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
+
     return true;
 }

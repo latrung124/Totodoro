@@ -20,6 +20,11 @@
 #include "GetSettingsCommand.h"
 #include "UpdateSettingsCommand.h"
 
+UserApiGatewayManager::UserApiGatewayManager(QObject* parent)
+    : IApiGatewayManager(parent), m_responseHandler(std::make_shared<JsonResponseHandler>())
+{
+}
+
 bool UserApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
     if (m_responseCallbacks.find(requestType) != m_responseCallbacks.end())

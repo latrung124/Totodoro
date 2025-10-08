@@ -28,7 +28,7 @@ public:
     using ErrorCallback = std::function<void(const std::string&)>;
     using ResponseHandlerPtr = std::shared_ptr<JsonResponseHandler>;
 
-    explicit UserApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
+    explicit UserApiGatewayManager(QObject* parent = nullptr);
     ~UserApiGatewayManager() override = default;
 
     bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;

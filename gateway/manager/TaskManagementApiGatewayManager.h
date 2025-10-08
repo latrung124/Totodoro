@@ -8,6 +8,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 
 #include "IApiGatewayManager.h"
 
@@ -18,6 +19,8 @@ namespace gateway
     struct ApiResponse;
 }
 
+class JsonResponseHandler;
+
 class TaskManagementApiGatewayManager : public IApiGatewayManager
 {
 public:
@@ -26,8 +29,9 @@ public:
     using ErrorCallback = std::function<void(const std::string&)>;
     using TaskContainer = std::vector<gateway::TaskProperties>;
     using TaskGroupContainer = std::vector<gateway::TaskGroupProperties>;
+    using JsonResponseHandlerPtr = std::shared_ptr<JsonResponseHandler>;
 
-    explicit TaskManagementApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
+    explicit TaskManagementApiGatewayManager(QObject* parent = nullptr);
     ~TaskManagementApiGatewayManager() override = default;
 
     bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
@@ -44,4 +48,5 @@ public:
 
 private:
     std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
+    JsonResponseHandlerPtr m_responseHandler = nullptr;
 };
