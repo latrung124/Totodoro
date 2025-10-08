@@ -8,6 +8,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 
 #include "IApiGatewayManager.h"
 
@@ -17,6 +18,8 @@ namespace gateway
     struct ApiResponse;
 }
 
+class JsonResponseHandler;
+
 class PomodoroApiGatewayManager : public IApiGatewayManager
 {
     Q_OBJECT
@@ -24,8 +27,9 @@ public:
     using ApiResponsePtr = std::shared_ptr<gateway::ApiResponse>;
     using ResponseCallback = std::function<void(const ApiResponsePtr&)>;
     using PomodoroSessionContainer = std::vector<gateway::PomodoroSessionProperties>;
+    using JsonResponseHandlerPtr = std::shared_ptr<JsonResponseHandler>;
 
-    explicit PomodoroApiGatewayManager(QObject* parent = nullptr) : IApiGatewayManager(parent) {}
+    explicit PomodoroApiGatewayManager(QObject* parent = nullptr);
     ~PomodoroApiGatewayManager() override = default;
 
     bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
@@ -38,4 +42,5 @@ public:
 
 private:
     std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
+    JsonResponseHandlerPtr m_responseHandler;
 };

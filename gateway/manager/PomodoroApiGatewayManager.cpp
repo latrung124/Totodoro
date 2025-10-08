@@ -14,10 +14,16 @@
 #include "PomodoroProperties.h"
 #include "ApiResponse.h"
 #include "ApiCommandFactory.h"
+#include "JsonResponseHandler.h"
 #include "CreateSessionCommand.h"
 #include "GetSessionsCommand.h"
 #include "UpdateSessionCommand.h"
 #include "DeleteSessionCommand.h"
+
+PomodoroApiGatewayManager::PomodoroApiGatewayManager(QObject* parent)
+    : IApiGatewayManager(parent), m_responseHandler(std::make_shared<JsonResponseHandler>())
+{
+}
 
 bool PomodoroApiGatewayManager::registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback)
 {
@@ -63,8 +69,8 @@ bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSes
         return false;
     }
 
-    //TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
 
     return true;
 }
@@ -88,8 +94,8 @@ bool PomodoroApiGatewayManager::getPomodoroSessions(const std::string& userId, c
         return false;
     }
 
-    // TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
 
     return true;
 }
@@ -112,8 +118,8 @@ bool PomodoroApiGatewayManager::updatePomodoroSession(const gateway::PomodoroSes
         return false;
     }
 
-    // TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
 
     return true;
 }
@@ -135,8 +141,8 @@ bool PomodoroApiGatewayManager::deletePomodoroSession(const std::string& session
         return false;
     }
 
-    // TODO: Set up response handler and connect signals/slots as needed
-    // And handle the result appropriately
+    command->setResponseHandler(m_responseHandler);
+    command->execute();
 
     return true;
 }
