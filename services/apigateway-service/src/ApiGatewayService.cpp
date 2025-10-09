@@ -8,12 +8,23 @@
 #include "ApiGatewayService.h"
 #include "IApiGatewayServiceListener.h"
 
+#include "common/ApiUtilities.h"
+#include "common/CommonDefine.h"
+#include "common/UserProperties.h"
+#include "Gateway.h"
+#include "manager/UserApiGatewayManager.h"
+
 namespace {
+
 using Information = apigateway_service::utils::user::Information;
 using Settings = apigateway_service::utils::user::Settings;
+
+using namespace gateway;
+
 } // namespace
 
 ApiGatewayService::ApiGatewayService()
+    : m_gateway(std::make_unique<Gateway>())
 {
 }
 
@@ -52,17 +63,45 @@ void ApiGatewayService::unregisterListener(const IServiceListener *listener)
 
 void ApiGatewayService::start()
 {
-	// Initialize resources, connections, etc.
+	if (!m_gateway) {
+		return;
+	}
+
+	m_gateway->start();
 }
 
 void ApiGatewayService::stop()
 {
-	// Clean up resources, connections, etc.
+	if (!m_gateway) {
+		return;
+	}
+
+	m_gateway->stop();
 }
 
 void ApiGatewayService::requestCreateUser(const Information &userInformation)
 {
-	// Simulate user creation (replace with actual implementation)
+	const auto userApiManagerWeak = m_gateway->getApiGatewayManager(gateway::RouteType::User);
+	if (userApiManagerWeak.expired()) {
+		return;
+	}
+	const auto userApiManager = userApiManagerWeak.lock();
+	if (!userApiManager) {
+		return;
+	}
+
+	const gateway::UserProperties userProperties{
+	    .userId = userInformation.userId,
+	    .email = userInformation.email,
+	    .userName = userInformation.username,
+	    .createdTime = userInformation.createdTime,
+	    .lastUpdatedTime = userInformation.lastUpdatedTime,
+	};
+
+	userApiManager->request(gateway::ApiRequest{
+	    .requestType = gateway::RequestType::CreateUser,
+	    .data = userProperties,
+	});
 }
 
 void ApiGatewayService::requestGetUserInformation(const std::string &userId)
