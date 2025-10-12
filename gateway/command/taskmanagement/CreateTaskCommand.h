@@ -1,5 +1,5 @@
 /**
- * @file CreateTaskCommand.h
+ * @file command/taskmanagement/CreateTaskCommand.h
  * @author trung.la
  * @date 09-13-2025
  * @brief Declaration of CreateTaskCommand class that handles creating tasks via the OpenAPI client.
@@ -13,7 +13,7 @@
 #include <QJsonObject>
 #include <memory>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>

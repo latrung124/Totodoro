@@ -5,9 +5,9 @@
  * @brief Implementation of GetTaskCommand class that handles retrieving a task via the OpenAPI client.
  */
 
-#include "GetTasksCommand.h"
+#include "command/taskmanagement/GetTasksCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 GetTasksCommand::GetTasksCommand(const QString& userId,
     const QString& groupId,

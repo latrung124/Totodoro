@@ -1,5 +1,5 @@
 /**
- * @file TaskManagementApiGatewayManager.h
+ * @file manager/TaskManagementApiGatewayManager.h
  * @author trung.la
  * @date 09-23-2025
  * @brief This file contains the declaration of the TaskManagementApiGatewayManager class.
@@ -10,7 +10,7 @@
 #include <map>
 #include <memory>
 
-#include "IApiGatewayManager.h"
+#include "manager/IApiGatewayManager.h"
 
 namespace gateway
 {

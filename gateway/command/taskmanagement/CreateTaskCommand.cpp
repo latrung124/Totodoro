@@ -5,7 +5,7 @@
  * @brief Command to create a new task via the Task Management API.
  */
 
-#include "CreateTaskCommand.h"
+#include "command/taskmanagement/CreateTaskCommand.h"
 
 #include <QDebug>
 #include <QJsonDocument>
@@ -14,7 +14,7 @@
 
 #include <OAITask_managementTask.h> // optional: if you need to inspect the model
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 
 CreateTaskCommand::CreateTaskCommand(const QString& groupId,

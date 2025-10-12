@@ -1,5 +1,5 @@
 /**
- * @file CreateTaskGroupCommand.h
+ * @file command/taskmanagement/CreateTaskGroupCommand.h
  * @author trung.la
  * @date 09-10-2025
  * @brief Command to create a new task group for a user.
@@ -11,7 +11,7 @@
 #include <QJsonObject>
 #include <memory>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>

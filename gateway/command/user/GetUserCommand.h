@@ -1,5 +1,5 @@
 /**
- * @file GetUserCommand.h
+ * @file command/user/GetUserCommand.h
  * @author trung.la
  * @date 09-17-2025
  * @brief Declaration of GetUserCommand class that handles retrieving a user via the OpenAPI client.
@@ -10,7 +10,7 @@
 #include <QJsonObject>
 #include <QNetworkReply>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUser_serviceGetUserResponse.h>

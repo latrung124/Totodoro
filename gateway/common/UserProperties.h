@@ -1,5 +1,5 @@
 /**
- * @file UserProperties.h
+ * @file common/UserProperties.h
  * @author trung.la
  * @date 09-22-2025
  * @brief This file contains the declaration of the UserProperties struct.

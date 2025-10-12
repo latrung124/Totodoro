@@ -1,5 +1,5 @@
 /**
- * @file PomodoroApiGatewayManager.h
+ * @file manager/PomodoroApiGatewayManager.h
  * @author trung.la
  * @date 09-24-2025
  * @brief This file contains the declaration of the PomodoroApiGatewayManager class.
@@ -10,7 +10,7 @@
 #include <map>
 #include <memory>
 
-#include "IApiGatewayManager.h"
+#include "manager/IApiGatewayManager.h"
 
 namespace gateway
 {

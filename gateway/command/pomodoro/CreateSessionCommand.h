@@ -1,5 +1,5 @@
 /**
- * @file CreateSessionCommand.h
+ * @file command/pomodoro/CreateSessionCommand.h
  * @author trung.la
  * @date 09-03-2025
  * @brief Command to create a Pomodoro session via the Pomodoro API.
@@ -10,8 +10,8 @@
 #include <QNetworkReply>
 #include <QJsonObject>
 
-#include "IApiCommand.h"
-#include "ApiClientFactory.h"
+#include "command/IApiCommand.h"
+#include "factory/ApiClientFactory.h"
 
 #include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoroServiceCreateSessionBody.h>

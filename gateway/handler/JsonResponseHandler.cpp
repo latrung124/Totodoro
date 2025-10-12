@@ -5,7 +5,7 @@
  * @brief Implementation of IResponseHandler for handling JSON responses.
  */
 
-#include "JsonResponseHandler.h"
+#include "handler/JsonResponseHandler.h"
 
 #include <QDebug>
 #include <QJsonObject>

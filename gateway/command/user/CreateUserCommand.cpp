@@ -5,9 +5,9 @@
  * @brief Implementation of CreateUserCommand class that handles creating a user via the OpenAPI client.
  */
 
-#include "CreateUserCommand.h"
+#include "command/user/CreateUserCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 CreateUserCommand::CreateUserCommand(const OAIUser_serviceCreateUserRequest& createUserRequest,
     const QString& baseUrl,

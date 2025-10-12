@@ -1,5 +1,5 @@
 /**
- * @file DeleteSessionCommand.h
+ * @file command/pomodoro/DeleteSessionCommand.h
  * @author trung.la
  * @date 09-07-2025
  * @brief Command to delete a pomodoro session.
@@ -9,7 +9,7 @@
 
 #include <QNetworkReply>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoro_serviceDeleteSessionResponse.h>

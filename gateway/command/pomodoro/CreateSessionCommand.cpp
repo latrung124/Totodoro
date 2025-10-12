@@ -5,11 +5,11 @@
  * @brief Implementation of CreateSessionCommand to create a Pomodoro session via the Pomodoro API.
  */
 
-#include "CreateSessionCommand.h"
+#include "command/pomodoro/CreateSessionCommand.h"
 
 #include <QDebug>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 CreateSessionCommand::CreateSessionCommand(const QString& userId, 
     const OAIPomodoroServiceCreateSessionBody& body,

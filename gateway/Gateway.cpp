@@ -9,10 +9,10 @@
 
 #include <QDebug>
 
-#include "CommonDefine.h"
-#include "PomodoroOpenApiController.h"
-#include "AsyncRequestProcessor.h"
-#include "ApiGatewayManagerFactory.h"
+#include "common/CommonDefine.h"
+#include "controller/PomodoroOpenApiController.h"
+#include "processor/AsyncRequestProcessor.h"
+#include "factory/ApiGatewayManagerFactory.h"
 
 namespace gateway
 {

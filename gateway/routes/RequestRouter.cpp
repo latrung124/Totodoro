@@ -5,9 +5,9 @@
  * @brief Implementation file for RequestRouter class that manages the registration of all API routes.
  */
 
-#include "RequestRouter.h"
+#include "routes/RequestRouter.h"
 
-#include "IRouteHandler.h"
+#include "routes/IRouteHandler.h"
 
 void RequestRouter::addHandler(IRouteHandlerPtr handler)
 {

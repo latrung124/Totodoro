@@ -5,9 +5,9 @@
  * @brief Command to get a Pomodoro session by ID via the Pomodoro API.
  */
 
-#include "GetSessionByIdCommand.h"
+#include "command/pomodoro/GetSessionByIdCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 GetSessionByIdCommand::GetSessionByIdCommand(
     const QString& sessionId,

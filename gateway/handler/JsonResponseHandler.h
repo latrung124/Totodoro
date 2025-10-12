@@ -1,5 +1,5 @@
 /**
- * @file JsonResponseHandler.h
+ * @file handler/JsonResponseHandler.h
  * @author trung.la
  * @date 09-03-2025
  * @brief Implementation of IResponseHandler for handling JSON responses.
@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "IResponseHandler.h"
+#include "handler/IResponseHandler.h"
 
 #include <QJsonArray>
 #include <QVariantList>

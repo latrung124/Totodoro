@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the TaskProperties struct methods.
  */
 
-#include "TaskProperties.h"
+#include "common/TaskProperties.h"
 
 #include <nlohmann/json.hpp>
 

@@ -5,9 +5,9 @@
  * @brief Implementation of GetSettingsCommand class that handles fetching user settings via the OpenAPI client
  */
 
-#include "GetSettingsCommand.h"
+#include "command/user/GetSettingsCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 GetSettingsCommand::GetSettingsCommand(
     const QString& userId,

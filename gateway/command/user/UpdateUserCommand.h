@@ -1,5 +1,5 @@
 /**
- * @file UpdateUserCommand.h
+ * @file command/user/UpdateUserCommand.h
  * @author trung.la
  * @date 09-17-2025
  * @brief Declaration of UpdateUserCommand class that handles updating a user via the OpenAPI client.
@@ -9,7 +9,7 @@
 
 #include <QJsonObject>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUserServiceUpdateUserBody.h>

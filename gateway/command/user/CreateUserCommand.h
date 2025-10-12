@@ -1,5 +1,5 @@
 /**
- * @file CreateUserCommand.h
+ * @file command/user/CreateUserCommand.h
  * @author trung.la
  * @date 09-15-2025
  * @brief Declaration of CreateUserCommand class that handles creating a user via the OpenAPI client.
@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUser_serviceCreateUserRequest.h>

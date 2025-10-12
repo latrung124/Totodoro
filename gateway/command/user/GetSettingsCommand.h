@@ -1,5 +1,5 @@
 /**
- * @file GetSettingsCommand.h
+ * @file command/user/GetSettingsCommand.h
  * @author trung.la
  * @date 09-18-2025
  * @brief Declaration of GetSettingsCommand class that handles fetching user settings via the OpenAPI client.
@@ -10,7 +10,7 @@
 #include <QJsonObject>
 #include <QNetworkReply>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUser_serviceGetSettingsResponse.h>

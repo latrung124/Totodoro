@@ -5,14 +5,14 @@
  * @brief Implementation of AsyncRequestProcessor for processing asynchronous API commands.
  */
 
-#include "AsyncRequestProcessor.h"
+#include "processor/AsyncRequestProcessor.h"
 
 #include <QEventLoop>
 #include <QTimer>
 #include <QDebug>
 
-#include "IApiCommand.h"
-#include "IResponseHandler.h"
+#include "command/IApiCommand.h"
+#include "handler/IResponseHandler.h"
 
 bool AsyncRequestProcessor::processCommand(IApiCommandPtr command, int timeoutMs)
 {

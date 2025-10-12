@@ -5,9 +5,9 @@
  * @brief Implementation of UpdateTaskCommand class that handles updating a task via the OpenAPI client.
  */
 
-#include "UpdateTaskCommand.h"
+#include "command/taskmanagement/UpdateTaskCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 UpdateTaskCommand::UpdateTaskCommand(const OAITaskManagementServiceUpdateTaskBody& updateTaskBody,
     const QString& taskId,

@@ -5,21 +5,21 @@
  * @brief Route handler for task management-related endpoints.
  */
 
-#include "TaskManagementRouteHandler.h"
+#include "routes/TaskManagementRouteHandler.h"
 
 #include <QString>
 
-#include "JsonResponseHandler.h"
-#include "AsyncRequestProcessor.h"
+#include "handler/JsonResponseHandler.h"
+#include "processor/AsyncRequestProcessor.h"
 
-#include "CreateTaskCommand.h"
-#include "GetTasksCommand.h"
-#include "UpdateTaskCommand.h"
-#include "DeleteTaskCommand.h"
-#include "CreateTaskGroupCommand.h"
-#include "GetTaskGroupsCommand.h"
-#include "UpdateTaskGroupCommand.h"
-#include "DeleteTaskGroupCommand.h"
+#include "command/taskmanagement/CreateTaskCommand.h"
+#include "command/taskmanagement/GetTasksCommand.h"
+#include "command/taskmanagement/UpdateTaskCommand.h"
+#include "command/taskmanagement/DeleteTaskCommand.h"
+#include "command/taskmanagement/CreateTaskGroupCommand.h"
+#include "command/taskmanagement/GetTaskGroupsCommand.h"
+#include "command/taskmanagement/UpdateTaskGroupCommand.h"
+#include "command/taskmanagement/DeleteTaskGroupCommand.h"
 
 TaskManagementRouteHandler::TaskManagementRouteHandler(AsyncRequestProcessorPtr requestProcessor,
                                                        const std::string& baseUrl)

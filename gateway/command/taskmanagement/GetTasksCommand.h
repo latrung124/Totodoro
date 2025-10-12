@@ -13,8 +13,8 @@
 #include <QVariantMap>
 #include <memory>
 
-#include "IApiCommand.h"
-#include "ApiClientFactory.h"
+#include "command/IApiCommand.h"
+#include "factory/ApiClientFactory.h"
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>

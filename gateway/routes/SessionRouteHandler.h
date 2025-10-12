@@ -1,5 +1,5 @@
 /**
- * @file SessionRouteHandler.h
+ * @file routes/SessionRouteHandler.h
  * @author trung.la
  * @date 09-05-2025
  * @brief Route handler for Pomodoro session-related endpoints.
@@ -12,9 +12,9 @@
 #include <string>
 #include <vector>
 
-#include "IRouteHandler.h"
+#include "routes/IRouteHandler.h"
 
-#include "AsyncRequestProcessor.h"
+#include "processor/AsyncRequestProcessor.h"
 
 class SessionRouteHandler : public IRouteHandler
 {

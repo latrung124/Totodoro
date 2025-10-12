@@ -5,11 +5,11 @@
  * @brief Implementation of UpdateSettingsCommand class that handles updating user settings via the OpenAPI client
  */
 
-#include "UpdateSettingsCommand.h"
+#include "command/user/UpdateSettingsCommand.h"
 
 #include <QDebug>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 UpdateSettingsCommand::UpdateSettingsCommand(const OAIUserServiceUpdateSettingsBody& updateSettingsBody,
                                             const QString& userId,

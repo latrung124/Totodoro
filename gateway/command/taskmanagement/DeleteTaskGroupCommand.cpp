@@ -5,12 +5,12 @@
  * @brief Implementation of DeleteTaskGroupCommand to delete a task group via the OpenAPI client.
  */
 
-#include "DeleteTaskGroupCommand.h"
+#include "command/taskmanagement/DeleteTaskGroupCommand.h"
 
 #include <QDebug>
 #include <QJsonObject>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,
     const QString& baseUrl,

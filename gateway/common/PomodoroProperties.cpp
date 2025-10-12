@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the PomodoroProperties struct.
  */
 
-#include "PomodoroProperties.h"
+#include "common/PomodoroProperties.h"
 
 #include <nlohmann/json.hpp>
 

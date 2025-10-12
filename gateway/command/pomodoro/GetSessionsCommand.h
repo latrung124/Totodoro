@@ -1,5 +1,5 @@
 /**
- * @file GetSessionsCommand.h
+ * @file command/pomodoro/GetSessionsCommand.h
  * @author trung.la
  * @date 09-04-2025
  * @brief Command to get all Pomodoro sessions for a user via the Pomodoro API.
@@ -10,7 +10,7 @@
 #include <QList>
 #include <QVariantMap>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIPomodoroServiceApi.h>
 #include "OAIPomodoro_serviceGetSessionsResponse.h"

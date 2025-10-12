@@ -12,7 +12,7 @@
 #include <QObject>
 #include <QString>
 
-#include "CommonDefine.h"
+#include "common/CommonDefine.h"
 
 class ApiClientFactory
 {

@@ -1,5 +1,5 @@
 /**
- * @file ApiCommandFactory.h
+ * @file factory/ApiCommandFactory.h
  * @author trung.la
  * @date 09-28-2025
  * @brief Factory class for creating API command instances.
@@ -12,7 +12,7 @@
 #include <type_traits>
 #include <concepts>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 class ApiCommandFactory
 {

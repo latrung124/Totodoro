@@ -1,5 +1,5 @@
 /**
- * @file TaskProperties.h
+ * @file common/TaskProperties.h
  * @author trung.la
  * @date 09-23-2025
  * @brief This file contains the definition of the TaskProperties struct.

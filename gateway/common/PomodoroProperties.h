@@ -1,5 +1,5 @@
 /**
- * @file PomodoroProperties.h
+ * @file common/PomodoroProperties.h
  * @author trung.la
  * @date 09-24-2025
  * @brief This file contains the declaration of the PomodoroProperties struct.

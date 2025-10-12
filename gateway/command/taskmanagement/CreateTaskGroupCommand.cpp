@@ -5,7 +5,7 @@
  * @brief Command to create a new task group for a user.
  */
 
-#include "CreateTaskGroupCommand.h"
+#include "command/taskmanagement/CreateTaskGroupCommand.h"
 
 #include <QDebug>
 #include <QJsonDocument>
@@ -14,7 +14,7 @@
 
 #include <OAITask_managementTaskGroup.h> // if your response has a model inside
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 using namespace OpenAPI;
 

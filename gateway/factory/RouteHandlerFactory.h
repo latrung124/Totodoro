@@ -1,5 +1,5 @@
 /**
- * @file RouteHandlerFactory.h
+ * @file factory/RouteHandlerFactory.h
  * @author trung.la
  * @date 09-07-2025
  * @brief Header file for RouteHandlerFactory class that creates route handlers for the gateway module.
@@ -10,7 +10,7 @@
 #include <memory>
 #include <string>
 
-#include "CommonDefine.h"
+#include "common/CommonDefine.h"
 
 class IRouteHandler;
 class AsyncRequestProcessor;

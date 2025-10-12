@@ -5,20 +5,20 @@
  * @brief This file contains the implementation of the UserApiGatewayManager class.
  */
 
-#include "UserApiGatewayManager.h"
+#include "manager/UserApiGatewayManager.h"
 
 #include <QDebug>
 
-#include "CommonDefine.h"
-#include "UserProperties.h"
-#include "ApiResponse.h"
-#include "ApiCommandFactory.h"
-#include "JsonResponseHandler.h"
-#include "CreateUserCommand.h"
-#include "GetUserCommand.h"
-#include "UpdateUserCommand.h"
-#include "GetSettingsCommand.h"
-#include "UpdateSettingsCommand.h"
+#include "common/CommonDefine.h"
+#include "common/UserProperties.h"
+#include "common/ApiResponse.h"
+#include "factory/ApiCommandFactory.h"
+#include "handler/JsonResponseHandler.h"
+#include "command/user/CreateUserCommand.h"
+#include "command/user/GetUserCommand.h"
+#include "command/user/UpdateUserCommand.h"
+#include "command/user/GetSettingsCommand.h"
+#include "command/user/UpdateSettingsCommand.h"
 
 UserApiGatewayManager::UserApiGatewayManager(QObject* parent)
     : IApiGatewayManager(parent), m_responseHandler(std::make_shared<JsonResponseHandler>())

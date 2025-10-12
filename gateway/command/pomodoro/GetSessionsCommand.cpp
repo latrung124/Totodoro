@@ -5,14 +5,14 @@
  * @brief Command to get all Pomodoro sessions for a user via the Pomodoro API.
  */
 
-#include "GetSessionsCommand.h"
+#include "command/pomodoro/GetSessionsCommand.h"
 
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QVariantList>
 #include <QJsonDocument>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 GetSessionsCommand::GetSessionsCommand(const QString& userId,
     const QString& taskId,

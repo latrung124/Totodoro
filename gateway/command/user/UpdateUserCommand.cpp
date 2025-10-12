@@ -5,11 +5,11 @@
  * @brief Implementation of UpdateUserCommand class that handles updating a user via the OpenAPI client.
  */
 
-#include "UpdateUserCommand.h"
+#include "command/user/UpdateUserCommand.h"
 
 #include <QDebug>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 UpdateUserCommand::UpdateUserCommand(const OAIUserServiceUpdateUserBody& updateUserBody,
                                     const QString& userId,

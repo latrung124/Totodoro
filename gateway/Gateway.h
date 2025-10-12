@@ -10,7 +10,7 @@
 #include <memory>
 #include <map>
 
-#include "CommonDefine.h"
+#include "common/CommonDefine.h"
 
 class IApiGatewayManager;
 

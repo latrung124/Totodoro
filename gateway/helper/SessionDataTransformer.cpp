@@ -5,9 +5,9 @@
  * @brief Session data transformer helper
  */
 
-#include "SessionDataTransformer.h"
+#include "helper/SessionDataTransformer.h"
 
-#include "TimeTransformer.h"
+#include "helper/TimeTransformer.h"
 
 namespace gateway {
 

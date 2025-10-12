@@ -1,5 +1,5 @@
 /**
- * @file GetSessionByIdCommand.h
+ * @file command/pomodoro/GetSessionByIdCommand.h
  * @author trung.la
  * @date 09-03-2025
  * @brief Command to get a Pomodoro session by ID via the Pomodoro API.
@@ -10,7 +10,7 @@
 #include <QJsonObject>
 #include <QNetworkReply>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoro_serviceGetSessionByIdResponse.h>

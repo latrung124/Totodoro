@@ -1,11 +1,11 @@
 /**
- * @file UserProperties.h
+ * @file common/UserProperties.h
  * @author trung.la
  * @date 10-02-2025
  * @brief This file contains the declaration of the UserProperties struct.
  */
 
-#include "UserProperties.h"
+#include "common/UserProperties.h"
 
 #include <nlohmann/json.hpp>
 

@@ -1,5 +1,5 @@
 /**
- * @file DeleteTaskCommand.h
+ * @file command/taskmanagement/DeleteTaskCommand.h
  * @author trung.la
  * @date 09-14-2025
  * @brief DeleteTaskCommand class definition
@@ -9,7 +9,7 @@
 
 #include <QNetworkReply>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAITaskManagementServiceApi.h>
 #include <OAITask_managementDeleteTaskResponse.h>

@@ -3,6 +3,7 @@ project(gateway)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
 
 add_definitions(-DDB_SOURCE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/databases")
 
@@ -11,6 +12,7 @@ find_package(httplib REQUIRED)
 find_package(SQLiteCpp REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(nlohmann_json REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core Network)
 
 add_subdirectory(generated/pomodoro_service.swagger_client/client)
 add_subdirectory(generated/user_service.swagger_client/client)
@@ -104,46 +106,42 @@ set(GATEWAY_SOURCES
     controller/PomodoroOpenApiController.cpp
     Gateway.cpp)
 
-add_library(gateway STATIC ${GATEWAY_SOURCES} ${GATEWAY_HEADERS})
+add_library(gateway STATIC ${GATEWAY_SOURCES})
+
+target_sources(gateway PRIVATE ${GATEWAY_HEADERS})
 
 target_include_directories(
   gateway
-  PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
-  PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/connection
-    ${CMAKE_CURRENT_SOURCE_DIR}/controller
-    ${CMAKE_CURRENT_SOURCE_DIR}/config
-    ${CMAKE_CURRENT_SOURCE_DIR}/common
-    ${CMAKE_CURRENT_SOURCE_DIR}/helper
-    ${CMAKE_CURRENT_SOURCE_DIR}/command
-    ${CMAKE_CURRENT_SOURCE_DIR}/command/pomodoro
-    ${CMAKE_CURRENT_SOURCE_DIR}/command/user
-    ${CMAKE_CURRENT_SOURCE_DIR}/command/taskmanagement
-    ${CMAKE_CURRENT_SOURCE_DIR}/manager
-    ${CMAKE_CURRENT_SOURCE_DIR}/factory
-    ${CMAKE_CURRENT_SOURCE_DIR}/processor
-    ${CMAKE_CURRENT_SOURCE_DIR}/handler
-    ${CMAKE_CURRENT_SOURCE_DIR}/routes
-    ${CMAKE_CURRENT_SOURCE_DIR}/generated/pomodoro_service.swagger_client/client
-    ${CMAKE_CURRENT_SOURCE_DIR}/generated/user_service.swagger_client/client
-    ${CMAKE_CURRENT_SOURCE_DIR}/generated/task_management_service.swagger_client/client
-)
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+         $<INSTALL_INTERFACE:include>
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(
   gateway
-  PUBLIC Qt6::Core
-         Qt6::Network
-         yaml-cpp
-         httplib::httplib
-         SQLiteCpp
+  PUBLIC Qt6::Core Qt6::Network yaml-cpp httplib::httplib SQLiteCpp
          nlohmann_json::nlohmann_json
-         PomodoroQtOpenAPIClient
-         UserQtOpenAPIClient
-         TaskManagementQtOpenAPIClient)
+  PRIVATE PomodoroQtOpenAPIClient UserQtOpenAPIClient
+          TaskManagementQtOpenAPIClient)
 
 include(GNUInstallDirs)
 install(
   TARGETS gateway
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+  EXPORT gateway-targets
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} # For static libs
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} # For shared libs
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} # For executables
+)
+
+install(FILES ${GATEWAY_HEADERS} DESTINATION include/gateway)
+
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+  Config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/gatewayConfig.cmake"
+  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/gateway")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gatewayConfig.cmake"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/gateway")
+install(
+  EXPORT gateway-targets
+  FILE gateway-targets.cmake
+  NAMESPACE gateway::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/gateway)

@@ -5,12 +5,12 @@
  * @brief Command to delete a pomodoro session.
  */
 
-#include "DeleteSessionCommand.h"
+#include "command/pomodoro/DeleteSessionCommand.h"
 
 #include <QDebug>
 #include <QJsonObject>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 DeleteSessionCommand::DeleteSessionCommand(const QString& sessionId,
     const QString& baseUrl,

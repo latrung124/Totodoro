@@ -5,18 +5,18 @@
  * @brief Route handler for Pomodoro session-related endpoints.
  */
 
-#include "SessionRouteHandler.h"
+#include "routes/SessionRouteHandler.h"
 
 #include <QString>
 
-#include "JsonResponseHandler.h"
-#include "AsyncRequestProcessor.h"
+#include "handler/JsonResponseHandler.h"
+#include "processor/AsyncRequestProcessor.h"
 
-#include "CreateSessionCommand.h"
-#include "GetSessionByIdCommand.h"
-#include "UpdateSessionCommand.h"
-#include "GetSessionsCommand.h"
-#include "DeleteSessionCommand.h"
+#include "command/pomodoro/CreateSessionCommand.h"
+#include "command/pomodoro/GetSessionByIdCommand.h"
+#include "command/pomodoro/UpdateSessionCommand.h"
+#include "command/pomodoro/GetSessionsCommand.h"
+#include "command/pomodoro/DeleteSessionCommand.h"
 
 SessionRouteHandler::SessionRouteHandler(AsyncRequestProcessorPtr requestProcessor,
                                          const std::string& baseUrl)

@@ -5,24 +5,24 @@
  * @brief This file contains the implementation of the TaskManagementApiGatewayManager class.
  */
 
-#include "TaskManagementApiGatewayManager.h"
+#include "manager/TaskManagementApiGatewayManager.h"
 
 #include <QDebug>
 
-#include "CommonDefine.h"
-#include "TaskProperties.h"
-#include "ApiResponse.h"
+#include "common/CommonDefine.h"
+#include "common/TaskProperties.h"
+#include "common/ApiResponse.h"
 
-#include "ApiCommandFactory.h"
-#include "JsonResponseHandler.h"
-#include "CreateTaskCommand.h"
-#include "GetTasksCommand.h"
-#include "UpdateTaskCommand.h"
-#include "DeleteTaskCommand.h"
-#include "CreateTaskGroupCommand.h"
-#include "GetTaskGroupsCommand.h"
-#include "UpdateTaskGroupCommand.h"
-#include "DeleteTaskGroupCommand.h"
+#include "factory/ApiCommandFactory.h"
+#include "handler/JsonResponseHandler.h"
+#include "command/taskmanagement/CreateTaskCommand.h"
+#include "command/taskmanagement/GetTasksCommand.h"
+#include "command/taskmanagement/UpdateTaskCommand.h"
+#include "command/taskmanagement/DeleteTaskCommand.h"
+#include "command/taskmanagement/CreateTaskGroupCommand.h"
+#include "command/taskmanagement/GetTaskGroupsCommand.h"
+#include "command/taskmanagement/UpdateTaskGroupCommand.h"
+#include "command/taskmanagement/DeleteTaskGroupCommand.h"
 
 TaskManagementApiGatewayManager::TaskManagementApiGatewayManager(QObject* parent)
     : IApiGatewayManager(parent), m_responseHandler(std::make_shared<JsonResponseHandler>())

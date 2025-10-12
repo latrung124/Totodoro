@@ -5,11 +5,11 @@
  * @brief Implementation file for RouteHandlerFactory class that creates route handlers for the gateway module.
  */
 
-#include "RouteHandlerFactory.h"
+#include "factory/RouteHandlerFactory.h"
 
-#include "SessionRouteHandler.h"
-#include "UserRouteHandler.h"
-#include "TaskManagementRouteHandler.h"
+#include "routes/SessionRouteHandler.h"
+#include "routes/UserRouteHandler.h"
+#include "routes/TaskManagementRouteHandler.h"
 
 std::shared_ptr<IRouteHandler> RouteHandlerFactory::createHandler(
     gateway::RouteType handlerType,

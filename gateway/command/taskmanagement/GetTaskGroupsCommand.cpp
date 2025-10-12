@@ -5,9 +5,9 @@
  * @brief Implementation of GetTaskGroupsCommand to retrieve task groups via the OpenAPI client.
  */
 
-#include "GetTaskGroupsCommand.h"
+#include "command/taskmanagement/GetTaskGroupsCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 GetTaskGroupsCommand::GetTaskGroupsCommand(const QString& userId,
                                                const QString& baseUrl,

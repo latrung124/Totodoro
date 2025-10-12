@@ -1,5 +1,5 @@
 /**
- * @file ApiResponse.h
+ * @file common/ApiResponse.h
  * @author trung.la
  * @date 09-22-2025
  * @brief This file contains the declaration of the ApiResponse struct.
@@ -11,11 +11,11 @@
 #include <string>
 #include <variant>
 
-#include "UserProperties.h"
-#include "TaskProperties.h"
-#include "PomodoroProperties.h"
+#include "common/UserProperties.h"
+#include "common/TaskProperties.h"
+#include "common/PomodoroProperties.h"
 
-#include "CommonDefine.h"
+#include "common/CommonDefine.h"
 
 namespace gateway
 {

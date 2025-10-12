@@ -4,21 +4,21 @@
  * @brief Route handler for user-related endpoints.
  */
 
-#include "UserRouteHandler.h"
+#include "routes/UserRouteHandler.h"
 
 #include <QString>
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonArray>
 
-#include "JsonResponseHandler.h"
-#include "AsyncRequestProcessor.h"
+#include "handler/JsonResponseHandler.h"
+#include "processor/AsyncRequestProcessor.h"
 
-#include "CreateUserCommand.h"
-#include "GetUserCommand.h"
-#include "UpdateUserCommand.h"
-#include "GetSettingsCommand.h"
-#include "UpdateSettingsCommand.h"
+#include "command/user/CreateUserCommand.h"
+#include "command/user/GetUserCommand.h"
+#include "command/user/UpdateUserCommand.h"
+#include "command/user/GetSettingsCommand.h"
+#include "command/user/UpdateSettingsCommand.h"
 
 UserRouteHandler::UserRouteHandler(AsyncRequestProcessorPtr requestProcessor,
                                    const std::string& baseUrl)

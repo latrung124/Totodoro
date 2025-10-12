@@ -1,5 +1,5 @@
 /**
- * @file UpdateSettingsCommand.h
+ * @file command/user/UpdateSettingsCommand.h
  * @author trung.la
  * @date 09-18-2025
  * @brief Declaration of UpdateSettingsCommand class that handles updating user settings via the OpenAPI client.
@@ -9,7 +9,7 @@
 
 #include <QJsonObject>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIUserServiceApi.h>
 #include <OAIUserServiceUpdateSettingsBody.h>

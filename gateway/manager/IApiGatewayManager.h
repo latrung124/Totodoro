@@ -1,5 +1,5 @@
 /**
- * @file IApiGatewayManager.h
+ * @file manager/IApiGatewayManager.h
  * @author trung.la
  * @date 09-22-2025
  * @brief This file contains the declaration of the IApiGatewayManager interface.

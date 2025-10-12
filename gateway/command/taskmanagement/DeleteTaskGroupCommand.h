@@ -1,5 +1,5 @@
 /**
- * @file DeleteTaskGroupCommand.h
+ * @file command/taskmanagement/DeleteTaskGroupCommand.h
  * @author trung.la
  * @date 09-11-2025
  * @brief Header file for DeleteTaskGroupCommand class that handles deleting a task group via the OpenAPI client.
@@ -9,7 +9,7 @@
 
 #include <QNetworkReply>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAITaskManagementServiceApi.h>
 #include <OAITask_managementDeleteTaskGroupResponse.h>

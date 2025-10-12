@@ -5,11 +5,11 @@
  * @brief Implementation of UpdateTaskGroupCommand to update a task group via the OpenAPI client.
  */
 
-#include "UpdateTaskGroupCommand.h"
+#include "command/taskmanagement/UpdateTaskGroupCommand.h"
 
 #include <QDebug>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 UpdateTaskGroupCommand::UpdateTaskGroupCommand(const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
                                                 const QString& taskGroupId,

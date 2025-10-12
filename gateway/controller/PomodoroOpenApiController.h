@@ -1,5 +1,5 @@
 /**
- * File: PomodoroOpenApiController.h
+ * File: controller/PomodoroOpenApiController.h
  * Author: trung.la
  * Date: 09-02-2025
  * Description: Header file for PomodoroOpenApiController class that handles Pomodoro-related API endpoints.
@@ -12,7 +12,7 @@
 
 #include <httplib.h>
 
-#include "RequestRouter.h"
+#include "routes/RequestRouter.h"
 
 class AsyncRequestProcessor;
 

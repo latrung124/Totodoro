@@ -1,5 +1,5 @@
 /**
- * @file UpdateSessionCommand.h
+ * @file command/pomodoro/UpdateSessionCommand.h
  * @author trung.la
  * @date 09-04-2025
  * @brief Header file for UpdateSessionCommand class that handles updating Pomodoro sessions via the OpenAPI client.
@@ -9,7 +9,7 @@
 
 #include <QJsonObject>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoroServiceUpdateSessionBody.h>

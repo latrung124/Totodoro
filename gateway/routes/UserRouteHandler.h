@@ -1,5 +1,5 @@
 /**
- * @file UserRouteHandler.h
+ * @file routes/UserRouteHandler.h
  * @author trung.la
  * @date 09-21-2025
  * @brief Route handler for user-related endpoints.
@@ -12,9 +12,9 @@
 #include <string>
 #include <vector>
 
-#include "IRouteHandler.h"
+#include "routes/IRouteHandler.h"
 
-#include "AsyncRequestProcessor.h"
+#include "processor/AsyncRequestProcessor.h"
 
 class UserRouteHandler : public IRouteHandler
 {

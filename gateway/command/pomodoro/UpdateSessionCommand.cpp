@@ -5,11 +5,11 @@
  * @brief Implementation of UpdateSessionCommand class that handles updating Pomodoro sessions via the OpenAPI client.
  */
 
-#include "UpdateSessionCommand.h"
+#include "command/pomodoro/UpdateSessionCommand.h"
 
 #include <QDebug>
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 UpdateSessionCommand::UpdateSessionCommand(const OAIPomodoroServiceUpdateSessionBody& updateSessionBody,
                                            const QString& sessionId,

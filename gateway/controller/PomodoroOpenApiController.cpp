@@ -5,11 +5,11 @@
  * Description: Implementation file for PomodoroOpenApiController class that handles Pomodoro-related API endpoints.
  */
 
-#include "PomodoroOpenApiController.h"
+#include "controller/PomodoroOpenApiController.h"
 
 #include <QDebug>
 
-#include "RouteHandlerFactory.h"
+#include "factory/RouteHandlerFactory.h"
 
 namespace gateway {
 

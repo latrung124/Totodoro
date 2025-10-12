@@ -5,12 +5,12 @@
  * @brief This file contains the implementation of the ApiGatewayManagerFactory class.
  */
 
-#include "ApiGatewayManagerFactory.h"
+#include "factory/ApiGatewayManagerFactory.h"
 
-#include "CommonDefine.h"
-#include "PomodoroApiGatewayManager.h"
-#include "TaskManagementApiGatewayManager.h"
-#include "UserApiGatewayManager.h"
+#include "common/CommonDefine.h"
+#include "manager/PomodoroApiGatewayManager.h"
+#include "manager/TaskManagementApiGatewayManager.h"
+#include "manager/UserApiGatewayManager.h"
 
 std::shared_ptr<IApiGatewayManager> ApiGatewayManagerFactory::createManager(gateway::RouteType managerType) {
     switch (managerType) {

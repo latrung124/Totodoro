@@ -5,9 +5,9 @@
  * @brief Implementation of DeleteTaskCommand class that handles deleting a task via the OpenAPI client.
  */
 
-#include "DeleteTaskCommand.h"
+#include "command/taskmanagement/DeleteTaskCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 DeleteTaskCommand::DeleteTaskCommand(const QString& taskId,
     const QString& baseUrl,

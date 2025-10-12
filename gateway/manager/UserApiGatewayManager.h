@@ -1,5 +1,5 @@
 /**
- * @file UserApiGatewayManager.h
+ * @file manager/UserApiGatewayManager.h
  * @author trung.la
  * @date 09-22-2025
  * @brief This file contains the declaration of the UserApiGatewayManager class.
@@ -9,7 +9,7 @@
 
 #include <map>
 
-#include "IApiGatewayManager.h"
+#include "manager/IApiGatewayManager.h"
 
 namespace gateway
 {

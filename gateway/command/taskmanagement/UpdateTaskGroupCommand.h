@@ -1,5 +1,5 @@
 /**
- * @file UpdateTaskGroupCommand.h
+ * @file command/taskmanagement/UpdateTaskGroupCommand.h
  * @author trung.la
  * @date 09-11-2025
  * @brief Header file for UpdateTaskGroupCommand class that handles updating a task group via the OpenAPI client.
@@ -9,7 +9,7 @@
 
 #include <QJsonObject>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 #include <OAITaskManagementServiceApi.h>
 #include <OAITaskManagementServiceUpdateTaskGroupBody.h>

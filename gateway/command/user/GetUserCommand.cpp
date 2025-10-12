@@ -5,9 +5,9 @@
  * @brief Implementation of GetUserCommand class that handles retrieving a user via the OpenAPI client
  */
 
-#include "GetUserCommand.h"
+#include "command/user/GetUserCommand.h"
 
-#include "ApiClientFactory.h"
+#include "factory/ApiClientFactory.h"
 
 GetUserCommand::GetUserCommand(
     const QString& userId,

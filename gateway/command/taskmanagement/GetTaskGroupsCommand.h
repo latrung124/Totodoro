@@ -1,5 +1,5 @@
 /**
- * @file GetTaskGroupsCommand.h
+ * @file command/taskmanagement/GetTaskGroupsCommand.h
  * @author trung.la
  * @date 09-11-2025
  * @brief Header file for GetTaskGroupsCommand class that handles retrieving task groups via the OpenAPI client.
@@ -13,7 +13,7 @@
 #include <QVariantMap>
 #include <memory>
 
-#include "IApiCommand.h"
+#include "command/IApiCommand.h"
 
 // Generated client types
 #include <OAITaskManagementServiceApi.h>

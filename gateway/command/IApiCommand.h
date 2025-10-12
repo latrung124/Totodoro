@@ -1,5 +1,5 @@
 /**
- * @file IApiCommand.h
+ * @file command/IApiCommand.h
  * @author trung.la
  * @date 09-03-2025
  * @brief Interface for API command classes.
@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "IResponseHandler.h"
+#include "handler/IResponseHandler.h"
 
 #include <QObject>
 

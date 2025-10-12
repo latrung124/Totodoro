@@ -1,5 +1,5 @@
 /**
- * @file IResponseHandler.h
+ * @file handler/IResponseHandler.h
  * @author trung.la
  * @date 09-03-2025
  * @brief Interface for handling API responses.
