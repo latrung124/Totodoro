@@ -8,23 +8,14 @@
 #ifndef API_GATEWAY_SERVICE_H
 #define API_GATEWAY_SERVICE_H
 
-#include <memory>
-
 #include <ApiGatewayServiceUtils.h>
 #include <IApiGatewayService.h>
-
-namespace gateway {
-
-class Gateway;
-
-} // namespace gateway
 
 class APIGATEWAY_SERVICE_API ApiGatewayService : public IApiGatewayService
 {
 public:
 	using Information = apigateway_service::utils::user::Information;
 	using Settings = apigateway_service::utils::user::Settings;
-	using GatewayUPtr = std::unique_ptr<gateway::Gateway>;
 
 	ApiGatewayService();
 	~ApiGatewayService() override;
@@ -55,7 +46,6 @@ public:
 
 private:
 	std::vector<IServiceListener *> m_listeners; // TODO: change to map for faster access the listener
-	GatewayUPtr m_gateway;
 };
 
 #endif // API_GATEWAY_SERVICE_H

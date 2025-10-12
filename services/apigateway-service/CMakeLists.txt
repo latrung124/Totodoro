@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 project(ApiGatewayService LANGUAGES CXX)
 
-add_subdirectory(gateway)
-
 set(APIGATEWAY_SERVICE_SOURCES include/ApiGatewayService.h
                                src/ApiGatewayService.cpp)
 
@@ -18,10 +16,8 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/services/interfaces/export-headers>
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/services/interfaces/include/apigateway-service>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/gateway>
     $<INSTALL_INTERFACE:include/services/interfaces>)
 
-target_link_libraries(ApiGatewayService PRIVATE gateway)
 install(
   TARGETS ApiGatewayService
   EXPORT ServicesTargets
