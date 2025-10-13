@@ -18,6 +18,8 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include/services/interfaces>)
 
+target_link_libraries(ApiGatewayService PRIVATE gateway)
+
 install(
   TARGETS ApiGatewayService
   EXPORT ServicesTargets

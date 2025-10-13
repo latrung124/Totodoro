@@ -124,24 +124,36 @@ target_link_libraries(
           TaskManagementQtOpenAPIClient)
 
 include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
 install(
   TARGETS gateway
-  EXPORT gateway-targets
+  EXPORT GatewayTargets
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} # For static libs
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} # For shared libs
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} # For executables
-)
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/gateway)
 
 install(FILES ${GATEWAY_HEADERS} DESTINATION include/gateway)
 
-include(CMakePackageConfigHelpers)
-configure_package_config_file(
-  Config.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/gatewayConfig.cmake"
-  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/gateway")
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gatewayConfig.cmake"
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/gateway")
 install(
-  EXPORT gateway-targets
-  FILE gateway-targets.cmake
+  EXPORT GatewayTargets
+  FILE GatewayTargets.cmake
   NAMESPACE gateway::
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/gateway)
+
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/cmake/gateway)
+
+configure_package_config_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/gatewayConfig.cmake
+  INSTALL_DESTINATION ${ConfigPackageLocation})
+
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/gatewayConfigVersion.cmake
+  VERSION 1.0.0
+  COMPATIBILITY SameMajorVersion)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gatewayConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/gatewayConfigVersion.cmake
+        DESTINATION ${ConfigPackageLocation})
