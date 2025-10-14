@@ -9,7 +9,15 @@
 
 #include <QDebug>
 
+#include <OAIPomodoroServiceCreateSessionBody.h>
+#include <OAIPomodoro_serviceCreateSessionResponse.h>
+
 #include "factory/ApiClientFactory.h"
+
+namespace
+{
+    using namespace OpenAPI;
+}
 
 CreateSessionCommand::CreateSessionCommand(const QString& userId, 
     const OAIPomodoroServiceCreateSessionBody& body,
@@ -17,7 +25,7 @@ CreateSessionCommand::CreateSessionCommand(const QString& userId,
     QObject* parent)
     : IApiCommand(parent),
       mUserId(userId),
-      mBody(body),
+      mBody(std::make_unique<OAIPomodoroServiceCreateSessionBody>(body)),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
@@ -46,7 +54,7 @@ void CreateSessionCommand::execute()
     connect(mApiClient.get(), &OpenAPI::OAIPomodoroServiceApi::pomodoroServiceCreateSessionSignalError,
             this, &CreateSessionCommand::onSessionError);
 
-    mApiClient->pomodoroServiceCreateSession(mUserId, mBody);
+    mApiClient->pomodoroServiceCreateSession(mUserId, mBody ? *mBody : OAIPomodoroServiceCreateSessionBody());
 }
 
 void CreateSessionCommand::setResponseHandler(IResponseHandlerPtr handler)

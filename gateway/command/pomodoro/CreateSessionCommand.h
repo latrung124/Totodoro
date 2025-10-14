@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <memory>
 #include <QNetworkReply>
 #include <QJsonObject>
 
@@ -14,8 +15,13 @@
 #include "factory/ApiClientFactory.h"
 
 #include <OAIPomodoroServiceApi.h>
-#include <OAIPomodoroServiceCreateSessionBody.h>
-#include <OAIPomodoro_serviceCreateSessionResponse.h>
+
+namespace OpenAPI
+{
+    class OAIPomodoroServiceApi;
+    class OAIPomodoroServiceCreateSessionBody;
+    class OAIPomodoro_serviceCreateSessionResponse;
+} // namespace OpenAPI
 
 class CreateSessionCommand : public IApiCommand
 {
@@ -23,6 +29,9 @@ class CreateSessionCommand : public IApiCommand
 public:
     using OAIPomodoroServiceCreateSessionBody = OpenAPI::OAIPomodoroServiceCreateSessionBody;
     using OAIPomodoro_serviceCreateSessionResponse = OpenAPI::OAIPomodoro_serviceCreateSessionResponse;
+    using OAIPomodoroServiceCreateSessionBodyUPtr = std::unique_ptr<OAIPomodoroServiceCreateSessionBody>;
+    using OAIPomodoroServiceApiUPtr = std::unique_ptr<OpenAPI::OAIPomodoroServiceApi>;
+
     CreateSessionCommand(const QString& userId, 
         const OAIPomodoroServiceCreateSessionBody& body,
         const QString& baseUrl,
@@ -44,8 +53,8 @@ private slots:
 private:
     QString mUserId;
     QJsonObject mSession;
-    OAIPomodoroServiceCreateSessionBody mBody;
     QString mBaseUrl;
+    OAIPomodoroServiceCreateSessionBodyUPtr mBody;
+    OAIPomodoroServiceApiUPtr mApiClient;
     IResponseHandlerPtr mResponseHandler;
-    std::unique_ptr<OpenAPI::OAIPomodoroServiceApi> mApiClient;
 };
