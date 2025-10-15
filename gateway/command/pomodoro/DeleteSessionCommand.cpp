@@ -12,6 +12,9 @@
 
 #include "factory/ApiClientFactory.h"
 
+#include <OAIPomodoroServiceApi.h>
+#include <OAIPomodoro_serviceDeleteSessionResponse.h>
+
 DeleteSessionCommand::DeleteSessionCommand(const QString& sessionId,
     const QString& baseUrl,
     QObject* parent)

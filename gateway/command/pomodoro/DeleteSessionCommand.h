@@ -7,12 +7,16 @@
 
 #pragma once
 
+#include <memory>
 #include <QNetworkReply>
 
 #include "command/IApiCommand.h"
 
-#include <OAIPomodoroServiceApi.h>
-#include <OAIPomodoro_serviceDeleteSessionResponse.h>
+namespace OpenAPI
+{
+    class OAIPomodoroServiceApi;
+    class OAIPomodoro_serviceDeleteSessionResponse;
+} // namespace OpenAPI
 
 class DeleteSessionCommand : public IApiCommand
 {
