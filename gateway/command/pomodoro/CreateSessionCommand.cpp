@@ -9,6 +9,7 @@
 
 #include <QDebug>
 
+#include <OAIPomodoroServiceApi.h>
 #include <OAIPomodoroServiceCreateSessionBody.h>
 #include <OAIPomodoro_serviceCreateSessionResponse.h>
 

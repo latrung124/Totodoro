@@ -14,8 +14,6 @@
 #include "command/IApiCommand.h"
 #include "factory/ApiClientFactory.h"
 
-#include <OAIPomodoroServiceApi.h>
-
 namespace OpenAPI
 {
     class OAIPomodoroServiceApi;
