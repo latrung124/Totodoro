@@ -33,6 +33,8 @@ CreateSessionCommand::CreateSessionCommand(const QString& userId,
 {
 }
 
+CreateSessionCommand::~CreateSessionCommand() = default;
+
 void CreateSessionCommand::execute()
 {
     if (mApiClient) {

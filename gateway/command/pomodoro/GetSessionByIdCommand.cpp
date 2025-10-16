@@ -7,6 +7,9 @@
 
 #include "command/pomodoro/GetSessionByIdCommand.h"
 
+#include <OAIPomodoroServiceApi.h>
+#include <OAIPomodoro_serviceGetSessionByIdResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 GetSessionByIdCommand::GetSessionByIdCommand(
@@ -20,6 +23,8 @@ GetSessionByIdCommand::GetSessionByIdCommand(
       mApiClient(nullptr)
 {
 }
+
+GetSessionByIdCommand::~GetSessionByIdCommand() = default;
 
 void GetSessionByIdCommand::execute()
 {

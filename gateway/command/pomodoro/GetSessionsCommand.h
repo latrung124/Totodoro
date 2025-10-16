@@ -9,11 +9,16 @@
 
 #include <QList>
 #include <QVariantMap>
+#include <QNetworkReply>
 
 #include "command/IApiCommand.h"
 
-#include <OAIPomodoroServiceApi.h>
-#include "OAIPomodoro_serviceGetSessionsResponse.h"
+namespace OpenAPI {
+
+class OAIPomodoroServiceApi;
+class OAIPomodoro_serviceGetSessionsResponse;
+
+} // namespace OpenAPI
 
 class GetSessionsCommand : public IApiCommand {
     Q_OBJECT
@@ -24,7 +29,7 @@ public:
         const QString& taskId,
         const QString& baseUrl,
         QObject* parent = nullptr);
-    ~GetSessionsCommand() override = default;
+    ~GetSessionsCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;

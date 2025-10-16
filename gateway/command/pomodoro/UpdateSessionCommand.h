@@ -8,12 +8,17 @@
 #pragma once
 
 #include <QJsonObject>
+#include <QNetworkReply>
 
 #include "command/IApiCommand.h"
 
-#include <OAIPomodoroServiceApi.h>
-#include <OAIPomodoroServiceUpdateSessionBody.h>
-#include <OAIPomodoro_serviceUpdateSessionResponse.h>
+namespace OpenAPI {
+
+class OAIPomodoroServiceApi;
+class OAIPomodoroServiceUpdateSessionBody;
+class OAIPomodoro_serviceUpdateSessionResponse;
+
+} // namespace OpenAPI
 
 class UpdateSessionCommand : public IApiCommand
 {
@@ -21,12 +26,13 @@ class UpdateSessionCommand : public IApiCommand
 public:
     using OAIPomodoroServiceUpdateSessionBody = OpenAPI::OAIPomodoroServiceUpdateSessionBody;
     using OAIPomodoro_serviceUpdateSessionResponse = OpenAPI::OAIPomodoro_serviceUpdateSessionResponse;
+    using OAIPomodoroServiceUpdateSessionBodyUPtr = std::unique_ptr<OpenAPI::OAIPomodoroServiceUpdateSessionBody>;
     using OAIPomodoroServiceApiUPtr = std::unique_ptr<OpenAPI::OAIPomodoroServiceApi>;
     UpdateSessionCommand(const OAIPomodoroServiceUpdateSessionBody& updateSessionBody,
                          const QString& sessionId,
                          const QString& baseUrl,
                          QObject* parent = nullptr);
-    ~UpdateSessionCommand() override = default;
+    ~UpdateSessionCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;
@@ -41,7 +47,7 @@ private slots:
 
 private:
     QJsonObject mSession;
-    OAIPomodoroServiceUpdateSessionBody mUpdateSessionBody;
+    OAIPomodoroServiceUpdateSessionBodyUPtr mUpdateSessionBody;
     QString mSessionId;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;

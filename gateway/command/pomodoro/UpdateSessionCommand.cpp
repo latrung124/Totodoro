@@ -9,6 +9,10 @@
 
 #include <QDebug>
 
+#include <OAIPomodoroServiceApi.h>
+#include <OAIPomodoroServiceUpdateSessionBody.h>
+#include <OAIPomodoro_serviceUpdateSessionResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 UpdateSessionCommand::UpdateSessionCommand(const OAIPomodoroServiceUpdateSessionBody& updateSessionBody,
@@ -16,12 +20,14 @@ UpdateSessionCommand::UpdateSessionCommand(const OAIPomodoroServiceUpdateSession
                                            const QString& baseUrl,
                                            QObject* parent)
     : IApiCommand(parent),
-      mUpdateSessionBody(updateSessionBody),
+      mUpdateSessionBody(std::make_unique<OAIPomodoroServiceUpdateSessionBody>(updateSessionBody)),
       mSessionId(sessionId),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr)
 {
 }
+
+UpdateSessionCommand::~UpdateSessionCommand() = default;
 
 void UpdateSessionCommand::execute()
 {
@@ -42,7 +48,7 @@ void UpdateSessionCommand::execute()
             this, &UpdateSessionCommand::onSessionError);
 
     // Execute the update session API call
-    mApiClient->pomodoroServiceUpdateSession(mSessionId, mUpdateSessionBody);
+    mApiClient->pomodoroServiceUpdateSession(mSessionId, *mUpdateSessionBody);
 }
 
 void UpdateSessionCommand::setResponseHandler(IResponseHandlerPtr handler)

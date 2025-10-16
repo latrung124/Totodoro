@@ -12,6 +12,8 @@
 #include <QVariantList>
 #include <QJsonDocument>
 
+#include <OAIPomodoroServiceApi.h>
+
 #include "factory/ApiClientFactory.h"
 
 GetSessionsCommand::GetSessionsCommand(const QString& userId,
@@ -26,6 +28,8 @@ GetSessionsCommand::GetSessionsCommand(const QString& userId,
       mApiClient(nullptr)
 {
 }
+
+GetSessionsCommand::~GetSessionsCommand() = default;
 
 void GetSessionsCommand::execute()
 {

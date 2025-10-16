@@ -12,8 +12,12 @@
 
 #include "command/IApiCommand.h"
 
-#include <OAIPomodoroServiceApi.h>
-#include <OAIPomodoro_serviceGetSessionByIdResponse.h>
+namespace OpenAPI {
+
+class OAIPomodoroServiceApi;
+class OAIPomodoro_serviceGetSessionByIdResponse;
+
+} // namespace OpenAPI
 
 class GetSessionByIdCommand : public IApiCommand
 {
@@ -24,7 +28,7 @@ public:
         const QString& sessionId,
         const QString& baseUrl,
         QObject* parent = nullptr);
-    ~GetSessionByIdCommand() override = default;
+    ~GetSessionByIdCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;

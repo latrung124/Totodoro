@@ -27,6 +27,10 @@ DeleteSessionCommand::DeleteSessionCommand(const QString& sessionId,
 {
 }
 
+DeleteSessionCommand::~DeleteSessionCommand()
+{
+}
+
 void DeleteSessionCommand::execute()
 {
     if (mApiClient) {

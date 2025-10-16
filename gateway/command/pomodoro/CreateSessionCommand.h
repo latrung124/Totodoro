@@ -12,7 +12,6 @@
 #include <QJsonObject>
 
 #include "command/IApiCommand.h"
-#include "factory/ApiClientFactory.h"
 
 namespace OpenAPI
 {
@@ -34,7 +33,7 @@ public:
         const OAIPomodoroServiceCreateSessionBody& body,
         const QString& baseUrl,
         QObject* parent = nullptr);
-    ~CreateSessionCommand() override = default;
+    ~CreateSessionCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;

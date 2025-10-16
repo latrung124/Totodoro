@@ -9,6 +9,12 @@
 
 #include <QString>
 
+#include <OAIPomodoroServiceCreateSessionBody.h>
+#include <OAIPomodoro_serviceCreateSessionResponse.h>
+#include <OAIPomodoro_serviceGetSessionByIdResponse.h>
+#include <OAIPomodoroServiceUpdateSessionBody.h>
+#include <OAIPomodoro_serviceUpdateSessionResponse.h>
+
 #include "handler/JsonResponseHandler.h"
 #include "processor/AsyncRequestProcessor.h"
 

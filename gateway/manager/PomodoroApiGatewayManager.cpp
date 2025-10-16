@@ -10,11 +10,15 @@
 #include <QDebug>
 #include <QString>
 
+#include <OAIPomodoroServiceApi.h>
+#include <OAIPomodoroServiceUpdateSessionBody.h>
+
 #include "common/CommonDefine.h"
 #include "common/PomodoroProperties.h"
 #include "common/ApiResponse.h"
 #include "factory/ApiCommandFactory.h"
 #include "handler/JsonResponseHandler.h"
+
 #include "command/pomodoro/CreateSessionCommand.h"
 #include "command/pomodoro/GetSessionsCommand.h"
 #include "command/pomodoro/UpdateSessionCommand.h"

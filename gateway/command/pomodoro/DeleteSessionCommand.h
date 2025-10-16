@@ -26,7 +26,7 @@ public:
     DeleteSessionCommand(const QString& sessionId,
         const QString& baseUrl,
         QObject* parent = nullptr);
-    ~DeleteSessionCommand() override = default;
+    ~DeleteSessionCommand() override;
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;
