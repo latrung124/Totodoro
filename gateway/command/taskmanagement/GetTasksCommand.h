@@ -16,20 +16,25 @@
 #include "command/IApiCommand.h"
 #include "factory/ApiClientFactory.h"
 
-// Generated client types
-#include <OAITaskManagementServiceApi.h>
-#include <OAITask_managementGetTasksResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITask_managementGetTasksResponse;
+} // namespace OpenAPI
 
 class GetTasksCommand : public IApiCommand
 {
     Q_OBJECT
 public:
     using OAIResponse = OpenAPI::OAITask_managementGetTasksResponse;
+    using OAIServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
 
     GetTasksCommand(const QString& userId,
                     const QString& groupId,
                            const QString& baseUrl,
                            QObject* parent = nullptr);
+
+    ~GetTasksCommand();
 
     void execute() override;
 
@@ -50,5 +55,5 @@ private:
     QList<QVariantMap> mTasks;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-    std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;
+    OAIServiceApiUPtr mApiClient;
 };

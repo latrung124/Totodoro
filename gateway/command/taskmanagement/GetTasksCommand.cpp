@@ -7,6 +7,9 @@
 
 #include "command/taskmanagement/GetTasksCommand.h"
 
+#include <OAITaskManagementServiceApi.h>
+#include <OAITask_managementGetTasksResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 GetTasksCommand::GetTasksCommand(const QString& userId,
@@ -21,6 +24,8 @@ GetTasksCommand::GetTasksCommand(const QString& userId,
       mApiClient(nullptr)
 {
 }
+
+GetTasksCommand::~GetTasksCommand() = default;
 
 void GetTasksCommand::execute()
 {
