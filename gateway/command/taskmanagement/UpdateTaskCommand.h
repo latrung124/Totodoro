@@ -7,13 +7,17 @@
 
 #pragma once
 
+#include <QNetworkReply>
 #include <QJsonObject>
 
 #include "command/IApiCommand.h"
 
-#include <OAITaskManagementServiceApi.h>
-#include <OAITaskManagementServiceUpdateTaskBody.h>
-#include <OAITask_managementUpdateTaskResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITaskManagementServiceUpdateTaskBody;
+    class OAITask_managementUpdateTaskResponse;
+} // namespace OpenAPI
 
 class UpdateTaskCommand : public IApiCommand
 {
@@ -22,11 +26,13 @@ public:
     using OAITaskManagementServiceUpdateTaskBody = OpenAPI::OAITaskManagementServiceUpdateTaskBody;
     using OAITask_managementUpdateTaskResponse = OpenAPI::OAITask_managementUpdateTaskResponse;
     using OAITaskManagementServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
+    using OAITaskManagementServiceUpdateTaskBodyUPtr = std::unique_ptr<OAITaskManagementServiceUpdateTaskBody>;
+
     UpdateTaskCommand(const OAITaskManagementServiceUpdateTaskBody& updateTaskBody,
                         const QString& taskId,
                         const QString& baseUrl,
                         QObject* parent = nullptr);
-    ~UpdateTaskCommand() override = default;
+    ~UpdateTaskCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;
@@ -41,7 +47,7 @@ private slots:
 
 private:
     QJsonObject mTask;
-    OAITaskManagementServiceUpdateTaskBody mUpdateTaskBody;
+    OAITaskManagementServiceUpdateTaskBodyUPtr mUpdateTaskBody;
     QString mTaskId;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;

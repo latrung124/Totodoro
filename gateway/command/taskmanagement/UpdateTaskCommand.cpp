@@ -7,6 +7,10 @@
 
 #include "command/taskmanagement/UpdateTaskCommand.h"
 
+#include <OAITaskManagementServiceApi.h>
+#include <OAITaskManagementServiceUpdateTaskBody.h>
+#include <OAITask_managementUpdateTaskResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 UpdateTaskCommand::UpdateTaskCommand(const OAITaskManagementServiceUpdateTaskBody& updateTaskBody,
@@ -15,13 +19,15 @@ UpdateTaskCommand::UpdateTaskCommand(const OAITaskManagementServiceUpdateTaskBod
     QObject* parent)
     : IApiCommand(parent),
       mTask(),
-      mUpdateTaskBody(updateTaskBody),
+      mUpdateTaskBody(std::make_unique<OAITaskManagementServiceUpdateTaskBody>(updateTaskBody)),
       mTaskId(taskId),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr),
       mApiClient(nullptr)
 {
 }
+
+UpdateTaskCommand::~UpdateTaskCommand() = default;
 
 void UpdateTaskCommand::execute()
 {
@@ -45,7 +51,7 @@ void UpdateTaskCommand::execute()
     connect(mApiClient.get(), &OpenAPI::OAITaskManagementServiceApi::taskManagementServiceUpdateTaskSignalError,
             this, &UpdateTaskCommand::onTaskError);
 
-    mApiClient->taskManagementServiceUpdateTask(mTaskId, mUpdateTaskBody);
+    mApiClient->taskManagementServiceUpdateTask(mTaskId, *mUpdateTaskBody);
 }
 
 void UpdateTaskCommand::setResponseHandler(IResponseHandlerPtr handler)
