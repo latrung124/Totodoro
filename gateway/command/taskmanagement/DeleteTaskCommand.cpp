@@ -7,6 +7,9 @@
 
 #include "command/taskmanagement/DeleteTaskCommand.h"
 
+#include <OAITaskManagementServiceApi.h>
+#include <OAITask_managementDeleteTaskResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 DeleteTaskCommand::DeleteTaskCommand(const QString& taskId,
