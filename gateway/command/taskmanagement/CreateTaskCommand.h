@@ -9,16 +9,18 @@
 
 #pragma once
 
+#include <memory>
 #include <QNetworkReply>
 #include <QJsonObject>
-#include <memory>
 
 #include "command/IApiCommand.h"
 
-// Generated client types
-#include <OAITaskManagementServiceApi.h>
-#include <OAITaskManagementServiceCreateTaskBody.h>
-#include <OAITask_managementCreateTaskResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITaskManagementServiceCreateTaskBody;
+    class OAITask_managementCreateTaskResponse;
+} // namespace OpenAPI
 
 class CreateTaskCommand : public IApiCommand
 {
@@ -27,11 +29,15 @@ public:
     using OAIRequest  = OpenAPI::OAITaskManagementServiceCreateTaskBody;
     using OAIResponse = OpenAPI::OAITask_managementCreateTaskResponse;
     using OAITaskManagementServiceApi = OpenAPI::OAITaskManagementServiceApi;
+    using OAITaskManagementServiceApiUPtr = std::unique_ptr<OAITaskManagementServiceApi>;
+    using OAIRequestUPtr = std::unique_ptr<OAIRequest>;
 
     CreateTaskCommand(const QString& groupId,
                       const OAIRequest& body,
                       const QString& baseUrl,
                       QObject* parent = nullptr);
+
+    ~CreateTaskCommand();
 
     void execute() override;
 
@@ -48,9 +54,9 @@ private slots:
 
 private:
     QString mGroupId;
-    OAIRequest mBody;
     QJsonObject mTask;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-    std::unique_ptr<OAITaskManagementServiceApi> mApiClient;
+    OAITaskManagementServiceApiUPtr mApiClient;
+    OAIRequestUPtr mBody;
 };

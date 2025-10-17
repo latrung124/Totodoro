@@ -10,9 +10,10 @@
 #include <QDebug>
 #include <QJsonDocument>
 #include <QObject>
-#include <utility>
 
-#include <OAITask_managementTask.h> // optional: if you need to inspect the model
+#include <OAITaskManagementServiceApi.h>
+#include <OAITaskManagementServiceCreateTaskBody.h>
+#include <OAITask_managementCreateTaskResponse.h>
 
 #include "factory/ApiClientFactory.h"
 
@@ -23,10 +24,12 @@ CreateTaskCommand::CreateTaskCommand(const QString& groupId,
                                      QObject* parent)
     : IApiCommand(parent)
     , mGroupId(groupId)
-    , mBody(body)
+    , mBody(std::make_unique<OAIRequest>(body))
     , mBaseUrl(baseUrl)
 {
 }
+
+CreateTaskCommand::~CreateTaskCommand() = default;
 
 void CreateTaskCommand::setResponseHandler(IResponseHandlerPtr handler)
 {
@@ -76,7 +79,7 @@ void CreateTaskCommand::execute()
             this, &CreateTaskCommand::onError);
 
     // Execute request
-    mApiClient->taskManagementServiceCreateTask(mGroupId, mBody);
+    mApiClient->taskManagementServiceCreateTask(mGroupId, *mBody);
 }
 
 void CreateTaskCommand::onCreated(const OAIResponse& response)
