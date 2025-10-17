@@ -23,6 +23,8 @@ GetTaskGroupsCommand::GetTaskGroupsCommand(const QString& userId,
 {
 }
 
+GetTaskGroupsCommand::~GetTaskGroupsCommand() = default;
+
 void GetTaskGroupsCommand::setResponseHandler(IResponseHandlerPtr handler)
 {
     mResponseHandler = handler;

@@ -9,6 +9,11 @@
 
 #include <QString>
 
+#include <OAITaskManagementServiceCreateTaskBody.h>
+#include <OAITask_managementCreateTaskGroupRequest.h>
+#include <OAITaskManagementServiceUpdateTaskBody.h>
+#include <OAITaskManagementServiceUpdateTaskGroupBody.h>
+
 #include "handler/JsonResponseHandler.h"
 #include "processor/AsyncRequestProcessor.h"
 

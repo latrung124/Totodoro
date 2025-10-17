@@ -24,6 +24,8 @@ DeleteTaskCommand::DeleteTaskCommand(const QString& taskId,
 {
 }
 
+DeleteTaskCommand::~DeleteTaskCommand() = default;
+
 void DeleteTaskCommand::execute()
 {
     if (mApiClient) {

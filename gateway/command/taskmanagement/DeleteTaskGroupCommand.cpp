@@ -27,6 +27,8 @@ DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,
 {
 }
 
+DeleteTaskGroupCommand::~DeleteTaskGroupCommand() = default;
+
 void DeleteTaskGroupCommand::execute()
 {
     // Create as QObject then cast to the concrete API type and transfer ownership

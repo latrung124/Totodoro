@@ -7,13 +7,17 @@
 
 #pragma once
 
+#include <QNetworkReply>
 #include <QJsonObject>
 
 #include "command/IApiCommand.h"
 
-#include <OAITaskManagementServiceApi.h>
-#include <OAITaskManagementServiceUpdateTaskGroupBody.h>
-#include <OAITask_managementUpdateTaskGroupResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITaskManagementServiceUpdateTaskGroupBody;
+    class OAITask_managementUpdateTaskGroupResponse;
+} // namespace OpenAPI
 
 class UpdateTaskGroupCommand : public IApiCommand
 {
@@ -22,11 +26,13 @@ public:
     using OAITaskManagementServiceUpdateTaskGroupBody = OpenAPI::OAITaskManagementServiceUpdateTaskGroupBody;
     using OAITask_managementUpdateTaskGroupResponse = OpenAPI::OAITask_managementUpdateTaskGroupResponse;
     using OAITaskManagementServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
+    using OAITaskManagementServiceUpdateTaskGroupBodyUPtr = std::unique_ptr<OAITaskManagementServiceUpdateTaskGroupBody>;
+
     UpdateTaskGroupCommand(const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
                             const QString& taskGroupId,
                             const QString& baseUrl,
                             QObject* parent = nullptr);
-    ~UpdateTaskGroupCommand() override = default;
+    ~UpdateTaskGroupCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;
@@ -41,7 +47,7 @@ private slots:
 
 private:
     QJsonObject mTaskGroup;
-    OAITaskManagementServiceUpdateTaskGroupBody mUpdateTaskGroupBody;
+    OAITaskManagementServiceUpdateTaskGroupBodyUPtr mUpdateTaskGroupBody;
     QString mTaskGroupId;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;

@@ -32,6 +32,8 @@ public:
                            const QString& baseUrl,
                            QObject* parent = nullptr);
 
+    ~GetTaskGroupsCommand();
+
     void execute() override;
 
     void setResponseHandler(IResponseHandlerPtr handler) override;

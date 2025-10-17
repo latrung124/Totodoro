@@ -9,10 +9,14 @@
 
 #include <QDebug>
 
+#include <OAITaskManagementServiceCreateTaskBody.h>
+#include <OAITask_managementCreateTaskGroupRequest.h>
+#include <OAITaskManagementServiceUpdateTaskBody.h>
+#include <OAITaskManagementServiceUpdateTaskGroupBody.h>
+
 #include "common/CommonDefine.h"
 #include "common/TaskProperties.h"
 #include "common/ApiResponse.h"
-
 #include "factory/ApiCommandFactory.h"
 #include "handler/JsonResponseHandler.h"
 #include "command/taskmanagement/CreateTaskCommand.h"

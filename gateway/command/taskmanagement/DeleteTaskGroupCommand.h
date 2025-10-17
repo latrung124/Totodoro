@@ -27,7 +27,7 @@ public:
     DeleteTaskGroupCommand(const QString& groupId,
         const QString& baseUrl,
         QObject* parent = nullptr);
-    ~DeleteTaskGroupCommand() override = default;
+    ~DeleteTaskGroupCommand();
 
     void execute() override;
     void setResponseHandler(IResponseHandlerPtr handler) override;

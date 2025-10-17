@@ -9,6 +9,10 @@
 
 #include <QDebug>
 
+#include <OAITaskManagementServiceApi.h>
+#include <OAITaskManagementServiceUpdateTaskGroupBody.h>
+#include <OAITask_managementUpdateTaskGroupResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 UpdateTaskGroupCommand::UpdateTaskGroupCommand(const OAITaskManagementServiceUpdateTaskGroupBody& updateTaskGroupBody,
@@ -16,12 +20,14 @@ UpdateTaskGroupCommand::UpdateTaskGroupCommand(const OAITaskManagementServiceUpd
                                                 const QString& baseUrl,
                                                 QObject* parent)
     : IApiCommand(parent),
-      mUpdateTaskGroupBody(updateTaskGroupBody),
+      mUpdateTaskGroupBody(std::make_unique<OAITaskManagementServiceUpdateTaskGroupBody>(updateTaskGroupBody)),
       mTaskGroupId(taskGroupId),
       mBaseUrl(baseUrl),
       mResponseHandler(nullptr)
 {
 }
+
+UpdateTaskGroupCommand::~UpdateTaskGroupCommand() = default;
 
 void UpdateTaskGroupCommand::execute()
 {
@@ -42,7 +48,7 @@ void UpdateTaskGroupCommand::execute()
             this, &UpdateTaskGroupCommand::onTaskGroupError);
 
     // Execute the update taskgroup API call
-    mApiClient->taskManagementServiceUpdateTaskGroup(mTaskGroupId, mUpdateTaskGroupBody);
+    mApiClient->taskManagementServiceUpdateTaskGroup(mTaskGroupId, *mUpdateTaskGroupBody);
 }
 
 void UpdateTaskGroupCommand::setResponseHandler(IResponseHandlerPtr handler)
