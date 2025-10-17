@@ -15,15 +15,18 @@
 
 #include "command/IApiCommand.h"
 
-// Generated client types
-#include <OAITaskManagementServiceApi.h>
-#include <OAITask_managementGetTaskGroupsResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITask_managementGetTaskGroupsResponse;
+} // namespace OpenAPI
 
 class GetTaskGroupsCommand : public IApiCommand
 {
     Q_OBJECT
 public:
     using OAIResponse = OpenAPI::OAITask_managementGetTaskGroupsResponse;
+    using OAIServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
 
     GetTaskGroupsCommand(const QString& userId,
                            const QString& baseUrl,
@@ -47,5 +50,5 @@ private:
     QList<QVariantMap> mGroups;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-    std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;
+    OAIServiceApiUPtr mApiClient;
 };

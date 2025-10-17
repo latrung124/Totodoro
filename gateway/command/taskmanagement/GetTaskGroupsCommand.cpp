@@ -7,6 +7,9 @@
 
 #include "command/taskmanagement/GetTaskGroupsCommand.h"
 
+#include <OAITaskManagementServiceApi.h>
+#include <OAITask_managementGetTaskGroupsResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 GetTaskGroupsCommand::GetTaskGroupsCommand(const QString& userId,
