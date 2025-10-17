@@ -11,14 +11,19 @@
 
 #include "command/IApiCommand.h"
 
-#include <OAITaskManagementServiceApi.h>
-#include <OAITask_managementDeleteTaskGroupResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITask_managementDeleteTaskGroupResponse;
+} // namespace OpenAPI
 
 class DeleteTaskGroupCommand : public IApiCommand
 {
     Q_OBJECT
 public:
     using OAITask_managementDeleteTaskGroupResponse = OpenAPI::OAITask_managementDeleteTaskGroupResponse;
+    using OAITaskManagementServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
+
     DeleteTaskGroupCommand(const QString& groupId,
         const QString& baseUrl,
         QObject* parent = nullptr);
@@ -41,5 +46,5 @@ private:
     QString mGroupId;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-    std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;
+    OAITaskManagementServiceApiUPtr mApiClient;
 };

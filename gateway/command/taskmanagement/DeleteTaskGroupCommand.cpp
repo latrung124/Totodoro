@@ -10,6 +10,9 @@
 #include <QDebug>
 #include <QJsonObject>
 
+#include <OAITaskManagementServiceApi.h>
+#include <OAITask_managementDeleteTaskGroupResponse.h>
+
 #include "factory/ApiClientFactory.h"
 
 DeleteTaskGroupCommand::DeleteTaskGroupCommand(const QString& groupId,

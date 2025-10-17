@@ -17,7 +17,6 @@
 
 #include "factory/ApiClientFactory.h"
 
-
 CreateTaskCommand::CreateTaskCommand(const QString& groupId,
                                      const OAIRequest& body,
                                      const QString& baseUrl,
