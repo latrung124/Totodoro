@@ -13,10 +13,12 @@
 
 #include "command/IApiCommand.h"
 
-// Generated client types
-#include <OAITaskManagementServiceApi.h>
-#include <OAITask_managementCreateTaskGroupRequest.h>
-#include <OAITask_managementCreateTaskGroupResponse.h>
+namespace OpenAPI
+{
+    class OAITaskManagementServiceApi;
+    class OAITask_managementCreateTaskGroupRequest;
+    class OAITask_managementCreateTaskGroupResponse;
+} // namespace OpenAPI
 
 class CreateTaskGroupCommand : public IApiCommand
 {
@@ -24,11 +26,15 @@ class CreateTaskGroupCommand : public IApiCommand
 public:
     using OAIRequest  = OpenAPI::OAITask_managementCreateTaskGroupRequest;
     using OAIResponse = OpenAPI::OAITask_managementCreateTaskGroupResponse;
+    using OAIRequestUPtr = std::unique_ptr<OAIRequest>;
+    using OAIServiceApiUPtr = std::unique_ptr<OpenAPI::OAITaskManagementServiceApi>;
 
     CreateTaskGroupCommand(const OAIRequest& body,
                            const QString& baseUrl,
                            QObject* parent = nullptr);
 
+    ~CreateTaskGroupCommand();
+    
     void execute() override;
 
     void setResponseHandler(IResponseHandlerPtr handler) override;
@@ -43,9 +49,9 @@ private slots:
                  const QString& errorStr);
 
 private:
-    OAIRequest mBody;
+    OAIRequestUPtr mBody;
     QJsonObject mGroup;
     QString mBaseUrl;
     IResponseHandlerPtr mResponseHandler;
-    std::unique_ptr<OpenAPI::OAITaskManagementServiceApi> mApiClient;
+    OAIServiceApiUPtr mApiClient;
 };

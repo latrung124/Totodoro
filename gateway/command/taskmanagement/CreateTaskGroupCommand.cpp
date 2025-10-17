@@ -12,7 +12,9 @@
 #include <QObject>
 #include <utility>
 
-#include <OAITask_managementTaskGroup.h> // if your response has a model inside
+#include <OAITaskManagementServiceApi.h>
+#include <OAITask_managementCreateTaskGroupRequest.h>
+#include <OAITask_managementCreateTaskGroupResponse.h>
 
 #include "factory/ApiClientFactory.h"
 
@@ -22,10 +24,12 @@ CreateTaskGroupCommand::CreateTaskGroupCommand(const OAIRequest& body,
                                                const QString& baseUrl,
                                                QObject* parent)
     : IApiCommand(parent)
-    , mBody(body)
+    , mBody(std::make_unique<OAIRequest>(body))
     , mBaseUrl(baseUrl)
 {
 }
+
+CreateTaskGroupCommand::~CreateTaskGroupCommand() = default;
 
 void CreateTaskGroupCommand::setResponseHandler(IResponseHandlerPtr handler)
 {
@@ -76,7 +80,7 @@ void CreateTaskGroupCommand::execute()
             this, &CreateTaskGroupCommand::onError);
 
     // Fire request
-    mApiClient->taskManagementServiceCreateTaskGroup(mBody);
+    mApiClient->taskManagementServiceCreateTaskGroup(*mBody);
 }
 
 void CreateTaskGroupCommand::onCreated(const OAIResponse& response)
