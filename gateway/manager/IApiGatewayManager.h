@@ -15,6 +15,7 @@
 namespace gateway
 {
     struct ApiResponse;
+    struct Properties;
     enum class RequestType : uint8_t;
 }
 
@@ -30,4 +31,6 @@ public:
 
     virtual bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) = 0;
     virtual bool unregisterResponseCallback(gateway::RequestType requestType) = 0;
+
+    virtual void trigger(gateway::RequestType requestType, const gateway::Properties& properties) = 0;
 };

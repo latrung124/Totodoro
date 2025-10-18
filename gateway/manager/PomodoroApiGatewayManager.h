@@ -35,6 +35,8 @@ public:
     bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
     bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
+    void trigger(gateway::RequestType requestType, const gateway::Properties& properties) override;
+
     bool createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps);
     bool getPomodoroSessions(const std::string& userId, const std::string& taskId);
     bool updatePomodoroSession(const gateway::PomodoroSessionProperties& sessionProps);

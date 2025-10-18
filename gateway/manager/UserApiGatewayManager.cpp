@@ -10,7 +10,7 @@
 #include <QDebug>
 
 #include "common/CommonDefine.h"
-#include "common/UserProperties.h"
+#include "common/Properties.h"
 #include "common/ApiResponse.h"
 #include "factory/ApiCommandFactory.h"
 #include "handler/JsonResponseHandler.h"
@@ -48,6 +48,51 @@ bool UserApiGatewayManager::unregisterResponseCallback(gateway::RequestType requ
 
     m_responseCallbacks.erase(it);
     return true;
+}
+
+void UserApiGatewayManager::trigger(gateway::RequestType requestType, const gateway::Properties& properties)
+{
+    switch(requestType) {
+        case gateway::RequestType::CreateUser: {
+            const auto& userProps = properties.getProperty<gateway::UserProperties>();
+            if (!createUser(userProps)) {
+                qDebug() << "Failed to trigger CreateUser request.";
+            }
+            break;
+        }
+        case gateway::RequestType::GetUserProperties: {
+            const auto& userProps = properties.getProperty<gateway::UserProperties>();
+            if (!getUserProperties(userProps.userId)) {
+                qDebug() << "Failed to trigger GetUserProperties request.";
+            }
+            break;
+        }
+        case gateway::RequestType::UpdateUserProperties: {
+            const auto& userProps = properties.getProperty<gateway::UserProperties>();
+            if (!updateUserProperties(userProps)) {
+                qDebug() << "Failed to trigger UpdateUserProperties request.";
+            }
+            break;
+        }
+        case gateway::RequestType::GetUserSettings: {
+            const auto& userProps = properties.getProperty<gateway::UserProperties>();
+            if (!getUserSettings(userProps.userId)) {
+                qDebug() << "Failed to trigger GetUserSettings request.";
+            }
+            break;
+        }
+        case gateway::RequestType::UpdateUserSettings: {
+            const auto& userSettings = properties.getProperty<gateway::UserSettings>();
+            if (!updateUserSettings(userSettings)) {
+                qDebug() << "Failed to trigger UpdateUserSettings request.";
+            }
+            break;
+        }
+        default: {
+            qDebug() << "Unsupported request type triggered:" << static_cast<int>(requestType);
+            break;
+        }
+    }
 }
 
 bool UserApiGatewayManager::createUser(const gateway::UserProperties& userProps)

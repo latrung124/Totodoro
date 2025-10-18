@@ -54,6 +54,10 @@ bool PomodoroApiGatewayManager::unregisterResponseCallback(gateway::RequestType 
     return true;
 }
 
+void PomodoroApiGatewayManager::trigger(gateway::RequestType requestType, const gateway::Properties& properties)
+{
+}
+
 bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
 {
     qDebug() << "Creating Pomodoro session for user:" << QString::fromStdString(sessionProps.userId);

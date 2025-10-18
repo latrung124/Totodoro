@@ -34,13 +34,16 @@ public:
     bool registerResponseCallback(gateway::RequestType requestType, const ResponseCallback& callback) override;
     bool unregisterResponseCallback(gateway::RequestType requestType) override;
 
+    void trigger(gateway::RequestType requestType, const gateway::Properties& properties) override;
+
+    
+private:
     bool createUser(const gateway::UserProperties& userProps);
     bool getUserProperties(const std::string& userId);
     bool updateUserProperties(const gateway::UserProperties& userProps);
     bool getUserSettings(const std::string& userId);
     bool updateUserSettings(const gateway::UserSettings& userSettings);
 
-private:
     std::map<gateway::RequestType, ResponseCallback> m_responseCallbacks;
     ResponseHandlerPtr m_responseHandler;
 };

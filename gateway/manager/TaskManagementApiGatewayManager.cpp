@@ -58,6 +58,10 @@ bool TaskManagementApiGatewayManager::unregisterResponseCallback(gateway::Reques
     return true;
 }
 
+void TaskManagementApiGatewayManager::trigger(gateway::RequestType requestType, const gateway::Properties& properties)
+{
+}
+
 bool TaskManagementApiGatewayManager::createTask(const gateway::TaskProperties& taskProperties)
 {
     qDebug() << "Creating task:" << QString::fromStdString(taskProperties.name);
