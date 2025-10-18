@@ -21,6 +21,7 @@ struct Properties
         UserProperties,
         UserSettings,
         TaskProperties,
+        TaskGroupProperties,
         PomodoroSessionProperties
     >;
 

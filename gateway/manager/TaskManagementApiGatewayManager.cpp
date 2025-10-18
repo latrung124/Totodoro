@@ -15,8 +15,7 @@
 #include <OAITaskManagementServiceUpdateTaskGroupBody.h>
 
 #include "common/CommonDefine.h"
-#include "common/TaskProperties.h"
-#include "common/ApiResponse.h"
+#include "common/Properties.h"
 #include "factory/ApiCommandFactory.h"
 #include "handler/JsonResponseHandler.h"
 #include "command/taskmanagement/CreateTaskCommand.h"
@@ -60,6 +59,70 @@ bool TaskManagementApiGatewayManager::unregisterResponseCallback(gateway::Reques
 
 void TaskManagementApiGatewayManager::trigger(gateway::RequestType requestType, const gateway::Properties& properties)
 {
+    switch (requestType) {
+        case gateway::RequestType::CreateTask: {
+            const auto& taskProps = properties.getProperty<gateway::TaskProperties>();
+            if (!createTask(taskProps)) {
+                qDebug() << "Failed to trigger CreateTask request.";
+            }
+            break;
+        }
+        case gateway::RequestType::GetTasks: {
+            const auto& taskProps = properties.getProperty<gateway::TaskProperties>();
+            const std::string& groupId = taskProps.groupId;
+            const std::string& userId = taskProps.userId;
+            if (!getTasks(groupId, userId)) {
+                qDebug() << "Failed to trigger GetTasks request.";
+            }
+            break;
+        }
+        case gateway::RequestType::UpdateTask: {
+            const auto& taskProps = properties.getProperty<gateway::TaskProperties>();
+            if (!updateTask(taskProps)) {
+                qDebug() << "Failed to trigger UpdateTask request.";
+            }
+            break;
+        }
+        case gateway::RequestType::DeleteTask: {
+            const auto& taskProps = properties.getProperty<gateway::TaskProperties>();
+            if (!deleteTask(taskProps.taskId)) {
+                qDebug() << "Failed to trigger DeleteTask request.";
+            }
+            break;
+        }
+        case gateway::RequestType::CreateTaskGroup: {
+            const auto& groupProps = properties.getProperty<gateway::TaskGroupProperties>();
+            if (!createTaskGroup(groupProps)) {
+                qDebug() << "Failed to trigger CreateTaskGroup request.";
+            }
+            break;
+        }
+        case gateway::RequestType::GetTaskGroups: {
+            const auto& groupProps = properties.getProperty<gateway::TaskGroupProperties>();
+            if (!getTaskGroups(groupProps.userId)) {
+                qDebug() << "Failed to trigger GetTaskGroups request.";
+            }
+            break;
+        }
+        case gateway::RequestType::UpdateTaskGroup: {
+            const auto& groupProps = properties.getProperty<gateway::TaskGroupProperties>();
+            if (!updateTaskGroup(groupProps)) {
+                qDebug() << "Failed to trigger UpdateTaskGroup request.";
+            }
+            break;
+        }
+        case gateway::RequestType::DeleteTaskGroup: {
+            const auto& groupId = properties.getProperty<gateway::TaskGroupProperties>().groupId;
+            if (!deleteTaskGroup(groupId)) {
+                qDebug() << "Failed to trigger DeleteTaskGroup request.";
+            }
+            break;
+        }
+        default: {
+            qDebug() << "Unsupported request type triggered:" << static_cast<int>(requestType);
+            break;
+        }
+    }
 }
 
 bool TaskManagementApiGatewayManager::createTask(const gateway::TaskProperties& taskProperties)
