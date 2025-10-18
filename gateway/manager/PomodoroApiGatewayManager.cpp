@@ -14,7 +14,7 @@
 #include <OAIPomodoroServiceUpdateSessionBody.h>
 
 #include "common/CommonDefine.h"
-#include "common/PomodoroProperties.h"
+#include "common/Properties.h"
 #include "common/ApiResponse.h"
 #include "factory/ApiCommandFactory.h"
 #include "handler/JsonResponseHandler.h"
@@ -56,6 +56,40 @@ bool PomodoroApiGatewayManager::unregisterResponseCallback(gateway::RequestType 
 
 void PomodoroApiGatewayManager::trigger(gateway::RequestType requestType, const gateway::Properties& properties)
 {
+    switch (requestType) {
+        case gateway::RequestType::CreatePomodoroSession: {
+            const auto& sessionProps = properties.getProperty<gateway::PomodoroSessionProperties>();
+            if (!createPomodoroSession(sessionProps)) {
+                qDebug() << "Failed to trigger CreatePomodoroSession request.";
+            }
+            break;
+        }
+        case gateway::RequestType::GetPomodoroSessions: {
+            const auto& sessionProps = properties.getProperty<gateway::PomodoroSessionProperties>();
+            if (!getPomodoroSessions(sessionProps.userId, sessionProps.taskId)) {
+                qDebug() << "Failed to trigger GetPomodoroSessions request.";
+            }
+            break;
+        }
+        case gateway::RequestType::UpdatePomodoroSession: {
+            const auto& sessionProps = properties.getProperty<gateway::PomodoroSessionProperties>();
+            if (!updatePomodoroSession(sessionProps)) {
+                qDebug() << "Failed to trigger UpdatePomodoroSession request.";
+            }
+            break;
+        }
+        case gateway::RequestType::DeletePomodoroSession: {
+            const auto& sessionProps = properties.getProperty<gateway::PomodoroSessionProperties>();
+            if (!deletePomodoroSession(sessionProps.sessionId)) {
+                qDebug() << "Failed to trigger DeletePomodoroSession request.";
+            }
+            break;
+        }
+        default: {
+            qDebug() << "Unsupported request type triggered:" << static_cast<int>(requestType);
+            break;
+        }
+    }
 }
 
 bool PomodoroApiGatewayManager::createPomodoroSession(const gateway::PomodoroSessionProperties& sessionProps)
