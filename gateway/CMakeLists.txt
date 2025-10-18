@@ -32,6 +32,7 @@ set(GATEWAY_HEADERS
     common/UserProperties.h
     common/TaskProperties.h
     common/PomodoroProperties.h
+    common/Properties.h
     command/IApiCommand.h
     command/pomodoro/CreateSessionCommand.h
     command/pomodoro/GetSessionByIdCommand.h
