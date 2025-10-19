@@ -8,12 +8,19 @@
 #include "ApiGatewayService.h"
 #include "IApiGatewayServiceListener.h"
 
+#include "Gateway.h"
+
+#include "common/Properties.h"
+#include "common/UserProperties.h"
+#include "manager/UserApiGatewayManager.h"
+
 namespace {
 using Information = apigateway_service::utils::user::Information;
 using Settings = apigateway_service::utils::user::Settings;
 } // namespace
 
 ApiGatewayService::ApiGatewayService()
+    : m_gateway(std::make_unique<gateway::Gateway>())
 {
 }
 
@@ -62,7 +69,25 @@ void ApiGatewayService::stop()
 
 void ApiGatewayService::requestCreateUser(const Information &userInformation)
 {
-	// Simulate user creation (replace with actual implementation)
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::User);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::UserProperties userProps;
+	userProps.userId = userInformation.userId;
+	userProps.email = userInformation.email;
+	userProps.userName = userInformation.username;
+	userProps.createdTime = userInformation.createdTime;
+	userProps.lastUpdatedTime = userInformation.lastUpdatedTime;
+	properties.property = userProps;
+	managerPtr->trigger(gateway::RequestType::CreateUser, properties);
 }
 
 void ApiGatewayService::requestGetUserInformation(const std::string &userId)
