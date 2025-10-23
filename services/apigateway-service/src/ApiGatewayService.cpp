@@ -92,7 +92,21 @@ void ApiGatewayService::requestCreateUser(const Information &userInformation)
 
 void ApiGatewayService::requestGetUserInformation(const std::string &userId)
 {
-	// Simulate fetching user information (replace with actual implementation)
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::User);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::UserProperties userProps;
+	userProps.userId = userId;
+	properties.property = userProps;
+	managerPtr->trigger(gateway::RequestType::GetUserProperties, properties);
 }
 
 void ApiGatewayService::requestGetUserSettings(const std::string &userId)
