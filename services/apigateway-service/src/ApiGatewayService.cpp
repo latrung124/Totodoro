@@ -153,7 +153,34 @@ void ApiGatewayService::requestUpdateUserInformation(const Information &info)
 
 void ApiGatewayService::requestUpdateUserSettings(const Settings &settings)
 {
-	// Simulate updating user settings (replace with actual implementation)
+	if (!m_gateway) {
+		return;
+	}
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::User);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::UserSettings userSettings;
+	userSettings.userId = settings.userId;
+	userSettings.theme = settings.theme;
+	userSettings.language = settings.language;
+	userSettings.pomodoroDuration = settings.pomodoroDuration;
+	userSettings.shortBreakDuration = settings.shortBreakDuration;
+	userSettings.longBreakDuration = settings.longBreakDuration;
+	userSettings.longBreakInterval = settings.longBreakInterval;
+	userSettings.autoStartShortBreak = settings.autoStartShortBreak;
+	userSettings.autoStartLongBreak = settings.autoStartLongBreak;
+	userSettings.autoStartPomodoro = settings.autoStartPomodoro;
+	userSettings.shortBreakNotification = settings.shortBreakNotification;
+	userSettings.longBreakNotification = settings.longBreakNotification;
+	userSettings.pomodoroNotification = settings.pomodoroNotification;
+	userSettings.autoStartMusic = settings.autoStartMusic;
+	userSettings.autoStartNextTask = settings.autoStartNextTask;
+	properties.property = userSettings;
+	managerPtr->trigger(gateway::RequestType::UpdateUserSettings, properties);
 }
 
 void ApiGatewayService::onResponseCreateUser(const Information &userInformation)
