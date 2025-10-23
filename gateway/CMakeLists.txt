@@ -14,6 +14,7 @@ find_package(OpenSSL REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Core Network)
 
+add_subdirectory(generated/common)
 add_subdirectory(generated/pomodoro_service.swagger_client/client)
 add_subdirectory(generated/user_service.swagger_client/client)
 add_subdirectory(generated/task_management_service.swagger_client/client)
@@ -122,7 +123,7 @@ target_link_libraries(
   PUBLIC Qt6::Core Qt6::Network yaml-cpp httplib::httplib SQLiteCpp
          nlohmann_json::nlohmann_json
   PRIVATE PomodoroQtOpenAPIClient UserQtOpenAPIClient
-          TaskManagementQtOpenAPIClient)
+          TaskManagementQtOpenAPIClient OpenAPIQtCommon)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)

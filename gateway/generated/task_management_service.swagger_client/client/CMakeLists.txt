@@ -12,8 +12,6 @@ include(CMakePackageConfigHelpers)
 
 add_library(
   ${PROJECT_NAME}
-  OAIProtobufAny.h
-  OAIRpcStatus.h
   OAITaskManagementServiceCreateTaskBody.h
   OAITaskManagementServiceUpdateTaskBody.h
   OAITaskManagementServiceUpdateTaskGroupBody.h
@@ -33,16 +31,6 @@ add_library(
   OAITask_managementUpdateTaskGroupResponse.h
   OAITask_managementUpdateTaskResponse.h
   OAITaskManagementServiceApi.h
-  OAIHelpers.h
-  OAIHttpRequest.h
-  OAIObject.h
-  OAIEnum.h
-  OAIHttpFileElement.h
-  OAIServerConfiguration.h
-  OAIServerVariable.h
-  OAIOauth.h
-  OAIProtobufAny.cpp
-  OAIRpcStatus.cpp
   OAITaskManagementServiceCreateTaskBody.cpp
   OAITaskManagementServiceUpdateTaskBody.cpp
   OAITaskManagementServiceUpdateTaskGroupBody.cpp
@@ -61,20 +49,18 @@ add_library(
   OAITask_managementTaskStatus.cpp
   OAITask_managementUpdateTaskGroupResponse.cpp
   OAITask_managementUpdateTaskResponse.cpp
-  OAITaskManagementServiceApi.cpp
-  OAIHelpers.cpp
-  OAIHttpRequest.cpp
-  OAIHttpFileElement.cpp
-  OAIOauth.cpp)
+  OAITaskManagementServiceApi.cpp)
 
 target_include_directories(
-  ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-                         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+  ${PROJECT_NAME}
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../common>
+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(
   ${PROJECT_NAME}
   PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network
-         Qt${QT_VERSION_MAJOR}::Gui)
+         Qt${QT_VERSION_MAJOR}::Gui OpenAPIQtCommon)
 
 configure_package_config_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in

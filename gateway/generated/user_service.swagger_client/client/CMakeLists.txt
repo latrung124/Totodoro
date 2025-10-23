@@ -10,10 +10,30 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network Gui)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
+set(_DUP_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIHelpers.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIHttpFileElement.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIHttpRequest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIOauth.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIProtobufAny.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIRpcStatus.cpp)
+set(_DUP_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIEnum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIHelpers.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIHttpFileElement.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIHttpRequest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIOauth.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIObject.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIProtobufAny.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIRpcStatus.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIServerConfiguration.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OAIServerVariable.h)
+set_source_files_properties(${_DUP_SRCS} PROPERTIES HEADER_FILE_ONLY ON
+                                                    SKIP_AUTOGEN ON)
+set_source_files_properties(${_DUP_HDRS} PROPERTIES SKIP_AUTOMOC ON)
+
 add_library(
   ${PROJECT_NAME}
-  OAIProtobufAny.h
-  OAIRpcStatus.h
   OAIUserServiceUpdateSettingsBody.h
   OAIUserServiceUpdateUserBody.h
   OAIUser_serviceCreateUserRequest.h
@@ -23,18 +43,6 @@ add_library(
   OAIUser_serviceSettings.h
   OAIUser_serviceUpdateSettingsResponse.h
   OAIUser_serviceUpdateUserResponse.h
-  OAIUser_serviceUser.h
-  OAIUserServiceApi.h
-  OAIHelpers.h
-  OAIHttpRequest.h
-  OAIObject.h
-  OAIEnum.h
-  OAIHttpFileElement.h
-  OAIServerConfiguration.h
-  OAIServerVariable.h
-  OAIOauth.h
-  OAIProtobufAny.cpp
-  OAIRpcStatus.cpp
   OAIUserServiceUpdateSettingsBody.cpp
   OAIUserServiceUpdateUserBody.cpp
   OAIUser_serviceCreateUserRequest.cpp
@@ -45,20 +53,18 @@ add_library(
   OAIUser_serviceUpdateSettingsResponse.cpp
   OAIUser_serviceUpdateUserResponse.cpp
   OAIUser_serviceUser.cpp
-  OAIUserServiceApi.cpp
-  OAIHelpers.cpp
-  OAIHttpRequest.cpp
-  OAIHttpFileElement.cpp
-  OAIOauth.cpp)
+  OAIUserServiceApi.cpp)
 
 target_include_directories(
-  ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-                         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+  ${PROJECT_NAME}
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../common>
+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(
   ${PROJECT_NAME}
   PUBLIC Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network
-         Qt${QT_VERSION_MAJOR}::Gui)
+         Qt${QT_VERSION_MAJOR}::Gui OpenAPIQtCommon)
 
 configure_package_config_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
