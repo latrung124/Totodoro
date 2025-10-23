@@ -130,7 +130,25 @@ void ApiGatewayService::requestGetUserSettings(const std::string &userId)
 
 void ApiGatewayService::requestUpdateUserInformation(const Information &info)
 {
-	// Simulate updating user information (replace with actual implementation)
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::User);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::UserProperties userProps;
+	userProps.userId = info.userId;
+	userProps.email = info.email;
+	userProps.userName = info.username;
+	userProps.createdTime = info.createdTime;
+	userProps.lastUpdatedTime = info.lastUpdatedTime;
+	properties.property = userProps;
+	managerPtr->trigger(gateway::RequestType::UpdateUserProperties, properties);
 }
 
 void ApiGatewayService::requestUpdateUserSettings(const Settings &settings)
