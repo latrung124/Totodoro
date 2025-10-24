@@ -23,6 +23,8 @@ class APIGATEWAY_SERVICE_API ApiGatewayService : public IApiGatewayService
 public:
 	using Information = apigateway_service::utils::user::Information;
 	using Settings = apigateway_service::utils::user::Settings;
+	using Task = apigateway_service::utils::task_management::Task;
+	using TaskGroup = apigateway_service::utils::task_management::TaskGroup;
 	using GatewayUPtr = std::unique_ptr<gateway::Gateway>;
 
 	ApiGatewayService();

@@ -12,7 +12,8 @@
 #include <stdint.h>
 #include <string>
 
-namespace apigateway_service { namespace utils { namespace user {
+namespace apigateway_service { namespace utils {
+namespace user {
 
 struct Information
 {
@@ -42,6 +43,44 @@ struct Settings
 	bool autoStartNextTask;
 };
 
-}}} // namespace apigateway_service::utils::user
+} // namespace user
+
+namespace task_management {
+
+struct Task
+{
+	uint16_t totalPomodoros;
+	uint16_t completedPomodoros;
+	uint16_t progress;
+	std::string taskId;
+	std::string userId;
+	std::string groupId;
+	std::string name;
+	std::string description;
+	std::string priority;
+	std::string status;
+	std::chrono::system_clock::time_point deadline;
+	std::chrono::system_clock::time_point createdTime;
+	std::chrono::system_clock::time_point lastUpdatedTime;
+};
+
+struct TaskGroup
+{
+	std::string groupId;
+	std::string userId;
+	std::string name;
+	std::string icon;
+	std::string description;
+	uint16_t completedTasks;
+	uint16_t totalTasks;
+	std::string priority;
+	std::string status;
+	std::chrono::system_clock::time_point deadline;
+	std::chrono::system_clock::time_point createdTime;
+	std::chrono::system_clock::time_point lastUpdatedTime;
+};
+
+} // namespace task_management
+}} // namespace apigateway_service::utils
 
 #endif // API_GATEWAY_SERVICE_UTILS_H
