@@ -47,6 +47,21 @@ struct Settings
 
 namespace task_management {
 
+enum class TaskPriority : uint8_t
+{
+	low,
+	medium,
+	high
+};
+
+enum class TaskStatus : uint8_t
+{
+	idle,
+	pending,
+	in_progress,
+	completed
+};
+
 struct Task
 {
 	uint16_t totalPomodoros;
@@ -57,11 +72,26 @@ struct Task
 	std::string groupId;
 	std::string name;
 	std::string description;
-	std::string priority;
-	std::string status;
+	TaskPriority priority;
+	TaskStatus status;
 	std::chrono::system_clock::time_point deadline;
 	std::chrono::system_clock::time_point createdTime;
 	std::chrono::system_clock::time_point lastUpdatedTime;
+};
+
+enum class TaskGroupPriority : uint8_t
+{
+	low,
+	medium,
+	high
+};
+
+enum class TaskGroupStatus : uint8_t
+{
+	idle,
+	pending,
+	inprogress,
+	completed
 };
 
 struct TaskGroup
@@ -73,8 +103,8 @@ struct TaskGroup
 	std::string description;
 	uint16_t completedTasks;
 	uint16_t totalTasks;
-	std::string priority;
-	std::string status;
+	TaskGroupPriority priority;
+	TaskGroupStatus status;
 	std::chrono::system_clock::time_point deadline;
 	std::chrono::system_clock::time_point createdTime;
 	std::chrono::system_clock::time_point lastUpdatedTime;

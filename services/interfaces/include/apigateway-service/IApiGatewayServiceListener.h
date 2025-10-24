@@ -21,6 +21,12 @@ public:
 	    const apigateway_service::utils::user::Information &info) = 0;
 	virtual void onUserSettingsChanged(
 	    const apigateway_service::utils::user::Settings &settings) = 0;
+
+	virtual void onTaskCreated(const apigateway_service::utils::task_management::Task &task) = 0;
+	virtual void onTaskUpdated(const apigateway_service::utils::task_management::Task &task) = 0;
+	virtual void onTaskDeleted(const std::string &taskId) = 0;
+	virtual void onTasksRetrieved(
+	    const std::vector<apigateway_service::utils::task_management::Task> &tasks) = 0;
 };
 
 #endif // IAPI_GATEWAY_SERVICE_LISTENER_H

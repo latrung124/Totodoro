@@ -11,12 +11,16 @@
 #include "Gateway.h"
 
 #include "common/Properties.h"
+#include "common/TaskProperties.h"
 #include "common/UserProperties.h"
+#include "manager/TaskManagementApiGatewayManager.h"
 #include "manager/UserApiGatewayManager.h"
 
 namespace {
 using Information = apigateway_service::utils::user::Information;
 using Settings = apigateway_service::utils::user::Settings;
+using Task = apigateway_service::utils::task_management::Task;
+using TaskGroup = apigateway_service::utils::task_management::TaskGroup;
 } // namespace
 
 ApiGatewayService::ApiGatewayService()
@@ -229,6 +233,147 @@ void ApiGatewayService::onResponseUpdateUserSettings(const Settings &settings)
 		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
 		if (apiListener) {
 			apiListener->onUserSettingsChanged(settings);
+		}
+	}
+}
+
+void ApiGatewayService::requestCreateTask(const Task &task)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskProperties taskProps;
+	taskProps.taskId = task.taskId;
+	taskProps.userId = task.userId;
+	taskProps.groupId = task.groupId;
+	taskProps.name = task.name;
+	taskProps.description = task.description;
+	taskProps.priority = static_cast<gateway::TaskPriority>(task.priority);
+	taskProps.status = static_cast<gateway::TaskStatus>(task.status);
+	taskProps.deadline = task.deadline;
+	taskProps.createdTime = task.createdTime;
+	taskProps.lastUpdatedTime = task.lastUpdatedTime;
+	taskProps.totalPomodoros = task.totalPomodoros;
+	taskProps.completedPomodoros = task.completedPomodoros;
+	taskProps.progress = task.progress;
+	properties.property = taskProps;
+	managerPtr->trigger(gateway::RequestType::CreateTask, properties);
+}
+
+void ApiGatewayService::requestUpdateTask(const Task &task)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskProperties taskProps;
+	taskProps.taskId = task.taskId;
+	taskProps.userId = task.userId;
+	taskProps.groupId = task.groupId;
+	taskProps.name = task.name;
+	taskProps.description = task.description;
+	taskProps.priority = static_cast<gateway::TaskPriority>(task.priority);
+	taskProps.status = static_cast<gateway::TaskStatus>(task.status);
+	taskProps.deadline = task.deadline;
+	taskProps.createdTime = task.createdTime;
+	taskProps.lastUpdatedTime = task.lastUpdatedTime;
+	taskProps.totalPomodoros = task.totalPomodoros;
+	taskProps.completedPomodoros = task.completedPomodoros;
+	taskProps.progress = task.progress;
+	properties.property = taskProps;
+	managerPtr->trigger(gateway::RequestType::UpdateTask, properties);
+}
+
+void ApiGatewayService::requestDeleteTask(const std::string &taskId)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskProperties taskProps;
+	taskProps.taskId = taskId;
+	properties.property = taskProps;
+	managerPtr->trigger(gateway::RequestType::DeleteTask, properties);
+}
+
+void ApiGatewayService::requestGetTasks(const std::string &userId, const std::string &groupId)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskProperties taskProps;
+	taskProps.userId = userId;
+	taskProps.groupId = groupId;
+	properties.property = taskProps;
+	managerPtr->trigger(gateway::RequestType::GetTasks, properties);
+}
+
+void ApiGatewayService::onResponseCreateTask(const Task &task)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskCreated(task);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseUpdateTask(const Task &task)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskUpdated(task);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseDeleteTask(const std::string &taskId)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskDeleted(taskId);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseGetTasks(const std::vector<Task> &tasks)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTasksRetrieved(tasks);
 		}
 	}
 }
