@@ -27,6 +27,14 @@ public:
 	virtual void onTaskDeleted(const std::string &taskId) = 0;
 	virtual void onTasksRetrieved(
 	    const std::vector<apigateway_service::utils::task_management::Task> &tasks) = 0;
+
+	virtual void onTaskGroupCreated(
+	    const apigateway_service::utils::task_management::TaskGroup &taskGroup) = 0;
+	virtual void onTaskGroupUpdated(
+	    const apigateway_service::utils::task_management::TaskGroup &taskGroup) = 0;
+	virtual void onTaskGroupDeleted(const std::string &groupId) = 0;
+	virtual void onTaskGroupsRetrieved(
+	    const std::vector<apigateway_service::utils::task_management::TaskGroup> &taskGroups) = 0;
 };
 
 #endif // IAPI_GATEWAY_SERVICE_LISTENER_H

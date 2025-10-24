@@ -377,3 +377,141 @@ void ApiGatewayService::onResponseGetTasks(const std::vector<Task> &tasks)
 		}
 	}
 }
+
+void ApiGatewayService::requestCreateTaskGroup(const TaskGroup &taskGroup)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskGroupProperties groupProps;
+	groupProps.groupId = taskGroup.groupId;
+	groupProps.userId = taskGroup.userId;
+	groupProps.name = taskGroup.name;
+	groupProps.icon = taskGroup.icon;
+	groupProps.completedTasks = taskGroup.completedTasks;
+	groupProps.totalTasks = taskGroup.totalTasks;
+	groupProps.description = taskGroup.description;
+	groupProps.deadline = taskGroup.deadline;
+	groupProps.priority = static_cast<gateway::TaskGroupPriority>(taskGroup.priority);
+	groupProps.status = static_cast<gateway::TaskGroupStatus>(taskGroup.status);
+	groupProps.createdTime = taskGroup.createdTime;
+	groupProps.lastUpdatedTime = taskGroup.lastUpdatedTime;
+	properties.property = groupProps;
+	managerPtr->trigger(gateway::RequestType::CreateTaskGroup, properties);
+}
+
+void ApiGatewayService::requestUpdateTaskGroup(const TaskGroup &taskGroup)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskGroupProperties groupProps;
+	groupProps.groupId = taskGroup.groupId;
+	groupProps.userId = taskGroup.userId;
+	groupProps.name = taskGroup.name;
+	groupProps.icon = taskGroup.icon;
+	groupProps.completedTasks = taskGroup.completedTasks;
+	groupProps.totalTasks = taskGroup.totalTasks;
+	groupProps.description = taskGroup.description;
+	groupProps.deadline = taskGroup.deadline;
+	groupProps.priority = static_cast<gateway::TaskGroupPriority>(taskGroup.priority);
+	groupProps.status = static_cast<gateway::TaskGroupStatus>(taskGroup.status);
+	groupProps.createdTime = taskGroup.createdTime;
+	groupProps.lastUpdatedTime = taskGroup.lastUpdatedTime;
+	properties.property = groupProps;
+	managerPtr->trigger(gateway::RequestType::UpdateTaskGroup, properties);
+}
+
+void ApiGatewayService::requestDeleteTaskGroup(const std::string &groupId)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskGroupProperties groupProps;
+	groupProps.groupId = groupId;
+	properties.property = groupProps;
+	managerPtr->trigger(gateway::RequestType::DeleteTaskGroup, properties);
+}
+
+void ApiGatewayService::requestGetTaskGroups(const std::string &userId)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::TaskManagement);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::TaskGroupProperties groupProps;
+	groupProps.userId = userId;
+	properties.property = groupProps;
+	managerPtr->trigger(gateway::RequestType::GetTaskGroups, properties);
+}
+
+void ApiGatewayService::onResponseCreateTaskGroup(const TaskGroup &taskGroup)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskGroupCreated(taskGroup);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseUpdateTaskGroup(const TaskGroup &taskGroup)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskGroupUpdated(taskGroup);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseDeleteTaskGroup(const std::string &groupId)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskGroupDeleted(groupId);
+		}
+	}
+}
+
+void ApiGatewayService::onResponseGetTaskGroups(const std::vector<TaskGroup> &taskGroups)
+{
+	for (const auto &listener : m_listeners) {
+		auto apiListener = dynamic_cast<IApiGatewayServiceListener *>(listener);
+		if (apiListener) {
+			apiListener->onTaskGroupsRetrieved(taskGroups);
+		}
+	}
+}

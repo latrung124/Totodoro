@@ -64,6 +64,16 @@ public:
 	void onResponseDeleteTask(const std::string &taskId);
 	void onResponseGetTasks(const std::vector<Task> &tasks);
 
+	void requestCreateTaskGroup(const TaskGroup &taskGroup);
+	void requestUpdateTaskGroup(const TaskGroup &taskGroup);
+	void requestDeleteTaskGroup(const std::string &groupId);
+	void requestGetTaskGroups(const std::string &userId);
+
+	void onResponseCreateTaskGroup(const TaskGroup &taskGroup);
+	void onResponseUpdateTaskGroup(const TaskGroup &taskGroup);
+	void onResponseDeleteTaskGroup(const std::string &groupId);
+	void onResponseGetTaskGroups(const std::vector<TaskGroup> &taskGroups);
+
 private:
 	std::vector<IServiceListener *> m_listeners; // TODO: change to map for faster access the listener
 	GatewayUPtr m_gateway;
