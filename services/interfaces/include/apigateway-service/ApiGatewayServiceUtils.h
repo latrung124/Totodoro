@@ -111,6 +111,39 @@ struct TaskGroup
 };
 
 } // namespace task_management
+
+namespace pomodoro {
+
+enum class PomodoroSessionType : uint8_t
+{
+	short_break,
+	long_break
+};
+
+enum class PomodoroSessionStatus : uint8_t
+{
+	idle,
+	inprogress,
+	pending,
+	completed
+};
+
+struct Session
+{
+	std::string sessionId;
+	std::string userId;
+	std::string taskId;
+	PomodoroSessionType type;
+	PomodoroSessionStatus status;
+	uint16_t progress;
+	uint16_t numberInCycle;
+	std::chrono::system_clock::time_point startTime;
+	std::chrono::system_clock::time_point endTime;
+	std::chrono::system_clock::time_point lastUpdatedTime;
+};
+
+} // namespace pomodoro
+
 }} // namespace apigateway_service::utils
 
 #endif // API_GATEWAY_SERVICE_UTILS_H
