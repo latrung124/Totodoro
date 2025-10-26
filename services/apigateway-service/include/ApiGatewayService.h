@@ -25,6 +25,7 @@ public:
 	using Settings = apigateway_service::utils::user::Settings;
 	using Task = apigateway_service::utils::task_management::Task;
 	using TaskGroup = apigateway_service::utils::task_management::TaskGroup;
+	using Session = apigateway_service::utils::pomodoro::Session;
 	using GatewayUPtr = std::unique_ptr<gateway::Gateway>;
 
 	ApiGatewayService();
@@ -73,6 +74,16 @@ public:
 	void onResponseUpdateTaskGroup(const TaskGroup &taskGroup);
 	void onResponseDeleteTaskGroup(const std::string &groupId);
 	void onResponseGetTaskGroups(const std::vector<TaskGroup> &taskGroups);
+
+	void requestCreateSession(const Session &session);
+	void requestUpdateSession(const Session &session);
+	void requestDeleteSession(const std::string &sessionId);
+	void requestGetSessions(const std::string &userId, const std::string &taskId);
+
+	void onResponseCreateSession(const Session &session);
+	void onResponseUpdateSession(const Session &session);
+	void onResponseDeleteSession(const std::string &sessionId);
+	void onResponseGetSessions(const std::vector<Session> &sessions);
 
 private:
 	std::vector<IServiceListener *> m_listeners; // TODO: change to map for faster access the listener

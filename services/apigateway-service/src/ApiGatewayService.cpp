@@ -10,6 +10,7 @@
 
 #include "Gateway.h"
 
+#include "common/PomodoroProperties.h"
 #include "common/Properties.h"
 #include "common/TaskProperties.h"
 #include "common/UserProperties.h"
@@ -514,4 +515,95 @@ void ApiGatewayService::onResponseGetTaskGroups(const std::vector<TaskGroup> &ta
 			apiListener->onTaskGroupsRetrieved(taskGroups);
 		}
 	}
+}
+
+void ApiGatewayService::requestCreateSession(const Session &session)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::Pomodoro);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::PomodoroSessionProperties sessionProps;
+	sessionProps.sessionId = session.sessionId;
+	sessionProps.userId = session.userId;
+	sessionProps.taskId = session.taskId;
+	sessionProps.type = static_cast<gateway::PomodoroSessionType>(session.type);
+	sessionProps.status = static_cast<gateway::PomodoroSessionStatus>(session.status);
+	sessionProps.startTime = session.startTime;
+	sessionProps.endTime = session.endTime;
+	sessionProps.lastUpdatedTime = session.lastUpdatedTime;
+	properties.property = sessionProps;
+	managerPtr->trigger(gateway::RequestType::CreatePomodoroSession, properties);
+}
+
+void ApiGatewayService::requestUpdateSession(const Session &session)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::Pomodoro);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::PomodoroSessionProperties sessionProps;
+	sessionProps.sessionId = session.sessionId;
+	sessionProps.userId = session.userId;
+	sessionProps.taskId = session.taskId;
+	sessionProps.type = static_cast<gateway::PomodoroSessionType>(session.type);
+	sessionProps.status = static_cast<gateway::PomodoroSessionStatus>(session.status);
+	sessionProps.startTime = session.startTime;
+	sessionProps.endTime = session.endTime;
+	sessionProps.lastUpdatedTime = session.lastUpdatedTime;
+	properties.property = sessionProps;
+	managerPtr->trigger(gateway::RequestType::UpdatePomodoroSession, properties);
+}
+
+void ApiGatewayService::requestDeleteSession(const std::string &sessionId)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::Pomodoro);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::PomodoroSessionProperties sessionProps;
+	sessionProps.sessionId = sessionId;
+	properties.property = sessionProps;
+	managerPtr->trigger(gateway::RequestType::DeletePomodoroSession, properties);
+}
+
+void ApiGatewayService::requestGetSessions(const std::string &userId, const std::string &taskId)
+{
+	if (!m_gateway) {
+		return;
+	}
+
+	auto managerWeakPtr = m_gateway->getApiGatewayManager(gateway::RouteType::Pomodoro);
+	auto managerPtr = managerWeakPtr.lock();
+	if (!managerPtr) {
+		return;
+	}
+
+	gateway::Properties properties;
+	gateway::PomodoroSessionProperties sessionProps;
+	sessionProps.userId = userId;
+	sessionProps.taskId = taskId;
+	properties.property = sessionProps;
+	managerPtr->trigger(gateway::RequestType::GetPomodoroSessions, properties);
 }
