@@ -87,6 +87,7 @@ set(CORE_SOURCES
     core/services/ServiceManager.h
     core/GuiApplication.h
     core/services/listeners/WMediaServiceListener.h
+    core/services/listeners/ApiGatewayServiceListener.h
     core/services/consumer/ServiceConsumer.h
     core/services/consumer/ServiceMessageConsumer.h
     core/services/producer/ServiceProducer.h
@@ -113,6 +114,7 @@ set(CORE_SOURCES
     core/services/producer/window-service/WPreviousAsyncMessageCreator.cpp
     core/services/producer/window-service/WNextAsyncMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
+    core/services/listeners/ApiGatewayServiceListener.cpp
     core/services/queue/MessageQueue.cpp
     core/services/ServiceManager.cpp)
 
@@ -238,10 +240,10 @@ set(QML_PLUGINS
     pomodoro_moduleplugin
     userprofile_moduleplugin)
 
-set(SERVICE_LIBRARIES WMediaService ServiceFactory)
+set(SERVICE_LIBRARIES WMediaService ApiGatewayService ServiceFactory)
 
 target_link_libraries(appTotodoro PRIVATE Qt6::Quick ${QML_PLUGINS}
-                                          ${SERVICE_LIBRARIES} gateway)
+                                          ${SERVICE_LIBRARIES})
 
 include(GNUInstallDirs)
 install(
