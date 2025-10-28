@@ -22,6 +22,7 @@ enum class MessageId : uint16_t
 	WPlayAsyncMessage = 6,
 	WNextAsyncMessage = 7,
 	WPreviousAsyncMessage = 8,
+	UserInformationMessage = 9,
 };
 
 #endif // SERVICE_MESSAGE_ID_H

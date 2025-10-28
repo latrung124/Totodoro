@@ -19,6 +19,7 @@
 class MediaPlayerViewModel;
 class HomeViewModel;
 class ViewModelFactory;
+class UserProfileViewModel;
 
 class ViewModelController : public QObject
 {
@@ -37,8 +38,10 @@ public:
 
 	void initMediaPlayerView();
 	void initHomeView();
+	void initUserProfileView();
 
 	MediaPlayerViewModel *mediaPlayerViewModel();
+	UserProfileViewModel *userProfileViewModel();
 
 	// INVOKEABLE FUNCTIONS
 	Q_INVOKABLE void tabNavigation(MainTabType tabType);

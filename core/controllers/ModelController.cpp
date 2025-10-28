@@ -10,6 +10,7 @@
 #include "core/controllers/ViewModelController.h"
 
 #include "models/mediaplayer/MediaPlayerModel.h"
+#include "models/userprofile/UserInformationModel.h"
 
 ModelController &ModelController::getInstance()
 {
@@ -20,6 +21,7 @@ ModelController &ModelController::getInstance()
 ModelController::ModelController(QObject *parent)
     : QObject(parent)
     , m_mediaPlayerModel(std::make_shared<MediaPlayerModel>())
+    , m_userInformationModel(std::make_shared<UserInformationModel>())
 {
 	initConnections();
 }
@@ -40,4 +42,9 @@ void ModelController::deinitConnections()
 ModelController::MediaPlayerModelWPtr ModelController::getMediaPlayerModel() const
 {
 	return m_mediaPlayerModel;
+}
+
+ModelController::UserInformationModelWPtr ModelController::getUserInformationModel() const
+{
+	return m_userInformationModel;
 }
