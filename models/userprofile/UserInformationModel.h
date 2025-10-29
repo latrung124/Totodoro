@@ -10,11 +10,10 @@
 
 #include "models/DatabaseModel.h"
 
-#include <memory>
 #include <mutex>
 #include <string>
 
-class UserInformationModel
+class UserInformationModel : public DatabaseModel
 {
 public:
 	UserInformationModel();

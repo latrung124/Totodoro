@@ -13,6 +13,7 @@
 #include "core/factories/view-model-producers/HomeVMProducer.h"
 #include "core/factories/view-model-producers/MediaPlayerVMProducer.h"
 #include "core/factories/view-model-producers/UserProfileVMProducer.h"
+#include "core/factories/view-model-producers/UserSettingsVMProducer.h"
 
 #include "core/factories/ViewModelFactory.h"
 
@@ -21,6 +22,7 @@
 #include "view-models/home/HomeViewModel.h"
 #include "view-models/mediaplayer/MediaPlayerViewModel.h"
 #include "view-models/userprofile/UserProfileViewModel.h"
+#include "view-models/userprofile/UserSettingsViewModel.h"
 
 ViewModelController &ViewModelController::getInstance()
 {
@@ -43,6 +45,7 @@ void ViewModelController::registerViewModels()
 	m_vmFactory->registerViewModel<MediaPlayerVMProducer>();
 	m_vmFactory->registerViewModel<HomeVMProducer>();
 	m_vmFactory->registerViewModel<UserProfileVMProducer>();
+	m_vmFactory->registerViewModel<UserSettingsVMProducer>();
 }
 
 void ViewModelController::setRootObject(QObject *root)
@@ -117,6 +120,27 @@ UserProfileViewModel *ViewModelController::userProfileViewModel()
 	return dynamic_cast<UserProfileViewModel *>(it->second.get());
 }
 
+UserSettingsViewModel *ViewModelController::userSettingsViewModel()
+{
+	std::type_index typeIndex = std::type_index(typeid(UserSettingsViewModel));
+	auto it = m_viewModels.find(typeIndex);
+	if (it == m_viewModels.end()) {
+		auto userSettingsVM = m_vmFactory->createViewModel<UserSettingsVMProducer>();
+		if (userSettingsVM) {
+			m_viewModels[typeIndex] = std::move(userSettingsVM);
+			it = m_viewModels.find(typeIndex); // Update the iterator after insertion
+		}
+	}
+
+	// Ensure the iterator is valid before dereferencing
+	if (it != m_viewModels.end() && !it->second) {
+		m_viewModels[typeIndex] = m_vmFactory->createViewModel<UserSettingsVMProducer>();
+		it = m_viewModels.find(typeIndex); // Update the iterator again
+	}
+
+	return dynamic_cast<UserSettingsViewModel *>(it->second.get());
+}
+
 void ViewModelController::initMediaPlayerView()
 {
 	if (!m_rootObject) {
@@ -180,6 +204,27 @@ void ViewModelController::initUserProfileView()
 	auto userProfileVM = userProfileViewModel();
 	if (userProfileVM) {
 		obj->setProperty("model", QVariant::fromValue(userProfileVM));
+	}
+}
+
+void ViewModelController::initUserSettingsView()
+{
+	if (!m_rootObject) {
+		qDebug() << "ViewModelController::initUserSettingsView: Invalid root object";
+		return;
+	}
+
+	auto obj = m_rootObject->findChild<QObject *>(
+	    "userSettingsView"); // find QtObject with objectName property
+
+	if (!obj) {
+		qDebug() << "ViewModelController::initUserSettingsView: Invalid object passed";
+		return;
+	}
+
+	auto userSettingsVM = userSettingsViewModel();
+	if (userSettingsVM) {
+		obj->setProperty("model", QVariant::fromValue(userSettingsVM));
 	}
 }
 

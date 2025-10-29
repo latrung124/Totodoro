@@ -42,6 +42,7 @@ set(VM_SOURCES
     view-models/pomodoro/PomodoroViewModel.h
     view-models/pomodoro/PomodoroTitleViewModel.h
     view-models/userprofile/UserProfileViewModel.h
+    view-models/userprofile/UserSettingsViewModel.h
     view-models/taskmanagement/TaskGroupsViewModel.h
     view-models/taskmanagement/TaskGroupViewModel.h
     view-models/taskmanagement/TasksViewModel.h
@@ -52,6 +53,7 @@ set(VM_SOURCES
     view-models/pomodoro/PomodoroViewModel.cpp
     view-models/pomodoro/PomodoroTitleViewModel.cpp
     view-models/userprofile/UserProfileViewModel.cpp
+    view-models/userprofile/UserSettingsViewModel.cpp
     view-models/taskmanagement/TaskGroupsViewModel.cpp
     view-models/taskmanagement/TaskGroupViewModel.cpp
     view-models/taskmanagement/TasksViewModel.cpp
@@ -67,11 +69,13 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/mediaplayer/MediaPlayerModel.h
     models/mediaplayer/MediaPlaybackModel.h
     models/userprofile/UserInformationModel.h
+    models/userprofile/UserSettingsModel.h
     models/DatabaseModel.cpp
     models/SystemDataModel.cpp
     models/mediaplayer/MediaPlayerModel.cpp
     models/mediaplayer/MediaPlaybackModel.cpp
-    models/userprofile/UserInformationModel.cpp)
+    models/userprofile/UserInformationModel.cpp
+    models/userprofile/UserSettingsModel.cpp)
 
 # set core sources
 set(CONTROLLER_SOURCES
@@ -104,6 +108,7 @@ set(CORE_SOURCES
     core/services/producer/window-service/WPreviousAsyncMessageCreator.h
     core/services/producer/window-service/WNextAsyncMessageCreator.h
     core/services/producer/apigateway-service/UserInformationMessageCreator.h
+    core/services/producer/apigateway-service/UserSettingsMessageCreator.h
     core/services/queue/MessageQueue.h
     core/GuiApplication.cpp
     core/services/consumer/ServiceMessageConsumer.cpp
@@ -117,6 +122,7 @@ set(CORE_SOURCES
     core/services/producer/window-service/WPreviousAsyncMessageCreator.cpp
     core/services/producer/window-service/WNextAsyncMessageCreator.cpp
     core/services/producer/apigateway-service/UserInformationMessageCreator.cpp
+    core/services/producer/apigateway-service/UserSettingsMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
     core/services/listeners/ApiGatewayServiceListener.cpp
     core/services/queue/MessageQueue.cpp
@@ -129,9 +135,11 @@ set(CORE_FACTORY_SOURCES
     core/factories/view-model-producers/HomeVMProducer.h
     core/factories/view-model-producers/MediaPlayerVMProducer.h
     core/factories/view-model-producers/UserProfileVMProducer.h
+    core/factories/view-model-producers/UserSettingsVMProducer.h
     core/factories/view-model-producers/HomeVMProducer.cpp
     core/factories/view-model-producers/MediaPlayerVMProducer.cpp
-    core/factories/view-model-producers/UserProfileVMProducer.cpp)
+    core/factories/view-model-producers/UserProfileVMProducer.cpp
+    core/factories/view-model-producers/UserSettingsVMProducer.cpp)
 
 set(CORE_SERVICE_STRATEGIES
     core/services/strategies/IStrategy.h
@@ -144,6 +152,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WPreviousAsyncExtractStrategy.h
     core/services/strategies/window-service/WNextAsyncExtractStrategy.h
     core/services/strategies/apigateway-service/UserInformationExtractStrategy.h
+    core/services/strategies/apigateway-service/UserSettingsExtractStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -153,7 +162,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WPreviousAsyncExtractStrategy.cpp
     core/services/strategies/window-service/WNextAsyncExtractStrategy.cpp
     core/services/strategies/apigateway-service/UserInformationExtractStrategy.cpp
-)
+    core/services/strategies/apigateway-service/UserSettingsExtractStrategy.cpp)
 
 set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/Message.h
@@ -167,6 +176,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/window-service/WPreviousAsyncMessage.h
     core/services/messages/window-service/WNextAsyncMessage.h
     core/services/messages/apigateway-service/UserInformationMessage.h
+    core/services/messages/apigateway-service/UserSettingsMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -175,7 +185,8 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/window-service/WPauseAsyncMessage.cpp
     core/services/messages/window-service/WPreviousAsyncMessage.cpp
     core/services/messages/window-service/WNextAsyncMessage.cpp
-    core/services/messages/apigateway-service/UserInformationMessage.cpp)
+    core/services/messages/apigateway-service/UserInformationMessage.cpp
+    core/services/messages/apigateway-service/UserSettingsMessage.cpp)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 
