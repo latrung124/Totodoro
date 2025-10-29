@@ -29,6 +29,7 @@ void UserInformationExtractStrategy::extract(const UserInformationMessage &messa
 	auto userInfo = message.getUserInformation();
 	auto model = ModelController::getInstance().getUserInformationModel(); // still in worker thread
 	if (auto modelPtr = model.lock()) {
+		modelPtr->setUserId(userInfo.userId);
 		modelPtr->setUsername(userInfo.username);
 		modelPtr->setEmail(userInfo.email);
 		// TODO: Set other user information as needed

@@ -17,6 +17,28 @@ UserInformationModel::UserInformationModel() = default;
 
 UserInformationModel::~UserInformationModel() = default;
 
+std::string UserInformationModel::getUserId() const
+{
+	std::lock_guard<std::mutex> lock(mutex);
+	return m_userId;
+}
+
+void UserInformationModel::setUserId(const std::string &userId)
+{
+	{
+		std::lock_guard<std::mutex> lock(mutex);
+		if (m_userId != userId) {
+			m_userId = userId;
+		}
+
+		auto viewModel = ViewModelController::getInstance().userProfileViewModel();
+		if (viewModel) {
+			QMetaObject::invokeMethod(
+			    viewModel, "onUserIdChanged", Q_ARG(QString, QString::fromStdString(m_userId)));
+		}
+	}
+}
+
 std::string UserInformationModel::getUsername() const
 {
 	std::lock_guard<std::mutex> lock(mutex);

@@ -21,6 +21,9 @@ public:
 	~UserInformationModel();
 
 	// Getters and setters for user information
+	std::string getUserId() const;
+	void setUserId(const std::string &userId);
+
 	std::string getUsername() const;
 	void setUsername(const std::string &username);
 
@@ -33,6 +36,7 @@ public:
 	// TODO: Other member functions as needed
 
 private:
+	std::string m_userId;
 	std::string m_username;
 	std::string m_email;
 	std::string m_avatarUrl;
