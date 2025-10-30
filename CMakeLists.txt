@@ -70,12 +70,14 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/mediaplayer/MediaPlaybackModel.h
     models/userprofile/UserInformationModel.h
     models/userprofile/UserSettingsModel.h
+    models/session/PomodoroModel.h
     models/DatabaseModel.cpp
     models/SystemDataModel.cpp
     models/mediaplayer/MediaPlayerModel.cpp
     models/mediaplayer/MediaPlaybackModel.cpp
     models/userprofile/UserInformationModel.cpp
-    models/userprofile/UserSettingsModel.cpp)
+    models/userprofile/UserSettingsModel.cpp
+    models/session/PomodoroModel.cpp)
 
 # set core sources
 set(CONTROLLER_SOURCES
