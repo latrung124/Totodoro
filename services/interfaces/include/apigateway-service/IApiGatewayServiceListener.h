@@ -35,6 +35,8 @@ public:
 	virtual void onTaskGroupDeleted(const std::string &groupId) = 0;
 	virtual void onTaskGroupsRetrieved(
 	    const std::vector<apigateway_service::utils::task_management::TaskGroup> &taskGroups) = 0;
+
+	virtual void onSessionChanged(const apigateway_service::utils::pomodoro::Session &session) = 0;
 };
 
 #endif // IAPI_GATEWAY_SERVICE_LISTENER_H

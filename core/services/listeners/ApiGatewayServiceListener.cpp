@@ -64,3 +64,9 @@ void ApiGatewayServiceListener::onTaskGroupsRetrieved(
 {
 	// Implementation goes here
 }
+
+void ApiGatewayServiceListener::onSessionChanged(
+    const apigateway_service::utils::pomodoro::Session &session)
+{
+	// Implementation goes here
+}

@@ -33,6 +33,8 @@ public:
 	void onTaskGroupsRetrieved(
 	    const std::vector<apigateway_service::utils::task_management::TaskGroup> &taskGroups)
 	    override;
+
+	void onSessionChanged(const apigateway_service::utils::pomodoro::Session &session) override;
 };
 
 #endif // API_GATEWAY_SERVICE_LISTENER_H
