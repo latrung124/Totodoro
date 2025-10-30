@@ -15,6 +15,7 @@
 class MediaPlayerModel;
 class UserInformationModel;
 class UserSettingsModel;
+class PomodoroModel;
 
 class ModelController : public QObject
 {
@@ -27,6 +28,8 @@ public:
 	using UserInformationModelWPtr = std::weak_ptr<UserInformationModel>;
 	using UserSettingsModelPtr = std::shared_ptr<UserSettingsModel>;
 	using UserSettingsModelWPtr = std::weak_ptr<UserSettingsModel>;
+	using PomodoroModelPtr = std::shared_ptr<PomodoroModel>;
+	using PomodoroModelWPtr = std::weak_ptr<PomodoroModel>;
 
 	static ModelController &getInstance();
 
@@ -35,6 +38,7 @@ public:
 	MediaPlayerModelWPtr getMediaPlayerModel() const;
 	UserInformationModelWPtr getUserInformationModel() const;
 	UserSettingsModelWPtr getUserSettingsModel() const;
+	PomodoroModelWPtr getPomodoroModel() const;
 
 private:
 	explicit ModelController(QObject *parent = nullptr);
@@ -45,6 +49,7 @@ private:
 	MediaPlayerModelPtr m_mediaPlayerModel;
 	UserInformationModelPtr m_userInformationModel;
 	UserSettingsModelPtr m_userSettingsModel;
+	PomodoroModelPtr m_pomodoroModel;
 };
 
 #endif // MODELCONTROLLER_H

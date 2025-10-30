@@ -19,6 +19,21 @@ public:
 	PomodoroModel();
 	~PomodoroModel();
 
+	enum class SessionType : uint8_t
+	{
+		ShortBreak = 0,
+		LongBreak,
+		Pomodoro
+	};
+
+	enum class SessionStatus : uint8_t
+	{
+		Idle = 0,
+		InRunning,
+		Paused,
+		Completed
+	};
+
 	// Getters and setters for Pomodoro session properties
 	std::string getSessionId() const;
 	void setSessionId(const std::string &sessionId);
@@ -26,14 +41,17 @@ public:
 	std::string getUserId() const;
 	void setUserId(const std::string &userId);
 
+	std::string getTaskId() const;
+	void setTaskId(const std::string &taskId);
+
 	uint32_t getDuration() const;
 	void setDuration(uint32_t duration);
 
-	std::string getStatus() const;
-	void setStatus(const std::string &status);
+	SessionStatus getStatus() const;
+	void setStatus(const SessionStatus &status);
 
-	std::string getType() const;
-	void setType(const std::string &type);
+	SessionType getType() const;
+	void setType(const SessionType &type);
 
 	uint16_t getProgress() const;
 	void setProgress(uint16_t progress);
@@ -44,9 +62,10 @@ public:
 private:
 	std::string m_sessionId = "";
 	std::string m_userId = "";
+	std::string m_taskId = "";
 	uint32_t m_duration = 0;
-	std::string m_status = "";
-	std::string m_type = "";
+	SessionStatus m_status = SessionStatus::Idle;
+	SessionType m_type = SessionType::Pomodoro;
 	uint16_t m_progress = 0;
 	uint16_t m_numberInCycle = 0;
 

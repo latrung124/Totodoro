@@ -155,6 +155,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WNextAsyncExtractStrategy.h
     core/services/strategies/apigateway-service/UserInformationExtractStrategy.h
     core/services/strategies/apigateway-service/UserSettingsExtractStrategy.h
+    core/services/strategies/apigateway-service/PomodoroExtractStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -164,7 +165,8 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WPreviousAsyncExtractStrategy.cpp
     core/services/strategies/window-service/WNextAsyncExtractStrategy.cpp
     core/services/strategies/apigateway-service/UserInformationExtractStrategy.cpp
-    core/services/strategies/apigateway-service/UserSettingsExtractStrategy.cpp)
+    core/services/strategies/apigateway-service/UserSettingsExtractStrategy.cpp
+    core/services/strategies/apigateway-service/PomodoroExtractStrategy.cpp)
 
 set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/Message.h
@@ -179,6 +181,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/window-service/WNextAsyncMessage.h
     core/services/messages/apigateway-service/UserInformationMessage.h
     core/services/messages/apigateway-service/UserSettingsMessage.h
+    core/services/messages/apigateway-service/PomodoroMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -188,7 +191,8 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/window-service/WPreviousAsyncMessage.cpp
     core/services/messages/window-service/WNextAsyncMessage.cpp
     core/services/messages/apigateway-service/UserInformationMessage.cpp
-    core/services/messages/apigateway-service/UserSettingsMessage.cpp)
+    core/services/messages/apigateway-service/UserSettingsMessage.cpp
+    core/services/messages/apigateway-service/PomodoroMessage.cpp)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 

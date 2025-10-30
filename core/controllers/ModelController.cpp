@@ -8,6 +8,7 @@
 #include "ModelController.h"
 
 #include "models/mediaplayer/MediaPlayerModel.h"
+#include "models/session/PomodoroModel.h"
 #include "models/userprofile/UserInformationModel.h"
 #include "models/userprofile/UserSettingsModel.h"
 
@@ -22,6 +23,7 @@ ModelController::ModelController(QObject *parent)
     , m_mediaPlayerModel(std::make_shared<MediaPlayerModel>())
     , m_userInformationModel(std::make_shared<UserInformationModel>())
     , m_userSettingsModel(std::make_shared<UserSettingsModel>())
+    , m_pomodoroModel(std::make_shared<PomodoroModel>())
 {
 	initConnections();
 }
@@ -52,4 +54,9 @@ ModelController::UserInformationModelWPtr ModelController::getUserInformationMod
 ModelController::UserSettingsModelWPtr ModelController::getUserSettingsModel() const
 {
 	return m_userSettingsModel;
+}
+
+ModelController::PomodoroModelWPtr ModelController::getPomodoroModel() const
+{
+	return m_pomodoroModel;
 }

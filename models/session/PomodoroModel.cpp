@@ -41,6 +41,20 @@ void PomodoroModel::setUserId(const std::string &userId)
 	}
 }
 
+std::string PomodoroModel::getTaskId() const
+{
+	std::lock_guard<std::mutex> lock(m_mutex);
+	return m_taskId;
+}
+
+void PomodoroModel::setTaskId(const std::string &taskId)
+{
+	std::lock_guard<std::mutex> lock(m_mutex);
+	if (m_taskId != taskId) {
+		m_taskId = taskId;
+	}
+}
+
 uint32_t PomodoroModel::getDuration() const
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
@@ -55,30 +69,31 @@ void PomodoroModel::setDuration(uint32_t duration)
 	}
 }
 
-std::string PomodoroModel::getStatus() const
-{
-	std::lock_guard<std::mutex> lock(m_mutex);
-	return m_status;
-}
-
-void PomodoroModel::setStatus(const std::string &status)
-{
-	std::lock_guard<std::mutex> lock(m_mutex);
-	if (m_status != status) {
-		m_status = status;
-	}
-}
-
-std::string PomodoroModel::getType() const
+PomodoroModel::SessionType PomodoroModel::getType() const
 {
 	std::lock_guard<std::mutex> lock(m_mutex);
 	return m_type;
 }
 
-void PomodoroModel::setType(const std::string &type)
+void PomodoroModel::setType(const SessionType &type)
 {
+	std::lock_guard<std::mutex> lock(m_mutex);
 	if (m_type != type) {
 		m_type = type;
+	}
+}
+
+PomodoroModel::SessionStatus PomodoroModel::getStatus() const
+{
+	std::lock_guard<std::mutex> lock(m_mutex);
+	return m_status;
+}
+
+void PomodoroModel::setStatus(const SessionStatus &status)
+{
+	std::lock_guard<std::mutex> lock(m_mutex);
+	if (m_status != status) {
+		m_status = status;
 	}
 }
 
