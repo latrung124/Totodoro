@@ -24,7 +24,8 @@ enum class MessageId : uint16_t
 	WPreviousAsyncMessage = 8,
 	UserInformationMessage = 9,
 	UserSettingsMessage = 10,
-	PomodoroMessage = 11
+	PomodoroMessage = 11,
+	TaskMessage = 12
 };
 
 #endif // SERVICE_MESSAGE_ID_H
