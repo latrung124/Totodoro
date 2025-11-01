@@ -25,7 +25,8 @@ enum class MessageId : uint16_t
 	UserInformationMessage = 9,
 	UserSettingsMessage = 10,
 	PomodoroMessage = 11,
-	TaskMessage = 12
+	TaskMessage = 12,
+	TaskGroupMessage = 13,
 };
 
 #endif // SERVICE_MESSAGE_ID_H

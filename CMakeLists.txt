@@ -114,6 +114,7 @@ set(CORE_SOURCES
     core/services/producer/apigateway-service/UserInformationMessageCreator.h
     core/services/producer/apigateway-service/UserSettingsMessageCreator.h
     core/services/producer/apigateway-service/TaskMessageCreator.h
+    core/services/producer/apigateway-service/TaskGroupMessageCreator.h
     core/services/queue/MessageQueue.h
     core/GuiApplication.cpp
     core/services/consumer/ServiceMessageConsumer.cpp
@@ -129,6 +130,7 @@ set(CORE_SOURCES
     core/services/producer/apigateway-service/UserInformationMessageCreator.cpp
     core/services/producer/apigateway-service/UserSettingsMessageCreator.cpp
     core/services/producer/apigateway-service/TaskMessageCreator.cpp
+    core/services/producer/apigateway-service/TaskGroupMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
     core/services/listeners/ApiGatewayServiceListener.cpp
     core/services/queue/MessageQueue.cpp
@@ -161,6 +163,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/UserSettingsExtractStrategy.h
     core/services/strategies/apigateway-service/PomodoroExtractStrategy.h
     core/services/strategies/apigateway-service/TaskExtractStrategy.h
+    core/services/strategies/apigateway-service/TaskGroupExtractStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -172,7 +175,8 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/UserInformationExtractStrategy.cpp
     core/services/strategies/apigateway-service/UserSettingsExtractStrategy.cpp
     core/services/strategies/apigateway-service/PomodoroExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskExtractStrategy.cpp)
+    core/services/strategies/apigateway-service/TaskExtractStrategy.cpp
+    core/services/strategies/apigateway-service/TaskGroupExtractStrategy.cpp)
 
 set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/Message.h
@@ -189,6 +193,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/UserSettingsMessage.h
     core/services/messages/apigateway-service/PomodoroMessage.h
     core/services/messages/apigateway-service/TaskMessage.h
+    core/services/messages/apigateway-service/TaskGroupMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -200,7 +205,8 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/UserInformationMessage.cpp
     core/services/messages/apigateway-service/UserSettingsMessage.cpp
     core/services/messages/apigateway-service/PomodoroMessage.cpp
-    core/services/messages/apigateway-service/TaskMessage.cpp)
+    core/services/messages/apigateway-service/TaskMessage.cpp
+    core/services/messages/apigateway-service/TaskGroupMessage.cpp)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 
