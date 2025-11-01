@@ -72,6 +72,7 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/userprofile/UserSettingsModel.h
     models/session/PomodoroModel.h
     models/taskmanagement/TaskModel.h
+    models/taskmanagement/TaskGroupModel.h
     models/DatabaseModel.cpp
     models/SystemDataModel.cpp
     models/mediaplayer/MediaPlayerModel.cpp
@@ -79,7 +80,8 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/userprofile/UserInformationModel.cpp
     models/userprofile/UserSettingsModel.cpp
     models/session/PomodoroModel.cpp
-    models/taskmanagement/TaskModel.cpp)
+    models/taskmanagement/TaskModel.cpp
+    models/taskmanagement/TaskGroupModel.cpp)
 
 # set core sources
 set(CONTROLLER_SOURCES
