@@ -7,16 +7,29 @@
 
 #include "ApiGatewayServiceListener.h"
 
+#include "core/services/producer/apigateway-service/UserInformationMessageCreator.h"
+#include "core/services/producer/apigateway-service/UserSettingsMessageCreator.h"
+#include "core/services/producer/ServiceMessageProducer.h"
+#include "core/services/queue/MessageQueue.h"
+
 void ApiGatewayServiceListener::onUserInformationChanged(
     const apigateway_service::utils::user::Information &info)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<UserInformationMessageCreator>(
+	    info);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onUserSettingsChanged(
     const apigateway_service::utils::user::Settings &settings)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<UserSettingsMessageCreator>(
+	    settings);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTaskCreated(
