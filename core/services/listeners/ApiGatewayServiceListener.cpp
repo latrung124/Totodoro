@@ -7,6 +7,8 @@
 
 #include "ApiGatewayServiceListener.h"
 
+#include "core/services/producer/apigateway-service/TaskDeletedMessageCreator.h"
+#include "core/services/producer/apigateway-service/TaskMessageCreator.h"
 #include "core/services/producer/apigateway-service/UserInformationMessageCreator.h"
 #include "core/services/producer/apigateway-service/UserSettingsMessageCreator.h"
 #include "core/services/producer/ServiceMessageProducer.h"
@@ -35,18 +37,27 @@ void ApiGatewayServiceListener::onUserSettingsChanged(
 void ApiGatewayServiceListener::onTaskCreated(
     const apigateway_service::utils::task_management::Task &task)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskMessageCreator>(task);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTaskUpdated(
     const apigateway_service::utils::task_management::Task &task)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskMessageCreator>(task);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTaskDeleted(const std::string &taskId)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskDeletedMessageCreator>(taskId);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTasksRetrieved(
