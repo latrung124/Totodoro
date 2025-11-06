@@ -119,6 +119,7 @@ set(CORE_SOURCES
     core/services/producer/apigateway-service/TaskDeletedMessageCreator.h
     core/services/producer/apigateway-service/TasksRetrievedMessageCreator.h
     core/services/producer/apigateway-service/TaskGroupMessageCreator.h
+    core/services/producer/apigateway-service/TaskGroupDeletedMessageCreator.h
     core/services/queue/MessageQueue.h
     core/GuiApplication.cpp
     core/services/consumer/ServiceMessageConsumer.cpp
@@ -137,6 +138,7 @@ set(CORE_SOURCES
     core/services/producer/apigateway-service/TaskDeletedMessageCreator.cpp
     core/services/producer/apigateway-service/TasksRetrievedMessageCreator.cpp
     core/services/producer/apigateway-service/TaskGroupMessageCreator.cpp
+    core/services/producer/apigateway-service/TaskGroupDeletedMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
     core/services/listeners/ApiGatewayServiceListener.cpp
     core/services/queue/MessageQueue.cpp
@@ -172,6 +174,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/TaskDeletedExtractStrategy.h
     core/services/strategies/apigateway-service/TasksRetrievedExtractStrategy.h
     core/services/strategies/apigateway-service/TaskGroupExtractStrategy.h
+    core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -186,7 +189,9 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/TaskExtractStrategy.cpp
     core/services/strategies/apigateway-service/TaskDeletedExtractStrategy.cpp
     core/services/strategies/apigateway-service/TasksRetrievedExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskGroupExtractStrategy.cpp)
+    core/services/strategies/apigateway-service/TaskGroupExtractStrategy.cpp
+    core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.cpp
+)
 
 set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/Message.h
@@ -206,6 +211,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/TaskDeletedMessage.h
     core/services/messages/apigateway-service/TasksRetrievedMessage.h
     core/services/messages/apigateway-service/TaskGroupMessage.h
+    core/services/messages/apigateway-service/TaskGroupDeletedMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -220,7 +226,8 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/TaskMessage.cpp
     core/services/messages/apigateway-service/TaskDeletedMessage.cpp
     core/services/messages/apigateway-service/TasksRetrievedMessage.cpp
-    core/services/messages/apigateway-service/TaskGroupMessage.cpp)
+    core/services/messages/apigateway-service/TaskGroupMessage.cpp
+    core/services/messages/apigateway-service/TaskGroupDeletedMessage.cpp)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 

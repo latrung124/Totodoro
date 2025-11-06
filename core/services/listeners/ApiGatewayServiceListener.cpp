@@ -74,18 +74,27 @@ void ApiGatewayServiceListener::onTasksRetrieved(
 void ApiGatewayServiceListener::onTaskGroupCreated(
     const apigateway_service::utils::task_management::TaskGroup &taskGroup)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskMessageCreator>(taskGroup);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTaskGroupUpdated(
     const apigateway_service::utils::task_management::TaskGroup &taskGroup)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskMessageCreator>(taskGroup);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTaskGroupDeleted(const std::string &groupId)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskDeletedMessageCreator>(groupId);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onTaskGroupsRetrieved(
