@@ -16,8 +16,7 @@ ServiceMessageUPtr TaskMessageCreator::create(ParamContainerBase *param) const
 		return std::make_unique<TaskMessage>(std::make_unique<TaskExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto task = std::get<0>(paramTuple);
+	const auto &task = container->getParam();
 
 	auto message = std::make_unique<TaskMessage>(std::make_unique<TaskExtractStrategy>());
 	message->setTask(task);

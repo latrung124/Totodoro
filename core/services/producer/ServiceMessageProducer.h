@@ -68,13 +68,14 @@ public:
 	 *         instance, or `nullptr` if no matching creator is found.
 	 */
 	template<typename CreatorType, typename... Args>
-	[[nodiscard]] std::unique_ptr<Message> produce(Args... args) const
+	[[nodiscard]] std::unique_ptr<Message> produce(Args &&...args) const
 	{
-		using ParamContainer = core::factories::ParamContainer<Args...>;
+		using ParamContainer = core::factories::ParamContainer<std::decay_t<Args>...>;
 		std::type_index type = std::type_index(typeid(CreatorType));
 		const auto &it = m_creators.find(type);
 		if (it != m_creators.end()) {
-			return it->second->create(std::make_unique<ParamContainer>(args...).get());
+			auto param = std::make_unique<ParamContainer>(std::forward<Args>(args)...);
+			return it->second->create(param.get());
 		} else {
 			qDebug() << "ServiceMessageProducer: No creator found for type" << type.name();
 		}

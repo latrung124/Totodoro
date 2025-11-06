@@ -18,8 +18,7 @@ ServiceMessageUPtr UserSettingsMessageCreator::create(ParamContainerBase *param)
 		    std::make_unique<UserSettingsExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto userSettings = std::get<0>(paramTuple);
+	const auto &userSettings = container->getParam();
 
 	auto message = std::make_unique<UserSettingsMessage>(
 	    std::make_unique<UserSettingsExtractStrategy>());

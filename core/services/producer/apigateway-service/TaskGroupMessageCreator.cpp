@@ -17,8 +17,7 @@ ServiceMessageUPtr TaskGroupMessageCreator::create(ParamContainerBase *param) co
 		return std::make_unique<TaskGroupMessage>(std::make_unique<TaskGroupExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto taskGroup = std::get<0>(paramTuple);
+	const auto &taskGroup = container->getParam();
 
 	auto message = std::make_unique<TaskGroupMessage>(std::make_unique<TaskGroupExtractStrategy>());
 	message->setTaskGroup(taskGroup);

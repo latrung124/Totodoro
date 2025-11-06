@@ -19,8 +19,7 @@ ServiceMessageUPtr UserInformationMessageCreator::create(ParamContainerBase *par
 		    std::make_unique<UserInformationExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto userInfo = std::get<0>(paramTuple);
+	const auto &userInfo = container->getParam();
 
 	auto message = std::make_unique<UserInformationMessage>(
 	    std::make_unique<UserInformationExtractStrategy>());

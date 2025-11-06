@@ -8,12 +8,8 @@
 #include "WMediaServiceListener.h"
 
 #include "core/services/producer/window-service/WMediaInfoMessageCreator.h"
-#include "core/services/producer/window-service/WNextAsyncMessageCreator.h"
-#include "core/services/producer/window-service/WPauseAsyncMessageCreator.h"
-#include "core/services/producer/window-service/WPlayAsyncMessageCreator.h"
 #include "core/services/producer/window-service/WPlaybackControlsMessageCreator.h"
 #include "core/services/producer/window-service/WPlaybackInfoMessageCreator.h"
-#include "core/services/producer/window-service/WPreviousAsyncMessageCreator.h"
 #include "core/services/producer/window-service/WTimelinePropertiesMessageCreator.h"
 
 #include "core/services/producer/ServiceMessageProducer.h"

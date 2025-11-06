@@ -17,8 +17,7 @@ ServiceMessageUPtr TaskGroupDeletedMessageCreator::create(ParamContainerBase *pa
 		    std::make_unique<TaskGroupDeletedExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto taskGroupId = std::get<0>(paramTuple);
+	auto taskGroupId = container->getParam();
 
 	auto message = std::make_unique<TaskGroupDeletedMessage>(
 	    std::make_unique<TaskGroupDeletedExtractStrategy>());

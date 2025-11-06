@@ -16,8 +16,7 @@ ServiceMessageUPtr TaskDeletedMessageCreator::create(ParamContainerBase *param) 
 		return std::make_unique<TaskDeletedMessage>(std::make_unique<TaskDeletedExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto taskId = std::get<0>(paramTuple);
+	auto taskId = container->getParam();
 
 	auto message = std::make_unique<TaskDeletedMessage>(
 	    std::make_unique<TaskDeletedExtractStrategy>());

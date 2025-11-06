@@ -17,8 +17,7 @@ ServiceMessageUPtr WMediaInfoMessageCreator::create(ParamContainerBase *param) c
 		return std::make_unique<WMediaInfoMessage>(std::make_unique<WMediaInfoExtractStrategy>());
 	}
 
-	auto paramTuple = container->getParams();
-	auto mediaInfo = std::get<0>(paramTuple);
+	const auto &mediaInfo = container->getParam();
 
 	auto message = std::make_unique<WMediaInfoMessage>(
 	    std::make_unique<WMediaInfoExtractStrategy>());
