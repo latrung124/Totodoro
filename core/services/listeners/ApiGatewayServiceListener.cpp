@@ -8,6 +8,7 @@
 #include "ApiGatewayServiceListener.h"
 
 #include "core/services/producer/apigateway-service/TaskDeletedMessageCreator.h"
+#include "core/services/producer/apigateway-service/TaskGroupsRetrievedMessageCreator.h"
 #include "core/services/producer/apigateway-service/TaskMessageCreator.h"
 #include "core/services/producer/apigateway-service/TasksRetrievedMessageCreator.h"
 #include "core/services/producer/apigateway-service/UserInformationMessageCreator.h"
@@ -100,7 +101,11 @@ void ApiGatewayServiceListener::onTaskGroupDeleted(const std::string &groupId)
 void ApiGatewayServiceListener::onTaskGroupsRetrieved(
     const std::vector<apigateway_service::utils::task_management::TaskGroup> &taskGroups)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<TaskGroupsRetrievedMessageCreator>(
+	    taskGroups);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
 
 void ApiGatewayServiceListener::onSessionChanged(
