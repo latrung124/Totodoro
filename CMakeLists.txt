@@ -121,6 +121,7 @@ set(CORE_SOURCES
     core/services/producer/apigateway-service/TaskGroupMessageCreator.h
     core/services/producer/apigateway-service/TaskGroupDeletedMessageCreator.h
     core/services/producer/apigateway-service/TaskGroupsRetrievedMessageCreator.h
+    core/services/producer/apigateway-service/PomodoroMessageCreator.h
     core/services/queue/MessageQueue.h
     core/GuiApplication.cpp
     core/services/consumer/ServiceMessageConsumer.cpp
@@ -141,6 +142,7 @@ set(CORE_SOURCES
     core/services/producer/apigateway-service/TaskGroupMessageCreator.cpp
     core/services/producer/apigateway-service/TaskGroupDeletedMessageCreator.cpp
     core/services/producer/apigateway-service/TaskGroupsRetrievedMessageCreator.cpp
+    core/services/producer/apigateway-service/PomodoroMessageCreator.cpp
     core/services/listeners/WMediaServiceListener.cpp
     core/services/listeners/ApiGatewayServiceListener.cpp
     core/services/queue/MessageQueue.cpp

@@ -7,6 +7,7 @@
 
 #include "ApiGatewayServiceListener.h"
 
+#include "core/services/producer/apigateway-service/PomodoroMessageCreator.h"
 #include "core/services/producer/apigateway-service/TaskDeletedMessageCreator.h"
 #include "core/services/producer/apigateway-service/TaskGroupsRetrievedMessageCreator.h"
 #include "core/services/producer/apigateway-service/TaskMessageCreator.h"
@@ -111,5 +112,8 @@ void ApiGatewayServiceListener::onTaskGroupsRetrieved(
 void ApiGatewayServiceListener::onSessionChanged(
     const apigateway_service::utils::pomodoro::Session &session)
 {
-	// Implementation goes here
+	auto message = ServiceMessageProducer::getInstance().produce<PomodoroMessageCreator>(session);
+	if (message) {
+		MessageQueue::getInstance().push(std::move(message));
+	}
 }
