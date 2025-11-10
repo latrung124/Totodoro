@@ -156,10 +156,12 @@ set(CORE_FACTORY_SOURCES
     core/factories/view-model-producers/MediaPlayerVMProducer.h
     core/factories/view-model-producers/UserProfileVMProducer.h
     core/factories/view-model-producers/UserSettingsVMProducer.h
+    core/factories/view-model-producers/TaskGroupsVMProducer.h
     core/factories/view-model-producers/HomeVMProducer.cpp
     core/factories/view-model-producers/MediaPlayerVMProducer.cpp
     core/factories/view-model-producers/UserProfileVMProducer.cpp
-    core/factories/view-model-producers/UserSettingsVMProducer.cpp)
+    core/factories/view-model-producers/UserSettingsVMProducer.cpp
+    core/factories/view-model-producers/TaskGroupsVMProducer.cpp)
 
 set(CORE_SERVICE_STRATEGIES
     core/services/strategies/IStrategy.h

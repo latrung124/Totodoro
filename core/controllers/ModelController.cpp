@@ -9,6 +9,8 @@
 
 #include "models/mediaplayer/MediaPlayerModel.h"
 #include "models/session/PomodoroModel.h"
+#include "models/taskmanagement/TaskGroupModel.h"
+#include "models/taskmanagement/TaskModel.h"
 #include "models/userprofile/UserInformationModel.h"
 #include "models/userprofile/UserSettingsModel.h"
 
@@ -59,4 +61,14 @@ ModelController::UserSettingsModelWPtr ModelController::getUserSettingsModel() c
 ModelController::PomodoroModelWPtr ModelController::getPomodoroModel() const
 {
 	return m_pomodoroModel;
+}
+
+ModelController::TaskModelWPtr ModelController::getTaskModel() const
+{
+	return m_taskModel;
+}
+
+ModelController::TaskGroupModelWPtr ModelController::getTaskGroupModel() const
+{
+	return m_taskGroupModel;
 }

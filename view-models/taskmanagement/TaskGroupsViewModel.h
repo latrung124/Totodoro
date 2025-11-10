@@ -44,6 +44,13 @@ public:
 	QHash<int, QByteArray> roleNames() const override;
 
 	Q_INVOKABLE QVariantMap get(int index) const; // Used for debug on qml
+	TaskGroupViewModelPtr getTaskGroupById(const QString &taskGroupId) const;
+
+public slots:
+	void onTaskGroupAppended(const QString &taskGroupId);
+	void onTaskGroupRemoved(const QString &taskGroupId);
+	void onTaskGroupUpdated(const QString &taskGroupId);
+	void onTaskGroupsCleared();
 
 private:
 	void initDummyData();

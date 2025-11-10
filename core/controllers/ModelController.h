@@ -16,6 +16,8 @@ class MediaPlayerModel;
 class UserInformationModel;
 class UserSettingsModel;
 class PomodoroModel;
+class TaskModel;
+class TaskGroupModel;
 
 class ModelController : public QObject
 {
@@ -30,6 +32,10 @@ public:
 	using UserSettingsModelWPtr = std::weak_ptr<UserSettingsModel>;
 	using PomodoroModelPtr = std::shared_ptr<PomodoroModel>;
 	using PomodoroModelWPtr = std::weak_ptr<PomodoroModel>;
+	using TaskModelPtr = std::shared_ptr<TaskModel>;
+	using TaskModelWPtr = std::weak_ptr<TaskModel>;
+	using TaskGroupModelPtr = std::shared_ptr<TaskGroupModel>;
+	using TaskGroupModelWPtr = std::weak_ptr<TaskGroupModel>;
 
 	static ModelController &getInstance();
 
@@ -39,6 +45,8 @@ public:
 	UserInformationModelWPtr getUserInformationModel() const;
 	UserSettingsModelWPtr getUserSettingsModel() const;
 	PomodoroModelWPtr getPomodoroModel() const;
+	TaskModelWPtr getTaskModel() const;
+	TaskGroupModelWPtr getTaskGroupModel() const;
 
 private:
 	explicit ModelController(QObject *parent = nullptr);
@@ -50,6 +58,8 @@ private:
 	UserInformationModelPtr m_userInformationModel;
 	UserSettingsModelPtr m_userSettingsModel;
 	PomodoroModelPtr m_pomodoroModel;
+	TaskModelPtr m_taskModel;
+	TaskGroupModelPtr m_taskGroupModel;
 };
 
 #endif // MODELCONTROLLER_H

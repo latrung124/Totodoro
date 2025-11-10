@@ -7,6 +7,12 @@
 
 #include "models/taskmanagement/TaskGroupModel.h"
 
+#include <QMetaObject>
+
+#include "core/controllers/ViewModelController.h"
+#include "view-models/taskmanagement/TaskGroupsViewModel.h"
+#include "view-models/taskmanagement/TaskGroupViewModel.h"
+
 TaskGroupModel::TaskGroupModel()
     : DatabaseModel()
     , m_groupId("")
@@ -38,6 +44,16 @@ void TaskGroupModel::setGroupId(const std::string &groupId)
 		return;
 	}
 	m_groupId = groupId;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(groupId))) {
+		QMetaObject::invokeMethod(
+		    taskGroupVM.get(), "onGroupIdChanged", Q_ARG(std::string, m_groupId));
+	}
 }
 
 std::string TaskGroupModel::getUserId() const
@@ -53,6 +69,14 @@ void TaskGroupModel::setUserId(const std::string &userId)
 		return;
 	}
 	m_userId = userId;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(taskGroupVM.get(), "onUserIdChanged", Q_ARG(std::string, userId));
+	}
 }
 
 std::string TaskGroupModel::getName() const
@@ -68,6 +92,15 @@ void TaskGroupModel::setName(const std::string &name)
 		return;
 	}
 	m_name = name;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(taskGroupVM.get(), "onNameChanged", Q_ARG(std::string, name));
+	}
 }
 
 std::string TaskGroupModel::icon() const
@@ -83,6 +116,15 @@ void TaskGroupModel::setIcon(const std::string &icon)
 		return;
 	}
 	m_icon = icon;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(taskGroupVM.get(), "onIconChanged", Q_ARG(std::string, icon));
+	}
 }
 
 std::string TaskGroupModel::getDescription() const
@@ -98,6 +140,16 @@ void TaskGroupModel::setDescription(const std::string &description)
 		return;
 	}
 	m_description = description;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(
+		    taskGroupVM.get(), "onDescriptionChanged", Q_ARG(std::string, description));
+	}
 }
 
 uint16_t TaskGroupModel::getCompletedTasks() const
@@ -113,6 +165,16 @@ void TaskGroupModel::setCompletedTasks(uint16_t completedTasks)
 		return;
 	}
 	m_completedTasks = completedTasks;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(
+		    taskGroupVM.get(), "onCompletedTasksChanged", Q_ARG(uint16_t, completedTasks));
+	}
 }
 
 uint16_t TaskGroupModel::getTotalTasks() const
@@ -128,6 +190,16 @@ void TaskGroupModel::setTotalTasks(uint16_t totalTasks)
 		return;
 	}
 	m_totalTasks = totalTasks;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(
+		    taskGroupVM.get(), "onTotalTasksChanged", Q_ARG(uint16_t, totalTasks));
+	}
 }
 
 TaskGroupModel::TaskGroupPriority TaskGroupModel::getPriority() const
@@ -143,6 +215,16 @@ void TaskGroupModel::setPriority(TaskGroupPriority priority)
 		return;
 	}
 	m_priority = priority;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(
+		    taskGroupVM.get(), "onPriorityChanged", Q_ARG(TaskGroupPriority, priority));
+	}
 }
 
 TaskGroupModel::TaskGroupStatus TaskGroupModel::getStatus() const
@@ -158,4 +240,14 @@ void TaskGroupModel::setStatus(TaskGroupStatus status)
 		return;
 	}
 	m_status = status;
+
+	auto model = ViewModelController::getInstance().taskGroupsViewModel();
+	if (!model) {
+		return;
+	}
+
+	if (auto taskGroupVM = model->getTaskGroupById(QString::fromStdString(m_groupId))) {
+		QMetaObject::invokeMethod(
+		    taskGroupVM.get(), "onStatusChanged", Q_ARG(TaskGroupStatus, status));
+	}
 }

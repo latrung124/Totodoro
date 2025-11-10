@@ -147,3 +147,67 @@ QObject *TaskGroupViewModel::tasks() const
 {
 	return m_tasks.get();
 }
+
+void TaskGroupViewModel::onIconChanged(const QString &icon)
+{
+	setIcon(icon);
+}
+
+void TaskGroupViewModel::onNameChanged(const QString &name)
+{
+	setName(name);
+}
+
+void TaskGroupViewModel::onDeadlineChanged(const QString &deadline)
+{
+	setDeadline(deadline);
+}
+
+void TaskGroupViewModel::onPriorityChanged(const PriorityType &priority)
+{
+	setPriority(priority);
+}
+
+void TaskGroupViewModel::onStatusChanged(const QString &status)
+{
+	setStatus(status);
+}
+
+void TaskGroupViewModel::onDescriptionChanged(const QString &description)
+{
+	setDescription(description);
+}
+
+void TaskGroupViewModel::onCompletedTasksChanged(int completedTasks)
+{
+	setCompletedTasks(completedTasks);
+}
+
+void TaskGroupViewModel::onTotalTasksChanged(int totalTasks)
+{
+	setTotalTasks(totalTasks);
+}
+
+void TaskGroupViewModel::updateFromModel(
+    const QString &taskGroupId,
+    const QString &icon,
+    const QString &name,
+    const QString &deadline,
+    const PriorityType &priority,
+    const QString &status,
+    const QString &description,
+    int completedTasks,
+    int totalTasks,
+    const TasksViewModelPtr &tasks)
+{
+	setTaskGroupId(taskGroupId);
+	setIcon(icon);
+	setName(name);
+	setDeadline(deadline);
+	setPriority(priority);
+	setStatus(status);
+	setDescription(description);
+	setCompletedTasks(completedTasks);
+	setTotalTasks(totalTasks);
+	setTasks(tasks.get());
+}

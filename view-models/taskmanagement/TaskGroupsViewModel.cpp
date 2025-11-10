@@ -114,3 +114,69 @@ QVariantMap TaskGroupsViewModel::get(int index) const
 	taskGroupData["tasks"] = QVariant::fromValue(taskGroup->tasks());
 	return taskGroupData;
 }
+
+void TaskGroupsViewModel::onTaskGroupAppended(const QString &taskGroupId)
+{
+	// Find the newly added task group from the model and append it to the view model
+	// For simplicity, we will just create a new TaskGroupViewModel here
+	auto taskGroup = std::make_shared<TaskGroupViewModel>();
+	taskGroup->setTaskGroupId(taskGroupId);
+	taskGroup->setIcon("default-task-icon.png");
+	taskGroup->setName(QString("New Task Group %1").arg(taskGroupId));
+	taskGroup->setDeadline("2025-12-31");
+	taskGroup->setPriority(PriorityType::Medium);
+	taskGroup->setStatus("Not Started");
+	taskGroup->setDescription(
+	    QString("This is a description of New Task Group %1.").arg(taskGroupId));
+	taskGroup->setCompletedTasks(0);
+	taskGroup->setTotalTasks(0);
+
+	beginInsertRows(QModelIndex(), m_taskGroups.size(), m_taskGroups.size());
+	m_taskGroups.push_back(taskGroup);
+	endInsertRows();
+}
+
+void TaskGroupsViewModel::onTaskGroupRemoved(const QString &taskGroupId)
+{
+	// Find and remove the task group from the view model
+	for (size_t i = 0; i < m_taskGroups.size(); ++i) {
+		if (m_taskGroups[i]->taskGroupId() == taskGroupId) {
+			beginRemoveRows(QModelIndex(), static_cast<int>(i), static_cast<int>(i));
+			m_taskGroups.erase(m_taskGroups.begin() + i);
+			endRemoveRows();
+			break;
+		}
+	}
+}
+
+void TaskGroupsViewModel::onTaskGroupUpdated(const QString &taskGroupId)
+{
+	// TODO: update detail later
+	// Find and update the task group in the view model
+	for (size_t i = 0; i < m_taskGroups.size(); ++i) {
+		if (m_taskGroups[i]->taskGroupId() == taskGroupId) {
+			// For simplicity, we will just emit dataChanged for the entire row
+			QModelIndex idx = index(static_cast<int>(i));
+			emit dataChanged(idx, idx);
+			break;
+		}
+	}
+}
+
+void TaskGroupsViewModel::onTaskGroupsCleared()
+{
+	beginResetModel();
+	m_taskGroups.clear();
+	endResetModel();
+}
+
+TaskGroupsViewModel::TaskGroupViewModelPtr TaskGroupsViewModel::getTaskGroupById(
+    const QString &taskGroupId) const
+{
+	for (const auto &taskGroup : m_taskGroups) {
+		if (taskGroup->taskGroupId() == taskGroupId) {
+			return taskGroup;
+		}
+	}
+	return nullptr;
+}

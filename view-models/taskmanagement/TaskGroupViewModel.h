@@ -65,8 +65,21 @@ public:
 	void setTotalTasks(int totalTasks);
 	int totalTasks() const;
 
+	// TODO: refactor tasks
 	void setTasks(const QObject *tasks);
 	QObject *tasks() const;
+
+	void updateFromModel(
+	    const QString &taskGroupId,
+	    const QString &icon,
+	    const QString &name,
+	    const QString &deadline,
+	    const PriorityType &priority,
+	    const QString &status,
+	    const QString &description,
+	    int completedTasks,
+	    int totalTasks,
+	    const TasksViewModelPtr &tasks);
 
 signals:
 	void taskGroupIdChanged();
@@ -79,6 +92,16 @@ signals:
 	void completedTasksChanged();
 	void totalTasksChanged();
 	void tasksChanged();
+
+public slots:
+	void onIconChanged(const QString &icon);
+	void onNameChanged(const QString &name);
+	void onDeadlineChanged(const QString &deadline);
+	void onPriorityChanged(const PriorityType &priority);
+	void onStatusChanged(const QString &status);
+	void onDescriptionChanged(const QString &description);
+	void onCompletedTasksChanged(int completedTasks);
+	void onTotalTasksChanged(int totalTasks);
 
 private:
 	int m_completedTasks = 0;
