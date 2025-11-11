@@ -23,7 +23,7 @@ void TasksViewModel::initDummyData()
 {
 	for (int i = 0; i < 10; ++i) {
 		auto task = std::make_shared<TaskViewModel>();
-		task->setId(i);
+		task->setId(QString::fromStdString(std::to_string(i)));
 		task->setName(QString("Task %1").arg(i));
 		task->setIcon("");
 		task->setTotalPomodoros(5);
@@ -83,4 +83,81 @@ QHash<int, QByteArray> TasksViewModel::roleNames() const
 	    {DescriptionRole, "description"},
 	    {DueDateRole, "dueDate"},
 	};
+}
+
+TasksViewModel::TaskViewModelPtr TasksViewModel::getTaskById(const QString &taskId) const
+{
+	for (const auto &task : m_tasks) {
+		if (task->id() == taskId) {
+			return task;
+		}
+	}
+	return nullptr;
+}
+
+QVariantMap TasksViewModel::get(int index) const
+{
+	QVariantMap taskData;
+	if (index < 0 || index >= m_tasks.size()) {
+		return taskData;
+	}
+
+	const auto &task = m_tasks[index];
+	taskData["id"] = task->id();
+	taskData["name"] = task->name();
+	taskData["icon"] = task->icon();
+	taskData["totalPomodoros"] = task->totalPomodoros();
+	taskData["completedPomodoros"] = task->completedPomodoros();
+	taskData["priority"] = static_cast<int>(task->priority());
+	taskData["description"] = task->description();
+	taskData["dueDate"] = task->dueDate();
+	return taskData;
+}
+
+void TasksViewModel::onTaskAppended(const QString &taskId)
+{
+	// For simplicity, we will create a dummy task. In real scenario, fetch task details from model.
+	auto task = std::make_shared<TaskViewModel>();
+	task->setId(taskId);
+	task->setName(QString("New Task %1").arg(taskId));
+	task->setIcon("");
+	task->setTotalPomodoros(3);
+	task->setCompletedPomodoros(0);
+	task->setPriority(PriorityType::Low);
+	task->setDescription(QString("Description of the new task %1").arg(taskId));
+	task->setDueDate("2025-12-31");
+
+	beginInsertRows(QModelIndex(), m_tasks.size(), m_tasks.size());
+	m_tasks.push_back(task);
+	endInsertRows();
+}
+
+void TasksViewModel::onTaskRemoved(const QString &taskId)
+{
+	for (int i = 0; i < m_tasks.size(); ++i) {
+		if (m_tasks[i]->id() == taskId) {
+			beginRemoveRows(QModelIndex(), i, i);
+			m_tasks.erase(m_tasks.begin() + i);
+			endRemoveRows();
+			return;
+		}
+	}
+}
+
+void TasksViewModel::onTaskUpdated(const QString &taskId)
+{
+	for (int i = 0; i < m_tasks.size(); ++i) {
+		if (m_tasks[i]->id() == taskId) {
+			QModelIndex modelIndex = index(i);
+			emit dataChanged(modelIndex, modelIndex);
+			return;
+		}
+	}
+}
+
+void TasksViewModel::onTasksCleared()
+{
+	beginResetModel();
+	m_tasks.clear();
+	endResetModel();
 }

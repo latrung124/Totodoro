@@ -16,12 +16,12 @@ TaskViewModel::~TaskViewModel()
 {
 }
 
-int TaskViewModel::id() const
+QString TaskViewModel::id() const
 {
 	return m_id;
 }
 
-void TaskViewModel::setId(int id)
+void TaskViewModel::setId(const QString &id)
 {
 	if (m_id != id) {
 		m_id = id;

@@ -41,6 +41,15 @@ public:
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 	QHash<int, QByteArray> roleNames() const override;
 
+	Q_INVOKABLE QVariantMap get(int index) const; // Used for debug on qml
+	TaskViewModelPtr getTaskById(const QString &taskId) const;
+
+public slots:
+	void onTaskAppended(const QString &taskId);
+	void onTaskRemoved(const QString &taskId);
+	void onTaskUpdated(const QString &taskId);
+	void onTasksCleared();
+
 private:
 	void initDummyData();
 

@@ -12,6 +12,7 @@
 
 #include "TaskGroupModel.h"
 #include "view-models/taskmanagement/TaskGroupsViewModel.h"
+#include "view-models/taskmanagement/TaskGroupViewModel.h"
 
 #include "core/controllers/ViewModelController.h"
 
@@ -38,7 +39,7 @@ bool TaskGroupsModel::appendTaskGroup(const TaskGroupModelPtr &taskGroup)
 		QMetaObject::invokeMethod(
 		    viewModel,
 		    "onTaskGroupAppended",
-		    Q_ARG(QString, QString::fromStdString(taskGroup->id())));
+		    Q_ARG(QString, QString::fromStdString(taskGroup->getGroupId())));
 	}
 	return true;
 }
@@ -73,14 +74,14 @@ bool TaskGroupsModel::updateTaskGroup(const TaskGroupModelPtr &taskGroup)
 	std::lock_guard<std::mutex> lock(m_mutex);
 	for (auto &existingGroup : m_taskGroups) {
 		if (existingGroup->getGroupId() == taskGroup->getGroupId()) {
-			existingGroup = taskGroup;
+			existingGroup = std::move(taskGroup);
 
 			auto viewModel = ViewModelController::getInstance().taskGroupsViewModel();
 			if (viewModel) {
 				QMetaObject::invokeMethod(
 				    viewModel,
 				    "onTaskGroupUpdated",
-				    Q_ARG(QString, QString::fromStdString(taskGroup->id())));
+				    Q_ARG(QString, QString::fromStdString(taskGroup->getGroupId())));
 			}
 			return true;
 		}

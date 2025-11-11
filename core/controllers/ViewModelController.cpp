@@ -12,7 +12,6 @@
 
 #include "core/factories/view-model-producers/HomeVMProducer.h"
 #include "core/factories/view-model-producers/MediaPlayerVMProducer.h"
-#include "core/factories/view-model-producers/TaskGroupsVMProducer.h"
 #include "core/factories/view-model-producers/UserProfileVMProducer.h"
 #include "core/factories/view-model-producers/UserSettingsVMProducer.h"
 
@@ -23,6 +22,7 @@
 #include "view-models/home/HomeViewModel.h"
 #include "view-models/mediaplayer/MediaPlayerViewModel.h"
 #include "view-models/taskmanagement/TaskGroupsViewModel.h"
+#include "view-models/taskmanagement/TasksViewModel.h"
 #include "view-models/userprofile/UserProfileViewModel.h"
 #include "view-models/userprofile/UserSettingsViewModel.h"
 
@@ -48,7 +48,6 @@ void ViewModelController::registerViewModels()
 	m_vmFactory->registerViewModel<HomeVMProducer>();
 	m_vmFactory->registerViewModel<UserProfileVMProducer>();
 	m_vmFactory->registerViewModel<UserSettingsVMProducer>();
-	m_vmFactory->registerViewModel<TaskGroupsVMProducer>();
 }
 
 void ViewModelController::setRootObject(QObject *root)
@@ -146,23 +145,22 @@ UserSettingsViewModel *ViewModelController::userSettingsViewModel()
 
 TaskGroupsViewModel *ViewModelController::taskGroupsViewModel()
 {
-	std::type_index typeIndex = std::type_index(typeid(TaskGroupsViewModel));
-	auto it = m_viewModels.find(typeIndex);
-	if (it == m_viewModels.end()) {
-		auto taskGroupsVM = m_vmFactory->createViewModel<TaskGroupsVMProducer>();
-		if (taskGroupsVM) {
-			m_viewModels[typeIndex] = std::move(taskGroupsVM);
-			it = m_viewModels.find(typeIndex); // Update the iterator after insertion
-		}
+	auto homeVM = homeViewModel();
+	if (!homeVM) {
+		return nullptr;
 	}
 
-	// Ensure the iterator is valid before dereferencing
-	if (it != m_viewModels.end() && !it->second) {
-		m_viewModels[typeIndex] = m_vmFactory->createViewModel<TaskGroupsVMProducer>();
-		it = m_viewModels.find(typeIndex); // Update the iterator again
+	return dynamic_cast<TaskGroupsViewModel *>(homeVM->taskGroups());
+}
+
+TasksViewModel *ViewModelController::tasksViewModel()
+{
+	auto homeVM = homeViewModel();
+	if (!homeVM) {
+		return nullptr;
 	}
 
-	return dynamic_cast<TaskGroupsViewModel *>(it->second.get());
+	return dynamic_cast<TasksViewModel *>(homeVM->tasks());
 }
 
 void ViewModelController::initMediaPlayerView()

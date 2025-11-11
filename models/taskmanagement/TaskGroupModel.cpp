@@ -31,6 +31,33 @@ TaskGroupModel::~TaskGroupModel()
 {
 }
 
+TaskGroupModel::TaskGroupModel(TaskGroupModel &&other) noexcept
+{
+	setUserId(other.m_userId);
+	setName(other.m_name);
+	setIcon(other.m_icon);
+	setDescription(other.m_description);
+	setCompletedTasks(other.m_completedTasks);
+	setTotalTasks(other.m_totalTasks);
+	setPriority(other.m_priority);
+	setStatus(other.m_status);
+}
+
+TaskGroupModel &TaskGroupModel::operator=(TaskGroupModel &&other) noexcept
+{
+	if (this != &other) {
+		setUserId(other.m_userId);
+		setName(other.m_name);
+		setIcon(other.m_icon);
+		setDescription(other.m_description);
+		setCompletedTasks(other.m_completedTasks);
+		setTotalTasks(other.m_totalTasks);
+		setPriority(other.m_priority);
+		setStatus(other.m_status);
+	}
+	return *this;
+}
+
 std::string TaskGroupModel::getGroupId() const
 {
 	std::lock_guard<std::mutex> lock(m_mutex);

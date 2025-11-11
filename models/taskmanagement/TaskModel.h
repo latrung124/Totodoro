@@ -20,6 +20,11 @@ public:
 	TaskModel();
 	~TaskModel() override;
 
+	// move constructor
+	TaskModel(TaskModel &&other) noexcept;
+	// move assignment operator
+	TaskModel &operator=(TaskModel &&other) noexcept;
+
 	enum class TaskStatus : uint8_t
 	{
 		idle = 0,

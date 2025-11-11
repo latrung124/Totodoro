@@ -15,7 +15,7 @@
 class TaskViewModel : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
+	Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
 	Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 	Q_PROPERTY(QString icon READ icon WRITE setIcon NOTIFY iconChanged)
 	Q_PROPERTY(
@@ -30,8 +30,8 @@ public:
 	explicit TaskViewModel(QObject *parent = nullptr);
 	~TaskViewModel() override;
 
-	int id() const;
-	void setId(int id);
+	QString id() const;
+	void setId(const QString &id);
 
 	QString name() const;
 	void setName(const QString &name);
@@ -65,7 +65,7 @@ signals:
 	void dueDateChanged();
 
 private:
-	int m_id = 0; // TODO: Use a unique identifier for each task
+	QString m_id = 0; // TODO: Use a unique identifier for each task
 	QString m_name;
 	QString m_icon;
 	int m_totalPomodoros = 0;

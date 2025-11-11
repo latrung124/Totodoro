@@ -72,7 +72,9 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/userprofile/UserSettingsModel.h
     models/session/PomodoroModel.h
     models/taskmanagement/TaskModel.h
+    models/taskmanagement/TasksModel.h
     models/taskmanagement/TaskGroupModel.h
+    models/taskmanagement/TaskGroupsModel.h
     models/DatabaseModel.cpp
     models/SystemDataModel.cpp
     models/mediaplayer/MediaPlayerModel.cpp
@@ -81,7 +83,9 @@ set(MEDIAPLAYER_MODELS_SOURCES
     models/userprofile/UserSettingsModel.cpp
     models/session/PomodoroModel.cpp
     models/taskmanagement/TaskModel.cpp
-    models/taskmanagement/TaskGroupModel.cpp)
+    models/taskmanagement/TasksModel.cpp
+    models/taskmanagement/TaskGroupModel.cpp
+    models/taskmanagement/TaskGroupsModel.cpp)
 
 # set core sources
 set(CONTROLLER_SOURCES
@@ -156,12 +160,10 @@ set(CORE_FACTORY_SOURCES
     core/factories/view-model-producers/MediaPlayerVMProducer.h
     core/factories/view-model-producers/UserProfileVMProducer.h
     core/factories/view-model-producers/UserSettingsVMProducer.h
-    core/factories/view-model-producers/TaskGroupsVMProducer.h
     core/factories/view-model-producers/HomeVMProducer.cpp
     core/factories/view-model-producers/MediaPlayerVMProducer.cpp
     core/factories/view-model-producers/UserProfileVMProducer.cpp
-    core/factories/view-model-producers/UserSettingsVMProducer.cpp
-    core/factories/view-model-producers/TaskGroupsVMProducer.cpp)
+    core/factories/view-model-producers/UserSettingsVMProducer.cpp)
 
 set(CORE_SERVICE_STRATEGIES
     core/services/strategies/IStrategy.h

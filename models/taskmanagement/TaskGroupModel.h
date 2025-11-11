@@ -35,6 +35,11 @@ public:
 	TaskGroupModel();
 	~TaskGroupModel() override;
 
+	// move constructor
+	TaskGroupModel(TaskGroupModel &&other) noexcept;
+	// move assignment operator
+	TaskGroupModel &operator=(TaskGroupModel &&other) noexcept;
+
 	std::string getGroupId() const;
 	void setGroupId(const std::string &groupId);
 

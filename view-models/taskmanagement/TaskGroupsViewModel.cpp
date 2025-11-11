@@ -155,7 +155,6 @@ void TaskGroupsViewModel::onTaskGroupUpdated(const QString &taskGroupId)
 	// Find and update the task group in the view model
 	for (size_t i = 0; i < m_taskGroups.size(); ++i) {
 		if (m_taskGroups[i]->taskGroupId() == taskGroupId) {
-			// For simplicity, we will just emit dataChanged for the entire row
 			QModelIndex idx = index(static_cast<int>(i));
 			emit dataChanged(idx, idx);
 			break;
