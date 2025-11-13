@@ -55,30 +55,30 @@ public:
 	void onResponseUpdateUserInformation(const Information &userInformation);
 	void onResponseUpdateUserSettings(const Settings &settings);
 
-	void requestCreateTask(const Task &task);
-	void requestUpdateTask(const Task &task);
-	void requestDeleteTask(const std::string &taskId);
-	void requestGetTasks(const std::string &userId, const std::string &groupId);
+	void requestCreateTask(const Task &task) override;
+	void requestUpdateTask(const Task &task) override;
+	void requestDeleteTask(const std::string &taskId) override;
+	void requestGetTasks(const std::string &userId, const std::string &groupId) override;
 
 	void onResponseCreateTask(const Task &task);
 	void onResponseUpdateTask(const Task &task);
 	void onResponseDeleteTask(const std::string &taskId);
 	void onResponseGetTasks(const std::vector<Task> &tasks);
 
-	void requestCreateTaskGroup(const TaskGroup &taskGroup);
-	void requestUpdateTaskGroup(const TaskGroup &taskGroup);
-	void requestDeleteTaskGroup(const std::string &groupId);
-	void requestGetTaskGroups(const std::string &userId);
+	void requestCreateTaskGroup(const TaskGroup &taskGroup) override;
+	void requestUpdateTaskGroup(const TaskGroup &taskGroup) override;
+	void requestDeleteTaskGroup(const std::string &groupId) override;
+	void requestGetTaskGroups(const std::string &userId) override;
 
 	void onResponseCreateTaskGroup(const TaskGroup &taskGroup);
 	void onResponseUpdateTaskGroup(const TaskGroup &taskGroup);
 	void onResponseDeleteTaskGroup(const std::string &groupId);
 	void onResponseGetTaskGroups(const std::vector<TaskGroup> &taskGroups);
 
-	void requestCreateSession(const Session &session);
-	void requestUpdateSession(const Session &session);
-	void requestDeleteSession(const std::string &sessionId);
-	void requestGetSessions(const std::string &userId, const std::string &taskId);
+	void requestCreateSession(const Session &session) override;
+	void requestUpdateSession(const Session &session) override;
+	void requestDeleteSession(const std::string &sessionId) override;
+	void requestGetSessions(const std::string &userId, const std::string &taskId) override;
 
 	void onResponseCreateSession(const Session &session);
 	void onResponseUpdateSession(const Session &session);
