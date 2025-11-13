@@ -7,6 +7,7 @@
 
 #include "core/services/ServiceManager.h"
 
+#include "core/services/listeners/ApiGatewayServiceListener.h"
 #include "core/services/listeners/WMediaServiceListener.h"
 
 ServiceManager &ServiceManager::instance()
@@ -34,10 +35,17 @@ void ServiceManager::startAllRegisteredServices()
 
 void ServiceManager::registerAllServiceListeners()
 {
-	auto service = getService<IWMediaService>();
-	if (service != nullptr) {
-		service->registerListener(new WMediaServiceListener());
+	auto mediaService = getService<IWMediaService>();
+	if (mediaService != nullptr) {
+		mediaService->registerListener(new WMediaServiceListener());
 	} else {
 		qDebug() << "Service is null";
+	}
+
+	auto apiGatewayService = getService<IApiGatewayService>();
+	if (apiGatewayService != nullptr) {
+		apiGatewayService->registerListener(new ApiGatewayServiceListener());
+	} else {
+		qDebug() << "ApiGatewayService is null";
 	}
 }

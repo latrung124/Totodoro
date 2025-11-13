@@ -184,6 +184,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/TaskGroupExtractStrategy.h
     core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.h
     core/services/strategies/apigateway-service/TaskGroupsRetrievedExtractStrategy.h
+    core/services/strategies/apigateway-service/RequestGetTasksAsyncExtractStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -201,6 +202,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/TaskGroupExtractStrategy.cpp
     core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.cpp
     core/services/strategies/apigateway-service/TaskGroupsRetrievedExtractStrategy.cpp
+    core/services/strategies/apigateway-service/RequestGetTasksAsyncExtractStrategy.cpp
 )
 
 set(CORE_SERVICE_MSG_SOURCES
@@ -223,6 +225,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/TaskGroupMessage.h
     core/services/messages/apigateway-service/TaskGroupDeletedMessage.h
     core/services/messages/apigateway-service/TaskGroupsRetrievedMessage.h
+    core/services/messages/apigateway-service/RequestGetTasksAsyncMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -239,7 +242,8 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/TasksRetrievedMessage.cpp
     core/services/messages/apigateway-service/TaskGroupMessage.cpp
     core/services/messages/apigateway-service/TaskGroupDeletedMessage.cpp
-    core/services/messages/apigateway-service/TaskGroupsRetrievedMessage.cpp)
+    core/services/messages/apigateway-service/TaskGroupsRetrievedMessage.cpp
+    core/services/messages/apigateway-service/RequestGetTasksAsyncMessage.cpp)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 

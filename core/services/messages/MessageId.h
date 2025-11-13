@@ -31,6 +31,7 @@ enum class MessageId : uint16_t
 	TasksRetrievedMessage = 15,
 	TaskGroupDeletedMessage = 16,
 	TaskGroupsRetrievedMessage = 17,
+	RequestGetTasksAsyncMessage = 18,
 };
 
 #endif // SERVICE_MESSAGE_ID_H

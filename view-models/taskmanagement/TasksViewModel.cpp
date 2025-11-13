@@ -19,6 +19,11 @@ TasksViewModel::~TasksViewModel()
 {
 }
 
+void TasksViewModel::init()
+{
+	// TODO: Request get tasks from BE
+}
+
 void TasksViewModel::initDummyData()
 {
 	for (int i = 0; i < 10; ++i) {

@@ -7,7 +7,7 @@ set(FACTORY_SOURCES src/ServiceFactory.cpp)
 
 add_library(ServiceFactory SHARED ${FACTORY_HEADERS} ${FACTORY_SOURCES})
 
-add_dependencies(ServiceFactory WMediaService)
+add_dependencies(ServiceFactory WMediaService ApiGatewayService)
 
 target_include_directories(
   ServiceFactory
@@ -15,7 +15,7 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
          $<INSTALL_INTERFACE:include/services/interfaces>)
 
-target_link_libraries(ServiceFactory PRIVATE WMediaService)
+target_link_libraries(ServiceFactory PRIVATE WMediaService ApiGatewayService)
 
 install(
   TARGETS ServiceFactory

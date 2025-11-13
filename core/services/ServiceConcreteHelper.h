@@ -8,6 +8,7 @@
 #ifndef SERVICE_CONCRETE_HELPER_H
 #define SERVICE_CONCRETE_HELPER_H
 
+#include <IApiGatewayService.h>
 #include <IService.h>
 #include <IServiceFactory.h>
 #include <IWMediaService.h>
@@ -26,6 +27,8 @@ std::shared_ptr<IService> createConcreteService(IServiceFactory *serviceFactory)
 		return nullptr;
 	} else if constexpr (std::same_as<Interface, IWMediaService>) {
 		return std::shared_ptr<IService>(serviceFactory->factoryMethod("WindowMediaService"));
+	} else if constexpr (std::same_as<Interface, IApiGatewayService>) {
+		return std::shared_ptr<IService>(serviceFactory->factoryMethod("ApiGatewayService"));
 	} else {
 		return nullptr;
 	}

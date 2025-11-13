@@ -52,6 +52,7 @@ public slots:
 
 private:
 	void initDummyData();
+	void init();
 
 	std::vector<TaskViewModelPtr> m_tasks;
 };
