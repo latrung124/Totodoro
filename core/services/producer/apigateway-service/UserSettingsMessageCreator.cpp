@@ -7,7 +7,7 @@
 
 #include "core/services/producer/apigateway-service/UserSettingsMessageCreator.h"
 #include "core/services/messages/apigateway-service/UserSettingsMessage.h"
-#include "core/services/strategies/apigateway-service/UserSettingsExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/UserSettingsExtractStrategy.h"
 
 ServiceMessageUPtr UserSettingsMessageCreator::create(ParamContainerBase *param) const
 {

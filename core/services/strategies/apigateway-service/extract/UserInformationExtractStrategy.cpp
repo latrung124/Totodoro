@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the UserInformationExtractStrategy class.
  */
 
-#include "core/services/strategies/apigateway-service/UserInformationExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/UserInformationExtractStrategy.h"
 
 #include <QDebug>
 

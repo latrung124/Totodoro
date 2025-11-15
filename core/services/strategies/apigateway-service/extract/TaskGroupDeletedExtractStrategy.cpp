@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the TaskGroupDeletedExtractStrategy class.
  */
 
-#include "core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/TaskGroupDeletedExtractStrategy.h"
 #include "core/services/messages/apigateway-service/TaskGroupDeletedMessage.h"
 
 #include <QDebug>

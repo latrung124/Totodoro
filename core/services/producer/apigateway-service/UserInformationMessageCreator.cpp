@@ -7,7 +7,7 @@
 
 #include "core/services/producer/apigateway-service/UserInformationMessageCreator.h"
 #include "core/services/messages/apigateway-service/UserInformationMessage.h"
-#include "core/services/strategies/apigateway-service/UserInformationExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/UserInformationExtractStrategy.h"
 
 ServiceMessageUPtr UserInformationMessageCreator::create(ParamContainerBase *param) const
 {

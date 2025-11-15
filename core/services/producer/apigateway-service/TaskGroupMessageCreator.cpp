@@ -7,7 +7,7 @@
 
 #include "core/services/producer/apigateway-service/TaskGroupMessageCreator.h"
 #include "core/services/messages/apigateway-service/TaskGroupMessage.h"
-#include "core/services/strategies/apigateway-service/TaskGroupExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/TaskGroupExtractStrategy.h"
 
 ServiceMessageUPtr TaskGroupMessageCreator::create(ParamContainerBase *param) const
 {

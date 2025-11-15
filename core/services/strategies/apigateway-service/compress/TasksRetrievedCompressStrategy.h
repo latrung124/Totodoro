@@ -1,8 +1,8 @@
 /**
- * @file RequestGetTasksAsyncExtractStrategy.h
+ * @file TasksRetrievedCompressStrategy.h
  * @author trung.la
  * @date 11-13-2025
- * @brief This file contains the declaration of the RequestGetTasksAsyncExtractStrategy class.
+ * @brief This file contains the declaration of the TasksRetrievedCompressStrategy class.
  */
 
 #ifndef REQUEST_GET_TASKS_ASYNC_EXTRACT_STRATEGY_H
@@ -12,10 +12,10 @@
 
 class RequestGetTasksAsyncMessage;
 
-class RequestGetTasksAsyncExtractStrategy : public IStrategy<RequestGetTasksAsyncMessage>
+class TasksRetrievedCompressStrategy : public IStrategy<RequestGetTasksAsyncMessage>
 {
 public:
-	~RequestGetTasksAsyncExtractStrategy();
+	~TasksRetrievedCompressStrategy();
 	void execute(const RequestGetTasksAsyncMessage &message) override;
 
 private:

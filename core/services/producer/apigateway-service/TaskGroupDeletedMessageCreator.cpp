@@ -7,7 +7,7 @@
 
 #include "core/services/producer/apigateway-service/TaskGroupDeletedMessageCreator.h"
 #include "core/services/messages/apigateway-service/TaskGroupDeletedMessage.h"
-#include "core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/TaskGroupDeletedExtractStrategy.h"
 
 ServiceMessageUPtr TaskGroupDeletedMessageCreator::create(ParamContainerBase *param) const
 {

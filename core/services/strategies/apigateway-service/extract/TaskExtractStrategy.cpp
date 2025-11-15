@@ -5,7 +5,7 @@
  * @brief Implementation of the TaskExtractStrategy class for extracting task data.
  */
 
-#include "core/services/strategies/apigateway-service/TaskExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/TaskExtractStrategy.h"
 
 #include <QDebug>
 

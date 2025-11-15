@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the PomodoroExtractStrategy class.
  */
 
-#include "core/services/strategies/apigateway-service/PomodoroExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/PomodoroExtractStrategy.h"
 
 #include <QDebug>
 

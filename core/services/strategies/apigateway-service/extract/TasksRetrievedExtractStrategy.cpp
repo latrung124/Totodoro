@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the TasksRetrievedExtractStrategy class.
  */
 
-#include "core/services/strategies/apigateway-service/TasksRetrievedExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/TasksRetrievedExtractStrategy.h"
 #include "core/services/messages/apigateway-service/TasksRetrievedMessage.h"
 
 #include <QDebug>

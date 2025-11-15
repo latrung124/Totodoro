@@ -5,7 +5,7 @@
  * @brief Implementation of the TaskGroupExtractStrategy class for extracting task group data.
  */
 
-#include "core/services/strategies/apigateway-service/TaskGroupExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/TaskGroupExtractStrategy.h"
 
 #include <QDebug>
 

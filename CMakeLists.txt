@@ -175,16 +175,16 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WPauseAsyncExtractStrategy.h
     core/services/strategies/window-service/WPreviousAsyncExtractStrategy.h
     core/services/strategies/window-service/WNextAsyncExtractStrategy.h
-    core/services/strategies/apigateway-service/UserInformationExtractStrategy.h
-    core/services/strategies/apigateway-service/UserSettingsExtractStrategy.h
-    core/services/strategies/apigateway-service/PomodoroExtractStrategy.h
-    core/services/strategies/apigateway-service/TaskExtractStrategy.h
-    core/services/strategies/apigateway-service/TaskDeletedExtractStrategy.h
-    core/services/strategies/apigateway-service/TasksRetrievedExtractStrategy.h
-    core/services/strategies/apigateway-service/TaskGroupExtractStrategy.h
-    core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.h
-    core/services/strategies/apigateway-service/TaskGroupsRetrievedExtractStrategy.h
-    core/services/strategies/apigateway-service/RequestGetTasksAsyncExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/UserInformationExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/UserSettingsExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/PomodoroExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/TaskExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/TaskDeletedExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/TasksRetrievedExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/TaskGroupExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/TaskGroupDeletedExtractStrategy.h
+    core/services/strategies/apigateway-service/extract/TaskGroupsRetrievedExtractStrategy.h
+    core/services/strategies/apigateway-service/compress/TasksRetrievedCompressStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -193,16 +193,16 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/window-service/WPauseAsyncExtractStrategy.cpp
     core/services/strategies/window-service/WPreviousAsyncExtractStrategy.cpp
     core/services/strategies/window-service/WNextAsyncExtractStrategy.cpp
-    core/services/strategies/apigateway-service/UserInformationExtractStrategy.cpp
-    core/services/strategies/apigateway-service/UserSettingsExtractStrategy.cpp
-    core/services/strategies/apigateway-service/PomodoroExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskDeletedExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TasksRetrievedExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskGroupExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskGroupDeletedExtractStrategy.cpp
-    core/services/strategies/apigateway-service/TaskGroupsRetrievedExtractStrategy.cpp
-    core/services/strategies/apigateway-service/RequestGetTasksAsyncExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/UserInformationExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/UserSettingsExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/PomodoroExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/TaskExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/TaskDeletedExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/TasksRetrievedExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/TaskGroupExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/TaskGroupDeletedExtractStrategy.cpp
+    core/services/strategies/apigateway-service/extract/TaskGroupsRetrievedExtractStrategy.cpp
+    core/services/strategies/apigateway-service/compress/TasksRetrievedCompressStrategy.cpp
 )
 
 set(CORE_SERVICE_MSG_SOURCES

@@ -7,7 +7,7 @@
 
 #include "core/services/producer/apigateway-service/PomodoroMessageCreator.h"
 #include "core/services/messages/apigateway-service/PomodoroMessage.h"
-#include "core/services/strategies/apigateway-service/PomodoroExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/PomodoroExtractStrategy.h"
 
 ServiceMessageUPtr PomodoroMessageCreator::create(ParamContainerBase *param) const
 {

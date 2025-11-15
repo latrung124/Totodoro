@@ -5,7 +5,7 @@
  * @brief This file contains the implementation of the UserSettingsExtractStrategy class.
  */
 
-#include "core/services/strategies/apigateway-service/UserSettingsExtractStrategy.h"
+#include "core/services/strategies/apigateway-service/extract/UserSettingsExtractStrategy.h"
 
 #include <QDebug>
 
