@@ -7,7 +7,7 @@
 
 #include "RequestGetTasksAsyncMessage.h"
 
-RequestGetTasksAsyncMessage::RequestGetTasksAsyncMessage(ExtractTasksStrategyUPtr strategy)
+RequestGetTasksAsyncMessage::RequestGetTasksAsyncMessage(CompressStrategyUPtr strategy)
     : Message(MessageId::RequestGetTasksAsyncMessage)
     , m_strategy(std::move(strategy))
 {

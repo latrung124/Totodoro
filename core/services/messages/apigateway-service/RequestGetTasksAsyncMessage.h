@@ -16,9 +16,9 @@
 class RequestGetTasksAsyncMessage : public Message
 {
 public:
-	using ExtractTasksStrategyUPtr = std::unique_ptr<IStrategy<RequestGetTasksAsyncMessage>>;
+	using CompressStrategyUPtr = std::unique_ptr<IStrategy<RequestGetTasksAsyncMessage>>;
 
-	RequestGetTasksAsyncMessage(ExtractTasksStrategyUPtr strategy);
+	RequestGetTasksAsyncMessage(CompressStrategyUPtr strategy);
 	~RequestGetTasksAsyncMessage();
 
 	void setUserId(const std::string &userId);
@@ -30,7 +30,7 @@ public:
 	void execute() override;
 
 private:
-	ExtractTasksStrategyUPtr m_strategy;
+	CompressStrategyUPtr m_strategy;
 	std::string m_userId;
 	std::string m_taskGroupId;
 };

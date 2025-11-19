@@ -226,6 +226,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/TaskGroupDeletedMessage.h
     core/services/messages/apigateway-service/TaskGroupsRetrievedMessage.h
     core/services/messages/apigateway-service/RequestGetTasksAsyncMessage.h
+    core/services/messages/apigateway-service/RequestCreateTaskAsyncMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -243,7 +244,8 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/TaskGroupMessage.cpp
     core/services/messages/apigateway-service/TaskGroupDeletedMessage.cpp
     core/services/messages/apigateway-service/TaskGroupsRetrievedMessage.cpp
-    core/services/messages/apigateway-service/RequestGetTasksAsyncMessage.cpp)
+    core/services/messages/apigateway-service/RequestGetTasksAsyncMessage.cpp
+    core/services/messages/apigateway-service/RequestCreateTaskAsyncMessage.cpp)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 
