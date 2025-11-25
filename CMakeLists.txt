@@ -187,6 +187,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/compress/TasksRetrievedCompressStrategy.h
     core/services/strategies/apigateway-service/compress/TaskDeletedCompressStrategy.h
     core/services/strategies/apigateway-service/compress/TaskUpdatedCompressStrategy.h
+    core/services/strategies/apigateway-service/compress/TaskGroupCompressStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -207,6 +208,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/compress/TasksRetrievedCompressStrategy.cpp
     core/services/strategies/apigateway-service/compress/TaskDeletedCompressStrategy.cpp
     core/services/strategies/apigateway-service/compress/TaskUpdatedCompressStrategy.cpp
+    core/services/strategies/apigateway-service/compress/TaskGroupCompressStrategy.cpp
 )
 
 set(CORE_SERVICE_MSG_SOURCES
@@ -233,6 +235,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/RequestCreateTaskAsyncMessage.h
     core/services/messages/apigateway-service/RequestDeleteTaskAsyncMessage.h
     core/services/messages/apigateway-service/RequestUpdateTaskAsyncMessage.h
+    core/services/messages/apigateway-service/RequestCreateTaskGroupAsyncMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -253,7 +256,9 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/RequestGetTasksAsyncMessage.cpp
     core/services/messages/apigateway-service/RequestCreateTaskAsyncMessage.cpp
     core/services/messages/apigateway-service/RequestDeleteTaskAsyncMessage.cpp
-    core/services/messages/apigateway-service/RequestUpdateTaskAsyncMessage.cpp)
+    core/services/messages/apigateway-service/RequestUpdateTaskAsyncMessage.cpp
+    core/services/messages/apigateway-service/RequestCreateTaskGroupAsyncMessage.cpp
+)
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
 
