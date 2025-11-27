@@ -190,6 +190,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/compress/TaskGroupCompressStrategy.h
     core/services/strategies/apigateway-service/compress/TaskGroupDeletedCompressStrategy.h
     core/services/strategies/apigateway-service/compress/TaskGroupUpdatedCompressStrategy.h
+    core/services/strategies/apigateway-service/compress/TaskGroupsRetrievedCompressStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -213,6 +214,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/compress/TaskGroupCompressStrategy.cpp
     core/services/strategies/apigateway-service/compress/TaskGroupDeletedCompressStrategy.cpp
     core/services/strategies/apigateway-service/compress/TaskGroupUpdatedCompressStrategy.cpp
+    core/services/strategies/apigateway-service/compress/TaskGroupsRetrievedCompressStrategy.cpp
 )
 
 set(CORE_SERVICE_MSG_SOURCES
@@ -242,6 +244,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/RequestCreateTaskGroupAsyncMessage.h
     core/services/messages/apigateway-service/RequestDeleteTaskGroupAsyncMessage.h
     core/services/messages/apigateway-service/RequestUpdateTaskGroupAsyncMessage.h
+    core/services/messages/apigateway-service/RequestGetTaskGroupsAsyncMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -266,6 +269,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/RequestCreateTaskGroupAsyncMessage.cpp
     core/services/messages/apigateway-service/RequestDeleteTaskGroupAsyncMessage.cpp
     core/services/messages/apigateway-service/RequestUpdateTaskGroupAsyncMessage.cpp
+    core/services/messages/apigateway-service/RequestGetTaskGroupsAsyncMessage.cpp
 )
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
