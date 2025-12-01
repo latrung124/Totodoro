@@ -44,7 +44,7 @@ public:
 	void stop() override;
 
 	void requestCreateUser(const Information &userInformation) override;
-	void requestGetUserInformation(const std::string &userId) override;
+	void requestGetUserInformation(const std::string &email) override;
 	void requestGetUserSettings(const std::string &userId) override;
 	void requestUpdateUserInformation(const Information &info) override;
 	void requestUpdateUserSettings(const Settings &settings) override;

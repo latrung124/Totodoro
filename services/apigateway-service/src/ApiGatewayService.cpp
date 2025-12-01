@@ -95,7 +95,7 @@ void ApiGatewayService::requestCreateUser(const Information &userInformation)
 	managerPtr->trigger(gateway::RequestType::CreateUser, properties);
 }
 
-void ApiGatewayService::requestGetUserInformation(const std::string &userId)
+void ApiGatewayService::requestGetUserInformation(const std::string &email)
 {
 	if (!m_gateway) {
 		return;
@@ -109,7 +109,7 @@ void ApiGatewayService::requestGetUserInformation(const std::string &userId)
 
 	gateway::Properties properties;
 	gateway::UserProperties userProps;
-	userProps.userId = userId;
+	userProps.email = email;
 	properties.property = userProps;
 	managerPtr->trigger(gateway::RequestType::GetUserProperties, properties);
 }

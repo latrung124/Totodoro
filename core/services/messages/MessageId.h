@@ -37,6 +37,7 @@ enum class MessageId : uint16_t
 	RequestDeleteTaskGroupAsyncMessage = 22,
 	RequestUpdateTaskGroupAsyncMessage = 23,
 	RequestGetTaskGroupsAsyncMessage = 24,
+	RequestUserInformationAsyncMessage = 25,
 };
 
 #endif // SERVICE_MESSAGE_ID_H

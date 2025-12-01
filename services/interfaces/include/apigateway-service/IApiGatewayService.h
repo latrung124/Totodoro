@@ -19,7 +19,7 @@ public:
 
 	virtual void requestCreateUser(
 	    const apigateway_service::utils::user::Information &userInformation) = 0;
-	virtual void requestGetUserInformation(const std::string &userId) = 0;
+	virtual void requestGetUserInformation(const std::string &email) = 0;
 	virtual void requestGetUserSettings(const std::string &userId) = 0;
 	virtual void requestUpdateUserInformation(
 	    const apigateway_service::utils::user::Information &info) = 0;
