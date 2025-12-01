@@ -192,6 +192,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/compress/TaskGroupUpdatedCompressStrategy.h
     core/services/strategies/apigateway-service/compress/TaskGroupsRetrievedCompressStrategy.h
     core/services/strategies/apigateway-service/compress/UserInfoRetrievedCompressStrategy.h
+    core/services/strategies/apigateway-service/compress/UserSettingsRetrievedCompressStrategy.h
     core/services/strategies/window-service/WMediaInfoExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackControlsExtractStrategy.cpp
     core/services/strategies/window-service/WPlaybackInfoExtractStrategy.cpp
@@ -217,6 +218,7 @@ set(CORE_SERVICE_STRATEGIES
     core/services/strategies/apigateway-service/compress/TaskGroupUpdatedCompressStrategy.cpp
     core/services/strategies/apigateway-service/compress/TaskGroupsRetrievedCompressStrategy.cpp
     core/services/strategies/apigateway-service/compress/UserInfoRetrievedCompressStrategy.cpp
+    core/services/strategies/apigateway-service/compress/UserSettingsRetrievedCompressStrategy.cpp
 )
 
 set(CORE_SERVICE_MSG_SOURCES
@@ -248,6 +250,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/RequestUpdateTaskGroupAsyncMessage.h
     core/services/messages/apigateway-service/RequestGetTaskGroupsAsyncMessage.h
     core/services/messages/apigateway-service/RequestUserInformationAsyncMessage.h
+    core/services/messages/apigateway-service/RequestUserSettingsAsyncMessage.h
     core/services/messages/window-service/WMediaInfoMessage.cpp
     core/services/messages/window-service/WPlaybackControlsMessage.cpp
     core/services/messages/window-service/WPlaybackInfoMessage.cpp
@@ -274,6 +277,7 @@ set(CORE_SERVICE_MSG_SOURCES
     core/services/messages/apigateway-service/RequestUpdateTaskGroupAsyncMessage.cpp
     core/services/messages/apigateway-service/RequestGetTaskGroupsAsyncMessage.cpp
     core/services/messages/apigateway-service/RequestUserInformationAsyncMessage.cpp
+    core/services/messages/apigateway-service/RequestUserSettingsAsyncMessage.cpp
 )
 
 set(HELPER_SOURCES helpers/ParamContainerHelper.h)
